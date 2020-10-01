@@ -1,54 +1,61 @@
 <?php
+/**
+ * A Magento 2 module named Aheadworks\MobileAppConnector
+ *
+ */
 namespace Aheadworks\MobileAppConnector\Model;
 
 use Aheadworks\MobileAppConnector\Api\CustomerOrderInterface;
+use Magento\Framework\Api\FilterBuilder;
+use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\Exception\InputException;
 use Magento\Framework\Exception\NoSuchEntityException;
-use Magento\Sales\Api\Data\OrderInterface;
 use Magento\Sales\Api\OrderRepositoryInterface;
-use Magento\Sales\Model\Order;
-use Magento\Sales\Model\Order\Config;
 
+/**
+ * Class CustomerOrder
+ * @package Aheadworks\MobileAppConnector\Model
+ */
 class CustomerOrder implements CustomerOrderInterface
 {
-
     /**
      * @var OrderRepositoryInterface
      */
-    public $_orderRepository;
+    public $orderRepository;
 
     /**
-     * CustomerOrder constructor.
-     *
-     * @param Order $order
-     */
-    protected $order;
-
-    /**
-     * @var OrderInterface[]
+     * @var $registry[]
      */
     protected $registry = [];
 
     /**
-     * Order config
-     * @var Config
+     * @var SearchCriteriaBuilder
      */
-    public $orderConfig;
+    public $searchCriteriaBuilder;
 
+    /**
+     * @var FilterBuilder
+     */
+    public $filterBuilder;
 
+    /**
+     * @param OrderRepositoryInterface $orderRepository
+     * @param SearchCriteriaBuilder $searchCriteriaBuilder
+     * @param FilterBuilder $filterBuilder
+     */
     public function __construct(
         OrderRepositoryInterface $orderRepository,
-        Config $orderConfig,
-        Order $order
+        SearchCriteriaBuilder $searchCriteriaBuilder,
+        FilterBuilder $filterBuilder
     ) {
-        $this->_orderRepository = $orderRepository;
-        $this->order = $order;
-        $this->orderConfig = $orderConfig;
+        $this->orderRepository = $orderRepository;
+        $this->searchCriteriaBuilder = $searchCriteriaBuilder;
+        $this->filterBuilder = $filterBuilder;
     }
 
     /**
      * @param int $id The order ID.
-     * @return OrderInterface[]
+     * @return \Magento\Sales\Api\Data\OrderInterface|mixed $registry
      * @throws InputException
      * @throws NoSuchEntityException
      */
@@ -57,19 +64,15 @@ class CustomerOrder implements CustomerOrderInterface
         if (empty($id) || !isset($id) || $id == "") {
             throw new InputException(__('Id required'));
         }
-
         if (!isset($this->registry[$id])) {
-            $entity = $this->_orderRepository->get($id);
-
+            $entity = $this->orderRepository->get($id);
             if (!$entity->getEntityId()) {
                 throw new NoSuchEntityException(
                     __("The entity that was requested doesn't exist. Verify the entity and try again.")
                 );
             }
-            
             $this->registry[$id] = $entity;
         }
-
         return $this->registry[$id];
     }
 
@@ -86,21 +89,21 @@ class CustomerOrder implements CustomerOrderInterface
         if (empty($customerId) || !isset($customerId) || $customerId == "") {
             throw new InputException(__('Id required'));
         }
-
-        $_orders = $this->order->getCollection()
-                            ->addAttributeToFilter('customer_id', $customerId)
-                            ->addFieldToFilter('status', ['in' => $this->orderConfig->getVisibleOnFrontStatuses()])
-                            ->setOrder('created_at', 'desc');
+        $filters = [
+            $this->filterBuilder->setField('customer_id')->setValue($customerId)->create()
+        ];
+        $searchCriteria = $this->searchCriteriaBuilder->addFilters($filters)->create();
+        $this->orders = $this->orderRepository->getList($searchCriteria);
 
         $data=[];
         $i=0;
-        foreach ($_orders as $_order) {
-            $data[$i]['increment_id']=$_order->getIncrementId();
-            $data[$i]['created_at']=$_order->getCreatedAt();
-            $data[$i]['ship_to']= $_order->getShippingAddress()->getName();
-            $data[$i]['grand_total']=$_order->getGrandTotal();
-            $data[$i]['status']=$_order->getStatusLabel();
-            $data[$i]['id']=$_order->getId();
+        foreach ($this->orders as $order) {
+            $data[$i][self::ORDER_INCREMENT_ID] = $order['increment_id'];
+            $data[$i][self::ORDER_CREATED_AT] = $order['created_at'];
+            $data[$i][self::ORDER_SHIP_TO] = $order->getShippingAddress()->getName();
+            $data[$i][self::ORDER_GRAND_TOTAL] = $order['grand_total'];
+            $data[$i][self::ORDER_STATUS] = $order['status'];
+            $data[$i][self::ORDER_ID] = $order['entity_id'];
             $i++;
         }
         return $data;
