@@ -10,6 +10,7 @@ use Magento\Framework\Api\FilterBuilder;
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\Exception\InputException;
 use Magento\Framework\Exception\NoSuchEntityException;
+use Magento\Sales\Api\Data\OrderInterface;
 use Magento\Sales\Api\OrderRepositoryInterface;
 
 /**
@@ -24,11 +25,6 @@ class CustomerOrder implements CustomerOrderInterface
     public $orderRepository;
 
     /**
-     * @var $registry[]
-     */
-    protected $registry = [];
-
-    /**
      * @var SearchCriteriaBuilder
      */
     public $searchCriteriaBuilder;
@@ -37,6 +33,11 @@ class CustomerOrder implements CustomerOrderInterface
      * @var FilterBuilder
      */
     public $filterBuilder;
+
+    /*
+     * SHIP TO.
+     */
+    const SHIP_TO = 'ship_to';
 
     /**
      * @param OrderRepositoryInterface $orderRepository
@@ -55,7 +56,7 @@ class CustomerOrder implements CustomerOrderInterface
 
     /**
      * @param int $id The order ID.
-     * @return \Magento\Sales\Api\Data\OrderInterface|mixed $registry
+     * @return OrderInterface
      * @throws InputException
      * @throws NoSuchEntityException
      */
@@ -67,9 +68,7 @@ class CustomerOrder implements CustomerOrderInterface
         if (!isset($this->registry[$id])) {
             $entity = $this->orderRepository->get($id);
             if (!$entity->getEntityId()) {
-                throw new NoSuchEntityException(
-                    __("The entity that was requested doesn't exist. Verify the entity and try again.")
-                );
+                throw  NoSuchEntityException::singleField('id', $id);
             }
             $this->registry[$id] = $entity;
         }
@@ -90,22 +89,22 @@ class CustomerOrder implements CustomerOrderInterface
             throw new InputException(__('Id required'));
         }
         $filters = [
-            $this->filterBuilder->setField('customer_id')->setValue($customerId)->create()
+            $this->filterBuilder->setField(OrderInterface::CUSTOMER_ID)->setValue($customerId)->create()
         ];
         $searchCriteria = $this->searchCriteriaBuilder->addFilters($filters)->create();
-        $this->orders = $this->orderRepository->getList($searchCriteria);
-
-        $data=[];
-        $i=0;
-        foreach ($this->orders as $order) {
-            $data[$i][self::ORDER_INCREMENT_ID] = $order['increment_id'];
-            $data[$i][self::ORDER_CREATED_AT] = $order['created_at'];
-            $data[$i][self::ORDER_SHIP_TO] = $order->getShippingAddress()->getName();
-            $data[$i][self::ORDER_GRAND_TOTAL] = $order['grand_total'];
-            $data[$i][self::ORDER_STATUS] = $order['status'];
-            $data[$i][self::ORDER_ID] = $order['entity_id'];
-            $i++;
+        $orders = $this->orderRepository->getList($searchCriteria)->getItems();
+        $orderData = [];
+        foreach ($orders as $order) {
+            $data = [
+                   OrderInterface::INCREMENT_ID  => $order->getIncrementId(),
+                   OrderInterface::CREATED_AT    => $order->getCreatedAt(),
+                   self::SHIP_TO                 => $order->getShippingAddress()->getName(),
+                   OrderInterface::GRAND_TOTAL   => $order->getGrandTotal(),
+                   OrderInterface::STATUS        => $order->getStatus(),
+                   OrderInterface::ENTITY_ID     => $order->getEntityId(),
+                ];
+            $orderData[] = $data;
         }
-        return $data;
+        return $orderData;
     }
 }

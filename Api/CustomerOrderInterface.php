@@ -11,15 +11,7 @@ namespace Aheadworks\MobileAppConnector\Api;
  */
 interface CustomerOrderInterface
 {
-    /**
-     * Constants defined for keys of the data array. Identical to the name of the getter in snake case
-     */
-    const ORDER_ID = 'entity_id';
-    const ORDER_INCREMENT_ID = 'increment_id';
-    const ORDER_CREATED_AT = 'created_at';
-    const ORDER_GRAND_TOTAL = 'grand_total';
-    const ORDER_STATUS = 'status';
-    const ORDER_SHIP_TO = 'ship_to';
+
     /**
      * Loads a specified order.
      *
@@ -29,10 +21,11 @@ interface CustomerOrderInterface
     public function get(int $id);
 
     /**
-     * Returns orders data to user
-     *
+     * Lists orders that match specified customer search criteria.
+     * 
      * @param int $customerId The CustomerId ID.
-     * @return \Magento\Sales\Api\Data\OrderSearchResultInterface Order search result interface.
+     * @return \Magento\Sales\Api\Data\OrderInterface Order interface.
+     * @throws \Magento\Framework\Exception\LocalizedException
      */
     public function getList(int $customerId);
 }
