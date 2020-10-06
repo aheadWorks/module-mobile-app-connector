@@ -7,23 +7,14 @@ namespace Aheadworks\MobileAppConnector\Api;
  */
 interface WishlistManagementInterface
 {
-
-    /**
-     * Return Wishlist items.
-     *
-     * @param int $customerId
-     * @return array
-     */
-    public function getWishlistForCustomer($customerId);
-
     /**
      * Return Added wishlist item.
      *
      * @param int $customerId
      * @param int $productId
-     * @return array
-     *
+     * @return bool true on success
+     * @throws \Magento\Framework\Exception\LocalizedException
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
-    public function addWishlistForCustomer($customerId,$productId);
-
+    public function addProductToWishlist($customerId, $productId);
 }
