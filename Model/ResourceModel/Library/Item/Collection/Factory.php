@@ -79,7 +79,7 @@ class Factory
             )
             ->addFieldToFilter(
                 'link_file',
-                ['regexp' => '(\.pdf$)|(\.PDF$)|(\.MP3$)|(\.MP4$)']
+                ['regexp' => '(\.pdf$)|(\.PDF$)|(\.MP3$)|(\.mp3$)|(\.MP4$)|(\.mp4$)']
             )
              ->setOrder(
                 'item_id',

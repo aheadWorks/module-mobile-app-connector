@@ -105,6 +105,23 @@ class Item extends AbstractModel implements LibraryItemInterface
     /**
      * {@inheritdoc}
      */
+    public function getLinkFile()
+    {
+        return $this->getData(self::LINK_FILE);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setLinkFile($linkFile)
+    {
+        return $this->setData(self::LINK_FILE, $linkFile);
+    }
+
+
+    /**
+     * {@inheritdoc}
+     */
     public function getLinkHash()
     {
         return $this->getData(self::LINK_HASH);

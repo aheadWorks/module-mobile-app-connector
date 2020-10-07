@@ -18,6 +18,7 @@ interface LibraryItemInterface extends ExtensibleDataInterface
     const ORDER_ITEM_ID = 'order_item_id';
     const PRODUCT_NAME = 'product_name';
     const PRODUCT_IMAGE_URL = 'product_image_url';
+    const LINK_FILE = 'link_file';
     const LINK_TITLE = 'link_title';
     const LINK_HASH = 'link_hash';
     const VIEW_URL = 'view_url';
@@ -97,6 +98,21 @@ interface LibraryItemInterface extends ExtensibleDataInterface
      * @return $this
      */
     public function setLinkTitle($linkTitle);
+
+    /**
+     * Get link title
+     *
+     * @return string
+     */
+    public function getLinkFile();
+
+    /**
+     * Set link title
+     *
+     * @param string $linkTitle
+     * @return $this
+     */
+    public function setLinkFile($linkFile);
 
     /**
      * Get link hash
