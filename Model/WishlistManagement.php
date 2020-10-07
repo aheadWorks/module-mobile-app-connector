@@ -3,7 +3,6 @@
 namespace Aheadworks\MobileAppConnector\Model;
 
 use Aheadworks\MobileAppConnector\Api\WishlistManagementInterface;
-use Exception;
 use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
@@ -11,27 +10,34 @@ use Magento\Wishlist\Model\WishlistFactory;
 
 /**
  * Defines the implemented class of the WishlistManagementInterface
+ * Class \Aheadworks\MobileAppConnector\Model\WishlistManagement
  */
 class WishlistManagement implements WishlistManagementInterface
 {
-    protected $wishlistRepository;
+    /**
+     * @var WishlistFactory
+     */
+    protected $wishlistFactory;
+    /**
+     * @var ProductRepositoryInterface
+     */
     protected $productRepository;
+
+    /**
+     * WishlistManagement constructor.
+     * @param WishlistFactory $wishlistFactory
+     * @param ProductRepositoryInterface $productRepository
+     */
     public function __construct(
-        WishlistFactory $wishlistRepository,
+        WishlistFactory $wishlistFactory,
         ProductRepositoryInterface $productRepository
     ) {
-        $this->wishlistRepository = $wishlistRepository;
+        $this->wishlistFactory = $wishlistFactory;
         $this->productRepository = $productRepository;
     }
 
     /**
-     * Add wishlist item for the customer
-     * @param int $customerId
-     * @param int $productId
-     * @return bool
-     * @throws LocalizedException
-     * @throws NoSuchEntityException
-     * @throws Exception
+     * @inheritdoc
      */
     public function addProductToWishlist($customerId, $productId)
     {
@@ -46,8 +52,7 @@ class WishlistManagement implements WishlistManagementInterface
         }
 
         try {
-            //$product = $this->productRepository->getById($productId);
-            $wishlist = $this->wishlistRepository->create()->loadByCustomerId($customerId, true);
+            $wishlist = $this->wishlistFactory->create()->loadByCustomerId($customerId, true);
             $wishlist->addNewItem($product);
             $wishlist->save();
         } catch (NoSuchEntityException $e) {
