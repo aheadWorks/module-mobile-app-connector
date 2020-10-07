@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Aheadworks\MobileAppConnector\Api\LibraryItemRepositoryInterface" type="Aheadworks\MobileAppConnector\Model\Library\Item\Repository" />
+    <preference for="Aheadworks\MobileAppConnector\Api\Data\LibraryItemSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+    <preference for="Aheadworks\MobileAppConnector\Api\Data\LibraryItemInterface" type="Aheadworks\MobileAppConnector\Model\Library\Item" />
+    <preference for="Aheadworks\MobileAppConnector\Api\LibraryItemRepositoryInterface" type="Aheadworks\MobileAppConnector\Model\Library\Item\Repository" />
+    <preference for="Aheadworks\MobileAppConnector\Model\ResourceModel\Collection\ModifierInterface" type="Aheadworks\MobileAppConnector\Model\ResourceModel\Collection\CompositeModifier" />
+</config>
