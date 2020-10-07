@@ -4,7 +4,7 @@ namespace Aheadworks\MobileAppConnector\Model;
 
 use Aheadworks\MobileAppConnector\Api\WishlistManagementInterface;
 use Magento\Catalog\Api\ProductRepositoryInterface;
-use Magento\Framework\Exception\LocalizedException;
+//use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Wishlist\Model\WishlistFactory;
 
@@ -38,23 +38,17 @@ class WishlistManagement implements WishlistManagementInterface
 
     /**
      * @inheritdoc
+     * @throws \Exception
      */
     public function addProductToWishlist($customerId, $productId)
     {
-        if ($productId == null) {
-            throw new LocalizedException(__('Invalid product, Please select a valid product'));
-        }
-
         try {
             $product = $this->productRepository->getById($productId);
-        } catch (NoSuchEntityException $e) {
-            $product = null;
-        }
-
-        try {
             $wishlist = $this->wishlistFactory->create()->loadByCustomerId($customerId, true);
-            $wishlist->addNewItem($product);
-            $wishlist->save();
+            if ($product && $wishlist) {
+                $wishlist->addNewItem($product);
+                $wishlist->save();
+            }
         } catch (NoSuchEntityException $e) {
             throw new NoSuchEntityException(__('We can\'t add the item to Wish List right now.'));
         }
