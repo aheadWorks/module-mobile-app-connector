@@ -16,9 +16,10 @@ interface CustomerOrderInterface
      * Loads a specified order.
      *
      * @param int $id The order ID.
+     * @param int $customerId The customerId ID.
      * @return \Magento\Sales\Api\Data\OrderInterface Order interface.
      */
-    public function get(int $id);
+    public function get(int $customerId, int $id);
 
     /**
      * Lists orders that match specified customer search criteria.

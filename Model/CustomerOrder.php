@@ -12,7 +12,7 @@ use Magento\Framework\Exception\InputException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Sales\Api\Data\OrderInterface;
 use Magento\Sales\Api\OrderRepositoryInterface;
-
+use Magento\Framework\Validator\Exception as ValidatorException;
 /**
  * Class CustomerOrder
  * @package Aheadworks\MobileAppConnector\Model
@@ -55,33 +55,24 @@ class CustomerOrder implements CustomerOrderInterface
     }
 
     /**
-     * @param int $id The order ID.
-     * @return OrderInterface
-     * @throws InputException
-     * @throws NoSuchEntityException
+     * @inheritdoc
      */
-    public function get(int $id)
-    {
+    public function get(int $customerId, int $id)
+    {  
         if (empty($id) || !isset($id) || $id == "") {
             throw new InputException(__('Id required'));
         }
-        if (!isset($this->registry[$id])) {
-            $entity = $this->orderRepository->get($id);
-            if (!$entity->getEntityId()) {
-                throw  NoSuchEntityException::singleField('id', $id);
-            }
-            $this->registry[$id] = $entity;
+        $entity = $this->orderRepository->get($id);
+        if($entity->getCustomerId() != $customerId){
+            throw new ValidatorException(
+               __('This Order id does not belongs to customer')
+             );
         }
-        return $this->registry[$id];
+        return $entity;
     }
 
     /**
-     * Returns orders data to user
-     *
-     * @param $customerId
-     * @return array order array collection.
-     * @throws InputException
-     * @api
+     * @inheritdoc
      */
     public function getList($customerId)
     {
@@ -98,7 +89,7 @@ class CustomerOrder implements CustomerOrderInterface
             $data = [
                    OrderInterface::INCREMENT_ID  => $order->getIncrementId(),
                    OrderInterface::CREATED_AT    => $order->getCreatedAt(),
-                   self::SHIP_TO                 => $order->getShippingAddress()->getName(),
+                   self::SHIP_TO                 => ($order->getShippingAddress() ? $order->getShippingAddress()->getName() : ""),
                    OrderInterface::GRAND_TOTAL   => $order->getGrandTotal(),
                    OrderInterface::STATUS        => $order->getStatus(),
                    OrderInterface::ENTITY_ID     => $order->getEntityId(),
