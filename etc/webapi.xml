@@ -9,4 +9,13 @@
             <parameter name="customerId" force="true">%customer_id%</parameter>
         </data>
     </route>
+    <route url="/V1/wishlist/remove/:productId" method="POST">
+        <service class="Aheadworks\MobileAppConnector\Api\WishlistManagementInterface" method="removeProductFromWishlist"/>
+        <resources>
+            <resource ref="self" />
+        </resources>
+        <data>
+            <parameter name="customerId" force="true">%customer_id%</parameter>
+        </data>
+    </route>
 </routes>

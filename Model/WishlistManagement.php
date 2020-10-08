@@ -53,4 +53,27 @@ class WishlistManagement implements WishlistManagementInterface
         }
         return true;
     }
+    /**
+     * @inheritdoc
+     * @throws \Exception
+     */
+    public function removeProductFromWishlist($customerId, $productId)
+    {
+        try {
+            $product = $this->productRepository->getById($productId);
+            $wishlist = $this->wishlistFactory->create()->loadByCustomerId($customerId, true);
+            $items = $wishlist->getItemCollection();
+            if ($product && $wishlist) {
+                foreach ($items as $item) {
+                    if ($item->getProductId() == $productId) {
+                        $item->delete();
+                        $wishlist->save();
+                    }
+                }
+            }
+        } catch (NoSuchEntityException $e) {
+            throw new NoSuchEntityException(__('We can\'t remove the item from Wish List right now.'));
+        }
+        return true;
+    }
 }
