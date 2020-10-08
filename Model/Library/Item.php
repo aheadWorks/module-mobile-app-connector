@@ -13,6 +13,14 @@ use Magento\Framework\Model\AbstractModel;
  */
 class Item extends AbstractModel implements LibraryItemInterface
 {
+    const DOWNLOADABLE_PATH_LINKS = 'downloadable/download/link/id/';
+
+    protected $productrepository;
+
+    public function __construct(\Magento\Catalog\Api\ProductRepositoryInterface $productrepository)
+    {
+        $this->productrepository = $productrepository;
+    }
 
     /**
      * {@inheritdoc}
@@ -56,10 +64,12 @@ class Item extends AbstractModel implements LibraryItemInterface
 
     /**
      * {@inheritdoc}
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     public function getProductName()
     {
-        return $this->getData(self::PRODUCT_NAME);
+        $product = $this->productrepository->getById($this->getData(self::PRODUCT_ID));
+        return ($product->getName() ? $product->getName() : "");
     }
 
     /**
@@ -75,7 +85,7 @@ class Item extends AbstractModel implements LibraryItemInterface
      */
     public function getProductImageUrl()
     {
-        return $this->getData(self::PRODUCT_IMAGE_URL);
+        return $this->getData(self::LINK_FILE);
     }
 
     /**
@@ -83,7 +93,7 @@ class Item extends AbstractModel implements LibraryItemInterface
      */
     public function setProductImageUrl($productImageUrl)
     {
-        return $this->setData(self::PRODUCT_IMAGE_URL, $productImageUrl);
+        return $this->setData(self::LINK_FILE, $productImageUrl);
     }
 
     /**
@@ -118,7 +128,6 @@ class Item extends AbstractModel implements LibraryItemInterface
         return $this->setData(self::LINK_FILE, $linkFile);
     }
 
-
     /**
      * {@inheritdoc}
      */
@@ -140,7 +149,23 @@ class Item extends AbstractModel implements LibraryItemInterface
      */
     public function getViewUrl()
     {
-        return $this->getData(self::VIEW_URL);
+        return self::DOWNLOADABLE_PATH_LINKS . $this->getData(self::LINK_HASH);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setProductId($productId)
+    {
+        return $this->setData(self::PRODUCT_ID, $productId);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getProductId()
+    {
+        return $this->getData(self::PRODUCT_ID);
     }
 
     /**
