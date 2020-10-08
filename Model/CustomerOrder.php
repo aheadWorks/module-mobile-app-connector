@@ -89,7 +89,7 @@ class CustomerOrder implements CustomerOrderInterface
             $data = [
                    OrderInterface::INCREMENT_ID  => $order->getIncrementId(),
                    OrderInterface::CREATED_AT    => $order->getCreatedAt(),
-                   self::SHIP_TO                 => ($order->getShippingAddress() ? $order->getShippingAddress()->getName() : ""),
+                   self::SHIP_TO                 => $this->getShipName($order),
                    OrderInterface::GRAND_TOTAL   => $order->getGrandTotal(),
                    OrderInterface::STATUS        => $order->getStatus(),
                    OrderInterface::ENTITY_ID     => $order->getEntityId(),
@@ -97,5 +97,14 @@ class CustomerOrder implements CustomerOrderInterface
             $orderData[] = $data;
         }
         return $orderData;
+    }
+
+    /**
+     * @param $order
+     * @return string
+     */
+    public function getShipName($order)
+    {
+        return ($order->getShippingAddress() ? $order->getShippingAddress()->getName() : "");
     }
 }
