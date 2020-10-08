@@ -9,10 +9,10 @@ use Aheadworks\MobileAppConnector\Api\CustomerOrderInterface;
 use Magento\Framework\Api\FilterBuilder;
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\Exception\InputException;
-use Magento\Framework\Exception\NoSuchEntityException;
+use Magento\Framework\Validator\Exception as ValidatorException;
 use Magento\Sales\Api\Data\OrderInterface;
 use Magento\Sales\Api\OrderRepositoryInterface;
-use Magento\Framework\Validator\Exception as ValidatorException;
+
 /**
  * Class CustomerOrder
  * @package Aheadworks\MobileAppConnector\Model
@@ -58,15 +58,15 @@ class CustomerOrder implements CustomerOrderInterface
      * @inheritdoc
      */
     public function get(int $customerId, int $id)
-    {  
+    {
         if (empty($id) || !isset($id) || $id == "") {
             throw new InputException(__('Id required'));
         }
         $entity = $this->orderRepository->get($id);
-        if($entity->getCustomerId() != $customerId){
+        if ($entity->getCustomerId() != $customerId) {
             throw new ValidatorException(
-               __('This Order id does not belongs to customer')
-             );
+                __('This Order id does not belongs to customer')
+            );
         }
         return $entity;
     }
