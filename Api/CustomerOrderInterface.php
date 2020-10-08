@@ -18,6 +18,7 @@ interface CustomerOrderInterface
      * @param int $id The order ID.
      * @param int $customerId The customerId ID.
      * @return \Magento\Sales\Api\Data\OrderInterface Order interface.
+     * @throws \Magento\Framework\Exception\LocalizedException
      */
     public function get(int $customerId, int $id);
 
