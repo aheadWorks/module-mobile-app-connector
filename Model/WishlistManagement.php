@@ -4,7 +4,6 @@ namespace Aheadworks\MobileAppConnector\Model;
 
 use Aheadworks\MobileAppConnector\Api\WishlistManagementInterface;
 use Magento\Catalog\Api\ProductRepositoryInterface;
-//use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Wishlist\Model\WishlistFactory;
 

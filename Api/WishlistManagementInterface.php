@@ -8,7 +8,7 @@ namespace Aheadworks\MobileAppConnector\Api;
 interface WishlistManagementInterface
 {
     /**
-     * Return Added wishlist item.
+     * Return true if item Added to wishlist.
      *
      * @param int $customerId
      * @param int $productId
