@@ -100,9 +100,8 @@ class CustomerOrder implements CustomerOrderInterface
     }
 
     /**
-     * get the shipping name
-     *
-     * @param array $order
+     * get Shipping name
+     * @param OrderInterface $order
      * @return string
      */
     private function getShipName($order)
