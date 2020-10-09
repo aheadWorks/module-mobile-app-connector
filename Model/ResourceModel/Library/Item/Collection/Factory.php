@@ -6,7 +6,7 @@ use Magento\Framework\ObjectManagerInterface;
 use Aheadworks\MobileAppConnector\Model\ResourceModel\Library\Item\Collection as LibraryItemCollection;
 use Aheadworks\MobileAppConnector\Model\ResourceModel\AbstractCollection;
 use Aheadworks\MobileAppConnector\Model\Downloadable\Link\Purchased\Provider as PurchasedLinkProvider;
-
+use Magento\Framework\App\ResourceConnection;
 /**
  * Class Factory
  *
@@ -14,6 +14,11 @@ use Aheadworks\MobileAppConnector\Model\Downloadable\Link\Purchased\Provider as 
  */
 class Factory
 {
+    /**
+     * @var ResourceConnection
+     */
+    private $resourceConnection;
+
     /**
      * Object Manager instance
      *
@@ -43,11 +48,13 @@ class Factory
     public function __construct(
         ObjectManagerInterface $objectManager,
         PurchasedLinkProvider $purchasedLinkProvider,
+        ResourceConnection $resourceConnection,
         $instanceName = LibraryItemCollection::class
     ) {
         $this->objectManager = $objectManager;
         $this->instanceName = $instanceName;
         $this->purchasedLinkProvider = $purchasedLinkProvider;
+        $this->resourceConnection = $resourceConnection;
     }
 
     /**
@@ -68,10 +75,19 @@ class Factory
         if (empty($purchasedLinkIds)) {
             $purchasedLinkIds = [null];
         }
+        $collection->getSelect()
+                    ->joinLeft( array('purches_item'=>$this->resourceConnection->getTableName('downloadable_link_purchased')),
+                               'purches_item.purchased_id = main_table.purchased_id', array('purches_item.product_name'))
+                    ->joinLeft(array('val'=>$this->resourceConnection->getTableName('catalog_product_entity_media_gallery_value')),
+                                'val.entity_id = main_table.product_id',array('val.value_id'))
+                     ->joinLeft(array('gal'=>$this->resourceConnection->getTableName('catalog_product_entity_media_gallery')),
+                                'gal.value_id = val.value_id',array('product_image_url' =>'gal.value')
+                    );
+   // echo $collection->getSelect()->__toString();die();
 
         $collection
             ->addFieldToFilter(
-                'purchased_id',
+                'main_table.purchased_id',
                 ['in' => $purchasedLinkIds]
             )->addFieldToFilter(
                 'status',

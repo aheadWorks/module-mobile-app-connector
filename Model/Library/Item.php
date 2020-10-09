@@ -4,6 +4,7 @@ namespace Aheadworks\MobileAppConnector\Model\Library;
 use Aheadworks\MobileAppConnector\Api\Data\LibraryItemInterface;
 use Aheadworks\MobileAppConnector\Model\ResourceModel\Library\Item\Collection as LibraryItemCollection;
 use Magento\Framework\Model\AbstractModel;
+use Magento\Framework\UrlInterface;
 
 /**
  * Class Item
@@ -13,13 +14,19 @@ use Magento\Framework\Model\AbstractModel;
  */
 class Item extends AbstractModel implements LibraryItemInterface
 {
-    const DOWNLOADABLE_PATH_LINKS = 'downloadable/download/link/id/';
 
-    protected $productrepository;
+    /**
+     * @var UrlInterface
+     */
+    private $urlBuilder;
 
-    public function __construct(\Magento\Catalog\Api\ProductRepositoryInterface $productrepository)
-    {
-        $this->productrepository = $productrepository;
+    /**
+     * @param UrlInterface $urlBuilder
+     */
+    public function __construct(
+        UrlInterface $urlBuilder
+    ) {
+        $this->urlBuilder = $urlBuilder;
     }
 
     /**
@@ -68,8 +75,7 @@ class Item extends AbstractModel implements LibraryItemInterface
      */
     public function getProductName()
     {
-        $product = $this->productrepository->getById($this->getData(self::PRODUCT_ID));
-        return ($product->getName() ? $product->getName() : "");
+        return $this->getData(self::PRODUCT_NAME);
     }
 
     /**
@@ -85,7 +91,9 @@ class Item extends AbstractModel implements LibraryItemInterface
      */
     public function getProductImageUrl()
     {
-        return $this->getData(self::LINK_FILE);
+        if ($this->getData(self::PRODUCT_IMAGE_URL) !='') {
+            return $this->urlBuilder->getUrl('media/catalog/product/', ['_secure' =>true]) . $this->getData(self::PRODUCT_IMAGE_URL);
+        }
     }
 
     /**
@@ -93,7 +101,7 @@ class Item extends AbstractModel implements LibraryItemInterface
      */
     public function setProductImageUrl($productImageUrl)
     {
-        return $this->setData(self::LINK_FILE, $productImageUrl);
+        return $this->setData(self::PRODUCT_IMAGE_URL, $productImageUrl);
     }
 
     /**
@@ -149,23 +157,10 @@ class Item extends AbstractModel implements LibraryItemInterface
      */
     public function getViewUrl()
     {
-        return self::DOWNLOADABLE_PATH_LINKS . $this->getData(self::LINK_HASH);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setProductId($productId)
-    {
-        return $this->setData(self::PRODUCT_ID, $productId);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getProductId()
-    {
-        return $this->getData(self::PRODUCT_ID);
+        return $this->urlBuilder->getUrl(
+            'downloadable/download/link',
+            ['id' => $this->getData(self::LINK_HASH), '_secure' => true]
+        );
     }
 
     /**
