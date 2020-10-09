@@ -28,4 +28,12 @@ interface WishlistManagementInterface
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     public function removeProductFromWishlist($customerId, $productId);
+
+    /**
+     * Return Wishlist items.
+     *
+     * @param int $customerId
+     * @return bool|mixed
+     */
+    public function getWishlistForCustomer($customerId);
 }

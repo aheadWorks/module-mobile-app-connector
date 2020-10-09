@@ -18,6 +18,15 @@
             <parameter name="customerId" force="true">%customer_id%</parameter>
         </data>
     </route>
+    <route url="/V1/wishlist/items" method="GET">
+        <service class="Aheadworks\MobileAppConnector\Api\WishlistManagementInterface" method="getWishlistForCustomer"/>
+        <resources>
+            <resource ref="self" />
+        </resources>
+        <data>
+            <parameter name="customerId" force="true">%customer_id%</parameter>
+        </data>
+    </route>
     <route url="/V1/products/most-viewed/:limit" method="GET">
         <service class="Aheadworks\MobileAppConnector\Api\MostViewedRepositoryInterface" method="getMostViewedProducts"/>
         <resources>
