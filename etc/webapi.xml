@@ -18,4 +18,10 @@
             <parameter name="customerId" force="true">%customer_id%</parameter>
         </data>
     </route>
+    <route url="/V1/products/most-viewed/:limit" method="GET">
+        <service class="Aheadworks\MobileAppConnector\Api\MostViewedRepositoryInterface" method="getMostViewedProducts"/>
+        <resources>
+            <resource ref="Magento_Catalog::products" />
+        </resources>
+    </route>
 </routes>
