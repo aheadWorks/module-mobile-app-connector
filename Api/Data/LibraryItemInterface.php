@@ -109,7 +109,7 @@ interface LibraryItemInterface extends ExtensibleDataInterface
     /**
      * Set link title
      *
-     * @param string $linkTitle
+     * @param string $linkFile
      * @return $this
      */
     public function setLinkFile($linkFile);

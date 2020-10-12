@@ -75,16 +75,7 @@ class Factory
         if (empty($purchasedLinkIds)) {
             $purchasedLinkIds = [null];
         }
-        $collection->getSelect()
-                    ->joinLeft( array('purches_item'=>$this->resourceConnection->getTableName('downloadable_link_purchased')),
-                               'purches_item.purchased_id = main_table.purchased_id', array('purches_item.product_name'))
-                    ->joinLeft(array('val'=>$this->resourceConnection->getTableName('catalog_product_entity_media_gallery_value')),
-                                'val.entity_id = main_table.product_id',array('val.value_id'))
-                     ->joinLeft(array('gal'=>$this->resourceConnection->getTableName('catalog_product_entity_media_gallery')),
-                                'gal.value_id = val.value_id',array('product_image_url' =>'gal.value')
-                    );
-   // echo $collection->getSelect()->__toString();die();
-
+        
         $collection
             ->addFieldToFilter(
                 'main_table.purchased_id',

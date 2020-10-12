@@ -4,8 +4,6 @@ namespace Aheadworks\MobileAppConnector\Model\Library;
 use Aheadworks\MobileAppConnector\Api\Data\LibraryItemInterface;
 use Aheadworks\MobileAppConnector\Model\ResourceModel\Library\Item\Collection as LibraryItemCollection;
 use Magento\Framework\Model\AbstractModel;
-use Magento\Framework\UrlInterface;
-
 /**
  * Class Item
  *
@@ -14,20 +12,6 @@ use Magento\Framework\UrlInterface;
  */
 class Item extends AbstractModel implements LibraryItemInterface
 {
-
-    /**
-     * @var UrlInterface
-     */
-    private $urlBuilder;
-
-    /**
-     * @param UrlInterface $urlBuilder
-     */
-    public function __construct(
-        UrlInterface $urlBuilder
-    ) {
-        $this->urlBuilder = $urlBuilder;
-    }
 
     /**
      * {@inheritdoc}
@@ -71,7 +55,6 @@ class Item extends AbstractModel implements LibraryItemInterface
 
     /**
      * {@inheritdoc}
-     * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     public function getProductName()
     {
@@ -91,9 +74,7 @@ class Item extends AbstractModel implements LibraryItemInterface
      */
     public function getProductImageUrl()
     {
-        if ($this->getData(self::PRODUCT_IMAGE_URL) !='') {
-            return $this->urlBuilder->getUrl('media/catalog/product/', ['_secure' =>true]) . $this->getData(self::PRODUCT_IMAGE_URL);
-        }
+        return $this->getData(self::PRODUCT_IMAGE_URL);
     }
 
     /**
@@ -157,10 +138,7 @@ class Item extends AbstractModel implements LibraryItemInterface
      */
     public function getViewUrl()
     {
-        return $this->urlBuilder->getUrl(
-            'downloadable/download/link',
-            ['id' => $this->getData(self::LINK_HASH), '_secure' => true]
-        );
+        return $this->getData(self::VIEW_URL);
     }
 
     /**
