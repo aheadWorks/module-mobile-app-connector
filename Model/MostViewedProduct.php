@@ -2,18 +2,25 @@
 
 namespace Aheadworks\MobileAppConnector\Model;
 
-use Aheadworks\MobileAppConnector\Api\MostViewedRepositoryInterface;
+use Aheadworks\MobileAppConnector\Api\MostViewedProductInterface;
 use Exception;
+use Magento\Catalog\Api\Data\ProductInterface;
 use Magento\Catalog\Api\ProductRepositoryInterface;
+use Magento\Framework\UrlInterface;
 use Magento\Reports\Model\ResourceModel\Product\CollectionFactory;
 use Magento\Store\Model\StoreManagerInterface;
 
+
 /**
- * Defines the implemented class of the MostViewedRepositoryInterface
- * Class \Aheadworks\MobileAppConnector\Model\MostViewedRepository
+ * Defines the implemented class of the MostViewedProductInterface
+ * Class \Aheadworks\MobileAppConnector\Model\MostViewedProduct
  */
-class MostViewedRepository implements MostViewedRepositoryInterface
+class MostViewedProduct implements MostViewedProductInterface
 {
+    const ID = 'id';
+    const MINIMUL_PRICE = 'minimul_price';
+    const MAXIMUL_PRICE = 'maximul_price';
+    const IMAGE = 'product_image';
     /**
      * @var CollectionFactory
      */
@@ -21,14 +28,14 @@ class MostViewedRepository implements MostViewedRepositoryInterface
     /**
      * @var ProductRepositoryInterface
      */
-    protected $productRepositoryInterface;
+    protected $productRepository;
     /**
      * @var StoreManagerInterface
      */
     protected $storeManager;
 
     /**
-     * MostViewedRepository constructor.
+     * MostViewedProduct constructor.
      * @param CollectionFactory $reportCollectionFactory
      * @param ProductRepositoryInterface $productRepository
      * @param StoreManagerInterface $storeManager
@@ -40,17 +47,17 @@ class MostViewedRepository implements MostViewedRepositoryInterface
     ) {
         $this->reportCollectionFactory = $reportCollectionFactory;
         $this->storeManager = $storeManager;
-        $this->productRepositoryInterface = $productRepository;
+        $this->productRepository = $productRepository;
     }
 
     /**
      * @inheritdoc
-     * @throws Exception
      */
     public function getMostViewedProducts($limit)
     {
         try {
             $storeId = $this->storeManager->getStore()->getId();
+            $store = $this->storeManager->getStore();
 
             $collection = $this->reportCollectionFactory->create()
                 ->addAttributeToSelect(
@@ -61,20 +68,19 @@ class MostViewedRepository implements MostViewedRepositoryInterface
                     $storeId
                 )->setPageSize($limit);
             $items = $collection->getItems();
-
+            $mostViewedData = [];
             if (count($collection->getData())) {
                 foreach ($items as $item) {
-                    $product = $this->productRepositoryInterface->getById($item->getId());
+                    $product = $this->productRepository->getById($item->getId());
+                    $productImageUrl = $store->getBaseUrl(UrlInterface::URL_TYPE_MEDIA) . 'catalog/product' . $product->getImage();
                     $data = [
-                        "product_id" => $item->getId(),
-                        "product_name" => $item->getName(),
-                        "product_type_id" => $item->getTypeId(),
-                        "final_price" => $product->getPriceInfo()->getPrice('final_price')->getValue(),
-                        "minimul_price" => $product->getPriceInfo()->getPrice('final_price')->getMinimalPrice()->getValue(),
-                        "maximul_price" => $product->getPriceInfo()->getPrice('final_price')->getMaximalPrice()->getValue(),
-                        "product_image" => $product->getData('image'),
-                        "product_thumbnail" => $product->getData('thumbnail'),
-                        "product_small_image" => $product->getData('small_image')
+                        self::ID => $item->getId(),
+                        ProductInterface::NAME => $item->getName(),
+                        ProductInterface::TYPE_ID => $item->getTypeId(),
+                        ProductInterface::PRICE => $product->getPriceInfo()->getPrice('final_price')->getValue(),
+                        self::MINIMUL_PRICE => $product->getPriceInfo()->getPrice('final_price')->getMinimalPrice()->getValue(),
+                        self::MAXIMUL_PRICE => $product->getPriceInfo()->getPrice('final_price')->getMaximalPrice()->getValue(),
+                        self::IMAGE=> $productImageUrl
 
                     ];
                     $mostViewedData[] = $data;

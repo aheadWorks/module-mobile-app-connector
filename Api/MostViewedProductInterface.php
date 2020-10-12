@@ -2,18 +2,18 @@
 namespace Aheadworks\MobileAppConnector\Api;
 
 /**
- * Interface MostViewedRepositoryInterface
+ * Interface MostViewedProductInterface
  * @api
  */
 
-interface MostViewedRepositoryInterface
+interface MostViewedProductInterface
 {
 
     /**
      * Get most viewed products
-     *
      * @param int $limit
-     * @return mixed
+     * @return bool|array
+     * @throws Exception
      */
     public function getMostViewedProducts($limit);
 }

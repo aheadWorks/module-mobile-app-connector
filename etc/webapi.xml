@@ -1,27 +1,12 @@
 <?xml version="1.0" ?>
 <routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
-    <route url="/V1/wishlist/add/:productId" method="POST">
-        <service class="Aheadworks\MobileAppConnector\Api\WishlistManagementInterface" method="addProductToWishlist"/>
-        <resources>
-            <resource ref="self" />
-        </resources>
-        <data>
-            <parameter name="customerId" force="true">%customer_id%</parameter>
-        </data>
-    </route>
-    <route url="/V1/wishlist/remove/:productId" method="POST">
-        <service class="Aheadworks\MobileAppConnector\Api\WishlistManagementInterface" method="removeProductFromWishlist"/>
-        <resources>
-            <resource ref="self" />
-        </resources>
-        <data>
-            <parameter name="customerId" force="true">%customer_id%</parameter>
-        </data>
-    </route>
     <route url="/V1/products/most-viewed/:limit" method="GET">
-        <service class="Aheadworks\MobileAppConnector\Api\MostViewedRepositoryInterface" method="getMostViewedProducts"/>
+        <service class="Aheadworks\MobileAppConnector\Api\MostViewedProductInterface" method="getMostViewedProducts"/>
         <resources>
-            <resource ref="Magento_Catalog::products" />
+            <resource ref="self" />
         </resources>
+        <data>
+            <parameter name="customerId" force="true">%customer_id%</parameter>
+        </data>
     </route>
 </routes>
