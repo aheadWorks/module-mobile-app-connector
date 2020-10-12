@@ -18,4 +18,23 @@
             <parameter name="customerId" force="true">%customer_id%</parameter>
         </data>
     </route>
+       <!-- for customer order list-->
+    <route url="/V1/customer/orders" method="GET">
+        <service class="Aheadworks\MobileAppConnector\Api\CustomerOrderInterface" method="getList"/>
+        <resources>
+            <resource ref="self"/>
+        </resources>
+        <data>
+            <parameter name="customerId" force="true">%customer_id%</parameter>
+        </data>
+    </route>
+    <route url="/V1/customer/order/:id" method="GET">
+        <service class="Aheadworks\MobileAppConnector\Api\CustomerOrderInterface" method="get"/>
+            <resources>
+                <resource ref="self"/>
+            </resources>
+            <data>
+                <parameter name="customerId" force="true">%customer_id%</parameter>
+            </data>
+    </route>
 </routes>
