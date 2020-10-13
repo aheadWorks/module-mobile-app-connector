@@ -159,12 +159,9 @@ class Provider
      */
     public function getItemViewUrl($linkHash)
     {
-        if (isset($linkHash)) {
-            return $this->urlBuilder->getUrl(
-                'downloadable/download/link',
-                ['id' => $linkHash, '_secure' => true]
-            );
-        }
-        return;
+        return $this->urlBuilder->getUrl(
+            'downloadable/download/link',
+            ['id' => $linkHash, '_secure' => true]
+        );
     }
 }
