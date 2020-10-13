@@ -2,8 +2,9 @@
 namespace Aheadworks\MobileAppConnector\Model\Library;
 
 use Aheadworks\MobileAppConnector\Api\Data\LibraryItemInterface;
-use Aheadworks\MobileAppConnector\Model\ResourceModel\Library\Item\Collection as LibraryItemCollection;
 use Magento\Framework\Model\AbstractModel;
+use Magento\Downloadable\Model\ResourceModel\Link\Purchased\Item as  ItemResource;
+use Aheadworks\MobileAppConnector\Model\Downloadable\Link\Purchased\Provider as PurchasedLinkProvider;
 /**
  * Class Item
  *
@@ -12,13 +13,28 @@ use Magento\Framework\Model\AbstractModel;
  */
 class Item extends AbstractModel implements LibraryItemInterface
 {
+    /**
+     * @var purchasedLinkProvider
+     */
+    private $purchasedLinkProvider;
+
+    /**
+     * @param PurchasedLinkProvider $purchasedLinkProvider
+     */
+    public function __construct(
+        PurchasedLinkProvider $purchasedLinkProvider
+    ) {
+      
+        $this->purchasedLinkProvider = $purchasedLinkProvider;
+    }
+
 
     /**
      * {@inheritdoc}
      */
     protected function _construct()
     {
-        $this->_init(LibraryItemCollection::class);
+        $this->_init(ItemResource::class);
     }
 
     /**
@@ -35,6 +51,22 @@ class Item extends AbstractModel implements LibraryItemInterface
     public function setItemId($itemId)
     {
         return $this->setData(self::ITEM_ID, $itemId);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getProductId()
+    {
+        return $this->getData(self::PRODUCT_ID);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setProductId($productId)
+    {
+        return $this->setData(self::PRODUCT_ID, $productId);
     }
 
     /**
@@ -58,6 +90,10 @@ class Item extends AbstractModel implements LibraryItemInterface
      */
     public function getProductName()
     {
+        if ($this->getData(self::PRODUCT_NAME) === null) {
+            $item = $this->purchasedLinkProvider->getPurcheseditem($this->getOrderItemId());
+            $this->setData(self::PRODUCT_NAME, $item);
+        }
         return $this->getData(self::PRODUCT_NAME);
     }
 
@@ -74,6 +110,10 @@ class Item extends AbstractModel implements LibraryItemInterface
      */
     public function getProductImageUrl()
     {
+        if ($this->getData(self::PRODUCT_IMAGE_URL) === null) {
+            $item = $this->purchasedLinkProvider->getItemImageUrl($this->getProductId());
+            $this->setData(self::PRODUCT_IMAGE_URL, $item);
+        }
         return $this->getData(self::PRODUCT_IMAGE_URL);
     }
 
@@ -138,6 +178,10 @@ class Item extends AbstractModel implements LibraryItemInterface
      */
     public function getViewUrl()
     {
+        if ($this->getData(self::VIEW_URL) === null) {
+            $item = $this->purchasedLinkProvider->getItemViewUrl($this->getLinkHash());
+            $this->setData(self::VIEW_URL, $item);
+        }
         return $this->getData(self::VIEW_URL);
     }
 

@@ -22,6 +22,7 @@ interface LibraryItemInterface extends ExtensibleDataInterface
     const LINK_TITLE = 'link_title';
     const LINK_HASH = 'link_hash';
     const VIEW_URL = 'view_url';
+    const PRODUCT_ID = 'product_id';
     /**#@-*/
 
     /**
@@ -38,6 +39,21 @@ interface LibraryItemInterface extends ExtensibleDataInterface
      * @return $this
      */
     public function setItemId($itemId);
+
+    /**
+     * Get productId id
+     *
+     * @return int
+     */
+    public function getProductId();
+
+    /**
+     * Set productId id
+     *
+     * @param int $productId
+     * @return $this
+     */
+    public function setProductId($productId);
 
     /**
      * Get order item id
