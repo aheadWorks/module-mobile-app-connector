@@ -7,15 +7,16 @@
     <preference for="Aheadworks\MobileAppConnector\Model\ResourceModel\Collection\ModifierInterface" type="Aheadworks\MobileAppConnector\Model\ResourceModel\Collection\CompositeModifier" />
 
     <virtualType name="Aheadworks\MobileAppConnector\Model\ResourceModel\Library\Item\Collection\CompositeModifier"
-             type="Aheadworks\MobileAppConnector\Model\ResourceModel\Collection\CompositeModifier">
-    <arguments>
-        <argument name="modifiers" xsi:type="array">
-            <item name="view_url" xsi:type="object">Aheadworks\MobileAppConnector\Model\ResourceModel\Library\Item\Collection\Modifier\ViewUrl</item>
-           <item name="product_name" xsi:type="object">Aheadworks\MobileAppConnector\Model\ResourceModel\Library\Item\Collection\Modifier\Product\Name</item>
-            <item name="product_image" xsi:type="object">Aheadworks\MobileAppConnector\Model\ResourceModel\Library\Item\Collection\Modifier\Product\Image</item>
-        </argument>
-    </arguments>
+                 type="Aheadworks\MobileAppConnector\Model\ResourceModel\Collection\CompositeModifier">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="view_url" xsi:type="object">Aheadworks\MobileAppConnector\Model\ResourceModel\Library\Item\Collection\Modifier\ViewUrl</item>
+                <item name="product_name" xsi:type="object">Aheadworks\MobileAppConnector\Model\ResourceModel\Library\Item\Collection\Modifier\Product\Name</item>
+                <item name="product_image" xsi:type="object">Aheadworks\MobileAppConnector\Model\ResourceModel\Library\Item\Collection\Modifier\Product\Image</item>
+            </argument>
+        </arguments>
     </virtualType>
+
     <type name="Aheadworks\MobileAppConnector\Model\ResourceModel\Library\Item\Collection">
         <arguments>
             <argument name="modifier" xsi:type="object">Aheadworks\MobileAppConnector\Model\ResourceModel\Library\Item\Collection\CompositeModifier</argument>

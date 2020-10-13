@@ -40,22 +40,6 @@ class Item extends AbstractModel implements LibraryItemInterface
     /**
      * {@inheritdoc}
      */
-    public function getProductId()
-    {
-        return $this->getData(self::PRODUCT_ID);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setProductId($productId)
-    {
-        return $this->setData(self::PRODUCT_ID, $productId);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getOrderItemId()
     {
         return $this->getData(self::ORDER_ITEM_ID);
@@ -115,22 +99,6 @@ class Item extends AbstractModel implements LibraryItemInterface
     public function setLinkTitle($linkTitle)
     {
         return $this->setData(self::LINK_TITLE, $linkTitle);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getLinkFile()
-    {
-        return $this->getData(self::LINK_FILE);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setLinkFile($linkFile)
-    {
-        return $this->setData(self::LINK_FILE, $linkFile);
     }
 
     /**
