@@ -4,7 +4,7 @@ namespace Aheadworks\MobileAppConnector\Model\Library;
 use Aheadworks\MobileAppConnector\Api\Data\LibraryItemInterface;
 use Magento\Framework\Model\AbstractModel;
 use Magento\Downloadable\Model\ResourceModel\Link\Purchased\Item as  ItemResource;
-use Aheadworks\MobileAppConnector\Model\Downloadable\Link\Purchased\Provider as PurchasedLinkProvider;
+
 /**
  * Class Item
  *
@@ -13,22 +13,6 @@ use Aheadworks\MobileAppConnector\Model\Downloadable\Link\Purchased\Provider as 
  */
 class Item extends AbstractModel implements LibraryItemInterface
 {
-    /**
-     * @var purchasedLinkProvider
-     */
-    private $purchasedLinkProvider;
-
-    /**
-     * @param PurchasedLinkProvider $purchasedLinkProvider
-     */
-    public function __construct(
-        PurchasedLinkProvider $purchasedLinkProvider
-    ) {
-      
-        $this->purchasedLinkProvider = $purchasedLinkProvider;
-    }
-
-
     /**
      * {@inheritdoc}
      */
