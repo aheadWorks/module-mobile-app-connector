@@ -90,10 +90,6 @@ class Item extends AbstractModel implements LibraryItemInterface
      */
     public function getProductName()
     {
-        if ($this->getData(self::PRODUCT_NAME) === null) {
-            $item = $this->purchasedLinkProvider->getPurcheseditem($this->getOrderItemId());
-            $this->setData(self::PRODUCT_NAME, $item);
-        }
         return $this->getData(self::PRODUCT_NAME);
     }
 
@@ -110,10 +106,6 @@ class Item extends AbstractModel implements LibraryItemInterface
      */
     public function getProductImageUrl()
     {
-        if ($this->getData(self::PRODUCT_IMAGE_URL) === null) {
-            $item = $this->purchasedLinkProvider->getItemImageUrl($this->getProductId());
-            $this->setData(self::PRODUCT_IMAGE_URL, $item);
-        }
         return $this->getData(self::PRODUCT_IMAGE_URL);
     }
 
@@ -178,10 +170,6 @@ class Item extends AbstractModel implements LibraryItemInterface
      */
     public function getViewUrl()
     {
-        if ($this->getData(self::VIEW_URL) === null) {
-            $item = $this->purchasedLinkProvider->getItemViewUrl($this->getLinkHash());
-            $this->setData(self::VIEW_URL, $item);
-        }
         return $this->getData(self::VIEW_URL);
     }
 
