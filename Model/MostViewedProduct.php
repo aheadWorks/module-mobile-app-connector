@@ -10,7 +10,6 @@ use Magento\Catalog\Model\Product\Visibility;
 use Magento\Reports\Model\ResourceModel\Product\CollectionFactory;
 use Magento\Store\Model\StoreManagerInterface;
 
-
 /**
  * Defines the implemented class of the MostViewedProductInterface
  * Class \Aheadworks\MobileAppConnector\Model\MostViewedProduct
@@ -20,6 +19,7 @@ class MostViewedProduct implements MostViewedProductInterface
     const ID = 'id';
     const MIN_PRICE = 'min_price';
     const MAX_PRICE = 'max_price';
+    const FINAL_PRICE = 'final_price';
     const IMAGE = 'product_image';
     /**
      * @var CollectionFactory
@@ -63,12 +63,9 @@ class MostViewedProduct implements MostViewedProductInterface
     public function getMostViewedProducts($limit, $storeId = null)
     {
         try {
-            $storeId = $this->storeManager->getStore()->getId();
-            $store = $this->storeManager->getStore();
-
             $collection = $this->reportCollectionFactory->create()
                 ->addAttributeToSelect(
-                    'entity_id'
+                    '*'
                 )->addStoreFilter(
                     $storeId
                 )->addViewsCount()->setStoreId(
@@ -80,15 +77,14 @@ class MostViewedProduct implements MostViewedProductInterface
             $mostViewedData = [];
             if (count($collection->getData())) {
                 foreach ($items as $item) {
-                    $product = $this->productRepository->getById($item->getId());
-                    $productImageUrl = $store->getBaseUrl(UrlInterface::URL_TYPE_MEDIA) . 'catalog/product' . $product->getImage();
                     $data = [
                         self::ID => $item->getId(),
-                        ProductInterface::NAME => $product->getName(),
+                        ProductInterface::NAME => $item->getName(),
                         ProductInterface::TYPE_ID => $item->getTypeId(),
-                        ProductInterface::PRICE => $product->getPriceInfo()->getPrice('final_price')->getValue(),
-                        self::MIN_PRICE => $this->getMinimumPrice($product),
-                        self::MAX_PRICE => $this->getMaximumPrice($product),
+                        ProductInterface::PRICE => $item->getPrice(),
+                        self::MIN_PRICE => $this->getMinimumPrice($item),
+                        self::MAX_PRICE => $this->getMaximumPrice($item),
+                        self::FINAL_PRICE => $item->getFinalPrice(),
                         self::IMAGE=> "TO DO"
 
                     ];
@@ -104,20 +100,22 @@ class MostViewedProduct implements MostViewedProductInterface
     }
 
     /**
-     * @param $product
-     * @return mixed
+     * Return product min price
+     * @param object $item
+     * @return double
      */
-    private function getMinimumPrice($product)
+    private function getMinimumPrice($item)
     {
-        return $product->getPriceInfo()->getPrice('final_price')->getMinimalPrice()->getValue();
+        return $item->getPriceInfo()->getPrice('final_price')->getMinimalPrice()->getValue();
     }
 
     /**
-     * @param $product
-     * @return mixed
+     * Return product max price
+     * @param object $item
+     * @return double
      */
-    private function getMaximumPrice($product)
+    private function getMaximumPrice($item)
     {
-        return $product->getPriceInfo()->getPrice('final_price')->getMaximalPrice()->getValue();
+        return $item->getPriceInfo()->getPrice('final_price')->getMaximalPrice()->getValue();
     }
 }
