@@ -84,10 +84,6 @@ class Factory
                 'status',
                 ['in' => [Item::LINK_STATUS_AVAILABLE]]
             )
-            ->addFieldToFilter(
-                'link_file',
-                ['regexp' => '(\.pdf$)|(\.PDF$)|(\.MP3$)|(\.mp3$)|(\.MP4$)|(\.mp4$)']
-            )
              ->setOrder(
                 'item_id',
                 AbstractCollection::SORT_ORDER_DESC
