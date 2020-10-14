@@ -1,8 +1,27 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	<preference for="Aheadworks\MobileAppConnector\Api\WishlistManagementInterface" type="Aheadworks\MobileAppConnector\Model\WishlistManagement" />
+    <preference for="Aheadworks\MobileAppConnector\Api\CustomerOrderInterface" type="Aheadworks\MobileAppConnector\Model\CustomerOrder" />
     <preference for="Aheadworks\MobileAppConnector\Api\LibraryItemRepositoryInterface" type="Aheadworks\MobileAppConnector\Model\Library\Item\Repository" />
     <preference for="Aheadworks\MobileAppConnector\Api\Data\LibraryItemSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
     <preference for="Aheadworks\MobileAppConnector\Api\Data\LibraryItemInterface" type="Aheadworks\MobileAppConnector\Model\Library\Item" />
     <preference for="Aheadworks\MobileAppConnector\Api\LibraryItemRepositoryInterface" type="Aheadworks\MobileAppConnector\Model\Library\Item\Repository" />
     <preference for="Aheadworks\MobileAppConnector\Model\ResourceModel\Collection\ModifierInterface" type="Aheadworks\MobileAppConnector\Model\ResourceModel\Collection\CompositeModifier" />
+
+    <virtualType name="Aheadworks\MobileAppConnector\Model\ResourceModel\Library\Item\Collection\CompositeModifier"
+                 type="Aheadworks\MobileAppConnector\Model\ResourceModel\Collection\CompositeModifier">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="view_url" xsi:type="object">Aheadworks\MobileAppConnector\Model\ResourceModel\Library\Item\Collection\Modifier\ViewUrl</item>
+                <item name="product_name" xsi:type="object">Aheadworks\MobileAppConnector\Model\ResourceModel\Library\Item\Collection\Modifier\Product\Name</item>
+                <item name="product_image" xsi:type="object">Aheadworks\MobileAppConnector\Model\ResourceModel\Library\Item\Collection\Modifier\Product\Image</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Aheadworks\MobileAppConnector\Model\ResourceModel\Library\Item\Collection">
+        <arguments>
+            <argument name="modifier" xsi:type="object">Aheadworks\MobileAppConnector\Model\ResourceModel\Library\Item\Collection\CompositeModifier</argument>
+        </arguments>
+    </type>
 </config>
