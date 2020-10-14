@@ -2,8 +2,9 @@
 namespace Aheadworks\MobileAppConnector\Model\Library;
 
 use Aheadworks\MobileAppConnector\Api\Data\LibraryItemInterface;
-use Aheadworks\MobileAppConnector\Model\ResourceModel\Library\Item\Collection as LibraryItemCollection;
 use Magento\Framework\Model\AbstractModel;
+use Magento\Downloadable\Model\ResourceModel\Link\Purchased\Item as  ItemResource;
+
 /**
  * Class Item
  *
@@ -12,13 +13,12 @@ use Magento\Framework\Model\AbstractModel;
  */
 class Item extends AbstractModel implements LibraryItemInterface
 {
-
     /**
      * {@inheritdoc}
      */
     protected function _construct()
     {
-        $this->_init(LibraryItemCollection::class);
+        $this->_init(ItemResource::class);
     }
 
     /**
@@ -99,22 +99,6 @@ class Item extends AbstractModel implements LibraryItemInterface
     public function setLinkTitle($linkTitle)
     {
         return $this->setData(self::LINK_TITLE, $linkTitle);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getLinkFile()
-    {
-        return $this->getData(self::LINK_FILE);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setLinkFile($linkFile)
-    {
-        return $this->setData(self::LINK_FILE, $linkFile);
     }
 
     /**
