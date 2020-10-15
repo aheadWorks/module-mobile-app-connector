@@ -3,6 +3,7 @@
 namespace Aheadworks\MobileAppConnector\Model;
 
 use Aheadworks\MobileAppConnector\Api\MostViewedProductInterface;
+use Aheadworks\MobileAppConnector\Model\Product\Image\Resolver;
 use Exception;
 use Magento\Catalog\Api\Data\ProductInterface;
 use Magento\Catalog\Api\ProductRepositoryInterface;
@@ -37,6 +38,10 @@ class MostViewedProduct implements MostViewedProductInterface
      * @var Visibility
      */
     protected $productVisibility;
+    /**
+     * @var Resolver
+     */
+    protected $imageResolver;
 
     /**
      * MostViewedProduct constructor.
@@ -44,17 +49,20 @@ class MostViewedProduct implements MostViewedProductInterface
      * @param ProductRepositoryInterface $productRepository
      * @param StoreManagerInterface $storeManager
      * @param Visibility $productVisibility
+     * @param Resolver $imageResolver
      */
     public function __construct(
         CollectionFactory $reportCollectionFactory,
         ProductRepositoryInterface $productRepository,
         StoreManagerInterface $storeManager,
-        Visibility $productVisibility
+        Visibility $productVisibility,
+        Resolver $imageResolver
     ) {
         $this->reportCollectionFactory = $reportCollectionFactory;
         $this->storeManager = $storeManager;
         $this->productRepository = $productRepository;
         $this->productVisibility = $productVisibility;
+        $this->imageResolver = $imageResolver;
     }
 
     /**
@@ -85,7 +93,7 @@ class MostViewedProduct implements MostViewedProductInterface
                         self::MIN_PRICE => $this->getMinimumPrice($item),
                         self::MAX_PRICE => $this->getMaximumPrice($item),
                         self::FINAL_PRICE => $item->getFinalPrice(),
-                        self::IMAGE=> "TO DO"
+                        self::IMAGE => $this->imageResolver->getProductImageUrl($item, 'category_page_grid')
 
                     ];
                     $mostViewedData[] = $data;
@@ -101,7 +109,7 @@ class MostViewedProduct implements MostViewedProductInterface
 
     /**
      * Return product min price
-     * @param object $item
+     * @param object $item \Magento\Catalog\Model\Product
      * @return double
      */
     private function getMinimumPrice($item)
@@ -111,7 +119,7 @@ class MostViewedProduct implements MostViewedProductInterface
 
     /**
      * Return product max price
-     * @param object $item
+     * @param object $item \Magento\Catalog\Model\Product
      * @return double
      */
     private function getMaximumPrice($item)
