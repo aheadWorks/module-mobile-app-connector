@@ -5,11 +5,11 @@ use Aheadworks\MobileAppConnector\Model\ResourceModel\Collection\ModifierInterfa
 use Aheadworks\MobileAppConnector\Api\Data\LibraryItemInterface;
 use Aheadworks\MobileAppConnector\Model\Url\Builder as UrlBuilder;
 /**
- * Class ViewUrl
+ * Class DownloadUrl
  *
  * @package Aheadworks\MobileAppConnector\Model\ResourceModel\Library\Item\Collection\Modifier
  */
-class ViewUrl implements ModifierInterface
+class DownloadUrl implements ModifierInterface
 {
     /**
      * @var UrlBuilder
@@ -32,8 +32,8 @@ class ViewUrl implements ModifierInterface
     {
         $linkHash = $item->getData(LibraryItemInterface::LINK_HASH);
         $item->setData(
-            LibraryItemInterface::VIEW_URL,
-            $this->urlBuilder->getItemDownloadUrl($linkHash)
+            LibraryItemInterface::DOWNLOAD_URL,
+            $this->urlBuilder->getLibraryItemDownloadUrl($linkHash)
         );
         return $item;
     }

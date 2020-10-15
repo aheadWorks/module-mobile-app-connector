@@ -20,7 +20,7 @@ interface LibraryItemInterface extends ExtensibleDataInterface
     const PRODUCT_IMAGE_URL = 'product_image_url';
     const LINK_TITLE = 'link_title';
     const LINK_HASH = 'link_hash';
-    const VIEW_URL = 'view_url';
+    const DOWNLOAD_URL = 'download_url';
     /**#@-*/
 
     /**
@@ -114,19 +114,19 @@ interface LibraryItemInterface extends ExtensibleDataInterface
     public function setLinkHash($linkHash);
 
     /**
-     * Get view url
+     * Get download url
      *
      * @return string
      */
-    public function getViewUrl();
+    public function getDownloadUrl();
 
     /**
-     * Set view url
+     * Set download url
      *
-     * @param string $viewUrl
+     * @param string $downloadUrl
      * @return $this
      */
-    public function setViewUrl($viewUrl);
+    public function setDownloadUrl($downloadUrl);
 
     /**
      * Retrieve existing extension attributes object or create a new one

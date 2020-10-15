@@ -10,7 +10,6 @@ use Magento\Framework\UrlInterface;
  */
 class Builder
 {
- 
     /**
      * @var UrlInterface
      */
@@ -26,19 +25,19 @@ class Builder
     }
 
     /**
-     * Retrieve url to download item
+     * Retrieve url to download library item
      *
      * @param string $linkHash
      * @param array $additionalParams
      * @return string
      */
-    public function getItemDownloadUrl($linkHash, $additionalParams = [])
+    public function getLibraryItemDownloadUrl($linkHash, $additionalParams = [])
     {
         $params = $additionalParams;
         $params['id'] = $linkHash;
         $params['_secure'] = true;
         return $this->urlBuilder->getUrl(
-            'downloadable/download/link',
+            'aw_mobile_app/download/link',
             $params
         );
     }
