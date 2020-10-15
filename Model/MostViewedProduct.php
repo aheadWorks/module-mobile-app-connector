@@ -109,7 +109,7 @@ class MostViewedProduct implements MostViewedProductInterface
 
     /**
      * Return product min price
-     * @param object $item \Magento\Catalog\Model\Product
+     * @param ProductInterface $item
      * @return double
      */
     private function getMinimumPrice($item)
@@ -119,7 +119,7 @@ class MostViewedProduct implements MostViewedProductInterface
 
     /**
      * Return product max price
-     * @param object $item \Magento\Catalog\Model\Product
+     * @param ProductInterface $item
      * @return double
      */
     private function getMaximumPrice($item)
