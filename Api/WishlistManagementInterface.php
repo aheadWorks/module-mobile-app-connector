@@ -1,5 +1,6 @@
 <?php
 namespace Aheadworks\MobileAppConnector\Api;
+use Exception;
 
 /**
  * Interface WishlistManagementInterface
@@ -33,7 +34,8 @@ interface WishlistManagementInterface
      * Return Wishlist items.
      *
      * @param int $customerId
-     * @return bool|mixed
+     * @return bool|array
+     * @throws Exception
      */
     public function getWishlistForCustomer($customerId);
 }
