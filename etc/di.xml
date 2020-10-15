@@ -12,7 +12,7 @@
                  type="Aheadworks\MobileAppConnector\Model\ResourceModel\Collection\CompositeModifier">
         <arguments>
             <argument name="modifiers" xsi:type="array">
-                <item name="view_url" xsi:type="object">Aheadworks\MobileAppConnector\Model\ResourceModel\Library\Item\Collection\Modifier\ViewUrl</item>
+                <item name="download_url" xsi:type="object">Aheadworks\MobileAppConnector\Model\ResourceModel\Library\Item\Collection\Modifier\DownloadUrl</item>
                 <item name="product_name" xsi:type="object">Aheadworks\MobileAppConnector\Model\ResourceModel\Library\Item\Collection\Modifier\Product\Name</item>
                 <item name="product_image" xsi:type="object">Aheadworks\MobileAppConnector\Model\ResourceModel\Library\Item\Collection\Modifier\Product\Image</item>
             </argument>
