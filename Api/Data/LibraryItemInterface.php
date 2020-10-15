@@ -21,6 +21,9 @@ interface LibraryItemInterface extends ExtensibleDataInterface
     const LINK_TITLE = 'link_title';
     const LINK_HASH = 'link_hash';
     const VIEW_URL = 'view_url';
+    const TYPE = 'type';
+    const REMAINING_DOWNLOADS = 'remaining_downloads';
+    const IS_DOWNLOADABLE = 'is_downloadable';
     /**#@-*/
 
     /**
@@ -127,6 +130,51 @@ interface LibraryItemInterface extends ExtensibleDataInterface
      * @return $this
      */
     public function setViewUrl($viewUrl);
+
+    /**
+     * Get type
+     *
+     * @return string
+     */
+    public function getType();
+
+    /**
+     * Set type
+     *
+     * @param string $type
+     * @return $this
+     */
+    public function setType($type);
+
+    /**
+     * Get remaining downloads
+     *
+     * @return string
+     */
+    public function getRemainingDownloads();
+
+    /**
+     * Set remaining downloads
+     *
+     * @param string $remainingDownloads
+     * @return $this
+     */
+    public function setRemainingDownloads($remainingDownloads);
+
+    /**
+     * Get is Downloadbles
+     *
+     * @return bool
+     */
+    public function getIsDownloadable();
+
+    /**
+     * Set is Downloadbles
+     *
+     * @param bool $isDownloadble
+     * @return $this
+     */
+    public function setIsDownloadable($isDownloadble);
 
     /**
      * Retrieve existing extension attributes object or create a new one
