@@ -3,7 +3,7 @@ namespace Aheadworks\MobileAppConnector\Model\ResourceModel\Library\Item\Collect
 
 use Aheadworks\MobileAppConnector\Model\ResourceModel\Collection\ModifierInterface;
 use Aheadworks\MobileAppConnector\Api\Data\LibraryItemInterface;
-use Aheadworks\MobileAppConnector\Model\Aditional\Resolver as AditionalResolver;
+use Aheadworks\MobileAppConnector\Model\Info\Resolver as InfoResolver;
 /**
  * Class ItemType
  *
@@ -20,7 +20,7 @@ class ItemType implements ModifierInterface
      * @param aditionalResolver $aditionalResolver
      */
     public function __construct(
-        AditionalResolver $aditionalResolver
+        InfoResolver $aditionalResolver
     ) {
         $this->aditionalResolver = $aditionalResolver;
     }
@@ -30,11 +30,11 @@ class ItemType implements ModifierInterface
      */
     public function modifyData($item)
     {
-        if(isset($item['link_file'])){
-           $linkFile = $item['link_file'];
+        if(isset($item['link_file']) && isset($item['link_url']) )
+        {
             $item->setData(
                 LibraryItemInterface::TYPE,
-                $this->aditionalResolver->getItemType($linkFile)
+                $this->aditionalResolver->getItemType($item)
             ); 
         }
         return $item;

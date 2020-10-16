@@ -24,6 +24,7 @@ interface LibraryItemInterface extends ExtensibleDataInterface
     const TYPE = 'type';
     const REMAINING_DOWNLOADS = 'remaining_downloads';
     const IS_DOWNLOADABLE = 'is_downloadable';
+    const DOWNLOAD_URL = 'download_url';
     /**#@-*/
 
     /**
@@ -117,19 +118,19 @@ interface LibraryItemInterface extends ExtensibleDataInterface
     public function setLinkHash($linkHash);
 
     /**
-     * Get view url
+     * Get download url
      *
      * @return string
      */
-    public function getViewUrl();
+    public function getDownloadUrl();
 
     /**
-     * Set view url
+     * Set download url
      *
-     * @param string $viewUrl
+     * @param string $downloadUrl
      * @return $this
      */
-    public function setViewUrl($viewUrl);
+    public function setDownloadUrl($downloadUrl);
 
     /**
      * Get type
