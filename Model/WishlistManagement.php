@@ -3,9 +3,11 @@
 namespace Aheadworks\MobileAppConnector\Model;
 
 use Aheadworks\MobileAppConnector\Api\WishlistManagementInterface;
+use Aheadworks\MobileAppConnector\Model\Product\Image\Resolver;
+use Magento\Catalog\Api\Data\ProductInterface;
 use Magento\Catalog\Api\ProductRepositoryInterface;
+use Magento\Framework\Api\SimpleDataObjectConverter;
 use Magento\Framework\Exception\NoSuchEntityException;
-use Magento\Wishlist\Model\ResourceModel\Item\CollectionFactory;
 use Magento\Wishlist\Model\WishlistFactory;
 
 /**
@@ -14,6 +16,11 @@ use Magento\Wishlist\Model\WishlistFactory;
  */
 class WishlistManagement implements WishlistManagementInterface
 {
+    const WISHLIST_ITEM_ID = 'wishlist_item_id';
+    const QTY = 'qty';
+    const IMAGE = 'image';
+    const PRODUCT = 'product';
+
     /**
      * @var WishlistFactory
      */
@@ -23,24 +30,31 @@ class WishlistManagement implements WishlistManagementInterface
      */
     protected $productRepository;
     /**
-     * @var CollectionFactory
+     * @var Resolver
      */
-    protected $wishlistCollectionFactory;
+    protected $imageResolver;
+    /**
+     * @var SimpleDataObjectConverter
+     */
+    protected $simpleDataObjectConverter;
 
     /**
      * WishlistManagement constructor.
      * @param WishlistFactory $wishlistFactory
      * @param ProductRepositoryInterface $productRepository
-     * @param CollectionFactory $wishlistCollectionFactory
+     * @param Resolver $imageResolver
+     * @param SimpleDataObjectConverter $simpleDataObjectConverter
      */
     public function __construct(
         WishlistFactory $wishlistFactory,
         ProductRepositoryInterface $productRepository,
-        CollectionFactory $wishlistCollectionFactory
+        Resolver $imageResolver,
+        SimpleDataObjectConverter $simpleDataObjectConverter
     ) {
         $this->wishlistFactory = $wishlistFactory;
         $this->productRepository = $productRepository;
-        $this->wishlistCollectionFactory= $wishlistCollectionFactory;
+        $this->imageResolver = $imageResolver;
+        $this->simpleDataObjectConverter = $simpleDataObjectConverter;
     }
 
     /**
@@ -91,16 +105,20 @@ class WishlistManagement implements WishlistManagementInterface
     public function getWishlistForCustomer($customerId)
     {
         try {
-            $collection =
-                $this->wishlistCollectionFactory->create()
-                    ->addCustomerIdFilter($customerId);
+            $wishlist = $this->wishlistFactory->create();
+            $wishlist->loadByCustomerId($customerId, true);
+            $collection = $wishlist->getItemCollection();
             $wishlistData = [];
             foreach ($collection as $item) {
-                $productInfo = $item->getProduct()->getData();
+                $productInfo = $this->simpleDataObjectConverter->toFlatArray(
+                    $item->getProduct(),
+                    ProductInterface::class
+                );
                 $data = [
-                    "wishlist_item_id" => $item->getWishlistItemId(),
-                    "qty"              => round($item->getQty()),
-                    "product" => $productInfo
+                    self::WISHLIST_ITEM_ID => $item->getWishlistItemId(),
+                    self::QTY => round($item->getQty()),
+                    self::IMAGE => $this->imageResolver->getProductImageUrl($item->getProduct(), 'category_page_grid'),
+                    self::PRODUCT => $productInfo
 
                 ];
                 $wishlistData[] = $data;
