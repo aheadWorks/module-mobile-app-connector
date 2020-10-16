@@ -20,7 +20,6 @@ interface LibraryItemInterface extends ExtensibleDataInterface
     const PRODUCT_IMAGE_URL = 'product_image_url';
     const LINK_TITLE = 'link_title';
     const LINK_HASH = 'link_hash';
-    const VIEW_URL = 'view_url';
     const TYPE = 'type';
     const REMAINING_DOWNLOADS = 'remaining_downloads';
     const IS_DOWNLOADABLE = 'is_downloadable';

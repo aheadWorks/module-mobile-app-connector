@@ -3,7 +3,7 @@ namespace Aheadworks\MobileAppConnector\Model\ResourceModel\Library\Item\Collect
 
 use Aheadworks\MobileAppConnector\Model\ResourceModel\Collection\ModifierInterface;
 use Aheadworks\MobileAppConnector\Api\Data\LibraryItemInterface;
-use Aheadworks\MobileAppConnector\Model\Info\Resolver as InfoResolver;
+use Aheadworks\MobileAppConnector\Model\Downloadable\Resolver as Resolver;
 /**
  * Class RemainingDownloads
  *
@@ -12,17 +12,17 @@ use Aheadworks\MobileAppConnector\Model\Info\Resolver as InfoResolver;
 class RemainingDownloads implements ModifierInterface
 {
     /**
-     * @var aditionalResolver
+     * @var dataResolver
      */
-    private $aditionalResolver;
+    private $dataResolver;
 
     /**
-     * @param aditionalResolver $aditionalResolver
+     * @param dataResolver $dataResolver
      */
     public function __construct(
-        InfoResolver $aditionalResolver
+        Resolver $dataResolver
     ) {
-        $this->aditionalResolver = $aditionalResolver;
+        $this->dataResolver = $dataResolver;
     }
 
     /**
@@ -33,7 +33,7 @@ class RemainingDownloads implements ModifierInterface
         if(isset($item['number_of_downloads_bought'])){
             $item->setData(
                 LibraryItemInterface::REMAINING_DOWNLOADS,
-                $this->aditionalResolver->getRemaningDownload($item)
+                $this->dataResolver->getRemaningDownload($item)
             ); 
         }
         return $item;

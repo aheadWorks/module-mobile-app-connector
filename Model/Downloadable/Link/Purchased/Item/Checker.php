@@ -19,7 +19,7 @@ class Checker
     /**
      * @var moduleManager
      */
-    private $temCheckerFactory;
+    private $itemCheckerFactory;
 
     /**
      * @param Manager $moduleManager
@@ -30,7 +30,7 @@ class Checker
     )
     {
         $this->moduleManager = $moduleManager;
-        $this->temCheckerFactory = $temCheckerFactory;
+        $this->itemCheckerFactory = $temCheckerFactory;
     }
 
     /**
@@ -41,7 +41,7 @@ class Checker
      */
     public function isLibraryItem($purchasedLinkItem)
     {
-        return $this->temCheckerFactory->create($purchasedLinkItem);
+        return $this->itemCheckerFactory->create($purchasedLinkItem);
     }
 
     /**

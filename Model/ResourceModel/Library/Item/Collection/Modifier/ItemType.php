@@ -3,7 +3,7 @@ namespace Aheadworks\MobileAppConnector\Model\ResourceModel\Library\Item\Collect
 
 use Aheadworks\MobileAppConnector\Model\ResourceModel\Collection\ModifierInterface;
 use Aheadworks\MobileAppConnector\Api\Data\LibraryItemInterface;
-use Aheadworks\MobileAppConnector\Model\Info\Resolver as InfoResolver;
+use Aheadworks\MobileAppConnector\Model\FileSystem\Filetype;
 /**
  * Class ItemType
  *
@@ -12,17 +12,17 @@ use Aheadworks\MobileAppConnector\Model\Info\Resolver as InfoResolver;
 class ItemType implements ModifierInterface
 {
     /**
-     * @var aditionalResolver
+     * @var filetypeChecker
      */
-    private $aditionalResolver;
+    private $filetypeChecker;
 
     /**
-     * @param aditionalResolver $aditionalResolver
+     * @param filetypeChecker $filetypeChecker
      */
     public function __construct(
-        InfoResolver $aditionalResolver
+        Filetype $filetypeChecker
     ) {
-        $this->aditionalResolver = $aditionalResolver;
+        $this->filetypeChecker = $filetypeChecker;
     }
 
     /**
@@ -34,7 +34,7 @@ class ItemType implements ModifierInterface
         {
             $item->setData(
                 LibraryItemInterface::TYPE,
-                $this->aditionalResolver->getItemType($item)
+                $this->filetypeChecker->getItemType($item)
             ); 
         }
         return $item;
