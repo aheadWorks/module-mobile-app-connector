@@ -3,8 +3,7 @@ namespace Aheadworks\MobileAppConnector\Model\ResourceModel\Library\Item\Collect
 
 use Aheadworks\MobileAppConnector\Model\ResourceModel\Collection\ModifierInterface;
 use Aheadworks\MobileAppConnector\Api\Data\LibraryItemInterface;
-use Aheadworks\MobileAppConnector\Model\Downloadable\Link\Purchased\Item\Checker as ItemChecker;
-
+use Aheadworks\MobileAppConnector\Model\ThirdPartyModule\Checker;
 
 /**
  * Class IsDownloadable
@@ -13,18 +12,19 @@ use Aheadworks\MobileAppConnector\Model\Downloadable\Link\Purchased\Item\Checker
  */
 class IsDownloadable implements ModifierInterface
 {
-    /**
-     * @var itemChecker
-     */
-    private $itemChecker;
 
     /**
-     * @param itemChecker $itemChecker
+     * @var Checker
+     */
+    private $checker;
+
+    /*r
+     * @param checker $checker
      */
     public function __construct(
-        ItemChecker $itemChecker
+        Checker $checker
     ) {
-        $this->itemChecker = $itemChecker;
+        $this->checker = $checker;
     }
 
     /**
@@ -34,9 +34,8 @@ class IsDownloadable implements ModifierInterface
     {
         $item->setData(
             LibraryItemInterface::IS_DOWNLOADABLE,
-                $this->itemChecker->getIsDownloadable($item) 
+               $this->checker->isLibraryItem($item)
         ); 
-
         return $item;
     }
 }

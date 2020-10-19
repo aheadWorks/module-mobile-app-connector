@@ -20,7 +20,6 @@ class Filetype
     public function getItemType($item)
     {
         $type = Type::OTHER_TYPE;
-
         $linkFile =  $item['link_file'];
         $ext = pathinfo($linkFile, PATHINFO_EXTENSION);
         if (strtolower('pdf') === strtolower($ext)) {
@@ -32,7 +31,6 @@ class Filetype
         if (strtolower('mp4') === strtolower($ext)) {
             $type = Type::MP4_TYPE;
         }
-
-       return $type;
+        return $type;
     }
 }

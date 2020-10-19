@@ -1,9 +1,10 @@
 <?php
 namespace Aheadworks\MobileAppConnector\Model\ResourceModel\Library\Item\Collection\Modifier;
 
-use Aheadworks\MobileAppConnector\Model\ResourceModel\Collection\ModifierInterface;
 use Aheadworks\MobileAppConnector\Api\Data\LibraryItemInterface;
 use Aheadworks\MobileAppConnector\Model\FileSystem\Filetype;
+use Aheadworks\MobileAppConnector\Model\ResourceModel\Collection\ModifierInterface;
+
 /**
  * Class ItemType
  *
@@ -17,7 +18,7 @@ class ItemType implements ModifierInterface
     private $filetypeChecker;
 
     /**
-     * @param filetypeChecker $filetypeChecker
+     * @param Filetype $filetypeChecker
      */
     public function __construct(
         Filetype $filetypeChecker
@@ -30,12 +31,11 @@ class ItemType implements ModifierInterface
      */
     public function modifyData($item)
     {
-        if(isset($item['link_file']) && isset($item['link_url']) )
-        {
+        if (isset($item['link_file']) && isset($item['link_hash'])) {
             $item->setData(
                 LibraryItemInterface::TYPE,
                 $this->filetypeChecker->getItemType($item)
-            ); 
+            );
         }
         return $item;
     }

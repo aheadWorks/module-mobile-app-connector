@@ -3,7 +3,7 @@ namespace Aheadworks\MobileAppConnector\Model\ResourceModel\Library\Item\Collect
 
 use Aheadworks\MobileAppConnector\Model\ResourceModel\Collection\ModifierInterface;
 use Aheadworks\MobileAppConnector\Api\Data\LibraryItemInterface;
-use Aheadworks\MobileAppConnector\Model\Downloadable\Resolver as Resolver;
+use Aheadworks\MobileAppConnector\Model\FileSystem\Resolver as Resolver;
 /**
  * Class RemainingDownloads
  *

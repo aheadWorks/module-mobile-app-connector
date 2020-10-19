@@ -120,22 +120,6 @@ class Item extends AbstractModel implements LibraryItemInterface
     /**
      * {@inheritdoc}
      */
-    public function getViewUrl()
-    {
-        return $this->getData(self::VIEW_URL);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setViewUrl($viewUrl)
-    {
-        return $this->setData(self::VIEW_URL, $viewUrl);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getDownloadUrl()
     {
         return $this->getData(self::DOWNLOAD_URL);
