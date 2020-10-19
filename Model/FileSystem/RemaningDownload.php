@@ -1,16 +1,17 @@
 <?php
 namespace Aheadworks\MobileAppConnector\Model\FileSystem;
+use Aheadworks\MobileAppConnector\Api\Data\LibraryItemInterface;
 
 /**
- * Class Resolver
+ * Class RemaningDownload
  *
  * @package Aheadworks\MobileAppConnector\Model\FileSystem
  */
-class Resolver
+class RemaningDownload
 {
 
     /**
-     * Retrieve item file remainingdownloads
+     * Retrieve item remainingdownloads
      *
      * @param LibraryItemInterface $item
      * @return string

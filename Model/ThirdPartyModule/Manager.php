@@ -34,7 +34,7 @@ class Manager
      *
      * @return bool
      */
-    public function isDigitalMediaModuleEnabled()
+    public function isDMModuleEnabled()
     {
         return $this->moduleList->has(self::DIGITAL_MEDIA_MODULE_NAME);
     }
