@@ -3,11 +3,11 @@ namespace Aheadworks\MobileAppConnector\Model\FileSystem;
 use Aheadworks\MobileAppConnector\Api\Data\LibraryItemInterface;
 
 /**
- * Class RemaningDownload
+ * Class getRemainingDownloads
  *
  * @package Aheadworks\MobileAppConnector\Model\FileSystem
  */
-class RemaningDownload
+class GetRemainingDownloads
 {
 
     /**

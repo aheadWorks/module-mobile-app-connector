@@ -31,7 +31,7 @@ class ItemType implements ModifierInterface
      */
     public function modifyData($item)
     {
-        if (isset($item['link_file']) && isset($item['link_url'])) {
+        if (isset($item['link_file']) && (!empty($item['link_file']))){   
             $item->setData(
                 LibraryItemInterface::TYPE,
                 $this->filetypeChecker->getItemType($item)
