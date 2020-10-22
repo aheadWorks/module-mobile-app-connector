@@ -1,5 +1,6 @@
 <?php
 namespace Aheadworks\MobileAppConnector\Api;
+use Exception;
 
 /**
  * Interface WishlistManagementInterface
@@ -28,4 +29,13 @@ interface WishlistManagementInterface
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     public function removeProductFromWishlist($customerId, $productId);
+
+    /**
+     * Return Wishlist items.
+     *
+     * @param int $customerId
+     * @return array
+     * @throws Exception
+     */
+    public function getWishlistForCustomer($customerId);
 }
