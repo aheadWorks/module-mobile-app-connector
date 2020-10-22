@@ -34,7 +34,7 @@ interface WishlistManagementInterface
      * Return Wishlist items.
      *
      * @param int $customerId
-     * @return bool|array
+     * @return array
      * @throws Exception
      */
     public function getWishlistForCustomer($customerId);

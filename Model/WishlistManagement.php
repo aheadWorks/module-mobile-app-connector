@@ -125,7 +125,7 @@ class WishlistManagement implements WishlistManagementInterface
             }
             return $wishlistData;
         } catch (\Exception $e) {
-            return false;
+            throw new \Exception('We can\'t get Wishlist right now.');
         }
     }
 }
