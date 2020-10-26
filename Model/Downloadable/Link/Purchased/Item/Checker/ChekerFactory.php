@@ -1,26 +1,28 @@
 <?php
 
-namespace Aheadworks\MobileAppConnector\Model\Downloadable\Link\Purchased\Item;
+namespace Aheadworks\MobileAppConnector\Model\Downloadable\Link\Purchased\Item\Checker;
 
 use Aheadworks\DigitalMedia\Model\Downloadable\Link\Purchased\Item\Checker as DigitalMediaChecker;
 use Aheadworks\MobileAppConnector\Model\ThirdPartyModule\Manager as ModuleManager;
 use Magento\Framework\ObjectManagerInterface;
 
 /**
- * Class Factory
+ * Class ChekerFactory
  *
- * @package Aheadworks\MobileAppConnector\Model\Downloadable\Link\Purchased\Item
+ * @package Aheadworks\MobileAppConnector\Model\Downloadable\Link\Purchased\Item\Checker
  */
-class Factory
+class ChekerFactory
 {
 
     /**
-     * @var moduleManager
+     * @var ModuleManager
      */
     private $moduleManager;
 
     /**
-     * @var objectManager
+     * Object Manager instance
+     *
+     * @var ObjectManagerInterface
      */
     protected $objectManager;
 

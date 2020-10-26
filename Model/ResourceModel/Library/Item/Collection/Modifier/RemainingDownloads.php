@@ -2,7 +2,7 @@
 namespace Aheadworks\MobileAppConnector\Model\ResourceModel\Library\Item\Collection\Modifier;
 
 use Aheadworks\MobileAppConnector\Api\Data\LibraryItemInterface;
-use Aheadworks\MobileAppConnector\Model\FileSystem\GetRemainingDownloads;
+use Aheadworks\MobileAppConnector\Model\Downloadable\Link\Purchased\Item\GetRemainingDownloads;
 use Aheadworks\MobileAppConnector\Model\ResourceModel\Collection\ModifierInterface;
 
 /**
@@ -13,7 +13,7 @@ use Aheadworks\MobileAppConnector\Model\ResourceModel\Collection\ModifierInterfa
 class RemainingDownloads implements ModifierInterface
 {
     /**
-     * @var dataResolver
+     * @var remainingDownloads
      */
     private $remainingDownloads;
 

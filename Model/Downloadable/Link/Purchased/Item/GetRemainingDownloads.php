@@ -1,17 +1,17 @@
 <?php
-namespace Aheadworks\MobileAppConnector\Model\FileSystem;
+namespace Aheadworks\MobileAppConnector\Model\Downloadable\Link\Purchased\Item;
 use Aheadworks\MobileAppConnector\Api\Data\LibraryItemInterface;
 
 /**
  * Class getRemainingDownloads
  *
- * @package Aheadworks\MobileAppConnector\Model\FileSystem
+ * @package Aheadworks\DigitalMedia\Model\Downloadable\Link\Purchased\Item
  */
 class GetRemainingDownloads
 {
 
     /**
-     * Retrieve item remainingdownloads
+     *  Return number of left downloads or unlimited
      *
      * @param LibraryItemInterface $item
      * @return string
@@ -20,7 +20,6 @@ class GetRemainingDownloads
     {
         $numberOfDownloadsUsed = $item['number_of_downloads_used'];
         $numberOfDownloadsBought = $item['number_of_downloads_bought'];
-
         if ($numberOfDownloadsBought) {
             $remainingDownloads = $numberOfDownloadsBought -$numberOfDownloadsUsed;
         } else {
