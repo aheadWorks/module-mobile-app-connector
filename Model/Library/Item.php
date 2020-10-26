@@ -136,6 +136,54 @@ class Item extends AbstractModel implements LibraryItemInterface
     /**
      * {@inheritdoc}
      */
+    public function getType()
+    {
+        return $this->getData(self::TYPE);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setType($type)
+    {
+        return $this->setData(self::TYPE, $type);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getRemainingDownloads()
+    {
+        return $this->getData(self::REMAINING_DOWNLOADS);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setRemainingDownloads($remainingDownloads)
+    {
+        return $this->setData(self::REMAINING_DOWNLOADS, $remainingDownloads);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getIsDownloadable()
+    {
+        return $this->getData(self::IS_DOWNLOADABLE);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setIsDownloadable($isDownloadble)
+    {
+        return $this->setData(self::IS_DOWNLOADABLE, $isDownloadble);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getExtensionAttributes()
     {
         return $this->getData(self::EXTENSION_ATTRIBUTES_KEY);

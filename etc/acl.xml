@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Aheadworks_MobileAppConnector::general">
+                    <resource id="Aheadworks_MobileAppConnector::appconnector_menu_app" title="MobileAppConnector by Aheadworks" sortOrder="110">
+                        <resource id="MobileAppConnector::app_overview" title="Overview" sortOrder="10" />
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

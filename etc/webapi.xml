@@ -1,7 +1,16 @@
 <?xml version="1.0" ?>
 <routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
-    <route url="/V1/products/most-viewed/:limit/storeid/:storeId" method="GET">
-        <service class="Aheadworks\MobileAppConnector\Api\MostViewedProductInterface" method="getMostViewedProducts"/>
+    <route url="/V1/wishlist/add/:productId" method="POST">
+        <service class="Aheadworks\MobileAppConnector\Api\WishlistManagementInterface" method="addProductToWishlist"/>
+        <resources>
+            <resource ref="self" />
+        </resources>
+        <data>
+            <parameter name="customerId" force="true">%customer_id%</parameter>
+        </data>
+    </route>
+    <route url="/V1/wishlist/remove/:productId" method="POST">
+        <service class="Aheadworks\MobileAppConnector\Api\WishlistManagementInterface" method="removeProductFromWishlist"/>
         <resources>
             <resource ref="self" />
         </resources>
@@ -28,7 +37,7 @@
                 <parameter name="customerId" force="true">%customer_id%</parameter>
             </data>
     </route>
-       <!-- for customer purchased downloadable productst-->
+    <!-- for customer purchased downloadable productst-->
     <route url="/V1/customer/libraryItemsList" method="GET">
         <service class="Aheadworks\MobileAppConnector\Api\LibraryItemRepositoryInterface" method="getList"/>
             <resources>
@@ -37,5 +46,13 @@
             <data>
                 <parameter name="customerId" force="true">%customer_id%</parameter>
             </data>
+    </route>
+
+    <!-- for get app customization tenant id-->
+    <route url="/V1/overview" method="GET">
+        <service class="Aheadworks\MobileAppConnector\Api\OverViewRepositoryInterface" method="getTenantId"/>
+            <resources>
+                <resource ref="Aheadworks_MobileAppConnector::app_overview"/>
+            </resources>
     </route>
 </routes>
