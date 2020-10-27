@@ -68,8 +68,8 @@ class Resolver
      */
     public function getRemainingDownload($purchasedLinkItem)
     {
-        $numberOfDownloadsUsed = $item['number_of_downloads_used'];
-        $numberOfDownloadsBought = $item['number_of_downloads_bought'];
+        $numberOfDownloadsUsed = $purchasedLinkItem['number_of_downloads_used'];
+        $numberOfDownloadsBought = $purchasedLinkItem['number_of_downloads_bought'];
         if ($numberOfDownloadsBought) {
             $remainingDownloads = $numberOfDownloadsBought -$numberOfDownloadsUsed;
         } else {
