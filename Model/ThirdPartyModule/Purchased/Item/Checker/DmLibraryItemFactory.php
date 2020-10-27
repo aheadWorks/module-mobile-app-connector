@@ -1,6 +1,6 @@
 <?php
 
-namespace Aheadworks\MobileAppConnector\Model\Downloadable\Link\Purchased\Item\DigitalMedia\Checker;
+namespace Aheadworks\MobileAppConnector\Model\ThirdPartyModule\Purchased\Item\Checker;
 
 use Aheadworks\DigitalMedia\Model\Downloadable\Link\Purchased\Item\Checker as DigitalMediaChecker;
 use Aheadworks\MobileAppConnector\Model\ThirdPartyModule\Manager as ModuleManager;
@@ -9,7 +9,7 @@ use Magento\Framework\ObjectManagerInterface;
 /**
  * Class DmLibraryItemFactory
  *
- * @package Aheadworks\MobileAppConnector\Model\Downloadable\Link\Purchased\Item\DigitalMedia\Checker
+ * @package Aheadworks\MobileAppConnector\Model\ThirdPartyModule\Purchased\Item\Checker
  */
 class DmLibraryItemFactory
 {
