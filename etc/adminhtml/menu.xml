@@ -1,11 +1,12 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
     <menu>
-        <add id="Aheadworks_MobileAppConnector::mobileappconnector" title="Sales Channels" module="Aheadworks_MobileAppConnector"  sortOrder="20" dependsOnModule="Aheadworks_MobileAppConnector" resource="Aheadworks_MobileAppConnector::general"/>
+        <add id="Aheadworks_MobileAppConnector::general" title="Sales Channels" module="Aheadworks_MobileAppConnector" sortOrder="20" dependsOnModule="Aheadworks_MobileAppConnector" resource="Aheadworks_MobileAppConnector::general"/>
     
-        <add id="Aheadworks_MobileAppConnector::appconnector_menu_app" title="Mobile App" module="Aheadworks_MobileAppConnector" sortOrder="99" parent="Aheadworks_MobileAppConnector::mobileappconnector" resource="Aheadworks_MobileAppConnector::appconnector_menu_app"/>
+        <add id="Aheadworks_MobileAppConnector::mobile_app" title="Mobile App" module="Aheadworks_MobileAppConnector" sortOrder="10" parent="Aheadworks_MobileAppConnector::general" resource="Aheadworks_MobileAppConnector::appconnector_menu_app"/>
        
-        <add id="Aheadworks_MobileAppConnector::mobileappconnector_settings" title="mobileappconnector " module="Aheadworks_MobileAppConnector" sortOrder="99" parent="Aheadworks_MobileAppConnector::mobileappconnector" resource="Aheadworks_MobileAppConnector::simiconnector_settings"/>
-        <add id="Aheadworks_MobileAppConnector::app_overview" title="Overview" module="Aheadworks_MobileAppConnector" sortOrder="10" parent="Aheadworks_MobileAppConnector::appconnector_menu_app" action="mobileappconnector/overview/index/flag/tenant" resource="Aheadworks_MobileAppConnector::app_overview"/>
+<!--         <add id="Aheadworks_MobileAppConnector::mobileappconnector_settings" title="mobileappconnector" module="Aheadworks_MobileAppConnector" sortOrder="99" parent="Aheadworks_MobileAppConnector::mobileappconnector" resource="Aheadworks_MobileAppConnector::simiconnector_settings"/> -->
+
+        <add id="Aheadworks_MobileAppConnector::app_overview" title="Overview" module="Aheadworks_MobileAppConnector" sortOrder="10" parent="Aheadworks_MobileAppConnector::mobile_app" action="mobileappconnector/overview/index/flag/tenant" resource="Aheadworks_MobileAppConnector::app_overview"/>
     </menu>
 </config>

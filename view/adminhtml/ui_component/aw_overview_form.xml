@@ -40,7 +40,7 @@
             </item>
         </argument>
 
-         <container name="custom_tab_container">
+  		<container name="custom_tab_container">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="sortOrder" xsi:type="string">1</item>
@@ -49,8 +49,9 @@
             <htmlContent name="html_content">
                 <argument name="block" xsi:type="object">Aheadworks\MobileAppConnector\Block\Adminhtml\OverView\Logo</argument>
             </htmlContent>
+        </container>
 
-            <field name="aw_tenant_id">
+        <field name="aw_tenant_id">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="dataScope" xsi:type="string">aw_tenant_id</item>
@@ -65,7 +66,5 @@
                 </item>
             </argument>
         </field>
-        </container>
-        
     </fieldset>
 </form>
