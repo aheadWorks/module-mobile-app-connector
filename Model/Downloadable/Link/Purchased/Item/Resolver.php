@@ -1,10 +1,10 @@
 <?php
 namespace Aheadworks\MobileAppConnector\Model\Downloadable\Link\Purchased\Item;
 
-use Magento\Downloadable\Model\Link\Purchased\Item as PurchasedLinkItemModel;
-use Magento\Downloadable\Helper\File as DownloadableFileHelper;
 use Magento\Downloadable\Helper\Download as DownloadableDownloadHelper;
+use Magento\Downloadable\Helper\File as DownloadableFileHelper;
 use Magento\Downloadable\Model\Link as DownloadableLink;
+use Magento\Downloadable\Model\Link\Purchased\Item as PurchasedLinkItemModel;
 use Magento\Downloadable\Model\LinkFactory as DownloadableLinkFactory;
 
 /**
@@ -31,7 +31,7 @@ class Resolver
     public function __construct(
         DownloadableFileHelper $downloadableFileHelper,
         DownloadableLinkFactory $downloadableLinkFactory
-    ){
+    ) {
         $this->downloadableFileHelper = $downloadableFileHelper;
         $this->downloadableLinkFactory = $downloadableLinkFactory;
     }
@@ -58,5 +58,23 @@ class Resolver
         }
 
         return $resourceFilePath;
+    }
+
+    /**
+     *  Return number of left downloads or unlimited
+     *
+     * @param PurchasedLinkItemModel $purchasedLinkItem
+     * @return string
+     */
+    public function getRemainingDownload($purchasedLinkItem)
+    {
+        $numberOfDownloadsUsed = $item['number_of_downloads_used'];
+        $numberOfDownloadsBought = $item['number_of_downloads_bought'];
+        if ($numberOfDownloadsBought) {
+            $remainingDownloads = $numberOfDownloadsBought -$numberOfDownloadsUsed;
+        } else {
+            $remainingDownloads = __('Unlimited');
+        }
+        return $remainingDownloads;
     }
 }

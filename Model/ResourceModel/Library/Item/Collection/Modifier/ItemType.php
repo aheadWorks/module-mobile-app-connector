@@ -13,7 +13,7 @@ use Aheadworks\MobileAppConnector\Model\ResourceModel\Collection\ModifierInterfa
 class ItemType implements ModifierInterface
 {
     /**
-     * @var filetypeChecker
+     * @var Filetype
      */
     private $filetypeChecker;
 
@@ -30,8 +30,8 @@ class ItemType implements ModifierInterface
      * {@inheritDoc}
      */
     public function modifyData($item)
-    {
-        if (isset($item['link_file']) && !isset($item['link_url'])){
+    {   // TO DO
+        if (isset($item['link_file']) && !isset($item['link_url'])) {
             $item->setData(
                 LibraryItemInterface::TYPE,
                 $this->filetypeChecker->getItemType($item)

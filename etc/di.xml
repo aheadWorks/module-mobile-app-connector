@@ -17,7 +17,7 @@
                 <item name="product_image" xsi:type="object">Aheadworks\MobileAppConnector\Model\ResourceModel\Library\Item\Collection\Modifier\Product\Image</item>
                 <item name="type" xsi:type="object">Aheadworks\MobileAppConnector\Model\ResourceModel\Library\Item\Collection\Modifier\ItemType</item>
                 <item name="is_downloadable" xsi:type="object">Aheadworks\MobileAppConnector\Model\ResourceModel\Library\Item\Collection\Modifier\IsDownloadable</item>
-                <item name="remaining_downloads" xsi:type="object">Aheadworks\MobileAppConnector\Model\ResourceModel\Library\Item\Collection\Modifier\RemainingDownloads</item>
+                <item name="remaining_downloads" xsi:type="object">Aheadworks\MobileAppConnector\Model\ResourceModel\Library\Item\Collection\Modifier\GetRemainingDownload</item>
             </argument>
         </arguments>
     </virtualType>

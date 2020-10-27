@@ -2,7 +2,7 @@
 namespace Aheadworks\MobileAppConnector\Model\Downloadable\Link\Purchased\Item;
 
 use Magento\Downloadable\Model\Link\Purchased\Item as PurchasedLinkItemModel;
-use Aheadworks\MobileAppConnector\Model\Downloadable\Link\Purchased\Item\Checker\ChekerFactory;
+use Aheadworks\MobileAppConnector\Model\Downloadable\Link\Purchased\Item\Checker\DmLibraryItemFactory;
 
 /**
  * Class Checker
@@ -13,15 +13,15 @@ class Checker
 {
 
     /**
-     * @var ChekerFactory
+     * @var DmLibraryItemFactory
      */
     protected $purchasedLinkItemCheckerFactory;
 
     /**
-     * @param ChekerFactory $purchasedLinkItemCheckerFactory
+     * @param DmLibraryItemFactory $purchasedLinkItemCheckerFactory
      */
     public function __construct(
-        ChekerFactory $purchasedLinkItemCheckerFactory
+        DmLibraryItemFactory $purchasedLinkItemCheckerFactory
     ) {
         $this->purchasedLinkItemCheckerFactory = $purchasedLinkItemCheckerFactory;
     }
@@ -33,9 +33,9 @@ class Checker
     public function isLibraryItem($purchasedLinkItem)
     {
         $isDownloadable = true;
-        $isLibraryItem = $this->purchasedLinkItemCheckerFactory->create();
-        if ($isLibraryItem) {
-            if ($isLibraryItem->isLibraryItem($purchasedLinkItem)) {
+        $dmLibraryItem = $this->purchasedLinkItemCheckerFactory->create();
+        if ($dmLibraryItem) {
+            if ($dmLibraryItem->isLibraryItem($purchasedLinkItem)) {
                 $isDownloadable = false;
             }
         }
