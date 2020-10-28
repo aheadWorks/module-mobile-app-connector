@@ -4,10 +4,10 @@ namespace Aheadworks\MobileAppConnector\Block\Adminhtml\OverView;
 use Magento\Framework\View\Element\UiComponent\Control\ButtonProviderInterface;
 
 /**
- * Class Logo
+ * Class StoreLogo
  * @package Aheadworks\MobileAppConnector\Block\Adminhtml\OverView
  */
-class Logo extends \Magento\Backend\Block\Template
+class StoreLogo extends \Magento\Backend\Block\Template
 {
    
    /**
@@ -15,7 +15,7 @@ class Logo extends \Magento\Backend\Block\Template
     *
     * @var string
     */
-    protected $_template = 'download_store_logo.phtml';
+    protected $_template = 'store_logo.phtml';
 
     const PLAY_STORE_URL ='https://play.google.com/store/apps';
 
