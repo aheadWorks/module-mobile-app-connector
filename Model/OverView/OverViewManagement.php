@@ -2,7 +2,7 @@
 namespace Aheadworks\MobileAppConnector\Model\OverView;
 
 use Aheadworks\MobileAppConnector\Api\OverViewRepositoryInterface;
-use Aheadworks\MobileAppConnector\Model\OverView\Config as OverViewConfig;
+use Aheadworks\MobileAppConnector\Model\OverView\Config\ConfigHandler as OverViewConfig;
 /**
  * Class OverViewManagement
  * @package Aheadworks\MobileAppConnector\Model\OverView
@@ -47,17 +47,19 @@ class OverViewManagement implements OverViewRepositoryInterface
     /**
      * get domain name of third level
      * @param string $tenantId 
-     * @return string $domainname
+     * @return string $subdomains|null
      */
     public function getDomainName($tenantId){
+
         $tenantId = parse_url($tenantId);
         $domain = isset($tenantId['host']) ? $tenantId['host'] : '';
         $hostData = explode('.', $domain);
-        if(isset($hostData[1])){ 
-            return $hostData[1];
+        $subdomains = array_slice($hostData, 0, count($hostData) - 2 );
+        if(!empty($subdomains[0])){
+            return $subdomains[0];
         }
         else{
-            return 'error no domain';
+            return null;
         }
     }
 }

@@ -1,15 +1,15 @@
 <?php
-namespace Aheadworks\MobileAppConnector\Model\OverView;
+namespace Aheadworks\MobileAppConnector\Model\OverView\Ui;
 
 use Magento\Framework\App\Request\DataPersistorInterface;
 use Magento\Ui\DataProvider\AbstractDataProvider;
 use Magento\Framework\Api\Filter;
 use Magento\Framework\App\RequestInterface;
-use Aheadworks\MobileAppConnector\Model\OverView\Config as OverViewConfig;
+use Aheadworks\MobileAppConnector\Model\OverView\Config\ConfigHandler as OverViewConfig;
 
 /**
  * Class DataProvider
- * @package Aheadworks\MobileAppConnector\Model
+ * @package Aheadworks\MobileAppConnector\Model\OverView\Ui
  */
 class DataProvider extends AbstractDataProvider
 {
@@ -83,15 +83,8 @@ class DataProvider extends AbstractDataProvider
             } else {
             $tenant = $this->request->getParam($this->getRequestFieldName());
             if ($tenant) {
-                /** @var RuleInterface $ruleDataObject */
                 $formData['aw_tenant_id']= $this->overviewconfig->getTenantId();
-                $formData = $this->convertToString(
-                    $formData,
-                    [
-                        OverViewConfig::AW_TENANT_ID
-                    ]
-                );
-
+                $formData[OverViewConfig::AW_TENANT_ID]= $this->overviewconfig->getTenantId();
                 $data[$tenant] = $formData;
             }
          }
@@ -105,32 +98,5 @@ class DataProvider extends AbstractDataProvider
     public function addFilter(Filter $filter)
     {
         return $this;
-    }
-
-    /**
-     * Convert selected fields to string
-     *
-     * @param [] $data
-     * @param string[] $fields
-     * @return []
-     */
-    private function convertToString($data, $fields)
-    {
-        foreach ($fields as $field) {
-            if (isset($data[$field])) {
-                if (is_array($data[$field])) {
-                    foreach ($data[$field] as $key => $value) {
-                        if ($value === false) {
-                            $data[$field][$key] = '0';
-                        } else {
-                            $data[$field][$key] = (string)$value;
-                        }
-                    }
-                } else {
-                    $data[$field] = (string)$data[$field];
-                }
-            }
-        }
-        return $data;
     }
 }

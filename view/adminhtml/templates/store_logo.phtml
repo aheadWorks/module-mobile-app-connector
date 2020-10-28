@@ -1,11 +1,11 @@
 <div class="mobile-logo-boxes-container">
     <div class="mobile-connector-play-store-box">
-    	<a target="_blank" href='<?= $block::APP_STORE_URL?>'>
+    	<a target="_blank" href='<?= $block->escapeHtml($block::APP_STORE_URL) ?>'>
         	<img width="150" src='<?= $block->escapeUrl($this->getViewFileUrl('Aheadworks_MobileAppConnector::images/app-store.png')) ?>' alt="<?= $block->escapeHtml(__("App store")) ?>">
         </a>
     </div>
     <div class="mobile-connector-play-store-box">
-    	<a target="_blank" href='<?= $block::PLAY_STORE_URL?>'>
+    	<a target="_blank" href='<?= $block->escapeHtml($block::PLAY_STORE_URL) ?>'>
         	<img width="150" src='<?= $block->escapeUrl($this->getViewFileUrl('Aheadworks_MobileAppConnector::images/google-play.png')) ?>' alt="<?= $block->escapeHtml(__("Google App store.")) ?>">
    		</a>
     </div>

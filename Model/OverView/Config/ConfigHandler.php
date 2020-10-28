@@ -1,14 +1,14 @@
 <?php
-namespace Aheadworks\MobileAppConnector\Model\OverView;
+namespace Aheadworks\MobileAppConnector\Model\OverView\Config;
 
 use Aheadworks\MobileAppConnector\Model\OverView\Flag;
 use Aheadworks\MobileAppConnector\Model\OverView\FlagFactory;
 
 /**
- * Class Config
+ * Class ConfigHandler
  * @package Aheadworks\MobileAppConnector\Model\OverView
  */
-class Config
+class ConfigHandler
 {
     /**
      * Configuration path to tenant id
@@ -84,5 +84,16 @@ class Config
     {
         $this->setFlagData(self::AW_TENANT_ID, $tenantId);
         return $this;
+    }
+
+    /**
+     * Processing save overview data
+     *
+     * @return $this
+     */
+    public function save($data)
+    {
+       $this->setTenantId($data['aw_tenant_id']);
+       return $this;
     }
 }

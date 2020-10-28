@@ -17,7 +17,7 @@
     </argument>
     <dataSource name="aw_overview_form_data_source">
         <argument name="dataProvider" xsi:type="configurableObject">
-            <argument name="class" xsi:type="string">Aheadworks\MobileAppConnector\Model\OverView\DataProvider</argument>
+            <argument name="class" xsi:type="string">Aheadworks\MobileAppConnector\Model\OverView\Ui\DataProvider</argument>
             <argument name="name" xsi:type="string">aw_overview_form_data_source</argument>
             <argument name="primaryFieldName" xsi:type="string">flag</argument>
             <argument name="requestFieldName" xsi:type="string">flag</argument>
@@ -39,7 +39,6 @@
                 <item name="label" xsi:type="string" translate="true">DownloadApp</item>
             </item>
         </argument>
-
   		<container name="custom_tab_container">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
@@ -50,7 +49,6 @@
                 <argument name="block" xsi:type="object">Aheadworks\MobileAppConnector\Block\Adminhtml\OverView\StoreLogo</argument>
             </htmlContent>
         </container>
-
         <field name="aw_tenant_id">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
