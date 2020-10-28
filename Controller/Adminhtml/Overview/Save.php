@@ -7,7 +7,8 @@ use Magento\Framework\View\Result\PageFactory;
 use Magento\Framework\Api\DataObjectHelper;
 use Magento\Framework\App\Request\DataPersistorInterface;
 use Magento\Framework\Exception\LocalizedException;
-use Aheadworks\MobileAppConnector\Model\OverView\Config as OverViewConfig;
+use Aheadworks\MobileAppConnector\Model\OverView\Config\ConfigHandler;
+
 /**
  * Class Save
  * @package Aheadworks\MobileAppConnector\Controller\Adminhtml\Overview
@@ -21,7 +22,7 @@ class Save extends \Magento\Backend\App\Action
     const ADMIN_RESOURCE = 'Aheadworks_MobileAppConnector::app_overview';
 
     /**
-     * @var OverViewConfig
+     * @var ConfigHandler
      */
     private $overviewconfig;
 
@@ -37,14 +38,14 @@ class Save extends \Magento\Backend\App\Action
 
     /**
      * @param Context $context
-     * @param OverviewConfig $overviewconfig
+     * @param ConfigHandler $overviewconfig
      * @param DataPersistorInterface $dataPersistor
      * @param DataObjectHelper $dataObjectHelper,
      */
     public function __construct(
         Context $context,
         DataPersistorInterface $dataPersistor,
-        OverviewConfig $overviewconfig,
+        ConfigHandler $overviewconfig,
         DataObjectHelper $dataObjectHelper
     ) {
         parent::__construct($context);
@@ -55,7 +56,6 @@ class Save extends \Magento\Backend\App\Action
 
     /**
      * {@inheritdoc}
-     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
     public function execute()
     {
@@ -67,9 +67,9 @@ class Save extends \Magento\Backend\App\Action
                     $tenantId = $data['aw_tenant_id'];
                 }else{
                     $this->messageManager->addErrorMessage('Tenant id should not be empty');
-                    return $resultRedirect->setPath('*/*/');
+                    return $resultRedirect->setPath('*/*/index/flag/tenant');
                 }
-                $this->overviewconfig->setTenantId($tenantId);
+                $this->overviewconfig->save($data);
                 $this->dataPersistor->set('aw_flag_tenant', $data);
                 $this->messageManager->addSuccessMessage(__('Tenant id was successfully saved.'));
             } catch (LocalizedException $e) {
@@ -80,7 +80,7 @@ class Save extends \Magento\Backend\App\Action
                     __('Something went wrong while saving the rule data.')
                 );
             }
-        return $resultRedirect->setPath('*/*/');
+        return $resultRedirect->setPath('*/*/index/flag/tenant');
         }
     }
 
