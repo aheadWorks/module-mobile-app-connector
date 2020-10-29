@@ -18,11 +18,20 @@
             <parameter name="customerId" force="true">%customer_id%</parameter>
         </data>
     </route>
-       <!-- for customer order list-->
+    <!-- for customer order list-->
     <route url="/V1/customer/orders" method="GET">
         <service class="Aheadworks\MobileAppConnector\Api\CustomerOrderInterface" method="getList"/>
         <resources>
             <resource ref="self"/>
+        </resources>
+        <data>
+            <parameter name="customerId" force="true">%customer_id%</parameter>
+        </data>
+    </route>
+    <route url="/V1/wishlist/items" method="GET">
+        <service class="Aheadworks\MobileAppConnector\Api\WishlistManagementInterface" method="getWishlistForCustomer"/>
+        <resources>
+            <resource ref="self" />
         </resources>
         <data>
             <parameter name="customerId" force="true">%customer_id%</parameter>
@@ -47,4 +56,13 @@
                 <parameter name="customerId" force="true">%customer_id%</parameter>
             </data>
     </route>
+    <route url="/V1/products/most-viewed/:limit/storeid/:storeId" method="GET">
+         <service class="Aheadworks\MobileAppConnector\Api\MostViewedProductInterface" method="getMostViewedProducts"/>
+         <resources>
+             <resource ref="self" />
+         </resources>
+         <data>
+             <parameter name="customerId" force="true">%customer_id%</parameter>
+         </data>
+     </route>
 </routes>
