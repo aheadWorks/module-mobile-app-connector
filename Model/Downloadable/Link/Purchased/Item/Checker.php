@@ -2,7 +2,7 @@
 namespace Aheadworks\MobileAppConnector\Model\Downloadable\Link\Purchased\Item;
 
 use Magento\Downloadable\Model\Link\Purchased\Item as PurchasedLinkItemModel;
-use Aheadworks\MobileAppConnector\Model\ThirdPartyModule\Purchased\Item\Checker\DmLibraryItemFactory;
+use Aheadworks\MobileAppConnector\Model\ThirdPartyModule\Purchased\Item\Checker\ThirdPartyModuleFactory;
 
 /**
  * Class Checker
@@ -13,15 +13,15 @@ class Checker
 {
 
     /**
-     * @var DmLibraryItemFactory
+     * @var ThirdPartyModuleFactory
      */
     protected $purchasedLinkItemCheckerFactory;
 
     /**
-     * @param DmLibraryItemFactory $purchasedLinkItemCheckerFactory
+     * @param ThirdPartyModuleFactory $purchasedLinkItemCheckerFactory
      */
     public function __construct(
-        DmLibraryItemFactory $purchasedLinkItemCheckerFactory
+        ThirdPartyModuleFactory $purchasedLinkItemCheckerFactory
     ) {
         $this->purchasedLinkItemCheckerFactory = $purchasedLinkItemCheckerFactory;
     }

@@ -7,11 +7,11 @@ use Aheadworks\MobileAppConnector\Model\ThirdPartyModule\Manager as ModuleManage
 use Magento\Framework\ObjectManagerInterface;
 
 /**
- * Class DmLibraryItemFactory
+ * Class ThirdPartyModuleFactory
  *
  * @package Aheadworks\MobileAppConnector\Model\ThirdPartyModule\Purchased\Item\Checker
  */
-class DmLibraryItemFactory
+class ThirdPartyModuleFactory
 {
 
     /**

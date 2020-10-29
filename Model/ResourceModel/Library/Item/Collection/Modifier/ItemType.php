@@ -4,6 +4,7 @@ namespace Aheadworks\MobileAppConnector\Model\ResourceModel\Library\Item\Collect
 use Aheadworks\MobileAppConnector\Api\Data\LibraryItemInterface;
 use Aheadworks\MobileAppConnector\Model\FileSystem\Filetype;
 use Aheadworks\MobileAppConnector\Model\ResourceModel\Collection\ModifierInterface;
+use Aheadworks\MobileAppConnector\Model\Source\Data\Type;
 
 /**
  * Class ItemType
@@ -30,11 +31,16 @@ class ItemType implements ModifierInterface
      * {@inheritDoc}
      */
     public function modifyData($item)
-    {   // TO DO
+    {  
         if (isset($item['link_file']) && ($item['link_type'] =='file')) {
             $item->setData(
                 LibraryItemInterface::TYPE,
                 $this->filetypeChecker->getItemType($item)
+            );
+        }else{
+             $item->setData(
+                LibraryItemInterface::TYPE,Type::OTHER_TYPE
+                
             );
         }
         return $item;
