@@ -11,10 +11,8 @@ use Magento\Catalog\Api\Data\ProductInterface;
 use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Catalog\Model\Product\Link;
 use Magento\Catalog\Model\Product\LinkFactory;
-use Magento\Framework\Exception\InputException;
-use Magento\Catalog\Model\ResourceModel\Product\CollectionFactory;
-use Magento\Store\Model\StoreManagerInterface;
 use Magento\Catalog\Model\Product\Visibility;
+use Magento\Framework\Exception\InputException;
 
 /**
  * Class RelatedProductsManagement
@@ -22,7 +20,6 @@ use Magento\Catalog\Model\Product\Visibility;
  */
 class RelatedProductsManagement implements RelatedProductsRepositoryInterface
 {
-
     const ID = 'id';
     const MIN_PRICE = 'min_price';
     const MAX_PRICE = 'max_price';
@@ -45,48 +42,32 @@ class RelatedProductsManagement implements RelatedProductsRepositoryInterface
     private $linkFactory;
 
     /**
-     * @var CollectionFactory
-     */
-    protected $productCollectionFactory;
-
-    /**
      * @var Visibility
      */
     protected $productVisibility;
 
     /**
-     * @var StoreManagerInterface
-     */
-    protected $storeManager;
-
-    /**
      * @param ProductRepositoryInterface $productRepository
      * @param Resolver $imageResolver
      * @param LinkFactory $linkFactory
-     * @param CollectionFactory $productCollectionFactory
      * @param Visibility $productVisibility
-     * @param StoreManagerInterface $storeManager    
      */
     public function __construct(
         ProductRepositoryInterface $productRepository,
         Resolver $imageResolver,
         LinkFactory $linkFactory,
-        CollectionFactory $productCollectionFactory,
-        Visibility $productVisibility,
-        StoreManagerInterface $storeManager
+        Visibility $productVisibility
     ) {
         $this->productRepository = $productRepository;
         $this->imageResolver = $imageResolver;
         $this->linkFactory = $linkFactory;
-        $this->productCollectionFactory = $productCollectionFactory; 
-        $this->storeManager = $storeManager;
         $this->productVisibility = $productVisibility;
     }
 
     /**
      * @inheritdoc
      */
-    public function getRelatedProducts($customerId, $sku, $storeId = null)
+    public function getRelatedProducts($customerId, $sku)
     {
         if (empty($sku) || !isset($sku)) {
             throw new InputException(__('Sku required'));
@@ -97,53 +78,37 @@ class RelatedProductsManagement implements RelatedProductsRepositoryInterface
             $link = $this->linkFactory->create(['data' => ['link_type_id' => $linkType]]);
             $collection = $link->getProductCollection();
             $collection->setIsStrongMode();
+            $collection->addAttributeToSelect('*');
+            $collection->setVisibility($this->productVisibility->getVisibleInSiteIds());
             $collection->setProduct($product);
             $relatedProducts = $collection->getItems();
-            $productIds =[];
-            foreach ($relatedProducts as $key => $relatedProduct) {
-                $productIds[] = $relatedProduct->getId();
-            }
-            $productCollection = $this->productCollectionFactory->create()
-                ->addAttributeToSelect(
-                    '*'
-                )->addStoreFilter(
-                    $storeId
-                )->setVisibility(
-                    $this->productVisibility->getVisibleInSiteIds()
-                )->addFieldToFilter('entity_id', ['in' =>$productIds])
-                ->addAttributeToFilter(
-                    'status',
-                    array('eq' => \Magento\Catalog\Model\Product\Attribute\Source\Status::STATUS_ENABLED)
-                );
-
-            $items = $productCollection->getItems();
-            $relatedProductsData = [];
-            foreach ($items as $item) {
+            $productsData = [];
+            foreach ($relatedProducts as $relatedProduct) {
                 $data = [
-                        self::ID => $item->getId(),
-                        ProductInterface::SKU => $item->getSku(),
-                        ProductInterface::NAME => $item->getName(),
-                        ProductInterface::PRICE => $item->getPrice(),
-                        ProductInterface::TYPE_ID => $item->getTypeId(),
-                        self::MIN_PRICE => $this->getMinimumPrice($item),
-                        self::MAX_PRICE => $this->getMaximumPrice($item),
-                        self::FINAL_PRICE => $item->getFinalPrice(),
-                        self::IMAGE => $this->getProductImageUrl($item),
+                        self::ID => $relatedProduct->getId(),
+                        ProductInterface::SKU => $relatedProduct->getSku(),
+                        ProductInterface::NAME => $relatedProduct->getName(),
+                        ProductInterface::PRICE => $relatedProduct->getPrice(),
+                        ProductInterface::TYPE_ID => $relatedProduct->getTypeId(),
+                        self::MIN_PRICE => $this->getMinimumPrice($relatedProduct),
+                        self::MAX_PRICE => $this->getMaximumPrice($relatedProduct),
+                        self::FINAL_PRICE => $relatedProduct->getFinalPrice(),
+                        self::IMAGE => $this->getProductImageUrl($relatedProduct),
 
                 ];
-                $relatedProductsData []= $data;
+                $productsData[] = $data;
             }
-            return $relatedProductsData;
+            return $productsData;
         } catch (\Exception $e) {
             throw new \Exception(__('We can\'t get Related product right now.'));
         }
     }
 
     /**
-     * Return ptoduct link type
+     * product link type
      * @return int
      */
-    protected function getLinkType(): int
+    private function getLinkType(): int
     {
         return Link::LINK_TYPE_RELATED;
     }
