@@ -14,7 +14,7 @@ interface RelatedProductsRepositoryInterface
      * @param int $customerId
      * @param int|null $storeId
      * @param string $sku
-     * @return \Aheadworks\MobileAppConnector\Model\RelatedProductsManagement
+     * @return array
      * @throws \Magento\Framework\Exception\LocalizedException
      * @throws Exception
      */
