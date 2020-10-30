@@ -69,7 +69,10 @@
     <route url="/V1/relatedproducts/:sku" method="GET">
         <service class="Aheadworks\MobileAppConnector\Api\RelatedProductsRepositoryInterface" method="getRelatedProducts"/>
             <resources>
-                 <resource ref="anonymous"/>
+                <resource ref="self"/>
             </resources>
+            <data>
+                <parameter name="customerId" force="true">%customer_id%</parameter>
+            </data>
     </route>
 </routes>
