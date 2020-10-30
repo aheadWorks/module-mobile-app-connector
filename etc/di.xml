@@ -23,5 +23,5 @@
             <argument name="imageUploader" xsi:type="object">Aheadworks\MobileAppConnector\ReferenceImageUpload</argument>
         </arguments>
     </type>
-    <preference for="Aheadworks\MobileAppConnector\Api\AppPrefrenceDataManagementInterface" type="Aheadworks\MobileAppConnector\Model\AppPrefrenceDataManagement"/>
+    <preference for="Aheadworks\MobileAppConnector\Api\AppPreferencesDataManagementInterface" type="Aheadworks\MobileAppConnector\Model\AppPreferencesDataManagement"/>
 </config>
