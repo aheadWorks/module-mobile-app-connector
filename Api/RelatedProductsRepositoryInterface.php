@@ -1,5 +1,6 @@
 <?php
 namespace Aheadworks\MobileAppConnector\Api;
+use Exception;
 
 /**
  * Interface RelatedProductsRepositoryInterface
@@ -13,7 +14,7 @@ interface RelatedProductsRepositoryInterface
      * @param string $sku
      * @return /Aheadworks\MobileAppConnector\Model\RelatedProductsManagement
      * @throws \Magento\Framework\Exception\LocalizedException
-     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     * @throws Exception
      */
     public function getRelatedProducts($sku);
 }

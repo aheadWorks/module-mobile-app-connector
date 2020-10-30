@@ -8,5 +8,13 @@ Book,Book
 Audio,Audio
 Video,Video
 Unlimited,Unlimited
-We can\'t get Wishlist right now.,We can\'t get Wishlist right now.
+Overview,Overview
+Tenant id should not be empty,Tenant id should not be empty
+Tenant id was successfully saved,Tenant id was successfully saved
+Something went wrong while saving the rule data,Something went wrong while saving the rule data
+App store,App store
+Google App store,Google App store
+We can\'t get tenant id,We can\'t get tenant id
+Save,Save
 Sku required,Sku required
+We can\'t get Related product right now,We can\'t get Related product right now

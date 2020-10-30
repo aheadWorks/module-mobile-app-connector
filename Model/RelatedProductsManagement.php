@@ -20,7 +20,11 @@ use Magento\Catalog\Api\Data\ProductInterface;
 class RelatedProductsManagement implements RelatedProductsRepositoryInterface
 {
     
+    /*
+     * Entity Id.
+     */
     const ENTITY_ID = 'entity_id';
+
     /**
      * @var ProductRepositoryInterface
      */
@@ -61,25 +65,34 @@ class RelatedProductsManagement implements RelatedProductsRepositoryInterface
         if (empty($sku) || !isset($sku) || $sku == "") {
             throw new InputException(__('Sku required'));
         }
-        $product =  $this->productRepository->get($sku);
-        $linkType = $this->getLinkType();
-        $link = $this->linkFactory->create(['data' => ['link_type_id' => $linkType]]);
-        $collection = $link->getProductCollection();
-        $collection->setIsStrongMode();
-        $collection->setProduct($product);
-        $relatedProducts = $collection->getItems();
-        $relatedProductsData = [];
-        foreach ($relatedProducts as $relatedProduct) {
-            $relatedProduct=  $this->productRepository->get($relatedProduct->getSku());
-            $productsData[self::ENTITY_ID] = $relatedProduct->getEntityId();
-            $productsData[ProductInterface::SKU] = $relatedProduct->getSku();
-            $productsData[ProductInterface::NAME] = $relatedProduct->getName();
-            $productsData[ProductInterface::PRICE] = $relatedProduct->getPrice();
-            $productsData[ProductInterface::MEDIA_GALLERY] = $this->imageResolver->getProductImageUrl($relatedProduct, 'category_page_grid');
-            $relatedProductsData []= $productsData;
-        }
+        try {
 
-        return $relatedProductsData;
+            $product =  $this->productRepository->get($sku);
+            $linkType = $this->getLinkType();
+            $link = $this->linkFactory->create(['data' => ['link_type_id' => $linkType]]);
+            $collection = $link->getProductCollection();
+            $collection->setIsStrongMode();
+            $collection->setProduct($product);
+            $relatedProducts = $collection->getItems();
+            $relatedProductsData = [];
+        
+            foreach ($relatedProducts as $relatedProduct) {
+                $relatedProduct = $this->productRepository->get($relatedProduct->getSku());
+
+                $data = [
+                        self::ENTITY_ID => $relatedProduct->getEntityId(),
+                        ProductInterface::SKU => $relatedProduct->getSku(),
+                        ProductInterface::NAME => $relatedProduct->getName(),
+                        ProductInterface::PRICE => $relatedProduct->getPrice(),
+                        ProductInterface::MEDIA_GALLERY => $this->imageResolver->getProductImageUrl($relatedProduct, 'category_page_grid')
+
+                ];
+                $relatedProductsData []= $data;
+            }
+            return $relatedProductsData;
+        }catch (\Exception $e) {
+            throw new \Exception(__('We can\'t get Related product right now.'));
+        }  
     }
 
     /**
