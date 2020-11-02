@@ -66,7 +66,7 @@
          </data>
      </route>
      <!-- for related products-->
-    <route url="/V1/relatedproducts/:sku" method="GET">
+    <route url="/V1/relatedproducts/:sku/storeid/:storeId" method="GET">
         <service class="Aheadworks\MobileAppConnector\Api\RelatedProductsRepositoryInterface" method="getRelatedProducts"/>
             <resources>
                 <resource ref="self"/>
