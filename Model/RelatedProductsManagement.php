@@ -67,7 +67,7 @@ class RelatedProductsManagement implements RelatedProductsRepositoryInterface
     /**
      * @inheritdoc
      */
-    public function getRelatedProducts($customerId, $sku)
+    public function getRelatedProducts($customerId, $sku, $storeId = null)
     {
         if (empty($sku) || !isset($sku)) {
             throw new InputException(__('Sku required'));
@@ -78,22 +78,25 @@ class RelatedProductsManagement implements RelatedProductsRepositoryInterface
             $link = $this->linkFactory->create(['data' => ['link_type_id' => $linkType]]);
             $collection = $link->getProductCollection();
             $collection->setIsStrongMode();
-            $collection->addAttributeToSelect('*');
+            $collection->addAttributeToSelect('*')
+                ->addStoreFilter(
+                    $storeId
+                );
             $collection->setVisibility($this->productVisibility->getVisibleInSiteIds());
             $collection->setProduct($product);
             $relatedProducts = $collection->getItems();
             $productsData = [];
             foreach ($relatedProducts as $relatedProduct) {
                 $data = [
-                        self::ID => $relatedProduct->getId(),
-                        ProductInterface::SKU => $relatedProduct->getSku(),
-                        ProductInterface::NAME => $relatedProduct->getName(),
-                        ProductInterface::PRICE => $relatedProduct->getPrice(),
-                        ProductInterface::TYPE_ID => $relatedProduct->getTypeId(),
-                        self::MIN_PRICE => $this->getMinimumPrice($relatedProduct),
-                        self::MAX_PRICE => $this->getMaximumPrice($relatedProduct),
-                        self::FINAL_PRICE => $relatedProduct->getFinalPrice(),
-                        self::IMAGE => $this->getProductImageUrl($relatedProduct),
+                    self::ID => $relatedProduct->getId(),
+                    ProductInterface::SKU => $relatedProduct->getSku(),
+                    ProductInterface::NAME => $relatedProduct->getName(),
+                    ProductInterface::PRICE => $relatedProduct->getPrice(),
+                    ProductInterface::TYPE_ID => $relatedProduct->getTypeId(),
+                    self::MIN_PRICE => $this->getMinimumPrice($relatedProduct),
+                    self::MAX_PRICE => $this->getMaximumPrice($relatedProduct),
+                    self::FINAL_PRICE => $relatedProduct->getFinalPrice(),
+                    self::IMAGE => $this->getProductImageUrl($relatedProduct),
 
                 ];
                 $productsData[] = $data;
