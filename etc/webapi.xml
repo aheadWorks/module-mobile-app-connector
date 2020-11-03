@@ -50,9 +50,9 @@
 
     <!-- for get app customization tenant id-->
     <route url="/V1/overview" method="GET">
-        <service class="Aheadworks\MobileAppConnector\Api\OverViewRepositoryInterface" method="getTenantId"/>
+        <service class="Aheadworks\MobileAppConnector\Api\AppOverViewRepositoryInterface" method="getTenantId"/>
             <resources>
-                <resource ref="Aheadworks_MobileAppConnector::app_overview"/>
+                <resource ref="self"/>
             </resources>
     </route>
 </routes>
