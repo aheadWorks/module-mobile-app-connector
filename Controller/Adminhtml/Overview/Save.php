@@ -2,19 +2,17 @@
 
 namespace Aheadworks\MobileAppConnector\Controller\Adminhtml\Overview;
 
+use Aheadworks\MobileAppConnector\Model\Overview\AppOverViewModel;
+use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
-use Magento\Framework\View\Result\PageFactory;
-use Magento\Framework\Api\DataObjectHelper;
-use Magento\Framework\App\Request\DataPersistorInterface;
-use Magento\Framework\Exception\LocalizedException;
-use Aheadworks\MobileAppConnector\Model\OverView\Config\ConfigHandler;
+use Exception;
 
 /**
  * Class Save
  * @package Aheadworks\MobileAppConnector\Controller\Adminhtml\Overview
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
-class Save extends \Magento\Backend\App\Action
+class Save extends Action
 {
     /**
      * {@inheritdoc}
@@ -22,36 +20,20 @@ class Save extends \Magento\Backend\App\Action
     const ADMIN_RESOURCE = 'Aheadworks_MobileAppConnector::app_overview';
 
     /**
-     * @var ConfigHandler
+     * @var AppOverViewModel
      */
-    private $overviewconfig;
-
-    /**
-     * @var DataPersistorInterface
-     */
-    private $dataPersistor;
-
-    /**
-     * @var DataObjectHelper
-     */
-    private $dataObjectHelper;
+    private $overViewConfig;
 
     /**
      * @param Context $context
-     * @param ConfigHandler $overviewconfig
-     * @param DataPersistorInterface $dataPersistor
-     * @param DataObjectHelper $dataObjectHelper,
+     * @param AppOverViewModel $overViewConfig
      */
     public function __construct(
         Context $context,
-        DataPersistorInterface $dataPersistor,
-        ConfigHandler $overviewconfig,
-        DataObjectHelper $dataObjectHelper
+        AppOverViewModel $overViewConfig
     ) {
         parent::__construct($context);
-        $this->overviewconfig = $overviewconfig;
-        $this->dataPersistor = $dataPersistor;
-        $this->dataObjectHelper = $dataObjectHelper;
+        $this->overViewConfig = $overViewConfig;
     }
 
     /**
@@ -63,25 +45,20 @@ class Save extends \Magento\Backend\App\Action
         $resultRedirect = $this->resultRedirectFactory->create();
         if ($data) {
             try {
-                if(isset($data['aw_tenant_id'])){
-                    $tenantId = $data['aw_tenant_id'];
-                }else{
+                if (!isset($data['aw_tenant_id'])) {
                     $this->messageManager->addErrorMessage('Tenant id should not be empty');
                     return $resultRedirect->setPath('*/*/index/flag/tenant');
                 }
-                $this->overviewconfig->save($data);
-                $this->dataPersistor->set('aw_flag_tenant', $data);
+                $this->overViewConfig->save($data);
                 $this->messageManager->addSuccessMessage(__('Tenant id was successfully saved.'));
-            } catch (LocalizedException $e) {
-                $this->messageManager->addErrorMessage($e->getMessage());
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 $this->messageManager->addExceptionMessage(
                     $e,
-                    __('Something went wrong while saving the rule data.')
+                    __('Something went wrong while saving the tenant id.')
                 );
             }
-        return $resultRedirect->setPath('*/*/index/flag/tenant');
+            return $resultRedirect->setPath('*/*/index/flag/tenant');
         }
+        return $resultRedirect->setPath('*/*/index/flag/tenant');
     }
-
 }

@@ -2,10 +2,12 @@
 
 namespace Aheadworks\MobileAppConnector\Controller\Adminhtml\Overview;
 
+use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
+use Magento\Backend\Model\View\Result\Page;
 use Magento\Framework\View\Result\PageFactory;
 
-class Index extends \Magento\Framework\App\Action\Action
+class Index extends Action
 {
 
     /**
@@ -17,7 +19,7 @@ class Index extends \Magento\Framework\App\Action\Action
      * @inheritdoc
      */
     const ADMIN_RESOURCE = 'Aheadworks_MobileAppConnector::app_overview';
-    
+
     /**
      * @param Context $context
      * @param PageFactory $resultPageFactory
@@ -26,19 +28,16 @@ class Index extends \Magento\Framework\App\Action\Action
         Context $context,
         PageFactory $resultPageFactory
     ) {
-   
         parent::__construct($context);
         $this->resultPageFactory = $resultPageFactory;
     }
+
     /**
-     * Connector List action
-     *
-     * @return void
+     * {@inheritdoc}
      */
     public function execute()
     {
-      
-        /** @var \Magento\Backend\Model\View\Result\Page $resultPage */
+        /** @var Page $resultPage */
         $resultPage = $this->resultPageFactory->create();
         $resultPage->setActiveMenu(
             'Aheadworks_MobileAppConnector::app_overview'

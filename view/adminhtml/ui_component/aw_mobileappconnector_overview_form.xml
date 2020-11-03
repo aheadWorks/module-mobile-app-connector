@@ -2,23 +2,23 @@
 <form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
     <argument name="data" xsi:type="array">
         <item name="js_config" xsi:type="array">
-            <item name="provider" xsi:type="string">aw_overview_form.aw_overview_form_data_source</item>
-            <item name="deps" xsi:type="string">aw_overview_form.aw_overview_form_data_source</item>
+            <item name="provider" xsi:type="string">aw_mobileappconnector_overview_form.aw_mobileappconnector_overview_form_data_source</item>
+            <item name="deps" xsi:type="string">aw_mobileappconnector_overview_form.aw_mobileappconnector_overview_form_data_source</item>
         </item>
         <item name="label" xsi:type="string" translate="true">Rule</item>
         <item name="config" xsi:type="array">
             <item name="dataScope" xsi:type="string">data</item>
-            <item name="namespace" xsi:type="string">aw_overview_form</item>
+            <item name="namespace" xsi:type="string">aw_mobileappconnector_overview_form</item>
         </item>
         <item name="template" xsi:type="string">templates/form/collapsible</item>
         <item name="buttons" xsi:type="array">
             <item name="save" xsi:type="string">Aheadworks\MobileAppConnector\Block\Adminhtml\OverView\Edit\SaveButton</item>
         </item>
     </argument>
-    <dataSource name="aw_overview_form_data_source">
+    <dataSource name="aw_mobileappconnector_overview_form_data_source">
         <argument name="dataProvider" xsi:type="configurableObject">
-            <argument name="class" xsi:type="string">Aheadworks\MobileAppConnector\Model\OverView\Ui\DataProvider</argument>
-            <argument name="name" xsi:type="string">aw_overview_form_data_source</argument>
+            <argument name="class" xsi:type="string">Aheadworks\MobileAppConnector\Ui\AppOverViewDataProvider</argument>
+            <argument name="name" xsi:type="string">aw_mobileappconnector_overview_form_data_source</argument>
             <argument name="primaryFieldName" xsi:type="string">flag</argument>
             <argument name="requestFieldName" xsi:type="string">flag</argument>
             <argument name="data" xsi:type="array">

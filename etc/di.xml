@@ -27,6 +27,5 @@
             <argument name="modifier" xsi:type="object">Aheadworks\MobileAppConnector\Model\ResourceModel\Library\Item\Collection\CompositeModifier</argument>
         </arguments>
     </type>
-
-	<preference for="Aheadworks\MobileAppConnector\Api\OverViewRepositoryInterface" type="Aheadworks\MobileAppConnector\Model\OverView\OverViewManagement" />
+	<preference for="Aheadworks\MobileAppConnector\Api\AppOverViewRepositoryInterface" type="Aheadworks\MobileAppConnector\Model\AppOverViewManagement" />
 </config>

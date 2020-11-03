@@ -11,7 +11,7 @@ Unlimited,Unlimited
 Overview,Overview
 Tenant id should not be empty,Tenant id should not be empty
 Tenant id was successfully saved,Tenant id was successfully saved
-Something went wrong while saving the rule data,Something went wrong while saving the rule data
+Something went wrong while saving the tenant id,Something went wrong while saving the tenant id
 App store,App store
 Google App store,Google App store
 We can\'t get tenant id,We can\'t get tenant id

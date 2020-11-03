@@ -1,9 +1,9 @@
 <?php
-namespace Aheadworks\MobileAppConnector\Model\OverView;
+namespace Aheadworks\MobileAppConnector\Model;
 
 /**
  * Class Flag
- * @package Aheadworks\MobileAppConnector\Model\OverView
+ * @package Aheadworks\MobileAppConnector\Model
  */
 class Flag extends \Magento\Framework\Flag
 {
@@ -14,7 +14,7 @@ class Flag extends \Magento\Framework\Flag
      * @param string $code
      * @return $this
      */
-    public function setOverViewFlagCode($code)
+    public function setMACFlagCode($code)
     {
         $this->_flagCode = $code;
         return $this;

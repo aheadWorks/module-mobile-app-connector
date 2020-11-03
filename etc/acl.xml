@@ -3,10 +3,8 @@
     <acl>
         <resources>
             <resource id="Magento_Backend::admin">
-                <resource id="Aheadworks_MobileAppConnector::general">
-                    <resource id="Aheadworks_MobileAppConnector::appconnector_menu_app" title="MobileAppConnector by Aheadworks" sortOrder="110">
-                        <resource id="MobileAppConnector::app_overview" title="Overview" sortOrder="10" />
-                    </resource>
+                <resource id="Aheadworks_MobileAppConnector::general" title="MobileAppConnector by Aheadworks" sortOrder="10">
+                    <resource id="MobileAppConnector::app_overview" title="Overview" sortOrder="10" />
                 </resource>
             </resource>
         </resources>

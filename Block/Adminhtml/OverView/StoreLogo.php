@@ -1,18 +1,15 @@
 <?php
 namespace Aheadworks\MobileAppConnector\Block\Adminhtml\OverView;
 
-use Magento\Framework\View\Element\UiComponent\Control\ButtonProviderInterface;
-
 /**
  * Class StoreLogo
  * @package Aheadworks\MobileAppConnector\Block\Adminhtml\OverView
  */
 class StoreLogo extends \Magento\Backend\Block\Template
 {
-   
+
    /**
     * Block template.
-    *
     * @var string
     */
     protected $_template = 'store_logo.phtml';
