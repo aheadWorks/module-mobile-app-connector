@@ -42,7 +42,7 @@ class AppOverViewManagement implements AppOverViewRepositoryInterface
         try {
             $tenantId = $this->overviewconfig->getTenantId();
             if (empty($tenantId)) {
-                $tenantId = $this->storeManager->getStore()->getBaseUrl();
+                $tenantId = $this->getBaseUrl();
             }
             $domain =  $this->getDomainName($tenantId);
             $data = [
@@ -71,5 +71,16 @@ class AppOverViewManagement implements AppOverViewRepositoryInterface
         } else {
             return null;
         }
+    }
+
+    /**
+     * Returns base url to file according to store configuration
+     *
+     * @return string
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
+    public function getBaseUrl()
+    {
+        return $this->storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_WEB);
     }
 }
