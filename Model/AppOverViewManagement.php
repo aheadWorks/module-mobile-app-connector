@@ -65,7 +65,7 @@ class AppOverViewManagement implements AppOverViewRepositoryInterface
         $tenantId = parse_url($tenantId);
         $domain = isset($tenantId['host']) ? $tenantId['host'] : '';
         $hostData = explode('.', $domain);
-        $subdomains = array_slice($hostData, 0, count($hostData) - 2);
+        $subdomains = array_slice($hostData, 0, count($hostData) - 1);
         if (!empty($subdomains[0])) {
             return $subdomains[0];
         } else {
