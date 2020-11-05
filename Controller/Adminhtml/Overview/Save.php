@@ -2,11 +2,12 @@
 
 namespace Aheadworks\MobileAppConnector\Controller\Adminhtml\Overview;
 
-use Aheadworks\MobileAppConnector\Model\Overview\AppOverViewModel;
 use Exception;
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\App\Request\DataPersistorInterface;
+use Aheadworks\MobileAppConnector\Model\AppOverViewManagement;
+use Aheadworks\MobileAppConnector\Model\Config;
 
 /**
  * Class Save
@@ -21,7 +22,7 @@ class Save extends Action
     const ADMIN_RESOURCE = 'Aheadworks_MobileAppConnector::app_overview';
 
     /**
-     * @var AppOverViewModel
+     * @var AppOverViewManagement
      */
     private $overViewConfig;
 
@@ -32,12 +33,12 @@ class Save extends Action
 
     /**
      * @param Context $context
-     * @param AppOverViewModel $overViewConfig
+     * @param AppOverViewManagement $overViewConfig
      * @param DataPersistorInterface $dataPersistor
      */
     public function __construct(
         Context $context,
-        AppOverViewModel $overViewConfig,
+        AppOverViewManagement $overViewConfig,
         DataPersistorInterface $dataPersistor
     ) {
         parent::__construct($context);
@@ -52,8 +53,8 @@ class Save extends Action
     {
         $data = $this->getRequest()->getParams();
         $resultRedirect = $this->resultRedirectFactory->create();
-        $param = ['flag' => 'tenant'];
-        $resultRedirect->setPath('*/*/', $param);
+        $params = ['flag' => 'overview'];
+        $resultRedirect->setPath('*/*/', $params);
         if ($data) {
             try {
                 if (!isset($data['aw_tenant_id'])) {
@@ -61,6 +62,7 @@ class Save extends Action
                     return $resultRedirect;
                 }
                 $this->overViewConfig->save($data);
+                $this->dataPersistor->clear(Config::AW_MAC_OVERVIEW);
                 $this->messageManager->addSuccessMessage(__('Tenant id was successfully saved.'));
             } catch (Exception $e) {
                 $this->messageManager->addExceptionMessage(
@@ -68,7 +70,7 @@ class Save extends Action
                     __('Something went wrong while saving the tenant id.')
                 );
             }
-            $this->dataPersistor->set('aw_mac_overview', $data);
+            $this->dataPersistor->set(Config::AW_MAC_OVERVIEW, $data);
             return $resultRedirect;
         }
         return $resultRedirect;

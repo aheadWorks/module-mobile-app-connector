@@ -13,6 +13,7 @@ class Config
      * Configuration path to tenant id
      */
     const AW_TENANT_ID = 'aw_tenant_id';
+    const AW_MAC_OVERVIEW = 'aw_mac_overview';
 
     /**
      * @var FlagManager

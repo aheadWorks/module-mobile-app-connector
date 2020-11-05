@@ -64,14 +64,5 @@
                 </item>
             </argument>
         </field>
-        <field name="flag" formElement="hidden">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="dataScope" xsi:type="string">flag</item>
-                    <item name="dataType" xsi:type="string">text</item>
-                    <item name="value" xsi:type="string">tenant</item>
-                </item>
-            </argument>
-        </field>
     </fieldset>
 </form>

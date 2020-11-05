@@ -87,4 +87,16 @@ class AppOverViewManagement implements AppOverViewRepositoryInterface
     {
         return $this->storeManager->getStore()->getBaseUrl(UrlInterface::URL_TYPE_WEB);
     }
+
+    /**
+     * Processing save app overview data
+     *
+     * @param array $data
+     * @return $this
+     */
+    public function save(array $data)
+    {
+        $this->overViewConfig->setTenantId($data[AppOverViewConfig::AW_TENANT_ID]);
+        return $this;
+    }
 }

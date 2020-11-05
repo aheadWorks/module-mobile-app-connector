@@ -67,19 +67,15 @@ class AppOverViewDataProvider extends AbstractDataProvider
     public function getData()
     {
         $data = [];
-        $dataFromForm = $this->dataPersistor->get('aw_mac_overview');
+        $dataFromForm = $this->dataPersistor->get(OverViewConfig::AW_MAC_OVERVIEW);
+        $overView = $this->request->getParam($this->getRequestFieldName());
         if (!empty($dataFromForm)) {
-            if (isset($dataFromForm['flag'])) {
-                $data[$dataFromForm['flag']] = $dataFromForm;
-            } else {
-                $data[null] = $dataFromForm;
-            }
-            $this->dataPersistor->clear('aw_mac_overview');
+            $data[$overView] = $dataFromForm;
+            $this->dataPersistor->clear(OverViewConfig::AW_MAC_OVERVIEW);
         } else {
-            $tenant = $this->request->getParam($this->getRequestFieldName());
-            if ($tenant) {
+            if ($overView) {
                 $formData[OverViewConfig::AW_TENANT_ID]= $this->overViewConfig->getTenantId();
-                $data[$tenant] = $formData;
+                $data[$overView] = $formData;
             }
         }
         return $data;
