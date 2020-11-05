@@ -44,9 +44,6 @@ class Index extends Action
         )->addBreadcrumb(
             __('Overview'),
             __('Overview')
-        )->addBreadcrumb(
-            __('Overview'),
-            __('Overview')
         );
         $resultPage->getConfig()->getTitle()->prepend(__('Overview'));
         return $resultPage;

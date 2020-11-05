@@ -5,7 +5,7 @@
             <item name="provider" xsi:type="string">aw_mobileappconnector_overview_form.aw_mobileappconnector_overview_form_data_source</item>
             <item name="deps" xsi:type="string">aw_mobileappconnector_overview_form.aw_mobileappconnector_overview_form_data_source</item>
         </item>
-        <item name="label" xsi:type="string" translate="true">Rule</item>
+        <item name="label" xsi:type="string" translate="true">App Overview</item>
         <item name="config" xsi:type="array">
             <item name="dataScope" xsi:type="string">data</item>
             <item name="namespace" xsi:type="string">aw_mobileappconnector_overview_form</item>
@@ -17,7 +17,7 @@
     </argument>
     <dataSource name="aw_mobileappconnector_overview_form_data_source">
         <argument name="dataProvider" xsi:type="configurableObject">
-            <argument name="class" xsi:type="string">Aheadworks\MobileAppConnector\Ui\AppOverViewDataProvider</argument>
+            <argument name="class" xsi:type="string">Aheadworks\MobileAppConnector\Ui\Component\AppOverViewDataProvider</argument>
             <argument name="name" xsi:type="string">aw_mobileappconnector_overview_form_data_source</argument>
             <argument name="primaryFieldName" xsi:type="string">flag</argument>
             <argument name="requestFieldName" xsi:type="string">flag</argument>
@@ -39,7 +39,7 @@
                 <item name="label" xsi:type="string" translate="true">DownloadApp</item>
             </item>
         </argument>
-  		<container name="custom_tab_container">
+  		<container name="store_logo_container">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="sortOrder" xsi:type="string">1</item>
@@ -61,6 +61,15 @@
                     <item name="validation" xsi:type="array">
                         <item name="required-entry" xsi:type="boolean">true</item>
                     </item>
+                </item>
+            </argument>
+        </field>
+        <field name="flag" formElement="hidden">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataScope" xsi:type="string">flag</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="value" xsi:type="string">tenant</item>
                 </item>
             </argument>
         </field>

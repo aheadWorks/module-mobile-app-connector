@@ -1,8 +1,7 @@
 <?php
 namespace Aheadworks\MobileAppConnector\Model;
 
-use Aheadworks\MobileAppConnector\Model\Flag;
-use Aheadworks\MobileAppConnector\Model\FlagFactory;
+use Magento\Framework\FlagManager;
 
 /**
  * Class Config
@@ -16,52 +15,17 @@ class Config
     const AW_TENANT_ID = 'aw_tenant_id';
 
     /**
-     * @var Flag
+     * @var FlagManager
      */
-    private $flag;
+    private $flagManager;
 
     /**
-     * @param FlagFactory $flagFactory
+     * @param FlagManager $flagManager
      */
     public function __construct(
-        FlagFactory $flagFactory
+        FlagManager $flagManager
     ) {
-        $this->flag = $flagFactory->create();
-    }
-
-    /**
-     * Get flag data
-     *
-     * @param string $param
-     * @return array
-     */
-    private function getFlagData($param)
-    {
-        $this->flag
-            ->unsetData()
-            ->setMACFlagCode($param)
-            ->loadSelf();
-
-        return $this->flag->getFlagData();
-    }
-
-    /**
-     * Set flag data
-     *
-     * @param string $param
-     * @param mixed $value
-     * @return $this
-     */
-    private function setFlagData($param, $value)
-    {
-        $this->flag
-            ->unsetData()
-            ->setMACFlagCode($param)
-            ->loadSelf()
-            ->setFlagData($value)
-            ->save();
-
-        return $this;
+        $this->flagManager = $flagManager;
     }
 
     /**
@@ -71,7 +35,7 @@ class Config
      */
     public function getTenantId()
     {
-        return $this->getFlagData(self::AW_TENANT_ID);
+        return $this->flagManager->getFlagData(self::AW_TENANT_ID);
     }
 
     /**
@@ -80,9 +44,9 @@ class Config
      * @param string $tenantId
      * @return $this
      */
-    public function setTenantId($tenantId)
+    public function setTenantId(string $tenantId)
     {
-        $this->setFlagData(self::AW_TENANT_ID, $tenantId);
+        $this->flagManager->saveFlag(self::AW_TENANT_ID, $tenantId);
         return $this;
     }
 }

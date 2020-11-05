@@ -1,17 +1,23 @@
 <?php
-namespace Aheadworks\MobileAppConnector\Ui;
+namespace Aheadworks\MobileAppConnector\Ui\Component;
 
 use Aheadworks\MobileAppConnector\Model\Config as OverViewConfig;
 use Magento\Framework\Api\Filter;
 use Magento\Framework\App\RequestInterface;
 use Magento\Ui\DataProvider\AbstractDataProvider;
+use Magento\Framework\App\Request\DataPersistorInterface;
 
 /**
  * Class AppOverViewDataProvider
- * @package Aheadworks\MobileAppConnector\Ui
+ * @package Aheadworks\MobileAppConnector\Ui\Component
  */
 class AppOverViewDataProvider extends AbstractDataProvider
 {
+
+    /**
+     * @var DataPersistorInterface
+     */
+    private $dataPersistor;
 
     /**
      * @var OverViewConfig
@@ -29,6 +35,7 @@ class AppOverViewDataProvider extends AbstractDataProvider
      * @param string $requestFieldName
      * @param OverViewConfig $overViewConfig
      * @param RequestInterface $request
+     * @param DataPersistorInterface $dataPersistor
      * @param array $meta
      * @param array $data
      */
@@ -38,6 +45,7 @@ class AppOverViewDataProvider extends AbstractDataProvider
         $requestFieldName,
         OverviewConfig $overViewConfig,
         RequestInterface $request,
+        DataPersistorInterface $dataPersistor,
         array $meta = [],
         array $data = []
     ) {
@@ -50,6 +58,7 @@ class AppOverViewDataProvider extends AbstractDataProvider
         );
         $this->overViewConfig = $overViewConfig;
         $this->request = $request;
+        $this->dataPersistor = $dataPersistor;
     }
 
     /**
@@ -58,10 +67,20 @@ class AppOverViewDataProvider extends AbstractDataProvider
     public function getData()
     {
         $data = [];
-        $tenant = $this->request->getParam($this->getRequestFieldName());
-        if ($tenant) {
-            $formData[OverViewConfig::AW_TENANT_ID]= $this->overViewConfig->getTenantId();
-            $data[$tenant] = $formData;
+        $dataFromForm = $this->dataPersistor->get('aw_mac_overview');
+        if (!empty($dataFromForm)) {
+            if (isset($dataFromForm['flag'])) {
+                $data[$dataFromForm['flag']] = $dataFromForm;
+            } else {
+                $data[null] = $dataFromForm;
+            }
+            $this->dataPersistor->clear('aw_mac_overview');
+        } else {
+            $tenant = $this->request->getParam($this->getRequestFieldName());
+            if ($tenant) {
+                $formData[OverViewConfig::AW_TENANT_ID]= $this->overViewConfig->getTenantId();
+                $data[$tenant] = $formData;
+            }
         }
         return $data;
     }

@@ -15,7 +15,7 @@ class AppOverViewModel
     private $config;
 
     /**
-     * @param FlagFactory $flagFactory
+     * @param Config $config
      */
     public function __construct(
         Config $config
@@ -24,13 +24,14 @@ class AppOverViewModel
     }
 
     /**
-     * Processing save overview data
+     * Processing save app overview data
      *
+     * @param $data
      * @return $this
      */
     public function save($data)
     {
-       $this->config->setTenantId($data['aw_tenant_id']);
-       return $this;
+        $this->config->setTenantId($data[Config::AW_TENANT_ID]);
+        return $this;
     }
 }

@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
-	<preference for="Aheadworks\MobileAppConnector\Api\WishlistManagementInterface" type="Aheadworks\MobileAppConnector\Model\WishlistManagement" />
+    <preference for="Aheadworks\MobileAppConnector\Api\WishlistManagementInterface" type="Aheadworks\MobileAppConnector\Model\WishlistManagement" />
+    <preference for="Aheadworks\MobileAppConnector\Api\MostViewedProductInterface" type="Aheadworks\MobileAppConnector\Model\MostViewedProduct" />
     <preference for="Aheadworks\MobileAppConnector\Api\CustomerOrderInterface" type="Aheadworks\MobileAppConnector\Model\CustomerOrder" />
     <preference for="Aheadworks\MobileAppConnector\Api\LibraryItemRepositoryInterface" type="Aheadworks\MobileAppConnector\Model\Library\Item\Repository" />
     <preference for="Aheadworks\MobileAppConnector\Api\Data\LibraryItemSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
@@ -17,7 +18,7 @@
                 <item name="product_image" xsi:type="object">Aheadworks\MobileAppConnector\Model\ResourceModel\Library\Item\Collection\Modifier\Product\Image</item>
                 <item name="type" xsi:type="object">Aheadworks\MobileAppConnector\Model\ResourceModel\Library\Item\Collection\Modifier\ItemType</item>
                 <item name="is_downloadable" xsi:type="object">Aheadworks\MobileAppConnector\Model\ResourceModel\Library\Item\Collection\Modifier\IsDownloadable</item>
-                <item name="remaining_downloads" xsi:type="object">Aheadworks\MobileAppConnector\Model\ResourceModel\Library\Item\Collection\Modifier\RemainingDownloads</item>
+                <item name="remaining_downloads" xsi:type="object">Aheadworks\MobileAppConnector\Model\ResourceModel\Library\Item\Collection\Modifier\GetRemainingDownload</item>
             </argument>
         </arguments>
     </virtualType>
@@ -27,5 +28,6 @@
             <argument name="modifier" xsi:type="object">Aheadworks\MobileAppConnector\Model\ResourceModel\Library\Item\Collection\CompositeModifier</argument>
         </arguments>
     </type>
-	<preference for="Aheadworks\MobileAppConnector\Api\AppOverViewRepositoryInterface" type="Aheadworks\MobileAppConnector\Model\AppOverViewManagement" />
+    <preference for="Aheadworks\MobileAppConnector\Api\RelatedProductsRepositoryInterface" type="Aheadworks\MobileAppConnector\Model\RelatedProductsManagement" />
+    <preference for="Aheadworks\MobileAppConnector\Api\AppOverViewRepositoryInterface" type="Aheadworks\MobileAppConnector\Model\AppOverViewManagement" />
 </config>

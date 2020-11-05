@@ -3,9 +3,10 @@
 namespace Aheadworks\MobileAppConnector\Controller\Adminhtml\Overview;
 
 use Aheadworks\MobileAppConnector\Model\Overview\AppOverViewModel;
+use Exception;
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
-use Exception;
+use Magento\Framework\App\Request\DataPersistorInterface;
 
 /**
  * Class Save
@@ -25,15 +26,23 @@ class Save extends Action
     private $overViewConfig;
 
     /**
+     * @var DataPersistorInterface
+     */
+    private $dataPersistor;
+
+    /**
      * @param Context $context
      * @param AppOverViewModel $overViewConfig
+     * @param DataPersistorInterface $dataPersistor
      */
     public function __construct(
         Context $context,
-        AppOverViewModel $overViewConfig
+        AppOverViewModel $overViewConfig,
+        DataPersistorInterface $dataPersistor
     ) {
         parent::__construct($context);
         $this->overViewConfig = $overViewConfig;
+        $this->dataPersistor = $dataPersistor;
     }
 
     /**
@@ -41,13 +50,15 @@ class Save extends Action
      */
     public function execute()
     {
-        $data = $this->getRequest()->getPostValue();
+        $data = $this->getRequest()->getParams();
         $resultRedirect = $this->resultRedirectFactory->create();
+        $param = ['flag' => 'tenant'];
+        $resultRedirect->setPath('*/*/', $param);
         if ($data) {
             try {
                 if (!isset($data['aw_tenant_id'])) {
                     $this->messageManager->addErrorMessage('Tenant id should not be empty');
-                    return $resultRedirect->setPath('*/*/index/flag/tenant');
+                    return $resultRedirect;
                 }
                 $this->overViewConfig->save($data);
                 $this->messageManager->addSuccessMessage(__('Tenant id was successfully saved.'));
@@ -57,8 +68,9 @@ class Save extends Action
                     __('Something went wrong while saving the tenant id.')
                 );
             }
-            return $resultRedirect->setPath('*/*/index/flag/tenant');
+            $this->dataPersistor->set('aw_mac_overview', $data);
+            return $resultRedirect;
         }
-        return $resultRedirect->setPath('*/*/index/flag/tenant');
+        return $resultRedirect;
     }
 }

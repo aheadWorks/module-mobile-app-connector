@@ -16,5 +16,5 @@ interface AppOverViewRepositoryInterface
      * get app overview.
      * @return array.
      */
-    public function getTenantId();
+    public function getAppTenantId();
 }
