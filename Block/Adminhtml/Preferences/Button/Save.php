@@ -1,7 +1,11 @@
 <?php
-namespace Aheadworks\MobileAppConnector\Block\Adminhtml\Prefrence\Button;
+namespace Aheadworks\MobileAppConnector\Block\Adminhtml\Preferences\Button;
 use Magento\Framework\View\Element\UiComponent\Control\ButtonProviderInterface;
 
+/**
+ * Class Save
+ * @package Aheadworks\MobileAppConnector\Block\Adminhtml\Preferences\Button
+ */
 class Save implements ButtonProviderInterface
 {
     /**

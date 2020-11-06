@@ -36,4 +36,17 @@ class UrlBuilder
         $store = $this->storeManager->getStore();
         return $store->getBaseUrl(UrlInterface::URL_TYPE_MEDIA);
     }
+
+    /**
+     * Get base Url
+     *
+     * @return string
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
+    public function getBaseUrl()
+    {
+        $store = $this->storeManager->getStore();
+        return $store->getBaseUrl(UrlInterface::URL_TYPE_WEB);
+    }
+
 }

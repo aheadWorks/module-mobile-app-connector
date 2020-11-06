@@ -1,27 +1,25 @@
 <?php
+namespace Aheadworks\MobileAppConnector\Controller\Adminhtml\Preferences\AppLogo;
 
-namespace Aheadworks\MobileAppConnector\Controller\Adminhtml\Preferences;
-
-use Aheadworks\MobileAppConnector\Model\ImageUploader;
-use Exception;
-use Magento\Backend\App\Action;
-use Magento\Backend\App\Action\Context;
-use Magento\Framework\App\Action\HttpPostActionInterface;
-use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\Controller\ResultInterface;
+use Magento\Framework\Controller\ResultFactory;
+use Magento\Backend\App\Action\Context;
+use Aheadworks\MobileAppConnector\Model\ImageUploader;
+use Aheadworks\MobileAppConnector\Controller\Adminhtml\Preferences\AbstractAction;
 
-class Upload extends Action implements HttpPostActionInterface
+/**
+ * App logo upload controller
+ */
+class Upload extends AbstractAction
 {
     /**
      * Image uploader
      *
      * @var ImageUploader
      */
-    protected $imageUploader;
+    private $imageUploader;
 
     /**
-     * Upload constructor.
-     *
      * @param Context $context
      * @param ImageUploader $imageUploader
      */
@@ -32,6 +30,7 @@ class Upload extends Action implements HttpPostActionInterface
         parent::__construct($context);
         $this->imageUploader = $imageUploader;
     }
+
     /**
      * Upload file controller action
      *
@@ -39,13 +38,13 @@ class Upload extends Action implements HttpPostActionInterface
      */
     public function execute()
     {
-        $imageId = $this->_request->getParam('param_name', 'image');
-
+        $files = $this->getRequest()->getFiles()->toArray();
         try {
-            $result = $this->imageUploader->saveFileToTmpDir($imageId);
-        } catch (Exception $e) {
+            $result = $this->imageUploader->saveFileToTmpDir(key($files));
+        } catch (\Exception $e) {
             $result = ['error' => $e->getMessage(), 'errorcode' => $e->getCode()];
         }
+
         return $this->resultFactory->create(ResultFactory::TYPE_JSON)->setData($result);
     }
 }

@@ -3,24 +3,24 @@
       xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/Ui/etc/ui_configuration.xsd">
     <argument name="data" xsi:type="array">
         <item name="js_config" xsi:type="array">
-            <item name="provider" xsi:type="string">aw_mobileappconnector_prefrence_form.aw_mobileappconnector_prefrence_form_data_source</item>
-            <item name="deps" xsi:type="string">aw_mobileappconnector_prefrence_form.aw_mobileappconnector_prefrence_form_data_source</item>
+            <item name="provider" xsi:type="string">aw_mobileappconnector_preferences_form.aw_mobileappconnector_preferences_form_data_source</item>
+            <item name="deps" xsi:type="string">aw_mobileappconnector_preferences_form.aw_mobileappconnector_preferences_form_data_source</item>
         </item>
         <item name="label" xsi:type="string" translate="true">Employee Information</item>
         <item name="config" xsi:type="array">
             <item name="dataScope" xsi:type="string">data</item>
-            <item name="namespace" xsi:type="string">aw_mobileappconnector_prefrence_form</item>
+            <item name="namespace" xsi:type="string">aw_mobileappconnector_preferences_form</item>
         </item>
         <item name="buttons" xsi:type="array">
-            <item name="save" xsi:type="string">Aheadworks\MobileAppConnector\Block\Adminhtml\Prefrence\Button\Save
+            <item name="save" xsi:type="string">Aheadworks\MobileAppConnector\Block\Adminhtml\Preferences\Button\Save
             </item>
         </item>
         <item name="template" xsi:type="string">templates/form/collapsible</item>
     </argument>
-    <dataSource name="aw_mobileappconnector_prefrence_form_data_source">
+    <dataSource name="aw_mobileappconnector_preferences_form_data_source">
         <argument name="dataProvider" xsi:type="configurableObject">
             <argument name="class" xsi:type="string">Aheadworks\MobileAppConnector\Model\Preferences\DataProvider</argument>
-            <argument name="name" xsi:type="string">aw_mobileappconnector_prefrence_form_data_source</argument>
+            <argument name="name" xsi:type="string">aw_mobileappconnector_preferences_form_data_source</argument>
             <argument name="primaryFieldName" xsi:type="string">flag</argument>
             <argument name="requestFieldName" xsi:type="string">flag</argument>
         </argument>
@@ -36,7 +36,7 @@
     <fieldset name="preferences_fieldset">
         <argument name="data" xsi:type="array">
             <item name="config" xsi:type="array">
-                <item name="label" xsi:type="string" translate="true">App Prefrence</item>
+                <item name="label" xsi:type="string" translate="true">App Preferences</item>
             </item>
         </argument>
         <!-- App Name -->
@@ -98,9 +98,9 @@
                     <settings>
                         <required>true</required>
                         <uploaderConfig>
-                            <param xsi:type="url" name="url" path="mobileappconnector/preferences/upload"/>
+                            <param xsi:type="url" name="url" path="mobileappconnector/preferences_applogo/upload"/>
                         </uploaderConfig>
-                        <previewTmpl>Aheadworks_MobileAppConnector/image-preview</previewTmpl>
+                        <previewTmpl>Magento_Catalog/image-preview</previewTmpl>
                         <openDialogTitle>Media Gallery</openDialogTitle>
                         <allowedExtensions>jpg jpeg gif png</allowedExtensions>
                         <maxFileSize>4194304</maxFileSize>
@@ -111,7 +111,7 @@
         <!-- Privacy Policy Page -->
         <field name="policy_page">
             <argument name="data" xsi:type="array">
-                <item name="options" xsi:type="object">Aheadworks\MobileAppConnector\Model\Config\Source\Cms</item>
+                <item name="options" xsi:type="object">Aheadworks\MobileAppConnector\Model\Config\Source\CmsPage</item>
                 <item name="config" xsi:type="array">
                     <item name="dataType" xsi:type="string">text</item>
                     <item name="label" xsi:type="string" translate="true">Privacy Policy Page</item>
@@ -125,7 +125,7 @@
         <!-- Contact Us Page -->
         <field name="contact_page">
             <argument name="data" xsi:type="array">
-                <item name="options" xsi:type="object">Aheadworks\MobileAppConnector\Model\Config\Source\Cms</item>
+                <item name="options" xsi:type="object">Aheadworks\MobileAppConnector\Model\Config\Source\CmsPage</item>
                 <item name="config" xsi:type="array">
                     <item name="dataType" xsi:type="string">text</item>
                     <item name="label" xsi:type="string" translate="true">Contact Us Page</item>

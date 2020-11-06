@@ -9,7 +9,7 @@
       xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
     <body>
         <referenceContainer name="content">
-            <uiComponent name="aw_mobileappconnector_prefrence_form"/>
+            <uiComponent name="aw_mobileappconnector_preferences_form"/>
         </referenceContainer>
     </body>
 </page>

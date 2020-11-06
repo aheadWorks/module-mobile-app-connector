@@ -2,11 +2,16 @@
 
 namespace Aheadworks\MobileAppConnector\Api;
 
+/**
+ * Interface AppPreferencesDataManagementInterface
+ * @package Aheadworks\MobileAppConnector\Api
+ * @api
+ */
 interface AppPreferencesDataManagementInterface
 {
 
     /**
-     * GET for AppPreferencesData api
+     * GET App Preferences data
      * @param null
      * @return array
      */

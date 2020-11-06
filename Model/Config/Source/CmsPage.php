@@ -9,10 +9,10 @@ use Magento\Framework\Data\OptionSourceInterface;
 use Magento\Framework\Exception\LocalizedException;
 
 /**
- * Class PolicyPage
+ * Class CmsPage
  * @package Aheadworks\MobileAppConnector\Model\Config\Source
  */
-class Cms implements OptionSourceInterface
+class CmsPage implements OptionSourceInterface
 {
     /**
      * @var PageRepositoryInterface
