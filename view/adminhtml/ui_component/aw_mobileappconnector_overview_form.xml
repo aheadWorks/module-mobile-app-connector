@@ -11,9 +11,6 @@
             <item name="namespace" xsi:type="string">aw_mobileappconnector_overview_form</item>
         </item>
         <item name="template" xsi:type="string">templates/form/collapsible</item>
-        <item name="buttons" xsi:type="array">
-            <item name="save" xsi:type="string">Aheadworks\MobileAppConnector\Block\Adminhtml\OverView\Edit\SaveButton</item>
-        </item>
     </argument>
     <dataSource name="aw_mobileappconnector_overview_form_data_source">
         <argument name="dataProvider" xsi:type="configurableObject">
@@ -21,11 +18,6 @@
             <argument name="name" xsi:type="string">aw_mobileappconnector_overview_form_data_source</argument>
             <argument name="primaryFieldName" xsi:type="string">flag</argument>
             <argument name="requestFieldName" xsi:type="string">flag</argument>
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="submit_url" xsi:type="url" path="*/*/save"/>
-                </item>
-            </argument>
         </argument>
         <argument name="data" xsi:type="array">
             <item name="js_config" xsi:type="array">
@@ -58,9 +50,7 @@
                     <item name="formElement" xsi:type="string">input</item>
                     <item name="source" xsi:type="string">overview</item>
                     <item name="sortOrder" xsi:type="number">30</item>
-                    <item name="validation" xsi:type="array">
-                        <item name="required-entry" xsi:type="boolean">true</item>
-                    </item>
+                    <item name="disabled" xsi:type="boolean">true</item>
                 </item>
             </argument>
         </field>

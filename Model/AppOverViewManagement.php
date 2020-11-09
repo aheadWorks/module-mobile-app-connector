@@ -2,9 +2,7 @@
 namespace Aheadworks\MobileAppConnector\Model;
 
 use Aheadworks\MobileAppConnector\Api\AppOverViewRepositoryInterface;
-use Aheadworks\MobileAppConnector\Model\Config as AppOverViewConfig;
 use Exception;
-use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\UrlInterface;
 use Magento\Store\Model\StoreManagerInterface;
 
@@ -14,10 +12,7 @@ use Magento\Store\Model\StoreManagerInterface;
  */
 class AppOverViewManagement implements AppOverViewRepositoryInterface
 {
-    /**
-     * @var AppOverViewConfig
-     */
-    private $overViewConfig;
+    const AW_TENANT_ID = 'aw_tenant_id';
 
     /**
      * @var StoreManagerInterface
@@ -25,14 +20,11 @@ class AppOverViewManagement implements AppOverViewRepositoryInterface
     protected $storeManager;
 
     /**
-     * @param AppOverViewConfig $overViewConfig
      * @param StoreManagerInterface $storeManager
      */
     public function __construct(
-        AppOverViewConfig $overViewConfig,
         StoreManagerInterface $storeManager
     ) {
-        $this->overViewConfig = $overViewConfig;
         $this->storeManager = $storeManager;
     }
 
@@ -43,17 +35,10 @@ class AppOverViewManagement implements AppOverViewRepositoryInterface
     public function getAppTenantId()
     {
         try {
-            /** @var AppOverViewConfig */
-            $tenantId = $this->overViewConfig->getTenantId();
-            if (empty($tenantId)) {
-                $tenantId = $this->getBaseUrl();
-            }
-            $domain =  $this->getDomainName($tenantId);
-            $data = [
-                AppOverViewConfig::AW_TENANT_ID => $domain
-            ];
-            $overViewData[] = $data;
-            return $overViewData;
+            $baseUrl = $this->storeManager->getStore()->getBaseUrl(UrlInterface::URL_TYPE_WEB);
+            $domain =  $this->getDomainName($baseUrl);
+            $data[self::AW_TENANT_ID] = $domain;
+            return $data;
         } catch (Exception $e) {
             throw new Exception("We can\'t get tenant id.");
         }
@@ -75,28 +60,5 @@ class AppOverViewManagement implements AppOverViewRepositoryInterface
         } else {
             return null;
         }
-    }
-
-    /**
-     * Returns base url to file according to store configuration
-     *
-     * @return string
-     * @throws NoSuchEntityException
-     */
-    public function getBaseUrl()
-    {
-        return $this->storeManager->getStore()->getBaseUrl(UrlInterface::URL_TYPE_WEB);
-    }
-
-    /**
-     * Processing save app overview data
-     *
-     * @param array $data
-     * @return $this
-     */
-    public function save(array $data)
-    {
-        $this->overViewConfig->setTenantId($data[AppOverViewConfig::AW_TENANT_ID]);
-        return $this;
     }
 }
