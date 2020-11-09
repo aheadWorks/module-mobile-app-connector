@@ -12,6 +12,10 @@ use Magento\Ui\DataProvider\AbstractDataProvider;
  */
 class AppOverViewDataProvider extends AbstractDataProvider
 {
+    /**#@+
+     * Constants defined for keys of the data array.
+     */
+    const AW_TENANT_ID = 'aw_tenant_id';
 
     /**
      * @var RequestInterface
@@ -59,9 +63,9 @@ class AppOverViewDataProvider extends AbstractDataProvider
     {
         $data = [];
         $tenantId= $this->appOverViewRepository->getAppTenantId();
-        $overView = $this->request->getParam($this->getRequestFieldName());
-        if ($overView) {
-            $data[$overView] = $tenantId;
+        $appOverViewFlag = $this->request->getParam($this->getRequestFieldName());
+        if ($appOverViewFlag) {
+            $data[$appOverViewFlag][self::AW_TENANT_ID] = $tenantId;
         }
         return $data;
     }

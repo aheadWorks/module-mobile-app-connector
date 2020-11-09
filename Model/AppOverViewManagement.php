@@ -12,8 +12,6 @@ use Magento\Store\Model\StoreManagerInterface;
  */
 class AppOverViewManagement implements AppOverViewRepositoryInterface
 {
-    const AW_TENANT_ID = 'aw_tenant_id';
-
     /**
      * @var StoreManagerInterface
      */
@@ -36,9 +34,7 @@ class AppOverViewManagement implements AppOverViewRepositoryInterface
     {
         try {
             $baseUrl = $this->storeManager->getStore()->getBaseUrl(UrlInterface::URL_TYPE_WEB);
-            $domain =  $this->getDomainName($baseUrl);
-            $data[self::AW_TENANT_ID] = $domain;
-            return $data;
+            return $this->getDomainName($baseUrl);
         } catch (Exception $e) {
             throw new Exception("We can\'t get tenant id.");
         }
