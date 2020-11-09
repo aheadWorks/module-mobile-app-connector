@@ -4,7 +4,7 @@
  *
  */
 namespace Aheadworks\MobileAppConnector\Api;
-
+use Exception;
 /**
  * AppOverViewRepositoryInterface
  * @api
@@ -14,7 +14,8 @@ interface AppOverViewRepositoryInterface
 
     /**
      * get app overview.
-     * @return array.
+     * @return string.
+     * @throws Exception
      */
     public function getAppTenantId();
 }

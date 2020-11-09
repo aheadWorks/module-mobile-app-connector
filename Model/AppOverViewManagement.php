@@ -28,7 +28,6 @@ class AppOverViewManagement implements AppOverViewRepositoryInterface
 
     /**
      * {@inheritdoc}
-     * @throws Exception
      */
     public function getAppTenantId()
     {
@@ -45,7 +44,7 @@ class AppOverViewManagement implements AppOverViewRepositoryInterface
      * @param string $tenantId
      * @return string $subdomains|null
      */
-    public function getDomainName(string $tenantId)
+    private function getDomainName(string $tenantId)
     {
         $tenantId = parse_url($tenantId);
         $domain = isset($tenantId['host']) ? $tenantId['host'] : '';
