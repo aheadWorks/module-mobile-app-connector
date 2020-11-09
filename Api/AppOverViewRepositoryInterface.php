@@ -14,7 +14,7 @@ interface AppOverViewRepositoryInterface
 
     /**
      * get app overview.
-     * @return string.
+     * @return null|string
      * @throws Exception
      */
     public function getAppTenantId();
