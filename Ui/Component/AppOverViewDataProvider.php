@@ -28,6 +28,7 @@ class AppOverViewDataProvider extends AbstractDataProvider
      * @param string $primaryFieldName
      * @param string $requestFieldName
      * @param RequestInterface $request
+     * @param AppOverViewRepositoryInterface $appOverViewRepository
      * @param array $meta
      * @param array $data
      */
