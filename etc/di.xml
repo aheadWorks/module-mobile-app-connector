@@ -29,4 +29,5 @@
         </arguments>
     </type>
     <preference for="Aheadworks\MobileAppConnector\Api\RelatedProductsRepositoryInterface" type="Aheadworks\MobileAppConnector\Model\RelatedProductsManagement" />
+    <preference for="Aheadworks\MobileAppConnector\Api\AppOverViewRepositoryInterface" type="Aheadworks\MobileAppConnector\Model\AppOverViewManagement" />
 </config>

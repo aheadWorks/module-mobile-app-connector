@@ -75,4 +75,11 @@
                 <parameter name="customerId" force="true">%customer_id%</parameter>
             </data>
     </route>
+    <!-- for get app customization tenant id-->
+    <route url="/V1/overview" method="GET">
+        <service class="Aheadworks\MobileAppConnector\Api\AppOverViewRepositoryInterface" method="getAppTenantId"/>
+            <resources>
+                <resource ref="self"/>
+            </resources>
+    </route>
 </routes>
