@@ -13,7 +13,8 @@ interface AppPreferencesDataManagementInterface
     /**
      * GET App Preferences data
      * @param null
-     * @return array
+     * @return null|array
+     * @throw Exception
      */
     public function getAppPreferencesData();
 

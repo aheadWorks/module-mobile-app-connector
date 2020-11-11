@@ -6,7 +6,7 @@
             <item name="provider" xsi:type="string">aw_mobileappconnector_preferences_form.aw_mobileappconnector_preferences_form_data_source</item>
             <item name="deps" xsi:type="string">aw_mobileappconnector_preferences_form.aw_mobileappconnector_preferences_form_data_source</item>
         </item>
-        <item name="label" xsi:type="string" translate="true">Employee Information</item>
+        <item name="label" xsi:type="string" translate="true">App Preferences</item>
         <item name="config" xsi:type="array">
             <item name="dataScope" xsi:type="string">data</item>
             <item name="namespace" xsi:type="string">aw_mobileappconnector_preferences_form</item>
@@ -19,7 +19,7 @@
     </argument>
     <dataSource name="aw_mobileappconnector_preferences_form_data_source">
         <argument name="dataProvider" xsi:type="configurableObject">
-            <argument name="class" xsi:type="string">Aheadworks\MobileAppConnector\Model\Preferences\DataProvider</argument>
+            <argument name="class" xsi:type="string">Aheadworks\MobileAppConnector\Ui\DataProvider\Preferences\Form\PreferencesDataProvider</argument>
             <argument name="name" xsi:type="string">aw_mobileappconnector_preferences_form_data_source</argument>
             <argument name="primaryFieldName" xsi:type="string">flag</argument>
             <argument name="requestFieldName" xsi:type="string">flag</argument>

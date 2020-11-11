@@ -3,10 +3,11 @@
 namespace Aheadworks\MobileAppConnector\Model;
 
 use Aheadworks\MobileAppConnector\Api\AppPreferencesDataManagementInterface;
+use Aheadworks\MobileAppConnector\Model\Config\Source\Font;
 use Aheadworks\MobileAppConnector\Model\Preferences\Config as PreferencesConfig;
-use Aheadworks\MobileAppConnector\Model\Preferences\Manager\UrlBuilder;
 use Aheadworks\MobileAppConnector\Model\Preferences\Manager\PageIdentifier;
-
+use Aheadworks\MobileAppConnector\Model\Preferences\Manager\UrlBuilder;
+use Exception;
 
 class AppPreferencesDataManagement implements AppPreferencesDataManagementInterface
 {
@@ -23,20 +24,27 @@ class AppPreferencesDataManagement implements AppPreferencesDataManagementInterf
      * @var PageIdentifier
      */
     protected $pageIdentifier;
+    /**
+     * @var Font
+     */
+    protected $font;
 
     /**
     * @param PreferencesConfig $PreferencesConfig
     * @param UrlBuilder $urlBuilder
     * @param PageIdentifier $pageIdentifier
+    * @param Font $font
     */
     public function __construct(
         PreferencesConfig $PreferencesConfig,
         UrlBuilder $urlBuilder,
-        PageIdentifier $pageIdentifier
+        PageIdentifier $pageIdentifier,
+        Font $font
     ) {
         $this->PreferencesConfig = $PreferencesConfig;
         $this->urlBuilder = $urlBuilder;
         $this->pageIdentifier = $pageIdentifier;
+        $this->font = $font;
     }
 
     /**
@@ -49,27 +57,29 @@ class AppPreferencesDataManagement implements AppPreferencesDataManagementInterf
             $urlToMediaFolder = $this->urlBuilder->getUrlToMediaFolder();
             $url = $this->urlBuilder->getBaseUrl();
 
-            $logoPath = PreferencesConfig::LOGO_PATH . '/' . $this->PreferencesConfig->getLogo();
+            $logoPath = PreferencesConfig::LOGO . '/' . $this->PreferencesConfig->getLogo();
+
+            $fontLabel = $this->font->getOptionByValue($this->PreferencesConfig->getFontFamily());
 
             $policyPageid = $this->PreferencesConfig->getPolicyPage();
             $policyPageIdentifier = $this->pageIdentifier->getPageIdentifierById($policyPageid);
-            $policyPageUrl = $url.$policyPageIdentifier;
+            $policyPageUrl = $url . $policyPageIdentifier;
 
             $contactPageid = $this->PreferencesConfig->getContactPage();
             $contactPageIdentifier = $this->pageIdentifier->getPageIdentifierById($contactPageid);
-            $contactPageUrl = $url.$contactPageIdentifier;
+            $contactPageUrl = $url . $contactPageIdentifier;
 
             $data = [
             PreferencesConfig::APP_NAME => $this->PreferencesConfig->getAppName(),
             PreferencesConfig::LOGO => $urlToMediaFolder . $logoPath ,
-            PreferencesConfig::FONT_FAMILY => $this->PreferencesConfig->getFontFamily(),
+            PreferencesConfig::FONT_FAMILY => $fontLabel,
             PreferencesConfig::COLOR_PREFERENCE => $this->PreferencesConfig->getColorPreference(),
             PreferencesConfig::POLICY_PAGE => $policyPageUrl,
             PreferencesConfig::CONTACT_PAGE => $contactPageUrl
         ];
             $preferenceData[] = $data;
         } catch (\Exception $e) {
-            //DO Nothing
+            throw new Exception("We can\'t get App data.");
         }
         return $preferenceData;
     }

@@ -1,149 +1,150 @@
 <?php
 namespace Aheadworks\MobileAppConnector\Model\Preferences;
 
-use Aheadworks\MobileAppConnector\Model\Preferences\Flag;
-use Aheadworks\MobileAppConnector\Model\Preferences\FlagFactory;
+use Magento\Framework\FlagManager;
 
 /**
  * Class Config
- * @package Aheadworks\MobileAppConnector\Model\Preference
+ * @package Aheadworks\MobileAppConnector\Model\Preferences
  */
 class Config
 {
-    /**
-     * Configuration path to tenant id
+    /**#@+
+     * App Preferences constants
      */
-    const AW_TENANT_ID = 'aw_tenant_id';
     const APP_NAME = 'app_name';
-    const LOGO = 'logo';
+    const LOGO = 'applogo';
     const FONT_FAMILY = 'font_family';
     const COLOR_PREFERENCE = 'color_preference';
     const POLICY_PAGE = 'policy_page';
     const CONTACT_PAGE = 'contact_page';
+    /**#@-*/
 
     /**
-     * @var Flag
+     * @var FlagManager
      */
-    private $flag;
+    private $flagManager;
 
     /**
-     * @param FlagFactory $flagFactory
+     * @param FlagManager $flagManager
      */
     public function __construct(
-        FlagFactory $flagFactory
+        FlagManager $flagManager
     ) {
-        $this->flag = $flagFactory->create();
+        $this->flagManager = $flagManager;
     }
-
     /**
-     * Get flag data
-     *
-     * @param string $param
-     * @return array
-     */
-    private function getFlagData($param)
-    {
-        $this->flag
-            ->unsetData()
-            ->setPreferencesFlagCode($param)
-            ->loadSelf();
-
-        return $this->flag->getFlagData();
-    }
-
-    /**
-     * Set flag data
-     *
-     * @param string $param
-     * @param mixed $value
-     * @return $this
-     */
-    private function setFlagData($param, $value)
-    {
-        $this->flag
-            ->unsetData()
-            ->setPreferencesFlagCode($param)
-            ->loadSelf()
-            ->setFlagData($value)
-            ->save();
-
-        return $this;
-    }
-
-    /**
-     * Get tenant id
-     *
+     * Get App name
      * @return string
      */
-    public function getTenantId()
+    public function getAppName()
     {
-        return $this->getFlagData(self::AW_TENANT_ID);
+        return $this->flagManager->getFlagData(self::APP_NAME);
     }
 
     /**
-     * Set tenant id
-     *
-     * @param string $tenantId
-     * @return $this
+     * Set App name
+     * @param string $appName
+     * @return bool
      */
-    public function setTenantId($tenantId)
-    {
-        $this->setFlagData(self::AW_TENANT_ID, $tenantId);
-        return $this;
-    }
-
-    public function getAppName()
-    {
-        return $this->getFlagData(self::APP_NAME);
-    }
     public function setAppName($appName)
     {
-        $this->setFlagData(self::APP_NAME, $appName);
-        return $this;
+        return $this->flagManager
+           ->saveFlag(self::APP_NAME, $appName);
     }
+    /**
+     * Get App logo
+     * @return string
+     */
     public function getLogo()
     {
-        return $this->getFlagData(self::LOGO);
+        return $this->flagManager->getFlagData(self::LOGO);
     }
+
+    /**
+     * Set App logo
+     * @param string $logo
+     * @return bool
+     */
     public function setLogo($logo)
     {
-        $this->setFlagData(self::LOGO, $logo);
-        return $this;
+        return $this->flagManager
+           ->saveFlag(self::LOGO, $logo);
     }
+    /**
+     * Get App font family
+     * @return string
+     */
     public function getFontFamily()
     {
-        return $this->getFlagData(self::FONT_FAMILY);
+        return $this->flagManager->getFlagData(self::FONT_FAMILY);
     }
+
+    /**
+     * Set App font family
+     * @param string $fontFamily
+     * @return bool
+     */
     public function setFontFamily($fontFamily)
     {
-        $this->setFlagData(self::FONT_FAMILY, $fontFamily);
-        return $this;
+        return $this->flagManager
+           ->saveFlag(self::FONT_FAMILY, $fontFamily);
     }
+    /**
+     * Get App color preference
+     * @return string
+     */
     public function getColorPreference()
     {
-        return $this->getFlagData(self::COLOR_PREFERENCE);
+        return $this->flagManager->getFlagData(self::COLOR_PREFERENCE);
     }
+
+    /**
+     * Set App color preference
+     * @param string $colorPreference
+     * @return bool
+     */
     public function setColorPreference($colorPreference)
     {
-        $this->setFlagData(self::COLOR_PREFERENCE, $colorPreference);
-        return $this;
+        return $this->flagManager
+           ->saveFlag(self::COLOR_PREFERENCE, $colorPreference);
     }
+    /**
+     * Get App policy page
+     * @return string
+     */
     public function getPolicyPage()
     {
-        return $this->getFlagData(self::POLICY_PAGE);
+        return $this->flagManager->getFlagData(self::POLICY_PAGE);
     }
+
+    /**
+     * Set App policy page
+     * @param string $policyPage
+     * @return bool
+     */
     public function setPolicyPage($policyPage)
     {
-        $this->setFlagData(self::POLICY_PAGE, $policyPage);
-        return $this;
+        return $this->flagManager
+           ->saveFlag(self::POLICY_PAGE, $policyPage);
     }
+    /**
+     * Get App contact page
+     * @return string
+     */
     public function getContactPage()
     {
-        return $this->getFlagData(self::CONTACT_PAGE);
+        return $this->flagManager->getFlagData(self::CONTACT_PAGE);
     }
+
+    /**
+     * Set App contact page
+     * @param string $contactPage
+     * @return bool
+     */
     public function setContactPage($contactPage)
     {
-        $this->setFlagData(self::CONTACT_PAGE, $contactPage);
-        return $this;
+        return $this->flagManager
+           ->saveFlag(self::CONTACT_PAGE, $contactPage);
     }
 }

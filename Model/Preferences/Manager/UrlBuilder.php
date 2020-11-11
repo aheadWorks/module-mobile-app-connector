@@ -1,6 +1,7 @@
 <?php
 namespace Aheadworks\MobileAppConnector\Model\Preferences\Manager;
 
+use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\UrlInterface;
 use Magento\Store\Model\StoreManagerInterface;
 
@@ -15,7 +16,7 @@ class UrlBuilder
      * @var StoreManagerInterface
      */
     private $storeManager;
-    
+
     /**
      * @param StoreManagerInterface $storeManager
      */
@@ -29,7 +30,7 @@ class UrlBuilder
      * Get url to media folder
      *
      * @return string
-     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     * @throws NoSuchEntityException
      */
     public function getUrlToMediaFolder()
     {
@@ -41,12 +42,11 @@ class UrlBuilder
      * Get base Url
      *
      * @return string
-     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     * @throws NoSuchEntityException
      */
     public function getBaseUrl()
     {
         $store = $this->storeManager->getStore();
         return $store->getBaseUrl(UrlInterface::URL_TYPE_WEB);
     }
-
 }

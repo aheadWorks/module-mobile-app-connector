@@ -2,6 +2,7 @@
 namespace Aheadworks\MobileAppConnector\Model\Preferences\Manager;
 
 use Magento\Cms\Api\PageRepositoryInterface;
+
 /**
  * Class PageIdentifier
  *
@@ -13,9 +14,9 @@ class PageIdentifier
      * @var PageRepositoryInterface
      */
     private $pageRepository;
-    
+
     /**
-     * @param StoreManagerInterface $pageRepository
+     * @param PageRepositoryInterface $pageRepository
      */
     public function __construct(
         PageRepositoryInterface $pageRepository
@@ -25,13 +26,13 @@ class PageIdentifier
 
     /**
      * Get identifier of cms page
-     *
+     * @param int
      * @return string
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
-    public function getPageIdentifierById($pageId){
-        $page = $this->pageRepository->getById($pageId);  
+    public function getPageIdentifierById($pageId)
+    {
+        $page = $this->pageRepository->getById($pageId);
         return $page->getIdentifier();
-
     }
 }
