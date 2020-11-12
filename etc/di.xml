@@ -30,4 +30,5 @@
     </type>
     <preference for="Aheadworks\MobileAppConnector\Api\RelatedProductsRepositoryInterface" type="Aheadworks\MobileAppConnector\Model\RelatedProductsManagement" />
     <preference for="Aheadworks\MobileAppConnector\Api\AppOverViewRepositoryInterface" type="Aheadworks\MobileAppConnector\Model\AppOverViewManagement" />
+    <preference for="Aheadworks\MobileAppConnector\Api\ConfigurableProductManagementInterface" type="Aheadworks\MobileAppConnector\Model\ConfigurableProductManagement" />
 </config>
