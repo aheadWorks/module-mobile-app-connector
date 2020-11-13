@@ -88,7 +88,7 @@ class MostViewedProduct implements MostViewedProductInterface
                         Resolver::MIN_PRICE => $this->productResolver->getMinimumPrice($item),
                         Resolver::MAX_PRICE => $this->productResolver->getMaximumPrice($item),
                         Resolver::FINAL_PRICE => $item->getFinalPrice(),
-                        Resolver::IMAGE => $this->productResolver->getProductImageUrl($item, 'category_page_grid')
+                        Resolver::IMAGE => $this->productResolver->getProductImageUrl($item)
 
                     ];
                     $mostViewedData[] = $data;
