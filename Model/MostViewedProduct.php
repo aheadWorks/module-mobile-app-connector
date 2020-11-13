@@ -3,13 +3,13 @@
 namespace Aheadworks\MobileAppConnector\Model;
 
 use Aheadworks\MobileAppConnector\Api\MostViewedProductInterface;
-use Aheadworks\MobileAppConnector\Model\Product\Image\Resolver;
 use Exception;
 use Magento\Catalog\Api\Data\ProductInterface;
 use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Catalog\Model\Product\Visibility;
 use Magento\Reports\Model\ResourceModel\Product\CollectionFactory;
 use Magento\Store\Model\StoreManagerInterface;
+use Aheadworks\MobileAppConnector\Model\Product\Resolver;
 
 /**
  * Defines the implemented class of the MostViewedProductInterface
@@ -17,11 +17,6 @@ use Magento\Store\Model\StoreManagerInterface;
  */
 class MostViewedProduct implements MostViewedProductInterface
 {
-    const ID = 'id';
-    const MIN_PRICE = 'min_price';
-    const MAX_PRICE = 'max_price';
-    const FINAL_PRICE = 'final_price';
-    const IMAGE = 'product_image';
     /**
      * @var CollectionFactory
      */
@@ -41,7 +36,7 @@ class MostViewedProduct implements MostViewedProductInterface
     /**
      * @var Resolver
      */
-    protected $imageResolver;
+    protected $productResolver;
 
     /**
      * MostViewedProduct constructor.
@@ -49,20 +44,20 @@ class MostViewedProduct implements MostViewedProductInterface
      * @param ProductRepositoryInterface $productRepository
      * @param StoreManagerInterface $storeManager
      * @param Visibility $productVisibility
-     * @param Resolver $imageResolver
+     * @param Resolver $productResolver
      */
     public function __construct(
         CollectionFactory $reportCollectionFactory,
         ProductRepositoryInterface $productRepository,
         StoreManagerInterface $storeManager,
         Visibility $productVisibility,
-        Resolver $imageResolver
+        Resolver $productResolver
     ) {
         $this->reportCollectionFactory = $reportCollectionFactory;
         $this->storeManager = $storeManager;
         $this->productRepository = $productRepository;
         $this->productVisibility = $productVisibility;
-        $this->imageResolver = $imageResolver;
+        $this->productResolver = $productResolver;
     }
 
     /**
@@ -86,14 +81,14 @@ class MostViewedProduct implements MostViewedProductInterface
             if (count($collection->getData())) {
                 foreach ($items as $item) {
                     $data = [
-                        self::ID => $item->getId(),
+                        Resolver::ID => $item->getId(),
                         ProductInterface::NAME => $item->getName(),
                         ProductInterface::TYPE_ID => $item->getTypeId(),
                         ProductInterface::PRICE => $item->getPrice(),
-                        self::MIN_PRICE => $this->getMinimumPrice($item),
-                        self::MAX_PRICE => $this->getMaximumPrice($item),
-                        self::FINAL_PRICE => $item->getFinalPrice(),
-                        self::IMAGE => $this->imageResolver->getProductImageUrl($item, 'category_page_grid')
+                        Resolver::MIN_PRICE => $this->productResolver->getMinimumPrice($item),
+                        Resolver::MAX_PRICE => $this->productResolver->getMaximumPrice($item),
+                        Resolver::FINAL_PRICE => $item->getFinalPrice(),
+                        Resolver::IMAGE => $this->productResolver->getProductImageUrl($item)
 
                     ];
                     $mostViewedData[] = $data;
@@ -105,25 +100,5 @@ class MostViewedProduct implements MostViewedProductInterface
         } catch (Exception $e) {
             return false;
         }
-    }
-
-    /**
-     * Return product min price
-     * @param ProductInterface $item
-     * @return double
-     */
-    private function getMinimumPrice($item)
-    {
-        return $item->getPriceInfo()->getPrice('final_price')->getMinimalPrice()->getValue();
-    }
-
-    /**
-     * Return product max price
-     * @param ProductInterface $item
-     * @return double
-     */
-    private function getMaximumPrice($item)
-    {
-        return $item->getPriceInfo()->getPrice('final_price')->getMaximalPrice()->getValue();
     }
 }
