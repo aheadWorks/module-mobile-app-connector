@@ -81,7 +81,7 @@
         <field formElement="imageUploader" name="image" sortOrder="40">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="source" xsi:type="string">Demo</item>
+                    <item name="source" xsi:type="string">APP</item>
                 </item>
             </argument>
             <settings>
@@ -96,7 +96,7 @@
             <formElements>
                 <imageUploader>
                     <settings>
-                        <required>true</required>
+                        <required>false</required>
                         <uploaderConfig>
                             <param xsi:type="url" name="url" path="mobileappconnector/preferences_applogo/upload"/>
                         </uploaderConfig>

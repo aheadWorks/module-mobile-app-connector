@@ -43,11 +43,11 @@ class Config
     }
 
     /**
-     * Set App name
+     * Save App name
      * @param string $appName
      * @return bool
      */
-    public function setAppName($appName)
+    public function saveAppName($appName)
     {
         return $this->flagManager
            ->saveFlag(self::APP_NAME, $appName);
@@ -62,11 +62,11 @@ class Config
     }
 
     /**
-     * Set App logo
+     * Save App logo
      * @param string $logo
      * @return bool
      */
-    public function setLogo($logo)
+    public function saveLogo($logo)
     {
         return $this->flagManager
            ->saveFlag(self::LOGO, $logo);
@@ -81,11 +81,11 @@ class Config
     }
 
     /**
-     * Set App font family
+     * Save App font family
      * @param string $fontFamily
      * @return bool
      */
-    public function setFontFamily($fontFamily)
+    public function saveFontFamily($fontFamily)
     {
         return $this->flagManager
            ->saveFlag(self::FONT_FAMILY, $fontFamily);
@@ -100,11 +100,11 @@ class Config
     }
 
     /**
-     * Set App color preference
+     * Save App color preference
      * @param string $colorPreference
      * @return bool
      */
-    public function setColorPreference($colorPreference)
+    public function saveColorPreference($colorPreference)
     {
         return $this->flagManager
            ->saveFlag(self::COLOR_PREFERENCE, $colorPreference);
@@ -113,17 +113,17 @@ class Config
      * Get App policy page
      * @return string
      */
-    public function getPolicyPage()
+    public function getPolicyPageId()
     {
         return $this->flagManager->getFlagData(self::POLICY_PAGE);
     }
 
     /**
-     * Set App policy page
+     * Save App policy page
      * @param string $policyPage
      * @return bool
      */
-    public function setPolicyPage($policyPage)
+    public function savePolicyPageId($policyPage)
     {
         return $this->flagManager
            ->saveFlag(self::POLICY_PAGE, $policyPage);
@@ -132,17 +132,17 @@ class Config
      * Get App contact page
      * @return string
      */
-    public function getContactPage()
+    public function getContactPageId()
     {
         return $this->flagManager->getFlagData(self::CONTACT_PAGE);
     }
 
     /**
-     * Set App contact page
+     * Save App contact page
      * @param string $contactPage
      * @return bool
      */
-    public function setContactPage($contactPage)
+    public function saveContactPageId($contactPage)
     {
         return $this->flagManager
            ->saveFlag(self::CONTACT_PAGE, $contactPage);

@@ -11,6 +11,7 @@ use Magento\Framework\Exception\LocalizedException;
  */
 class AppPreferencesModel
 {
+    const APP_IMAGE_NAME = 'image';
     /**
      * @var Config
      */
@@ -50,24 +51,24 @@ class AppPreferencesModel
             unset($data['image']);
         }
 
-        if (!empty($data['app_name'])) {
-            $this->config->setAppName($data[Config::APP_NAME]);
+        if (!empty($data[Config::APP_NAME])) {
+            $this->config->saveAppName($data[Config::APP_NAME]);
         }
-        if (!empty($data['image'])) {
-            $this->config->setLogo($data['image']);
+        if (!empty($data[Self::APP_IMAGE_NAME])) {
+            $this->config->saveLogo($data[Self::APP_IMAGE_NAME]);
         }
 
-        if (!empty($data['font_family'])) {
-            $this->config->setFontFamily($data['font_family']);
+        if (!empty($data[Config::FONT_FAMILY])) {
+            $this->config->saveFontFamily($data[Config::FONT_FAMILY]);
         }
-        if (!empty($data['color_preference'])) {
-            $this->config->setColorPreference($data['color_preference']);
+        if (!empty($data[Config::COLOR_PREFERENCE])) {
+            $this->config->saveColorPreference($data[Config::COLOR_PREFERENCE]);
         }
-        if (!empty($data['policy_page'])) {
-            $this->config->setPolicyPage($data['policy_page']);
+        if (!empty($data[Config::POLICY_PAGE])) {
+            $this->config->savePolicyPageId($data[Config::POLICY_PAGE]);
         }
-        if (!empty($data['contact_page'])) {
-            $this->config->setContactPage($data['contact_page']);
+        if (!empty($data[Config::CONTACT_PAGE])) {
+            $this->config->saveContactPageId($data[Config::CONTACT_PAGE]);
         }
         return $this;
     }

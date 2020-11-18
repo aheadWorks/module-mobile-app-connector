@@ -13,6 +13,7 @@ use Magento\Ui\DataProvider\AbstractDataProvider;
  */
 class PreferencesDataProvider extends AbstractDataProvider
 {
+    const DATA_KEY = 'aw_app_data';
     /**
      * @var DataPersistorInterface
      */
@@ -66,23 +67,19 @@ class PreferencesDataProvider extends AbstractDataProvider
     public function getData()
     {
         $data = [];
-        $dataFromForm = $this->dataPersistor->get('aw_app_data'); //
+        $appPreferences = $this->request->getParam($this->getRequestFieldName());
+        $dataFromForm = $this->dataPersistor->get(self::DATA_KEY);
         if (!empty($dataFromForm)) {
-            if (isset($dataFromForm)) {
-                $data['preferences'] = $dataFromForm;
-            } else {
-                $data[null] = $dataFromForm;
-            }
-            $this->dataPersistor->clear('aw_app_data');
+            $data[$appPreferences] = $dataFromForm;
+            $this->dataPersistor->clear(self::DATA_KEY);
         } else {
-            $appPreferences = $this->request->getParam($this->getRequestFieldName());
             if ($appPreferences) {
                 $formData[PreferencesConfig::APP_NAME] = $this->PreferencesConfig->getAppName();
                 $formData[PreferencesConfig::LOGO]= $this->PreferencesConfig->getLogo();
                 $formData[PreferencesConfig::FONT_FAMILY]= $this->PreferencesConfig->getFontFamily();
                 $formData[PreferencesConfig::COLOR_PREFERENCE]= $this->PreferencesConfig->getColorPreference();
-                $formData[PreferencesConfig::POLICY_PAGE]= $this->PreferencesConfig->getPolicyPage();
-                $formData[PreferencesConfig::CONTACT_PAGE]= $this->PreferencesConfig->getContactPage();
+                $formData[PreferencesConfig::POLICY_PAGE]= $this->PreferencesConfig->getPolicyPageId();
+                $formData[PreferencesConfig::CONTACT_PAGE]= $this->PreferencesConfig->getContactPageId();
 
                 $data[$appPreferences] = $formData;
             }
