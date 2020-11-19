@@ -11,6 +11,10 @@ use Magento\Framework\Exception\LocalizedException;
  */
 class AppPreferencesModel
 {
+
+    /**
+     * app logo database column name
+     */
     const APP_IMAGE_NAME = 'image';
     /**
      * @var Config
@@ -54,8 +58,8 @@ class AppPreferencesModel
         if (!empty($data[Config::APP_NAME])) {
             $this->config->saveAppName($data[Config::APP_NAME]);
         }
-        if (!empty($data[Self::APP_IMAGE_NAME])) {
-            $this->config->saveLogo($data[Self::APP_IMAGE_NAME]);
+        if (!empty($data[self::APP_IMAGE_NAME])) {
+            $this->config->saveLogo($data[self::APP_IMAGE_NAME]);
         }
 
         if (!empty($data[Config::FONT_FAMILY])) {

@@ -96,7 +96,6 @@
             <formElements>
                 <imageUploader>
                     <settings>
-                        <required>false</required>
                         <uploaderConfig>
                             <param xsi:type="url" name="url" path="mobileappconnector/preferences_applogo/upload"/>
                         </uploaderConfig>

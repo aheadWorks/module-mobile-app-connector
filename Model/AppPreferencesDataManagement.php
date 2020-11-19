@@ -7,7 +7,7 @@ use Aheadworks\MobileAppConnector\Model\Config\Source\Font;
 use Aheadworks\MobileAppConnector\Model\Preferences\Config as PreferencesConfig;
 use Exception;
 use Magento\Cms\Helper\Page;
-use Magento\Framework\UrlInterface;
+use Aheadworks\MobileAppConnector\Model\Url\Builder;
 
 class AppPreferencesDataManagement implements AppPreferencesDataManagementInterface
 {
@@ -26,28 +26,28 @@ class AppPreferencesDataManagement implements AppPreferencesDataManagementInterf
      *
      * @var Page
      */
-    protected $cmsPage;
+    protected $cmsPageHelper;
     /**
-     * @var UrlInterface
+     * @var Builder
      */
     protected $urlBuilder;
 
     /**
      * @param PreferencesConfig $preferencesConfig
-     * @param UrlInterface $urlBuilder
-     * @param Page $cmsPage
+     * @param Builder $urlBuilder
+     * @param Page $cmsPageHelper
      * @param Font $font
      */
     public function __construct(
         PreferencesConfig $preferencesConfig,
-        UrlInterface $urlBuilder,
-        Page $cmsPage,
+        Builder $urlBuilder,
+        Page $cmsPageHelper,
         Font $font
     ) {
         $this->preferencesConfig = $preferencesConfig;
         $this->urlBuilder = $urlBuilder;
         $this->font = $font;
-        $this->cmsPage = $cmsPage;
+        $this->cmsPageHelper = $cmsPageHelper;
     }
 
     /**
@@ -57,16 +57,10 @@ class AppPreferencesDataManagement implements AppPreferencesDataManagementInterf
     {
         $preferenceData = [];
         try {
-            $folderName = PreferencesConfig::LOGO;
-            $appLogoPath = $this->preferencesConfig->getLogo();
-            $path = $folderName . '/' . $appLogoPath;
-
-            $appLogoUrl = $this->urlBuilder
-                ->getBaseUrl(['_type' => UrlInterface::URL_TYPE_MEDIA]) . $path;
-
+            $appLogoUrl = $this->urlBuilder->getAppLogoUrl($this->preferencesConfig->getLogo());
             $fontLabel = $this->font->getOptionByValue($this->preferencesConfig->getFontFamily());
-            $policyPageUrl = $this->cmsPage->getPageUrl($this->preferencesConfig->getPolicyPageId());
-            $contactPageUrl = $this->cmsPage->getPageUrl($this->preferencesConfig->getContactPageId());
+            $policyPageUrl = $this->cmsPageHelper->getPageUrl($this->preferencesConfig->getPolicyPageId());
+            $contactPageUrl = $this->cmsPageHelper->getPageUrl($this->preferencesConfig->getContactPageId());
 
             $data = [
             PreferencesConfig::APP_NAME => $this->preferencesConfig->getAppName(),

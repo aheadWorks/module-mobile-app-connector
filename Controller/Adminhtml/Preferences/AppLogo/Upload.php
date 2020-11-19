@@ -3,11 +3,12 @@ namespace Aheadworks\MobileAppConnector\Controller\Adminhtml\Preferences\AppLogo
 
 use Magento\Framework\App\Action\HttpPostActionInterface;
 use Magento\Framework\Controller\ResultFactory;
+use Aheadworks\MobileAppConnector\Controller\Adminhtml\Preferences\AbstractAction;
 
 /**
  * Class Upload
  */
-class Upload extends \Magento\Backend\App\Action implements HttpPostActionInterface
+class Upload extends AbstractAction implements HttpPostActionInterface
 {
     /**
      * Image uploader
@@ -20,7 +21,7 @@ class Upload extends \Magento\Backend\App\Action implements HttpPostActionInterf
      * Upload constructor.
      *
      * @param \Magento\Backend\App\Action\Context $context
-     * @param \Magento\Catalog\Model\ImageUploader $imageUploader
+     * @param \Aheadworks\MobileAppConnector\Model\ImageUploader $imageUploader
      */
     public function __construct(
         \Magento\Backend\App\Action\Context $context,
@@ -28,16 +29,6 @@ class Upload extends \Magento\Backend\App\Action implements HttpPostActionInterf
     ) {
         parent::__construct($context);
         $this->imageUploader = $imageUploader;
-    }
-
-    /**
-     * Check admin permissions for this controller
-     *
-     * @return boolean
-     */
-    protected function _isAllowed()
-    {
-        return $this->_authorization->isAllowed('Aheadworks_MobileAppConnector::preferences');
     }
 
     /**

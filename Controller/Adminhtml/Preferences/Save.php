@@ -5,6 +5,7 @@ use Aheadworks\MobileAppConnector\Model\Preferences\AppPreferencesModel;
 use Exception;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\App\Request\DataPersistorInterface;
+use Aheadworks\MobileAppConnector\Ui\DataProvider\Preferences\Form\PreferencesDataProvider;
 
 /**
  * Class Save
@@ -51,10 +52,10 @@ class Save extends AbstractAction
             try {
                 $this->appPreferences->save($data);
                 $this->messageManager->addSuccessMessage(__('App data saved successfully'));
-                $this->dataPersistor->clear('aw_app_data');
+                $this->dataPersistor->clear(PreferencesDataProvider::DATA_KEY);
             } catch (Exception $e) {
                 $this->messageManager->addExceptionMessage($e, __('Something went wrong while saving the App data'));
-                $this->dataPersistor->set('aw_app_data', $data);
+                $this->dataPersistor->set(PreferencesDataProvider::DATA_KEY, $data);
             }
         }
         return $resultRedirect;
