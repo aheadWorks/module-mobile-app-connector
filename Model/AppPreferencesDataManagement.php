@@ -64,7 +64,7 @@ class AppPreferencesDataManagement implements AppPreferencesDataManagementInterf
 
             $data = [
             PreferencesConfig::APP_NAME => $this->preferencesConfig->getAppName(),
-            PreferencesConfig::LOGO => $appLogoUrl ,
+            PreferencesConfig::APP_LOGO => $appLogoUrl ,
             PreferencesConfig::FONT_FAMILY => $fontLabel,
             PreferencesConfig::COLOR_PREFERENCE => $this->preferencesConfig->getColorPreference(),
             PreferencesConfig::POLICY_PAGE => $policyPageUrl,

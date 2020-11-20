@@ -39,7 +39,7 @@ class Builder
      */
     public function getAppLogoUrl($appLogoImage)
     {
-        $folderName = PreferencesConfig::LOGO;
+        $folderName = PreferencesConfig::APP_LOGO;
         $path = $folderName . '/' . $appLogoImage;
         $appLogoUrl = $this->urlBuilder
             ->getBaseUrl(['_type' => UrlInterface::URL_TYPE_MEDIA]) . $path;

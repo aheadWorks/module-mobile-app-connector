@@ -6,6 +6,8 @@ use Magento\Framework\Api\Filter;
 use Magento\Framework\App\Request\DataPersistorInterface;
 use Magento\Framework\App\RequestInterface;
 use Magento\Ui\DataProvider\AbstractDataProvider;
+use Aheadworks\MobileAppConnector\Model\Url\Builder;
+use Aheadworks\MobileAppConnector\Model\Preferences\AppPreferencesModel;
 
 /**
  * Class PreferencesDataProvider
@@ -22,7 +24,7 @@ class PreferencesDataProvider extends AbstractDataProvider
     /**
      * @var PreferencesConfig
      */
-    private $PreferencesConfig;
+    private $preferencesConfig;
 
     /**
      * @var RequestInterface
@@ -30,11 +32,17 @@ class PreferencesDataProvider extends AbstractDataProvider
     private $request;
 
     /**
+     * @var Builder
+     */
+    protected $urlBuilder;
+
+    /**
      * @param string $name
      * @param string $primaryFieldName
      * @param string $requestFieldName
      * @param DataPersistorInterface $dataPersistor
-     * @param PreferencesConfig $PreferencesConfig
+     * @param PreferencesConfig $preferencesConfig
+     * @param Builder $urlBuilder
      * @param RequestInterface $request
      * @param array $meta
      * @param array $data
@@ -44,7 +52,8 @@ class PreferencesDataProvider extends AbstractDataProvider
         $primaryFieldName,
         $requestFieldName,
         DataPersistorInterface $dataPersistor,
-        PreferencesConfig $PreferencesConfig,
+        PreferencesConfig $preferencesConfig,
+        Builder $urlBuilder,
         RequestInterface $request,
         array $meta = [],
         array $data = []
@@ -56,7 +65,8 @@ class PreferencesDataProvider extends AbstractDataProvider
             $meta,
             $data
         );
-        $this->PreferencesConfig = $PreferencesConfig;
+        $this->preferencesConfig = $preferencesConfig;
+        $this->urlBuilder = $urlBuilder;
         $this->dataPersistor = $dataPersistor;
         $this->request = $request;
     }
@@ -74,12 +84,16 @@ class PreferencesDataProvider extends AbstractDataProvider
             $this->dataPersistor->clear(self::DATA_KEY);
         } else {
             if ($appPreferences) {
-                $formData[PreferencesConfig::APP_NAME] = $this->PreferencesConfig->getAppName();
-                $formData[PreferencesConfig::LOGO]= $this->PreferencesConfig->getLogo();
-                $formData[PreferencesConfig::FONT_FAMILY]= $this->PreferencesConfig->getFontFamily();
-                $formData[PreferencesConfig::COLOR_PREFERENCE]= $this->PreferencesConfig->getColorPreference();
-                $formData[PreferencesConfig::POLICY_PAGE]= $this->PreferencesConfig->getPolicyPageId();
-                $formData[PreferencesConfig::CONTACT_PAGE]= $this->PreferencesConfig->getContactPageId();
+                $formData[PreferencesConfig::APP_NAME] = $this->preferencesConfig->getAppName();
+                $appLogo = [];
+                $appLogoName = $this->preferencesConfig->getLogo();
+                $appLogo[0]['name'] = $appLogoName;
+                $appLogo[0]['url'] = $this->urlBuilder->getAppLogoUrl($appLogoName);
+                $formData[AppPreferencesModel::APP_IMAGE_NAME] = $appLogo;
+                $formData[PreferencesConfig::FONT_FAMILY]= $this->preferencesConfig->getFontFamily();
+                $formData[PreferencesConfig::COLOR_PREFERENCE]= $this->preferencesConfig->getColorPreference();
+                $formData[PreferencesConfig::POLICY_PAGE]= $this->preferencesConfig->getPolicyPageId();
+                $formData[PreferencesConfig::CONTACT_PAGE]= $this->preferencesConfig->getContactPageId();
 
                 $data[$appPreferences] = $formData;
             }

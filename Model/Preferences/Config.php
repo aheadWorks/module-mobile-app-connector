@@ -13,7 +13,7 @@ class Config
      * App Preferences constants
      */
     const APP_NAME = 'app_name';
-    const LOGO = 'applogo';
+    const APP_LOGO = 'applogo';
     const FONT_FAMILY = 'font_family';
     const COLOR_PREFERENCE = 'color_preference';
     const POLICY_PAGE = 'policy_page';
@@ -58,7 +58,7 @@ class Config
      */
     public function getLogo()
     {
-        return $this->flagManager->getFlagData(self::LOGO);
+        return $this->flagManager->getFlagData(self::APP_LOGO);
     }
 
     /**
@@ -69,7 +69,7 @@ class Config
     public function saveLogo($logo)
     {
         return $this->flagManager
-           ->saveFlag(self::LOGO, $logo);
+           ->saveFlag(self::APP_LOGO, $logo);
     }
     /**
      * Get App font family

@@ -10,6 +10,7 @@ use Magento\Framework\Filesystem\Directory\Write as DirectoryWrite;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\Framework\Filesystem;
 use Psr\Log\LoggerInterface;
+use Aheadworks\MobileAppConnector\Model\Preferences\Config as PreferencesConfig;
 
 /**
  * FAQ image uploader
@@ -18,8 +19,7 @@ use Psr\Log\LoggerInterface;
  */
 class ImageUploader
 {
-    const LOGO_PATH = 'applogo';
-
+    
     /**
      * Core file storage database
      *
@@ -72,7 +72,7 @@ class ImageUploader
         $this->filesystem = $filesystem;
         $this->storeManager = $storeManager;
         $this->logger = $logger;
-        $this->tmpPath = DirectoryList::TMP . '/' . self::LOGO_PATH;
+        $this->tmpPath = DirectoryList::TMP . '/' . PreferencesConfig::APP_LOGO;
     }
 
     /**
@@ -106,9 +106,9 @@ class ImageUploader
      */
     public function moveFileFromTmp($imageName)
     {
-        $baseImagePath = $this->getFilePath(self::LOGO_PATH, $imageName);
+        $baseImagePath = $this->getFilePath(PreferencesConfig::APP_LOGO, $imageName);
         $baseTmpImagePath = $this->getFilePath($this->tmpPath, $imageName);
-        $baseMediaImagePath = $this->getFilePath(self::LOGO_PATH . '/', $imageName);
+        $baseMediaImagePath = $this->getFilePath(PreferencesConfig::APP_LOGO . '/', $imageName);
         $mediaDirectory = $this->getMediaDirectory();
 
         if ($mediaDirectory->isExist($baseMediaImagePath) && !$mediaDirectory->isExist($baseTmpImagePath)) {
@@ -151,7 +151,7 @@ class ImageUploader
         $uploader = $this->uploaderFactory->create(['fileId' => $fileId]);
         $uploader->setAllowedExtensions(['jpg', 'jpeg', 'gif', 'png']);
         $uploader->setAllowRenameFiles(true);
-        $baseTmpPath = $this->getMediaDirectory()->getAbsolutePath(DirectoryList::TMP . '/' . self::LOGO_PATH);
+        $baseTmpPath = $this->getMediaDirectory()->getAbsolutePath(DirectoryList::TMP . '/' . PreferencesConfig::APP_LOGO);
 
         $result = $uploader->save($baseTmpPath);
 
