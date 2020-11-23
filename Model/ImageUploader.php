@@ -1,12 +1,13 @@
 <?php
-namespace Aheadworks\MobileAppConnector\Model\AppLogo;
+namespace Aheadworks\MobileAppConnector\Model;
 
 use Magento\MediaStorage\Model\File\UploaderFactory;
 use Aheadworks\MobileAppConnector\Model\Preferences\Config as PreferencesConfig;
+use Aheadworks\MobileAppConnector\Model\AppLogo\Info;
 
 /**
  * Class ImageUploader
- * @package Aheadworks\MobileAppConnector\Model\AppLogo
+ * @package Aheadworks\MobileAppConnector\Model
  */
 class ImageUploader
 {
