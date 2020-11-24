@@ -2,7 +2,7 @@
 
 namespace Aheadworks\MobileAppConnector\Model\Preferences;
 
-use Aheadworks\MobileAppConnector\Model\ImageUploader;
+use Aheadworks\MobileAppConnector\Model\Upload\ImageUploader;
 use Magento\Framework\Exception\LocalizedException;
 
 /**

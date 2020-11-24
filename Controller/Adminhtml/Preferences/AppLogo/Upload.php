@@ -13,7 +13,7 @@ class Upload extends AbstractAction implements HttpPostActionInterface
     /**
      * Image uploader
      *
-     * @var \Aheadworks\MobileAppConnector\Model\ImageUploader
+     * @var \Aheadworks\MobileAppConnector\Model\Upload\ImageUploader
      */
     protected $imageUploader;
 
@@ -21,11 +21,11 @@ class Upload extends AbstractAction implements HttpPostActionInterface
      * Upload constructor.
      *
      * @param \Magento\Backend\App\Action\Context $context
-     * @param \Aheadworks\MobileAppConnector\Model\ImageUploader $imageUploader
+     * @param \Aheadworks\MobileAppConnector\Model\Upload\ImageUploader $imageUploader
      */
     public function __construct(
         \Magento\Backend\App\Action\Context $context,
-        \Aheadworks\MobileAppConnector\Model\ImageUploader $imageUploader
+        \Aheadworks\MobileAppConnector\Model\Upload\ImageUploader $imageUploader
     ) {
         parent::__construct($context);
         $this->imageUploader = $imageUploader;
