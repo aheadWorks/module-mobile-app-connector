@@ -6,7 +6,7 @@ use Magento\Framework\Api\Filter;
 use Magento\Framework\App\Request\DataPersistorInterface;
 use Magento\Framework\App\RequestInterface;
 use Magento\Ui\DataProvider\AbstractDataProvider;
-use Aheadworks\MobileAppConnector\Model\Url\Builder;
+use Aheadworks\MobileAppConnector\Model\Upload\Info;
 use Aheadworks\MobileAppConnector\Model\Preferences\AppPreferencesModel;
 
 /**
@@ -32,9 +32,9 @@ class PreferencesDataProvider extends AbstractDataProvider
     private $request;
 
     /**
-     * @var Builder
+     * @var Info
      */
-    protected $urlBuilder;
+    protected $uploadInfo;
 
     /**
      * @param string $name
@@ -42,7 +42,7 @@ class PreferencesDataProvider extends AbstractDataProvider
      * @param string $requestFieldName
      * @param DataPersistorInterface $dataPersistor
      * @param PreferencesConfig $preferencesConfig
-     * @param Builder $urlBuilder
+     * @param Info $uploadInfo
      * @param RequestInterface $request
      * @param array $meta
      * @param array $data
@@ -53,7 +53,7 @@ class PreferencesDataProvider extends AbstractDataProvider
         $requestFieldName,
         DataPersistorInterface $dataPersistor,
         PreferencesConfig $preferencesConfig,
-        Builder $urlBuilder,
+        Info $uploadInfo,
         RequestInterface $request,
         array $meta = [],
         array $data = []
@@ -66,7 +66,7 @@ class PreferencesDataProvider extends AbstractDataProvider
             $data
         );
         $this->preferencesConfig = $preferencesConfig;
-        $this->urlBuilder = $urlBuilder;
+        $this->uploadInfo = $uploadInfo;
         $this->dataPersistor = $dataPersistor;
         $this->request = $request;
     }
@@ -88,7 +88,7 @@ class PreferencesDataProvider extends AbstractDataProvider
                 $appLogo = [];
                 $appLogoName = $this->preferencesConfig->getLogo();
                 $appLogo[0]['name'] = $appLogoName;
-                $appLogo[0]['url'] = $this->urlBuilder->getAppLogoUrl($appLogoName);
+                $appLogo[0]['url'] = $this->uploadInfo->getMediaUrl($appLogoName);
                 $formData[AppPreferencesModel::APP_IMAGE_NAME] = $appLogo;
                 $formData[PreferencesConfig::FONT_FAMILY]= $this->preferencesConfig->getFontFamily();
                 $formData[PreferencesConfig::COLOR_PREFERENCE]= $this->preferencesConfig->getColorPreference();

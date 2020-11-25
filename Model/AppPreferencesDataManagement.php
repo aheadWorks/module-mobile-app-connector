@@ -7,7 +7,7 @@ use Aheadworks\MobileAppConnector\Model\Config\Source\Font;
 use Aheadworks\MobileAppConnector\Model\Preferences\Config as PreferencesConfig;
 use Exception;
 use Magento\Cms\Helper\Page;
-use Aheadworks\MobileAppConnector\Model\Url\Builder;
+use Aheadworks\MobileAppConnector\Model\Upload\Info;
 
 class AppPreferencesDataManagement implements AppPreferencesDataManagementInterface
 {
@@ -28,24 +28,24 @@ class AppPreferencesDataManagement implements AppPreferencesDataManagementInterf
      */
     protected $cmsPageHelper;
     /**
-     * @var Builder
+     * @var Info
      */
-    protected $urlBuilder;
+    protected $uploadInfo;
 
     /**
      * @param PreferencesConfig $preferencesConfig
-     * @param Builder $urlBuilder
+     * @param Info $uploadInfo
      * @param Page $cmsPageHelper
      * @param Font $font
      */
     public function __construct(
         PreferencesConfig $preferencesConfig,
-        Builder $urlBuilder,
+        Info $uploadInfo,
         Page $cmsPageHelper,
         Font $font
     ) {
         $this->preferencesConfig = $preferencesConfig;
-        $this->urlBuilder = $urlBuilder;
+        $this->uploadInfo = $uploadInfo;
         $this->font = $font;
         $this->cmsPageHelper = $cmsPageHelper;
     }
@@ -57,7 +57,7 @@ class AppPreferencesDataManagement implements AppPreferencesDataManagementInterf
     {
         $preferenceData = [];
         try {
-            $appLogoUrl = $this->urlBuilder->getAppLogoUrl($this->preferencesConfig->getLogo());
+            $appLogoUrl = $this->uploadInfo->getMediaUrl($this->preferencesConfig->getLogo());
             $fontLabel = $this->font->getOptionByValue($this->preferencesConfig->getFontFamily());
             $policyPageUrl = $this->cmsPageHelper->getPageUrl($this->preferencesConfig->getPolicyPageId());
             $contactPageUrl = $this->cmsPageHelper->getPageUrl($this->preferencesConfig->getContactPageId());
