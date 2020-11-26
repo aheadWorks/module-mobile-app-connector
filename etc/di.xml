@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Aheadworks\MobileAppConnector\Api\AppPreferencesDataManagementInterface" type="Aheadworks\MobileAppConnector\Model\AppPreferencesDataManagement"/>
     <preference for="Aheadworks\MobileAppConnector\Api\WishlistManagementInterface" type="Aheadworks\MobileAppConnector\Model\WishlistManagement" />
     <preference for="Aheadworks\MobileAppConnector\Api\MostViewedProductInterface" type="Aheadworks\MobileAppConnector\Model\MostViewedProduct" />
     <preference for="Aheadworks\MobileAppConnector\Api\CustomerOrderInterface" type="Aheadworks\MobileAppConnector\Model\CustomerOrder" />

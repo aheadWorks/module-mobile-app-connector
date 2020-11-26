@@ -5,6 +5,7 @@
             <resource id="Magento_Backend::admin">
                 <resource id="Aheadworks_MobileAppConnector::general" title="MobileAppConnector by Aheadworks" sortOrder="10">
                     <resource id="Aheadworks_MobileAppConnector::app_overview" title="Overview" sortOrder="10" />
+                    <resource id="Aheadworks_MobileAppConnector::app_preferences" title="App Preferences" sortOrder="10" />
                 </resource>
             </resource>
         </resources>
