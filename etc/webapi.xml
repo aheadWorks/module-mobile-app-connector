@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <!-- for get bestseller product-->
+    <route url="/V1/products/best-selling/period/:period/storeid/:storeId/" method="GET">
+         <service class="Aheadworks\MobileAppConnector\Api\BestSellingProductInterface" method="getBestSellingProducts"/>
+         <resources>
+             <resource ref="self" />
+         </resources>
+    </route>
+</routes>
