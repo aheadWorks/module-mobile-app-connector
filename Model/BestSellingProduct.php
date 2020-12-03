@@ -4,6 +4,7 @@ namespace Aheadworks\MobileAppConnector\Model;
 
 use Aheadworks\MobileAppConnector\Api\BestSellingProductInterface;
 use Aheadworks\MobileAppConnector\Model\Product\Image\Resolver;
+use Aheadworks\MobileAppConnector\Model\Product\Resolver as ProductResolver;
 use Exception;
 use Magento\Catalog\Api\Data\ProductInterface;
 use Magento\Catalog\Api\ProductRepositoryInterface;
@@ -21,8 +22,6 @@ class BestSellingProduct implements BestSellingProductInterface
     const MAX_PRICE = 'max_price';
     const FINAL_PRICE = 'final_price';
     const IMAGE = 'product_image';
-    const QTY_ORDERD ='qty_ordered';
-    const PERIOD = 'period';
 
     /**
      * @var CollectionFactory
@@ -38,6 +37,10 @@ class BestSellingProduct implements BestSellingProductInterface
      * @var Resolver
      */
     protected $imageResolver;
+    /**
+     * @var ProductResolver
+     */
+    protected $productResolver;
 
     /**
      * @var ProductRepositoryInterface
@@ -49,17 +52,20 @@ class BestSellingProduct implements BestSellingProductInterface
      * @param CollectionFactory $bestSellersCollectionFactory
      * @param StoreManagerInterface $storeManager
      * @param Resolver $imageResolver
+     * @param ProductResolver $productResolver
      * @param ProductRepositoryInterface $productRepository
      */
     public function __construct(
         CollectionFactory $bestSellersCollectionFactory,
         StoreManagerInterface $storeManager,
         Resolver $imageResolver,
+        ProductResolver $productResolver,
         ProductRepositoryInterface $productRepository
     ) {
         $this->bestSellersCollectionFactory = $bestSellersCollectionFactory;
         $this->storeManager = $storeManager;
         $this->imageResolver = $imageResolver;
+        $this->productResolver = $productResolver;
         $this->productRepository = $productRepository;
     }
 
@@ -68,53 +74,43 @@ class BestSellingProduct implements BestSellingProductInterface
      */
     public function getBestSellingProducts($period, $storeId = null)
     {
+        $this->validatePeriod($period);
         try {
             $bestSellerProductCollection = $this->bestSellersCollectionFactory->create()
             ->addStoreFilter(
                 $storeId
             )->setPeriod(
-                $period);
+                $period
+            );
             $bestSellerData = [];
             foreach ($bestSellerProductCollection as $product) {
                 $item = $this->productRepository->getById($product->getProductId());
-                
+
                 $data = [
                             self::ID => $item->getId(),
                             ProductInterface::NAME => $item->getName(),
                             ProductInterface::TYPE_ID => $item->getTypeId(),
                             ProductInterface::PRICE => $item->getPrice(),
-                            self::MIN_PRICE => $this->getMinimumPrice($item),
-                            self::MAX_PRICE => $this->getMaximumPrice($item),
+                            self::MIN_PRICE => $this->productResolver->getMinimumPrice($item),
+                            self::MAX_PRICE => $this->productResolver->getMaximumPrice($item),
                             self::FINAL_PRICE => $item->getFinalPrice(),
                             self::IMAGE => $this->imageResolver->getProductImageUrl($item, 'category_page_grid')
 
                         ];
-                    
+
                 $bestSellerData[] = $data;
             }
             return $bestSellerData;
         } catch (Exception $e) {
-            $e->getMessage();
+            throw new Exception("There is something wrong!");
         }
     }
 
-    /**
-     * Return product min price
-     * @param ProductInterface $item
-     * @return double
-     */
-    private function getMinimumPrice($item)
+    public function validatePeriod($period)
     {
-        return $item->getPriceInfo()->getPrice('final_price')->getMinimalPrice()->getValue();
-    }
-
-    /**
-     * Return product max price
-     * @param ProductInterface $item
-     * @return double
-     */
-    private function getMaximumPrice($item)
-    {
-        return $item->getPriceInfo()->getPrice('final_price')->getMaximalPrice()->getValue();
+        $periodArray = ['day','month','year'];
+        if (!in_array($period, $periodArray)) {
+            throw new Exception('Accepted period values are day,month and year');
+        }
     }
 }
