@@ -102,7 +102,8 @@ class BestSellingProduct implements BestSellingProductInterface
     }
 
     /**
-     * @param $period
+     * Validate input period
+     * @param string $period
      * @throws Exception
      */
     public function validatePeriod($period)
