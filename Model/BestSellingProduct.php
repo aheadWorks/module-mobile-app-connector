@@ -17,12 +17,7 @@ use Magento\Store\Model\StoreManagerInterface;
  */
 class BestSellingProduct implements BestSellingProductInterface
 {
-    const ID = 'id';
-    const MIN_PRICE = 'min_price';
-    const MAX_PRICE = 'max_price';
-    const FINAL_PRICE = 'final_price';
-    const IMAGE = 'product_image';
-
+    
     /**
      * @var CollectionFactory
      */
@@ -87,14 +82,14 @@ class BestSellingProduct implements BestSellingProductInterface
                 $item = $this->productRepository->getById($product->getProductId());
 
                 $data = [
-                            self::ID => $item->getId(),
+                            ProductResolver::ID => $item->getId(),
                             ProductInterface::NAME => $item->getName(),
                             ProductInterface::TYPE_ID => $item->getTypeId(),
                             ProductInterface::PRICE => $item->getPrice(),
-                            self::MIN_PRICE => $this->productResolver->getMinimumPrice($item),
-                            self::MAX_PRICE => $this->productResolver->getMaximumPrice($item),
-                            self::FINAL_PRICE => $item->getFinalPrice(),
-                            self::IMAGE => $this->imageResolver->getProductImageUrl($item, 'category_page_grid')
+                            ProductResolver::MIN_PRICE => $this->productResolver->getMinimumPrice($item),
+                            ProductResolver::MAX_PRICE => $this->productResolver->getMaximumPrice($item),
+                            ProductResolver::FINAL_PRICE => $item->getFinalPrice(),
+                            ProductResolver::IMAGE => $this->imageResolver->getProductImageUrl($item, 'category_page_grid')
 
                         ];
 
@@ -106,10 +101,14 @@ class BestSellingProduct implements BestSellingProductInterface
         }
     }
 
+    /**
+     * @param $period
+     * @throws Exception
+     */
     public function validatePeriod($period)
     {
-        $periodArray = ['day','month','year'];
-        if (!in_array($period, $periodArray)) {
+        $allowedPeriods = ['day','month','year'];
+        if (!in_array($period, $allowedPeriods)) {
             throw new Exception('Accepted period values are day,month and year');
         }
     }
