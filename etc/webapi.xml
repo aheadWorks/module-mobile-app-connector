@@ -7,4 +7,98 @@
              <resource ref="self" />
          </resources>
     </route>
+	<route method="GET" url="/V1/app-preference-data">
+		<service class="Aheadworks\MobileAppConnector\Api\AppPreferencesDataManagementInterface" method="getAppPreferencesData"/>
+		<resources>
+			<resource ref="self"/>
+		</resources>
+	</route>
+    <route url="/V1/wishlist/add/:productId" method="POST">
+        <service class="Aheadworks\MobileAppConnector\Api\WishlistManagementInterface" method="addProductToWishlist"/>
+        <resources>
+            <resource ref="self" />
+        </resources>
+        <data>
+            <parameter name="customerId" force="true">%customer_id%</parameter>
+        </data>
+    </route>
+    <route url="/V1/wishlist/remove/:productId" method="POST">
+        <service class="Aheadworks\MobileAppConnector\Api\WishlistManagementInterface" method="removeProductFromWishlist"/>
+        <resources>
+            <resource ref="self" />
+        </resources>
+        <data>
+            <parameter name="customerId" force="true">%customer_id%</parameter>
+        </data>
+    </route>
+    <!-- for customer order list-->
+    <route url="/V1/customer/orders" method="GET">
+        <service class="Aheadworks\MobileAppConnector\Api\CustomerOrderInterface" method="getList"/>
+        <resources>
+            <resource ref="self"/>
+        </resources>
+        <data>
+            <parameter name="customerId" force="true">%customer_id%</parameter>
+        </data>
+    </route>
+    <route url="/V1/wishlist/items" method="GET">
+        <service class="Aheadworks\MobileAppConnector\Api\WishlistManagementInterface" method="getWishlistForCustomer"/>
+        <resources>
+            <resource ref="self" />
+        </resources>
+        <data>
+            <parameter name="customerId" force="true">%customer_id%</parameter>
+        </data>
+    </route>
+    <route url="/V1/customer/order/:id" method="GET">
+        <service class="Aheadworks\MobileAppConnector\Api\CustomerOrderInterface" method="get"/>
+            <resources>
+                <resource ref="self"/>
+            </resources>
+            <data>
+                <parameter name="customerId" force="true">%customer_id%</parameter>
+            </data>
+    </route>
+       <!-- for customer purchased downloadable productst-->
+    <route url="/V1/customer/libraryItemsList" method="GET">
+        <service class="Aheadworks\MobileAppConnector\Api\LibraryItemRepositoryInterface" method="getList"/>
+            <resources>
+                <resource ref="self"/>
+            </resources>
+            <data>
+                <parameter name="customerId" force="true">%customer_id%</parameter>
+            </data>
+    </route>
+    <route url="/V1/products/most-viewed/:limit/storeid/:storeId" method="GET">
+         <service class="Aheadworks\MobileAppConnector\Api\MostViewedProductInterface" method="getMostViewedProducts"/>
+         <resources>
+             <resource ref="self" />
+         </resources>
+         <data>
+             <parameter name="customerId" force="true">%customer_id%</parameter>
+         </data>
+     </route>
+     <!-- for related products-->
+    <route url="/V1/relatedproducts/:sku/storeid/:storeId" method="GET">
+        <service class="Aheadworks\MobileAppConnector\Api\RelatedProductsRepositoryInterface" method="getRelatedProducts"/>
+            <resources>
+                <resource ref="self"/>
+            </resources>
+            <data>
+                <parameter name="customerId" force="true">%customer_id%</parameter>
+            </data>
+    </route>
+    <!-- for get app customization tenant id-->
+    <route url="/V1/overview" method="GET">
+        <service class="Aheadworks\MobileAppConnector\Api\AppOverViewRepositoryInterface" method="getAppTenantId"/>
+            <resources>
+                <resource ref="self"/>
+            </resources>
+    </route>
+     <route url="/V1/configurable-products-option/:sku/children" method="GET">
+        <service class="Aheadworks\MobileAppConnector\Api\ConfigurableProductManagementInterface" method="getChildren"/>
+        <resources>
+            <resource ref="self"/>
+        </resources>
+    </route>
 </routes>

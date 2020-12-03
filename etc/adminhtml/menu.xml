@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Aheadworks_MobileAppConnector::general" title="Sales Channels" module="Aheadworks_MobileAppConnector" sortOrder="20" dependsOnModule="Aheadworks_MobileAppConnector" resource="Aheadworks_MobileAppConnector::general"/>
+        <add id="Aheadworks_MobileAppConnector::app_overview" title="Overview" module="Aheadworks_MobileAppConnector" sortOrder="10" parent="Aheadworks_MobileAppConnector::general" action="mobileappconnector/overview/index/flag/overview" resource="Aheadworks_MobileAppConnector::app_overview"/>
+        <add id="Aheadworks_MobileAppConnector::app_preferences" title="App Preferences" module="Aheadworks_MobileAppConnector" sortOrder="10" parent="Aheadworks_MobileAppConnector::general" action="mobileappconnector/preferences/index/flag/preferences" resource="Aheadworks_MobileAppConnector::app_preferences"/>
+    </menu>
+</config>
