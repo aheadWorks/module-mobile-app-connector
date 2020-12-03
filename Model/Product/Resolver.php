@@ -117,4 +117,5 @@ class Resolver
     {
         return $product->getPriceInfo()->getPrice('final_price')->getMaximalPrice()->getValue();
     }
+
 }
