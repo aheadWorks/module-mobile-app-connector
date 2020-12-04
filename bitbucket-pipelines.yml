@@ -12,10 +12,10 @@ definitions:
       echo ${AW_COMPOSER_KNOWN_HOSTS} >> ~/.ssh/known_hosts
       (umask  077 ; echo ${AW_COMPOSER_SSH_KEY} | base64 --decode > ~/.ssh/id_rsa)
     prepare_git: &prepare_git |-
-      apk add --update openssh
+      apk add --update openssh 
       apk add --update coreutils
       apk add git
-      echo ${DEVOPS_SSH_KEY} | base64 --decode > ~/.ssh/id_rsa
+      echo ${SSH_KEY} | base64 --decode > ~/.ssh/id_rsa
       chmod 700 ~/.ssh
       chmod 600 ~/.ssh/id_rsa
     get_repositories: &getRepositories |-
@@ -35,15 +35,9 @@ definitions:
             "ref_name": "master",
             "selector": {
               "type": "custom",
-              "pattern": "rebuild-selected-packages"
+              "pattern": "rebuild-all-packages"
             }
-          },
-          "variables": [
-            {
-              "key": "PACKAGES",
-              "value": "'${BITBUCKET_REPO_SLUG}'"
-            }
-          ]
+          }
       }' || ex
 
   build_steps:
@@ -152,10 +146,17 @@ definitions:
         name: Ecommerce build
         image: aheadworks/m2test-new:test-7.2
         script:
-          - *prepare_git
-          - echo "api.bitbucket.org/2.0/repositories/${BITBUCKET_WORKSPACE}/${BITBUCKET_REPO_SLUG}/downloads" >> request
-          - python3 /makebuilds.py
-          - cat request
+            - *prepare_git
+            - echo "api.bitbucket.org/2.0/repositories/${BITBUCKET_WORKSPACE}/${BITBUCKET_REPO_SLUG}/downloads" >> request
+            - python3 /makebuilds.py
+            - cat request
+    - step: &get_key
+        name: get_key
+        image: aheadworks/m2test-new:test-7.2
+        script:
+          - echo ${DEVOPS_SSH_KEY} > key
+        artifacts:
+          - key
 
 pipelines:
   branches:
@@ -176,22 +177,22 @@ pipelines:
 
     # For every commit to develop branch: run tests
     develop:
-      - parallel:
-          - step: *eqpTest
-          - step: *staticTest
-          - step: *unitTestSecond
-          - step: *unitMagento24
-      - step: *deployToDevComposer
+        - parallel:
+            - step: *eqpTest
+            - step: *staticTest
+            - step: *unitTestSecond
+            - step: *unitMagento24
+        - step: *deployToDevComposer
     feature/*:
-      - step: *eqpTest
-      - step: *staticTest
-      - step: *unitTestSecond
-      - step: *unitMagento24
+        - step: *eqpTest
+        - step: *staticTest
+        - step: *unitTestSecond
+        - step: *unitMagento24
     bugfix/*:
-      - step: *eqpTest
-      - step: *staticTest
-      - step: *unitTestSecond
-      - step: *unitMagento24
+        - step: *eqpTest
+        - step: *staticTest
+        - step: *unitTestSecond
+        - step: *unitMagento24
     release/*:
       - step: *build
       - step: *validatePackage
@@ -238,6 +239,9 @@ pipelines:
     # set composer permissions
     set_permissions:
       - step: *setPermissions
+      
+    get_key:
+      - step: *get_key
 
     #prepare build
     ecommerce_build:
