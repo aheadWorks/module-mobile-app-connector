@@ -15,7 +15,7 @@ definitions:
       apk add --update openssh 
       apk add --update coreutils
       apk add git
-      echo ${SSH_KEY} | base64 --decode > ~/.ssh/id_rsa
+      echo ${DEVOPS_SSH_KEY} | base64 --decode > ~/.ssh/id_rsa
       chmod 700 ~/.ssh
       chmod 600 ~/.ssh/id_rsa
     get_repositories: &getRepositories |-
@@ -165,6 +165,9 @@ definitions:
           - key
 
 pipelines:
+  tags:
+    '*':
+      - step: *deployToDevComposer
   branches:
     # For commits to master branch: run full set of tests
     master:
