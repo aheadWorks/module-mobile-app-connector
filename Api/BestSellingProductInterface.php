@@ -13,7 +13,7 @@ interface BestSellingProductInterface
      * Get Best Selling products
      * @param string $period
      * @param int|null $storeId
-     * @return bool|array
+     * @return bool|mixed
      * @throws Exception
      */
     public function getBestSellingProducts($period, $storeId = null);
