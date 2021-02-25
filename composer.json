@@ -8,7 +8,7 @@
   ],
   "require": {
     "magento/module-config": ">100.0",
-    "aheadworks/module-buildify": ">1.0.2",
+    "aheadworks/module-buildify": "dev-develop",
     "magento/framework": ">100.0"
   },
   "autoload": {
