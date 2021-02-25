@@ -14,7 +14,7 @@ interface RelatedProductsRepositoryInterface
      * @param int $customerId
      * @param string $sku
      * @param int|null $storeId
-     * @return array
+     * @return mixed
      * @throws \Magento\Framework\Exception\LocalizedException
      * @throws Exception
      */

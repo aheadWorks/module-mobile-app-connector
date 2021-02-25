@@ -13,7 +13,7 @@ interface MostViewedProductInterface
      * Get most viewed products
      * @param int $limit
      * @param int|null $storeId
-     * @return bool|array
+     * @return bool|mixed
      * @throws Exception
      */
     public function getMostViewedProducts($limit, $storeId = null);
