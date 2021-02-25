@@ -38,9 +38,9 @@ class HomepageDataProvider extends AbstractDataProvider
 
     /**
      * HomepageDataProvider constructor.
-     * @param $name
-     * @param $primaryFieldName
-     * @param $requestFieldName
+     * @param string $name
+     * @param string $primaryFieldName
+     * @param string $requestFieldName
      * @param HomepageInterfaceFactory $homepageFactory
      * @param DataObjectProcessor $dataObjectProcessor
      * @param LoadHandler $loadHandler
