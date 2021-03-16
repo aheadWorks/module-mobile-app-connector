@@ -4,6 +4,7 @@
     <module name="Aheadworks_MobileAppConnector" setup_version="0.0.1">
         <sequence>
             <module name="Magento_Customer"/>
+            <module name="Aheadworks_Buildify"/>
         </sequence>
     </module>
 </config>
