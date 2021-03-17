@@ -40,8 +40,8 @@ definitions:
           },
           "variables": [
             {
-              "key": "PACKAGE_URL",
-              "value": "'${BITBUCKET_GIT_SSH_ORIGIN}'"
+              "key": "PACKAGES",
+              "value": "'${BITBUCKET_REPO_SLUG}'"
             }
           ]
       }' || ex
@@ -114,6 +114,24 @@ definitions:
           - if test -f README.md; then if grep -q "for Magento 2.3.*" README.md; then echo only for Magento 2.3; else python3 /m2test.py unit ${PWD} test-results/test-unit.xml; fi; else python3 /m2test.py unit ${PWD} test-results/test-unit.xml; fi
         artifacts:
           - "test-results/test-unit.xml"
+    - step: &installMagento
+        name: Install Magento test
+        image: aheadworks/m2test-new:test-install-7.3
+        script:
+          - mkdir -p test-results
+          - *prepare_git
+          - if test -f README.md; then if grep -q "for Magento 2.3.*" README.md; then echo only for Magento 2.3; else python3 /m2test.py install-magento ${PWD} test-results/test-unit.xml; fi; else python3 /m2test.py install-magento ${PWD} test-results/test-unit.xml; fi
+        artifacts:
+          - "test-results/test-unit.xml"
+    - step: &installMagento24
+        name: Install Magento 2.4 test
+        image: aheadworks/m2test-new:test-install-2.4-7.4
+        script:
+          - mkdir -p test-results
+          - *prepare_git
+          - if test -f README.md; then if grep -q "for Magento 2.3.*" README.md; then echo only for Magento 2.3; else python3 /m2test.py install-magento ${PWD} test-results/test-unit.xml; fi; else python3 /m2test.py install-magento ${PWD} test-results/test-unit.xml; fi
+        artifacts:
+          - "test-results/test-unit.xml"
 
   deployment_steps:
     - step: &runPipelines
@@ -165,9 +183,6 @@ definitions:
           - key
 
 pipelines:
-  tags:
-    '*':
-      - step: *deployToDevComposer
   branches:
     # For commits to master branch: run full set of tests
     master:
@@ -180,6 +195,8 @@ pipelines:
           - step: *unitTestSecond
           - step: *unitTestThird
           - step: *unitMagento24
+          - step: *installMagento
+          - step: *installMagento24
       - step: *ecommerce_build
       - step: *deployToDevComposer
       - step: *deployToAwComposer
@@ -191,17 +208,20 @@ pipelines:
             - step: *staticTest
             - step: *unitTestSecond
             - step: *unitMagento24
+            - step: *installMagento24
         - step: *deployToDevComposer
     feature/*:
         - step: *eqpTest
         - step: *staticTest
         - step: *unitTestSecond
         - step: *unitMagento24
+        - step: *installMagento24
     bugfix/*:
         - step: *eqpTest
         - step: *staticTest
         - step: *unitTestSecond
         - step: *unitMagento24
+        - step: *installMagento24
     release/*:
       - step: *build
       - step: *validatePackage
@@ -212,6 +232,8 @@ pipelines:
           - step: *unitTestSecond
           - step: *unitTestThird
           - step: *unitMagento24
+          - step: *installMagento
+          - step: *installMagento24
 
   custom:
     # Upload to AW composer manually
@@ -235,6 +257,8 @@ pipelines:
           - step: *staticTest
           - step: *unitTestSecond
           - step: *unitMagento24
+          - step: *installMagento
+          - step: *installMagento24
     # Run prerelease tests manually
     run-prerelease-tests:
       - parallel:
@@ -244,6 +268,8 @@ pipelines:
           - step: *unitTestSecond
           - step: *unitTestThird
           - step: *unitMagento24
+          - step: *installMagento
+          - step: *installMagento24
 
     # set composer permissions
     set_permissions:
