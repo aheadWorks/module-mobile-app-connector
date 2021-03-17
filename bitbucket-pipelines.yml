@@ -71,7 +71,7 @@ definitions:
           - "test-results/test-EQP.xml"
     - step: &staticTest
         name: Static tests
-        image: aheadworks/m2test-new:static-test-7.2
+        image: aheadworks/m2test-new:static-test
         script:
           - mkdir -p test-results
           - *prepare_git
