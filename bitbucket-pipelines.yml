@@ -40,8 +40,8 @@ definitions:
           },
           "variables": [
             {
-              "key": "PACKAGES",
-              "value": "'${BITBUCKET_REPO_SLUG}'"
+              "key": "PACKAGE_URL",
+              "value": "'${BITBUCKET_GIT_SSH_ORIGIN}'"
             }
           ]
       }' || ex
