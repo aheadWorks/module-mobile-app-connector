@@ -4,5 +4,12 @@
 /** @var $block \Aheadworks\MobileAppConnector\Block\ThirdParty\Buildify\Page\Preview */
 
 $viewModel = $block->getViewModel();
+$mobileAppClass = $viewModel->getClass();
 ?>
-<div id="buildify" class="buildify <?php echo $viewModel->getClass() ?>"></div>
+<?php if (!empty($mobileAppClass)) : ?>
+    <div class="<?php echo $mobileAppClass ?>">
+        <div id="buildify" class="buildify"></div>
+    </div>
+<?php else : ?>
+    <div id="buildify" class="buildify"></div>
+<?php endif; ?>
