@@ -132,6 +132,7 @@ definitions:
     - step: &deployToDevComposer
         name: Toggle satis refresh
         script:
+          - echo ${BITBUCKET_GIT_SSH_ORIGIN}
           - *cleanTestResults
           - *toggleSatisRebuild
     - step: &deployToAwComposer
