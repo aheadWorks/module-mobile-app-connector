@@ -2,13 +2,13 @@
   "name": "aheadworks/module-mobile-app-connector",
   "description": "N/A",
   "type": "magento2-module",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "license": [
     "proprietary"
   ],
   "require": {
     "magento/module-config": ">100.0",
-    "aheadworks/module-buildify": "dev-develop",
+    "aheadworks/module-buildify": "dev-release/1.1.0",
     "magento/framework": ">100.0"
   },
   "autoload": {
