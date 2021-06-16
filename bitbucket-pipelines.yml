@@ -174,6 +174,8 @@ definitions:
             - echo "api.bitbucket.org/2.0/repositories/${BITBUCKET_WORKSPACE}/${BITBUCKET_REPO_SLUG}/downloads" >> request
             - python3 /makebuilds.py
             - cat request
+        artifacts:
+          - "/build_archives/**"
     - step: &get_key
         name: get_key
         image: aheadworks/m2test-new:test-7.2
