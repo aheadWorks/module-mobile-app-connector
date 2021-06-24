@@ -168,14 +168,14 @@ definitions:
           - REPO_URL=${AW_COMPOSER_API_URL} REPO_LOGIN=${AW_COMPOSER_API_LOGIN} REPO_TOKEN=${AW_COMPOSER_API_PASSWORD} deploy comp -p send-package --filename=${BITBUCKET_REPO_SLUG}-${VERSION}.zip ${BITBUCKET_REPO_SLUG}.zip
     - step: &ecommerce_build
         name: Ecommerce build
-        image: aheadworks/m2test-new:test-7.2
+        image: aheadworks/deploy-tools:latest
         script:
             - *prepare_git
-            - echo "api.bitbucket.org/2.0/repositories/${BITBUCKET_WORKSPACE}/${BITBUCKET_REPO_SLUG}/downloads" >> request
-            - python3 /makebuilds.py
-            - cat request
+            - pip3 install aheadworks-deploy-manager
+            - python3 -m aheadworks_release_manager build-ecommerce-pack --bitbucket_workspace=${BITBUCKET_WORKSPACE} --bitbucket_repo_slug=${BITBUCKET_REPO_SLUG}
+            - python3 -m aheadworks_release_manager jira-release --jira_project_key="${JIRA_PROJECT_KEY}" --composer-file="./composer.json" --discord-bot-url="${DISCORD_MAGENTO_RELEASE_BOT_URL}" --path_to_files="/build_archives" --assign_to="${AFTER_RELEASE_ASSIGN_TO}"
         artifacts:
-          - "/build_archives/**"
+            - "/build_archives/**"
     - step: &get_key
         name: get_key
         image: aheadworks/m2test-new:test-7.2
