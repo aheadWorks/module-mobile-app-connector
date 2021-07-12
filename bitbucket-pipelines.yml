@@ -12,12 +12,13 @@ definitions:
       echo ${AW_COMPOSER_KNOWN_HOSTS} >> ~/.ssh/known_hosts
       (umask  077 ; echo ${AW_COMPOSER_SSH_KEY} | base64 --decode > ~/.ssh/id_rsa)
     prepare_git: &prepare_git |-
-      apk add --update openssh 
-      apk add --update coreutils
-      apk add git
-      echo ${DEVOPS_SSH_KEY} | base64 --decode > ~/.ssh/id_rsa
-      chmod 700 ~/.ssh
-      chmod 600 ~/.ssh/id_rsa
+      echo 'skip'
+#      apk add --update openssh
+#      apk add --update coreutils
+#      apk add git
+#      echo ${DEVOPS_SSH_KEY} | base64 --decode > ~/.ssh/id_rsa
+#      chmod 700 ~/.ssh
+#      chmod 600 ~/.ssh/id_rsa
     get_repositories: &getRepositories |-
       TOKEN=$(curl -s -X POST -u "${BITBUCKET_KEY}:${BITBUCKET_SECRET}"  https://bitbucket.org/site/oauth2/access_token  -d grant_type=client_credentials | sed  -E 's/.*"access_token":? "?([^,"]*)"?.*/\1/')
       curl -H "Authorization: Bearer ${TOKEN}" https://api.bitbucket.org/2.0/repositories/$BITBUCKET_WORKSPACE?pagelen=100 >> repositories
@@ -175,9 +176,18 @@ definitions:
             - *prepare_git
             - pip3 install aheadworks-deploy-manager
             - python3 -m aheadworks_release_manager build-ecommerce-pack --bitbucket_workspace=${BITBUCKET_WORKSPACE} --bitbucket_repo_slug=${BITBUCKET_REPO_SLUG}
-            - python3 -m aheadworks_release_manager jira-release --jira_project_key="${JIRA_PROJECT_KEY}" --composer-file="./composer.json" --discord-bot-url="${DISCORD_MAGENTO_RELEASE_BOT_URL}" --path_to_files="/build_archives" --assign_to="${AFTER_RELEASE_ASSIGN_TO}"
+            - if [[ "$BITBUCKET_REPO_SLUG" == "module-test" ]]; then DISCORD_BOT_URL=${TEST_DISCORD_MAGENTO_RELEASE_BOT_URL}; else DISCORD_BOT_URL=${DISCORD_MAGENTO_RELEASE_BOT_URL}; fi;
+            - python3 -m aheadworks_release_manager jira-release --jira_project_key="${JIRA_PROJECT_KEY}" --composer-file="./composer.json" --discord-bot-url="${DISCORD_BOT_URL}" --path_to_files="/build_archives" --assign_to="${AFTER_RELEASE_ASSIGN_TO}"
         artifacts:
             - "/build_archives/**"
+    - step: &swaggerWebApiDocBuild
+        name: Web Api build
+        image: aheadworks/deploy-tools:latest
+        services:
+          - m24-74
+        script:
+          - pip3 install aheadworks-deploy-manager
+          - python3 -m aheadworks_release_manager build-swagger-web-api-doc --path-to-module=./ --magento_url=http://localhost --ssh_port=22
     - step: &get_key
         name: get_key
         image: aheadworks/m2test-new:test-7.2
@@ -185,7 +195,9 @@ definitions:
           - echo ${DEVOPS_SSH_KEY} > key
         artifacts:
           - key
-
+  services:
+    m24-74:
+      image: aheadworks/m2test-new:test-2.4-7.4
 pipelines:
   branches:
     # For commits to master branch: run full set of tests
@@ -285,6 +297,10 @@ pipelines:
     #prepare build
     ecommerce_build:
       - step: *ecommerce_build
+
+    #prepare build
+    swagger-web-api-doc-build:
+      - step: *swaggerWebApiDocBuild
 
     static-test-with-select-severity:
       - variables:
