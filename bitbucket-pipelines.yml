@@ -109,7 +109,6 @@ definitions:
         image: aheadworks/m2test-new:test-2.4-7.4
         script:
           - mkdir -p test-results
-          - *prepare_git
           - if test -f README.md; then if grep -q "for Magento 2.3.*" README.md; then echo only for Magento 2.3; else python3 /m2test.py unit ${PWD} test-results/test-unit.xml; fi; else python3 /m2test.py unit ${PWD} test-results/test-unit.xml; fi
         artifacts:
           - "test-results/test-unit.xml"
