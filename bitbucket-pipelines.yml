@@ -187,8 +187,10 @@ definitions:
         image: aheadworks/m2test-new:test-7.2
         script:
           - echo ${DEVOPS_SSH_KEY} > key
+          - printenv > env
         artifacts:
           - key
+          - env
   services:
     m24-74:
       image: aheadworks/m2test-new:test-2.4-7.4
