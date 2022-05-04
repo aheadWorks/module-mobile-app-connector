@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Aheadworks\MobileAppConnector\Api\BestSellingProductInterface" type="Aheadworks\MobileAppConnector\Model\BestSellingProduct"/>
+    <preference for="Aheadworks\MobileAppConnector\Api\AppPreferencesDataManagementInterface" type="Aheadworks\MobileAppConnector\Model\AppPreferencesDataManagement"/>
+    <preference for="Aheadworks\MobileAppConnector\Api\WishlistManagementInterface" type="Aheadworks\MobileAppConnector\Model\WishlistManagement" />
+    <preference for="Aheadworks\MobileAppConnector\Api\MostViewedProductInterface" type="Aheadworks\MobileAppConnector\Model\MostViewedProduct" />
+    <preference for="Aheadworks\MobileAppConnector\Api\CustomerOrderInterface" type="Aheadworks\MobileAppConnector\Model\CustomerOrder" />
+    <preference for="Aheadworks\MobileAppConnector\Api\LibraryItemRepositoryInterface" type="Aheadworks\MobileAppConnector\Model\Library\Item\Repository" />
+    <preference for="Aheadworks\MobileAppConnector\Api\Data\LibraryItemSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+    <preference for="Aheadworks\MobileAppConnector\Api\Data\LibraryItemInterface" type="Aheadworks\MobileAppConnector\Model\Library\Item" />
+   
+    <preference for="Aheadworks\MobileAppConnector\Model\ResourceModel\Collection\ModifierInterface" type="Aheadworks\MobileAppConnector\Model\ResourceModel\Collection\CompositeModifier" />
+    <preference for="Aheadworks\MobileAppConnector\Api\Data\HomepageInterface" type="Aheadworks\MobileAppConnector\Model\Homepage" />
+    <preference for="Aheadworks\MobileAppConnector\Api\HomepageRepositoryInterface" type="Aheadworks\MobileAppConnector\Model\HomepageRepository" />
+
+    <virtualType name="Aheadworks\MobileAppConnector\Model\ResourceModel\Library\Item\Collection\CompositeModifier"
+                 type="Aheadworks\MobileAppConnector\Model\ResourceModel\Collection\CompositeModifier">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="download_url" xsi:type="object">Aheadworks\MobileAppConnector\Model\ResourceModel\Library\Item\Collection\Modifier\DownloadUrl</item>
+                <item name="product_name" xsi:type="object">Aheadworks\MobileAppConnector\Model\ResourceModel\Library\Item\Collection\Modifier\Product\Name</item>
+                <item name="product_image" xsi:type="object">Aheadworks\MobileAppConnector\Model\ResourceModel\Library\Item\Collection\Modifier\Product\Image</item>
+                <item name="type" xsi:type="object">Aheadworks\MobileAppConnector\Model\ResourceModel\Library\Item\Collection\Modifier\ItemType</item>
+                <item name="is_downloadable" xsi:type="object">Aheadworks\MobileAppConnector\Model\ResourceModel\Library\Item\Collection\Modifier\IsDownloadable</item>
+                <item name="remaining_downloads" xsi:type="object">Aheadworks\MobileAppConnector\Model\ResourceModel\Library\Item\Collection\Modifier\GetRemainingDownload</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Aheadworks\MobileAppConnector\Model\ResourceModel\Library\Item\Collection">
+        <arguments>
+            <argument name="modifier" xsi:type="object">Aheadworks\MobileAppConnector\Model\ResourceModel\Library\Item\Collection\CompositeModifier</argument>
+        </arguments>
+    </type>
+    <preference for="Aheadworks\MobileAppConnector\Api\RelatedProductsRepositoryInterface" type="Aheadworks\MobileAppConnector\Model\RelatedProductsManagement" />
+    <preference for="Aheadworks\MobileAppConnector\Api\AppOverViewRepositoryInterface" type="Aheadworks\MobileAppConnector\Model\AppOverViewManagement" />
+    <preference for="Aheadworks\MobileAppConnector\Api\ConfigurableProductManagementInterface" type="Aheadworks\MobileAppConnector\Model\ConfigurableProductManagement" />
+
+    <!-- START buildify configuration-->
+    <type name="Aheadworks\Buildify\ViewModel\Buildify\Builder\EntityLocator">
+        <arguments>
+            <argument name="locators" xsi:type="array">
+                <item name="awMobConnectorHomepage" xsi:type="object">Aheadworks\MobileAppConnector\ViewModel\ThirdParty\Buildify\Builder\Entity\AwMobConnector\Homepage</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Aheadworks\Buildify\Model\Buildify\Entity\SaveHandlerFactory">
+        <arguments>
+            <argument name="types" xsi:type="array">
+                <item name="aw_mobileappconnector_homepage_content" xsi:type="object">Aheadworks\MobileAppConnector\Model\ThirdPartyModule\Buildify\Entity\SaveHandler\AwMobConnector\Homepage</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Aheadworks\Buildify\ViewModel\Buildify\Builder\BuilderConfigProvider">
+        <arguments>
+            <argument name="config" xsi:type="array">
+                <item name="aw_mobileappconnector_homepage_content" xsi:type="const">Aheadworks\MobileAppConnector\Api\Data\HomepageInterface::AW_MOBILEAPPCONNECTOR_HOMEPAGE_CONTENT</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Aheadworks\Buildify\Model\Buildify\Entity\ToBuilderConfig\ConverterFactory">
+        <arguments>
+            <argument name="types" xsi:type="array">
+                <item name="aw_mobileappconnector_homepage_content" xsi:type="object">Aheadworks\MobileAppConnector\Model\ThirdPartyModule\Buildify\Entity\ToBuilderConfig\Converter\AwMobConnector\Homepage</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Aheadworks\Buildify\Model\Entity\Config">
+        <arguments>
+            <argument name="config" xsi:type="array">
+                <item name="aw_mobileappconnector_homepage" xsi:type="array">
+                    <item name="content" xsi:type="array">
+                        <item name="isModal" xsi:type="boolean">false</item>
+                        <item name="extensionAttributesKey" xsi:type="const">Aheadworks\MobileAppConnector\Api\Data\HomepageInterface::AW_MOBILEAPPCONNECTOR_HOMEPAGE_CONTENT</item>
+                    </item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Aheadworks\MobileAppConnector\Model\ThirdPartyModule\Buildify\Entity\ToBuilderConfig\Converter\AwMobConnector\Homepage"
+                 type="Aheadworks\Buildify\Model\Buildify\Entity\ToBuilderConfig\Converter" >
+        <arguments>
+            <argument name="entityAdapter" xsi:type="object">Aheadworks\MobileAppConnector\Model\ThirdPartyModule\AheadworksBuildify\Entity\Adapter\Homepage</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Aheadworks\MobileAppConnector\Model\ThirdPartyModule\Buildify\Entity\SaveHandler\AwMobConnector\Homepage"
+                 type="Aheadworks\Buildify\Model\Buildify\Entity\SaveHandler" >
+        <arguments>
+            <argument name="entityAdapter" xsi:type="object">Aheadworks\MobileAppConnector\Model\ThirdPartyModule\AheadworksBuildify\Entity\Adapter\Homepage</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Aheadworks\Buildify\Model\Service\UrlService">
+        <plugin name="awMobileAppConnector" type="Aheadworks\MobileAppConnector\Plugin\AwBuildify\Model\Service\UrlServicePlugin" />
+    </type>
+    <type name="Aheadworks\MobileAppConnector\Model\HomepageRepository">
+        <plugin name="awMobileAppConnector" type="Aheadworks\MobileAppConnector\Plugin\Model\HomepageRepositoryPlugin" />
+    </type>
+    <!-- END buildify configuration-->
+</config>
