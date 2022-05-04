@@ -14,7 +14,7 @@ interface ConfigurableProductManagementInterface
      * Get all children for Configurable product with options
      *
      * @param string $sku
-     * @return array
+     * @return mixed
      * @throws NoSuchEntityException
      * @throws InputException
      */
