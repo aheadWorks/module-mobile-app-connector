@@ -24,6 +24,10 @@ definitions:
       TOKEN=$(curl -s -X POST -u "${BITBUCKET_KEY}:${BITBUCKET_SECRET}"  https://bitbucket.org/site/oauth2/access_token  -d grant_type=client_credentials | sed  -E 's/.*"access_token":? "?([^,"]*)"?.*/\1/')
       curl -H "Authorization: Bearer ${TOKEN}" https://api.bitbucket.org/2.0/repositories/$BITBUCKET_WORKSPACE?pagelen=100 >> repositories
       curl -H "Authorization: Bearer ${TOKEN}" https://api.bitbucket.org/2.0/repositories/$BITBUCKET_WORKSPACE?pagelen=100\&page=2 >> repositories2
+    get_repositories: &getRepositories2 |-
+      TOKEN=$(curl -s -X POST -u "${BITBUCKET_KEY}:${BITBUCKET_SECRET}"  https://bitbucket.org/site/oauth2/access_token  -d grant_type=client_credentials | sed  -E 's/.*"access_token":? "?([^,"]*)"?.*/\1/')
+      curl -H "Authorization: Bearer ${TOKEN}" https://api.bitbucket.org/2.0/repositories/awm2ext?q=updated_on%3C2022-05-11T01%3A43%3A00%2B03%3A00\&pagelen=100\&sort=updated_on >> repositories
+      echo '{"values":[]}' > repositories2
     toggle_satis_rebuild: &toggleSatisRebuild |-
       TOKEN=$(curl -s -X POST -u "${BITBUCKET_KEY}:${BITBUCKET_SECRET}"  https://bitbucket.org/site/oauth2/access_token  -d grant_type=client_credentials | sed  -E 's/.*"access_token":? "?([^,"]*)"?.*/\1/')
       [[ -z "$TOKEN" ]] && { echo "Can't obtain OAuth access token, check credentials" ; exit 1; }
@@ -195,6 +199,12 @@ definitions:
         script:
           - pip3 install aheadworks-deploy-manager
           - python3 -m aheadworks_release_manager build-swagger-web-api-doc --path-to-module=./ --magento_url=http://localhost --ssh_port=22
+    - step: &deployPipelines
+        name: Deploy pipelines
+        image: aheadworks/m2test-new:test-7.4
+        script:
+          - *getRepositories
+          - python3 /deploypipeline.py
     - step: &get_key
         name: get_key
         image: aheadworks/m2test-new:test-7.4
@@ -206,7 +216,7 @@ definitions:
           - env
   services:
     m24-74:
-      image: aheadworks/m2test-new:test-2.4-7.4
+      image: aheadworks/m2test-new:2.4.3-p2-with-dump-7.4
 pipelines:
   tags:
     '*.*.*':
@@ -332,5 +342,7 @@ pipelines:
 
 
     # copy this file to all modules
+    deploy-pipeline:
+      - step: *deployPipelines
 
 
