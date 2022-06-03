@@ -44,6 +44,7 @@ class BestSellingProducts extends ProductsList
      * @param LayoutFactory|null $layoutFactory
      * @param EncoderInterface|null $urlEncoder
      * @param CategoryRepositoryInterface|null $categoryRepository
+     * @return void
      */
     public function __construct(
         Context $context,
@@ -78,10 +79,7 @@ class BestSellingProducts extends ProductsList
     }
 
     /**
-     * Create Products Collection for Widget
-     *
-     * @return \Magento\Catalog\Model\ResourceModel\Product\Collection
-     * @throws \Magento\Framework\Exception\LocalizedException
+     * @inheritDoc
      */
     public function createCollection()
     {

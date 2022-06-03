@@ -104,5 +104,14 @@
     <type name="Aheadworks\Buildify\Model\ConfigProvider\WidgetConfigProvider">
         <plugin name="awMobileAppConnector_WidgetConfig" type="Aheadworks\MobileAppConnector\Plugin\AwBuildify\Model\ConfigProvider\WidgetConfigProviderPlugin" />
     </type>
+
+    <type name="Aheadworks\MobileAppConnector\Plugin\AwBuildify\Model\ConfigProvider\WidgetConfigProviderPlugin">
+        <arguments>
+            <argument name="showWidgets" xsi:type="array">
+                <item name="0" xsi:type="string">Aheadworks\MobileAppConnector\Block\Widget\Product\BestSellingProducts</item>
+                <item name="1" xsi:type="string">Aheadworks\MobileAppConnector\Block\Widget\Product\MostViewedProducts</item>
+            </argument>
+        </arguments>
+    </type>
     <!-- END buildify configuration-->
 </config>

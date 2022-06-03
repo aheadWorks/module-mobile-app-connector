@@ -4,10 +4,7 @@ declare(strict_types=1);
 namespace Aheadworks\MobileAppConnector\Plugin\AwBuildify\Model\ConfigProvider;
 
 use Aheadworks\Buildify\Model\ConfigProvider\WidgetConfigProvider as Subject;
-use Aheadworks\MobileAppConnector\Block\Widget\Product\BestSellingProducts;
-use Aheadworks\MobileAppConnector\Block\Widget\Product\MostViewedProducts;
 use Magento\Framework\App\Request\Http as Request;
-use Magento\Framework\UrlInterface;
 use Magento\Widget\Model\Widget\Config as WidgetConfig;
 
 /**
@@ -16,11 +13,6 @@ use Magento\Widget\Model\Widget\Config as WidgetConfig;
 class WidgetConfigProviderPlugin
 {
     const REQUEST_PAGE_IDENTIFIER = 'mobileappconnector/homepage';
-
-    const SHOW_WIDGETS = [
-        BestSellingProducts::class,
-        MostViewedProducts::class
-    ];
 
     /**
      * @var Request
@@ -33,16 +25,23 @@ class WidgetConfigProviderPlugin
     private $widgetConfig;
 
     /**
+     * @var array
+     */
+    private $showWidgets;
+
+    /**
      * WidgetConfigProviderPlugin constructor.
      *
      * @param Request $request
-     * @param UrlInterface $urlBuilder
      * @param WidgetConfig $widgetConfig
+     * @param array $showWidgets
+     * @return void
      */
-    public function __construct(Request $request, WidgetConfig $widgetConfig)
+    public function __construct(Request $request, WidgetConfig $widgetConfig, array $showWidgets = [])
     {
         $this->request = $request;
         $this->widgetConfig = $widgetConfig;
+        $this->showWidgets = $showWidgets;
     }
 
     /**
@@ -50,15 +49,19 @@ class WidgetConfigProviderPlugin
      *
      * @param Subject $subject
      * @param array $result
-     * @return mixed
+     * @return array
      */
     public function afterGetConfig(Subject $subject, $result)
     {
         $checkPageIdentifier = $this->request->getModuleName() . '/' . $this->request->getControllerName();
         $skipWidgets = [];
-        if (self::REQUEST_PAGE_IDENTIFIER === $checkPageIdentifier && isset($result['widget']['types'])) {
+        if (
+            self::REQUEST_PAGE_IDENTIFIER === $checkPageIdentifier &&
+            isset($result['widget']['types']) &&
+            $this->showWidgets
+        ) {
             foreach ($result['widget']['types'] as $widgetType => $title) {
-                if (!in_array($widgetType, self::SHOW_WIDGETS)) {
+                if (!in_array($widgetType, $this->showWidgets)) {
                     $skipWidgets[] = $widgetType;
                     unset($result['widget']['types'][$widgetType]);
                 }
