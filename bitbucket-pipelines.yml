@@ -216,7 +216,7 @@ definitions:
           - env
   services:
     m24-74:
-      image: aheadworks/m2test-new:2.4.3-p2-with-dump-7.4
+      image: aheadworks/m2test-new:2.4.4-with-dump-8.1
 pipelines:
   tags:
     '*.*.*':
