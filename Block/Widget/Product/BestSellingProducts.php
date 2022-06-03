@@ -17,6 +17,7 @@ use Magento\Framework\View\LayoutFactory;
 use Magento\Rule\Model\Condition\Sql\Builder as SqlBuilder;
 use Magento\Widget\Helper\Conditions;
 use Aheadworks\MobileAppConnector\Api\BestSellingProductInterfaceFactory;
+use Magento\Catalog\Model\ResourceModel\Product\Collection;
 
 /**
  * Class BestSellingProducts Widget
@@ -81,7 +82,7 @@ class BestSellingProducts extends ProductsList
     /**
      * @inheritDoc
      */
-    public function createCollection()
+    public function createCollection(): Collection
     {
         $bestSellingProduct = $this->bestSellingProductFactory->create();
 

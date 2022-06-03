@@ -51,7 +51,7 @@ class WidgetConfigProviderPlugin
      * @param array $result
      * @return array
      */
-    public function afterGetConfig(Subject $subject, $result)
+    public function afterGetConfig(Subject $subject, $result): array
     {
         $checkPageIdentifier = $this->request->getModuleName() . '/' . $this->request->getControllerName();
         $skipWidgets = [];
