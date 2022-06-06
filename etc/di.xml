@@ -8,7 +8,7 @@
     <preference for="Aheadworks\MobileAppConnector\Api\LibraryItemRepositoryInterface" type="Aheadworks\MobileAppConnector\Model\Library\Item\Repository" />
     <preference for="Aheadworks\MobileAppConnector\Api\Data\LibraryItemSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
     <preference for="Aheadworks\MobileAppConnector\Api\Data\LibraryItemInterface" type="Aheadworks\MobileAppConnector\Model\Library\Item" />
-   
+
     <preference for="Aheadworks\MobileAppConnector\Model\ResourceModel\Collection\ModifierInterface" type="Aheadworks\MobileAppConnector\Model\ResourceModel\Collection\CompositeModifier" />
     <preference for="Aheadworks\MobileAppConnector\Api\Data\HomepageInterface" type="Aheadworks\MobileAppConnector\Model\Homepage" />
     <preference for="Aheadworks\MobileAppConnector\Api\HomepageRepositoryInterface" type="Aheadworks\MobileAppConnector\Model\HomepageRepository" />
@@ -100,6 +100,18 @@
     </type>
     <type name="Aheadworks\MobileAppConnector\Model\HomepageRepository">
         <plugin name="awMobileAppConnector" type="Aheadworks\MobileAppConnector\Plugin\Model\HomepageRepositoryPlugin" />
+    </type>
+    <type name="Aheadworks\Buildify\Model\ConfigProvider\WidgetConfigProvider">
+        <plugin name="awMobileAppConnector_WidgetConfig" type="Aheadworks\MobileAppConnector\Plugin\AwBuildify\Model\ConfigProvider\WidgetConfigProviderPlugin" />
+    </type>
+
+    <type name="Aheadworks\MobileAppConnector\Plugin\AwBuildify\Model\ConfigProvider\WidgetConfigProviderPlugin">
+        <arguments>
+            <argument name="showWidgets" xsi:type="array">
+                <item name="0" xsi:type="string">Aheadworks\MobileAppConnector\Block\Widget\Product\BestSellingProducts</item>
+                <item name="1" xsi:type="string">Aheadworks\MobileAppConnector\Block\Widget\Product\MostViewedProducts</item>
+            </argument>
+        </arguments>
     </type>
     <!-- END buildify configuration-->
 </config>
