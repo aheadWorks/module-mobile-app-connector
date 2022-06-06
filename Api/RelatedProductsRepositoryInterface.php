@@ -11,12 +11,11 @@ interface RelatedProductsRepositoryInterface
     /**
      * Return related products
      *
-     * @param int $customerId
      * @param string $sku
      * @param int|null $storeId
      * @return mixed
      * @throws \Magento\Framework\Exception\LocalizedException
      * @throws Exception
      */
-    public function getRelatedProducts($customerId, $sku, $storeId = null);
+    public function getRelatedProducts($sku, $storeId = null);
 }
