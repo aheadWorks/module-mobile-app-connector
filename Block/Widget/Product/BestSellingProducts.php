@@ -18,6 +18,7 @@ use Magento\Rule\Model\Condition\Sql\Builder as SqlBuilder;
 use Magento\Widget\Helper\Conditions;
 use Aheadworks\MobileAppConnector\Api\BestSellingProductInterfaceFactory;
 use Magento\Catalog\Model\ResourceModel\Product\Collection;
+use Aheadworks\MobileAppConnector\ViewModel\Widget\Config as ConfigViewModel;
 
 /**
  * Class BestSellingProducts Widget
@@ -30,7 +31,12 @@ class BestSellingProducts extends ProductsList
     protected $bestSellingProductFactory;
 
     /**
-     * MostViewedProducts constructor.
+     * @var ConfigViewModel
+     */
+    protected $configViewModel;
+
+    /**
+     * BestSellingProducts constructor.
      *
      * @param Context $context
      * @param CollectionFactory $productCollectionFactory
@@ -40,12 +46,12 @@ class BestSellingProducts extends ProductsList
      * @param Rule $rule
      * @param Conditions $conditionsHelper
      * @param BestSellingProductInterfaceFactory $bestSellingProductFactory
+     * @param ConfigViewModel $configViewModel
      * @param array $data
      * @param Json|null $json
      * @param LayoutFactory|null $layoutFactory
      * @param EncoderInterface|null $urlEncoder
      * @param CategoryRepositoryInterface|null $categoryRepository
-     * @return void
      */
     public function __construct(
         Context $context,
@@ -56,6 +62,7 @@ class BestSellingProducts extends ProductsList
         Rule $rule,
         Conditions $conditionsHelper,
         BestSellingProductInterfaceFactory $bestSellingProductFactory,
+        ConfigViewModel $configViewModel,
         array $data = [],
         Json $json = null,
         LayoutFactory $layoutFactory = null,
@@ -63,6 +70,7 @@ class BestSellingProducts extends ProductsList
         CategoryRepositoryInterface $categoryRepository = null
     ) {
         $this->bestSellingProductFactory = $bestSellingProductFactory;
+        $this->configViewModel = $configViewModel;
         parent::__construct(
             $context,
             $productCollectionFactory,
@@ -120,5 +128,14 @@ class BestSellingProducts extends ProductsList
         $collection->distinct(true);
 
         return $collection;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function toHtml(): string
+    {
+        $this->assign('viewModel', $this->configViewModel);
+        return parent::toHtml();
     }
 }
