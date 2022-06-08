@@ -26,8 +26,8 @@
             <parameter name="template" xsi:type="select" required="true" visible="true">
                 <label translate="true">Template</label>
                 <options>
-                    <option name="default" value="Magento_CatalogWidget::product/widget/content/grid.phtml" selected="true">
-                        <label translate="true">Products Grid Template</label>
+                    <option name="default" value="Aheadworks_MobileAppConnector::product/widget/content/grid.phtml" selected="true">
+                        <label translate="true">Viewed Products List</label>
                     </option>
                 </options>
             </parameter>
@@ -81,8 +81,8 @@
             <parameter name="template" xsi:type="select" required="true" visible="true">
                 <label translate="true">Template</label>
                 <options>
-                    <option name="default" value="Magento_CatalogWidget::product/widget/content/grid.phtml" selected="true">
-                        <label translate="true">Products Grid Template</label>
+                    <option name="default" value="Aheadworks_MobileAppConnector::product/widget/content/grid.phtml" selected="true">
+                        <label translate="true">Best Selling Products List</label>
                     </option>
                 </options>
             </parameter>
