@@ -10,9 +10,56 @@ use Magento\Framework\View\Element\Block\ArgumentInterface;
  */
 class Config implements ArgumentInterface
 {
-    const SHOW_WISHLIST = false;
-    const SHOW_COMPARE = false;
-    const SHOW_REVIEWS_RATING = false;
+    /**
+     * @var bool
+     */
+    private $isShowWishlist = false;
+
+    /**
+     * @var bool
+     */
+    private $isShowCompare = false;
+
+    /**
+     * @var bool
+     */
+    private $isShowRating = false;
+
+    /**
+     * Set Is show Wishlist
+     *
+     * @param bool $value
+     * @return $this
+     */
+    public function setShowWishlist(bool $value): Config
+    {
+        $this->isShowWishlist = $value;
+        return $this;
+    }
+
+    /**
+     * Set Is show Compare
+     *
+     * @param bool $value
+     * @return $this
+     */
+    public function setShowCompare(bool $value): Config
+    {
+        $this->isShowCompare = $value;
+        return $this;
+    }
+
+    /**
+     * Set Is show Rating
+     *
+     * @param bool $value
+     * @return $this
+     */
+    public function setShowRating(bool $value): Config
+    {
+        $this->isShowRating = $value;
+        return $this;
+    }
 
     /**
      * Is show Wishlist for Template
@@ -21,7 +68,7 @@ class Config implements ArgumentInterface
      */
     public function isShowWishlist(): bool
     {
-        return self::SHOW_WISHLIST;
+        return $this->isShowWishlist;
     }
 
     /**
@@ -31,7 +78,7 @@ class Config implements ArgumentInterface
      */
     public function isShowCompare(): bool
     {
-        return self::SHOW_COMPARE;
+        return $this->isShowCompare;
     }
 
     /**
@@ -41,6 +88,6 @@ class Config implements ArgumentInterface
      */
     public function isShowReviewsRating(): bool
     {
-        return self::SHOW_REVIEWS_RATING;
+        return $this->isShowRating;
     }
 }

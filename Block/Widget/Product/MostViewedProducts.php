@@ -126,6 +126,10 @@ class MostViewedProducts extends ProductsList
      */
     public function toHtml(): string
     {
+        $this->configViewModel
+            ->setShowWishlist((bool)$this->getData('show_wishlist'))
+            ->setShowCompare((bool)$this->getData('show_compare'))
+            ->setShowRating((bool)$this->getData('show_rating'));
         $this->assign('viewModel', $this->configViewModel);
         return parent::toHtml();
     }

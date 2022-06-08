@@ -3,6 +3,7 @@
 use Magento\Framework\App\Action\Action;
 
 /** @var \Magento\CatalogWidget\Block\Product\ProductsList $block */
+/** @var \Aheadworks\MobileAppConnector\ViewModel\Widget\Config $viewModel */
 
 // phpcs:disable Generic.Files.LineLength.TooLong
 // phpcs:disable Magento2.Templates.ThisInTemplate.FoundHelper
@@ -16,9 +17,9 @@ use Magento\Framework\App\Action\Action;
     $image = 'new_products_content_widget_grid';
     $items = $block->getProductCollection()->getItems();
 
-    $showWishlist = $block->getViewModel()->isShowWishlist();
-    $showCompare = $block->getViewModel()->isShowCompare();
-    $showReviewsRating = $block->getViewModel()->isShowReviewsRating();
+    $showWishlist = $viewModel ? $viewModel->isShowWishlist() : false;
+    $showCompare = $viewModel ? $viewModel->isShowCompare() : false;
+    $showReviewsRating = $viewModel ? $viewModel->isShowReviewsRating() : false;
     $showCart = true;
     $templateType = \Magento\Catalog\Block\Product\ReviewRendererInterface::SHORT_VIEW;
     $description = false;
