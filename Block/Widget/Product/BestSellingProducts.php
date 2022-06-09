@@ -31,11 +31,6 @@ class BestSellingProducts extends ProductsList
     protected $bestSellingProductFactory;
 
     /**
-     * @var ConfigViewModel
-     */
-    protected $configViewModel;
-
-    /**
      * BestSellingProducts constructor.
      *
      * @param Context $context
@@ -70,7 +65,7 @@ class BestSellingProducts extends ProductsList
         CategoryRepositoryInterface $categoryRepository = null
     ) {
         $this->bestSellingProductFactory = $bestSellingProductFactory;
-        $this->configViewModel = $configViewModel;
+        $data['view_model'] = $configViewModel;
         parent::__construct(
             $context,
             $productCollectionFactory,
@@ -128,18 +123,5 @@ class BestSellingProducts extends ProductsList
         $collection->distinct(true);
 
         return $collection;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function toHtml(): string
-    {
-        $this->configViewModel
-            ->setShowWishlist((bool)$this->getData('show_wishlist'))
-            ->setShowCompare((bool)$this->getData('show_compare'))
-            ->setShowRating((bool)$this->getData('show_rating'));
-        $this->assign('viewModel', $this->configViewModel);
-        return parent::toHtml();
     }
 }

@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Aheadworks\MobileAppConnector\ViewModel\Widget;
 
+use Magento\Framework\DataObject;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
 
 /**
@@ -11,83 +12,35 @@ use Magento\Framework\View\Element\Block\ArgumentInterface;
 class Config implements ArgumentInterface
 {
     /**
-     * @var bool
-     */
-    private $isShowWishlist = false;
-
-    /**
-     * @var bool
-     */
-    private $isShowCompare = false;
-
-    /**
-     * @var bool
-     */
-    private $isShowRating = false;
-
-    /**
-     * Set Is show Wishlist
-     *
-     * @param bool $value
-     * @return $this
-     */
-    public function setShowWishlist(bool $value): Config
-    {
-        $this->isShowWishlist = $value;
-        return $this;
-    }
-
-    /**
-     * Set Is show Compare
-     *
-     * @param bool $value
-     * @return $this
-     */
-    public function setShowCompare(bool $value): Config
-    {
-        $this->isShowCompare = $value;
-        return $this;
-    }
-
-    /**
-     * Set Is show Rating
-     *
-     * @param bool $value
-     * @return $this
-     */
-    public function setShowRating(bool $value): Config
-    {
-        $this->isShowRating = $value;
-        return $this;
-    }
-
-    /**
      * Is show Wishlist for Template
      *
+     * @param DataObject $block
      * @return bool
      */
-    public function isShowWishlist(): bool
+    public function isShowWishlist(DataObject $block): bool
     {
-        return $this->isShowWishlist;
+        return (bool)$block->getData('show_wishlist');
     }
 
     /**
      * Is show Compare for Template
      *
+     * @param DataObject $block
      * @return bool
      */
-    public function isShowCompare(): bool
+    public function isShowCompare(DataObject $block): bool
     {
-        return $this->isShowCompare;
+        return (bool)$block->getData('show_compare');
     }
 
     /**
      * Is show Rating for Template
      *
+     * @param DataObject $block
      * @return bool
      */
-    public function isShowReviewsRating(): bool
+    public function isShowReviewsRating(DataObject $block): bool
     {
-        return $this->isShowRating;
+        return (bool)$block->getData('show_rating');
     }
 }

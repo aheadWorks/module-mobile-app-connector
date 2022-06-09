@@ -30,11 +30,6 @@ class MostViewedProducts extends ProductsList
     protected $reportCollectionFactory;
 
     /**
-     * @var ConfigViewModel
-     */
-    protected $configViewModel;
-
-    /**
      * MostViewedProducts constructor.
      *
      * @param Context $context
@@ -69,7 +64,7 @@ class MostViewedProducts extends ProductsList
         CategoryRepositoryInterface $categoryRepository = null
     ) {
         $this->reportCollectionFactory = $reportCollectionFactory;
-        $this->configViewModel = $configViewModel;
+        $data['view_model'] = $configViewModel;
         parent::__construct(
             $context,
             $productCollectionFactory,
@@ -119,18 +114,5 @@ class MostViewedProducts extends ProductsList
         $collection->distinct(true);
 
         return $collection;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function toHtml(): string
-    {
-        $this->configViewModel
-            ->setShowWishlist((bool)$this->getData('show_wishlist'))
-            ->setShowCompare((bool)$this->getData('show_compare'))
-            ->setShowRating((bool)$this->getData('show_rating'));
-        $this->assign('viewModel', $this->configViewModel);
-        return parent::toHtml();
     }
 }

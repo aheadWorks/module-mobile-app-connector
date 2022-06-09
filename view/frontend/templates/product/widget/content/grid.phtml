@@ -17,9 +17,9 @@ use Magento\Framework\App\Action\Action;
     $image = 'new_products_content_widget_grid';
     $items = $block->getProductCollection()->getItems();
 
-    $showWishlist = $viewModel ? $viewModel->isShowWishlist() : false;
-    $showCompare = $viewModel ? $viewModel->isShowCompare() : false;
-    $showReviewsRating = $viewModel ? $viewModel->isShowReviewsRating() : false;
+    $showWishlist = $block->getViewModel() ? $block->getViewModel()->isShowWishlist($block) : false;
+    $showCompare = $block->getViewModel() ? $block->getViewModel()->isShowCompare($block) : false;
+    $showReviewsRating = $block->getViewModel() ? $block->getViewModel()->isShowReviewsRating($block) : false;
     $showCart = true;
     $templateType = \Magento\Catalog\Block\Product\ReviewRendererInterface::SHORT_VIEW;
     $description = false;
