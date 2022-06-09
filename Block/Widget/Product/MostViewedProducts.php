@@ -17,6 +17,7 @@ use Magento\Rule\Model\Condition\Sql\Builder as SqlBuilder;
 use Magento\Widget\Helper\Conditions;
 use Magento\Reports\Model\ResourceModel\Product\CollectionFactory as ReportProductCollectionFactory;
 use Magento\Catalog\Model\ResourceModel\Product\Collection;
+use Aheadworks\MobileAppConnector\ViewModel\Widget\Config as ConfigViewModel;
 
 /**
  * Class MostViewedProducts Widget
@@ -39,12 +40,12 @@ class MostViewedProducts extends ProductsList
      * @param Rule $rule
      * @param Conditions $conditionsHelper
      * @param ReportProductCollectionFactory $reportCollectionFactory
+     * @param ConfigViewModel $configViewModel
      * @param array $data
      * @param Json|null $json
      * @param LayoutFactory|null $layoutFactory
      * @param EncoderInterface|null $urlEncoder
      * @param CategoryRepositoryInterface|null $categoryRepository
-     * @return void
      */
     public function __construct(
         Context $context,
@@ -55,6 +56,7 @@ class MostViewedProducts extends ProductsList
         Rule $rule,
         Conditions $conditionsHelper,
         ReportProductCollectionFactory $reportCollectionFactory,
+        ConfigViewModel $configViewModel,
         array $data = [],
         Json $json = null,
         LayoutFactory $layoutFactory = null,
@@ -62,6 +64,7 @@ class MostViewedProducts extends ProductsList
         CategoryRepositoryInterface $categoryRepository = null
     ) {
         $this->reportCollectionFactory = $reportCollectionFactory;
+        $data['view_model'] = $configViewModel;
         parent::__construct(
             $context,
             $productCollectionFactory,

@@ -26,8 +26,8 @@
             <parameter name="template" xsi:type="select" required="true" visible="true">
                 <label translate="true">Template</label>
                 <options>
-                    <option name="default" value="Magento_CatalogWidget::product/widget/content/grid.phtml" selected="true">
-                        <label translate="true">Products Grid Template</label>
+                    <option name="default" value="Aheadworks_MobileAppConnector::product/widget/content/grid.phtml" selected="true">
+                        <label translate="true">Viewed Products List</label>
                     </option>
                 </options>
             </parameter>
@@ -42,6 +42,39 @@
             <parameter name="condition" xsi:type="conditions" visible="true" required="true" sort_order="10"
                        class="Magento\CatalogWidget\Block\Product\Widget\Conditions">
                 <label translate="true">Conditions</label>
+            </parameter>
+            <parameter name="show_wishlist" xsi:type="select" required="false" visible="false">
+                <label translate="true">Is Show Wishlist for Items</label>
+                <options>
+                    <option name="0" value="0" selected="true">
+                        <label translate="true">No</label>
+                    </option>
+                    <option name="1" value="1">
+                        <label translate="true">Yes</label>
+                    </option>
+                </options>
+            </parameter>
+            <parameter name="show_compare" xsi:type="select" required="false" visible="false">
+                <label translate="true">Is Show Compare for Items</label>
+                <options>
+                    <option name="0" value="0" selected="true">
+                        <label translate="true">No</label>
+                    </option>
+                    <option name="1" value="1">
+                        <label translate="true">Yes</label>
+                    </option>
+                </options>
+            </parameter>
+            <parameter name="show_rating" xsi:type="select" required="false" visible="false">
+                <label translate="true">Is Show Reviews Rating for Items</label>
+                <options>
+                    <option name="0" value="0" selected="true">
+                        <label translate="true">No</label>
+                    </option>
+                    <option name="1" value="1">
+                        <label translate="true">Yes</label>
+                    </option>
+                </options>
             </parameter>
         </parameters>
         <containers>
@@ -81,8 +114,8 @@
             <parameter name="template" xsi:type="select" required="true" visible="true">
                 <label translate="true">Template</label>
                 <options>
-                    <option name="default" value="Magento_CatalogWidget::product/widget/content/grid.phtml" selected="true">
-                        <label translate="true">Products Grid Template</label>
+                    <option name="default" value="Aheadworks_MobileAppConnector::product/widget/content/grid.phtml" selected="true">
+                        <label translate="true">Best Selling Products List</label>
                     </option>
                 </options>
             </parameter>
@@ -105,6 +138,39 @@
                     </option>
                     <option name="year" value="year">
                         <label translate="true">Year</label>
+                    </option>
+                </options>
+            </parameter>
+            <parameter name="show_wishlist" xsi:type="select" required="false" visible="false">
+                <label translate="true">Is Show Wishlist for Items</label>
+                <options>
+                    <option name="0" value="0" selected="true">
+                        <label translate="true">No</label>
+                    </option>
+                    <option name="1" value="1">
+                        <label translate="true">Yes</label>
+                    </option>
+                </options>
+            </parameter>
+            <parameter name="show_compare" xsi:type="select" required="false" visible="false">
+                <label translate="true">Is Show Compare for Items</label>
+                <options>
+                    <option name="0" value="0" selected="true">
+                        <label translate="true">No</label>
+                    </option>
+                    <option name="1" value="1">
+                        <label translate="true">Yes</label>
+                    </option>
+                </options>
+            </parameter>
+            <parameter name="show_rating" xsi:type="select" required="false" visible="false">
+                <label translate="true">Is Show Reviews Rating for Items</label>
+                <options>
+                    <option name="0" value="0" selected="true">
+                        <label translate="true">No</label>
+                    </option>
+                    <option name="1" value="1">
+                        <label translate="true">Yes</label>
                     </option>
                 </options>
             </parameter>
