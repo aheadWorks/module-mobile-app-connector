@@ -99,9 +99,7 @@ class MostViewedProducts extends ProductsList
          * one by one and sorting by created_at is indeterministic in this case.
          */
         $collection = $this->_addProductAttributesAndPrices($collection)
-            ->addStoreFilter()
-            ->setPageSize($this->getPageSize())
-            ->setCurPage($this->getRequest()->getParam($this->getData('page_var_name'), 1));
+            ->addStoreFilter();
 
         $conditions = $this->getConditions();
         $conditions->collectValidatedAttributes($collection);
@@ -112,6 +110,12 @@ class MostViewedProducts extends ProductsList
          * several allowed values from condition simultaneously
          */
         $collection->distinct(true);
+
+        $this->setData('sku_products', $collection->getColumnValues('sku'));
+        $collection->clear();
+
+        $collection->setPageSize($this->getPageSize())
+        ->setCurPage($this->getRequest()->getParam($this->getData('page_var_name'), 1));
 
         return $collection;
     }

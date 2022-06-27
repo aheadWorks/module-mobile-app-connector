@@ -14,7 +14,7 @@ use Magento\Framework\App\Action\Action;
 
     $mode = 'grid';
 
-    $image = 'new_products_content_widget_grid';
+    $image = 'aw_mac_products_content_widget_grid';
     $items = $block->getProductCollection()->getItems();
 
     $showWishlist = $block->getViewModel() ? $block->getViewModel()->isShowWishlist($block) : false;
@@ -39,7 +39,7 @@ use Magento\Framework\App\Action\Action;
                         <?= /* @noEscape */ ($iterator++ == 1) ? '<li class="product-item">' : '</li><li class="product-item">' ?>
                         <div class="product-item-info">
                             <a href="<?= $block->escapeUrl($block->getProductUrl($_item)) ?>" class="product-item-photo">
-                                <?= $block->getImage($_item, $image)->toHtml() ?>
+                                <?= $block->getImage($_item, $image)->setData('area', 'frontend')->toHtml() ?>
                             </a>
                             <div class="product-item-details">
                                 <strong class="product-item-name">

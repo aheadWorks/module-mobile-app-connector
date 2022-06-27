@@ -100,17 +100,15 @@ class BestSellingProducts extends ProductsList
             $collection->setStoreId($this->getData('store_id'));
         }
 
-        $collection->addFieldToFilter('entity_id', ['in' => $productsIds]);
-        $collection->setVisibility($this->catalogProductVisibility->getVisibleInCatalogIds());
+        $collection->addFieldToFilter('entity_id', ['in' => $productsIds])
+            ->setVisibility($this->catalogProductVisibility->getVisibleInCatalogIds());
 
         /**
          * Change sorting attribute to entity_id because created_at can be the same for products fastly created
          * one by one and sorting by created_at is indeterministic in this case.
          */
         $collection = $this->_addProductAttributesAndPrices($collection)
-            ->addStoreFilter()
-            ->setPageSize($this->getPageSize())
-            ->setCurPage($this->getRequest()->getParam($this->getData('page_var_name'), 1));
+            ->addStoreFilter();
 
         $conditions = $this->getConditions();
         $conditions->collectValidatedAttributes($collection);
@@ -122,6 +120,11 @@ class BestSellingProducts extends ProductsList
          */
         $collection->distinct(true);
 
+        $this->setData('sku_products', $collection->getColumnValues('sku'));
+        $collection->clear();
+
+        $collection->setPageSize($this->getPageSize())
+            ->setCurPage($this->getRequest()->getParam($this->getData('page_var_name'), 1));
         return $collection;
     }
 }
