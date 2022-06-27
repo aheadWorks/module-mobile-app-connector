@@ -120,8 +120,10 @@ class BestSellingProducts extends ProductsList
          */
         $collection->distinct(true);
 
-        $this->setData('sku_products', $collection->getColumnValues('sku'));
-        $collection->clear();
+        if (empty($this->getData('sku_products'))) {
+            $this->setData('sku_products', $collection->getColumnValues('sku'));
+            $collection->clear();
+        }
 
         $collection->setPageSize($this->getPageSize())
             ->setCurPage($this->getRequest()->getParam($this->getData('page_var_name'), 1));
