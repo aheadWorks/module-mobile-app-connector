@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Aheadworks\MobileAppConnector\Plugin\Magento\Sales\Api;
+namespace Aheadworks\MobileAppConnector\Plugin\Magento\Sales\Model;
 
 use Magento\Sales\Api\OrderRepositoryInterface as Subject;
 use Magento\Sales\Api\Data\OrderInterface;
@@ -11,12 +11,12 @@ use Magento\Sales\Api\Data\OrderSearchResultInterface;
 /**
  * Class OrderRepositoryInterfacePlugin add additional data to order
  */
-class OrderRepositoryInterfacePlugin
+class OrderRepositoryPlugin
 {
     /**
      * @var OrderExtension
      */
-    protected $orderExtension;
+    private $orderExtension;
 
     /**
      * OrderRepositoryInterfacePlugin constructor.

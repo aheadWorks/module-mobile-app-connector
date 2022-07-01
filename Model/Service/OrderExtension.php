@@ -27,7 +27,7 @@ class OrderExtension
     /**
      * @var OrderItemExtensionFactory
      */
-    protected $orderItemExtensionFactory;
+    private $orderItemExtensionFactory;
 
     /**
      * OrderExtension constructor.
@@ -64,7 +64,7 @@ class OrderExtension
                     }
                 }
 
-                $extensionAttributes->setAwProductDetail($product);
+                $extensionAttributes->setAwMacProductDetail($product);
                 $orderItem->setExtensionAttributes($extensionAttributes);
             }
         }
