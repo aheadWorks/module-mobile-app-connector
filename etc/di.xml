@@ -13,6 +13,8 @@
     <preference for="Aheadworks\MobileAppConnector\Api\Data\HomepageInterface" type="Aheadworks\MobileAppConnector\Model\Homepage" />
     <preference for="Aheadworks\MobileAppConnector\Api\HomepageRepositoryInterface" type="Aheadworks\MobileAppConnector\Model\HomepageRepository" />
 
+    <preference for="Aheadworks\MobileAppConnector\Api\PaymentManagementInterface" type="Aheadworks\MobileAppConnector\Model\PaymentManagement" />
+
     <virtualType name="Aheadworks\MobileAppConnector\Model\ResourceModel\Library\Item\Collection\CompositeModifier"
                  type="Aheadworks\MobileAppConnector\Model\ResourceModel\Collection\CompositeModifier">
         <arguments>

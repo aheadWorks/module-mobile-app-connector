@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Aheadworks\MobileAppConnector\Model\Payment\Cart\Validator">
+        <arguments>
+            <argument name="quoteValidationRules" xsi:type="array">
+                <item name="ShippingAddressValidationRule" xsi:type="object">Magento\Quote\Model\ValidationRules\ShippingAddressValidationRule</item>
+                <item name="BillingAddressValidationRule" xsi:type="object">Magento\Quote\Model\ValidationRules\BillingAddressValidationRule</item>
+                <item name="AllowedCountryValidationRule" xsi:type="object">Magento\Quote\Model\ValidationRules\AllowedCountryValidationRule</item>
+                <item name="ShippingMethodValidationRule" xsi:type="object">Magento\Quote\Model\ValidationRules\ShippingMethodValidationRule</item>
+                <item name="MinimumAmountValidationRule" xsi:type="object">Magento\Quote\Model\ValidationRules\MinimumAmountValidationRule</item>
+                <item name="InStorePickupQuoteValidationRule" xsi:type="object">Magento\InventoryInStorePickupQuote\Model\Quote\ValidationRule\InStorePickupQuoteValidationRule</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Checkout\Controller\Onepage\Success">
+        <plugin name="awMobileAppConnector_changeSuccessPage" type="Aheadworks\MobileAppConnector\Plugin\Magento\Checkout\Controller\Onepage\SuccessPlugin" />
+    </type>
+</config>
