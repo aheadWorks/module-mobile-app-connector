@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
-    <type name="Aheadworks\MobileAppConnector\Model\Payment\Cart\Validator">
+    <type name="Aheadworks\MobileAppConnector\Model\Payment\Cart\ValidationRules\QuoteValidationComposite">
         <arguments>
-            <argument name="quoteValidationRules" xsi:type="array">
+            <argument name="validationRules" xsi:type="array">
                 <item name="ShippingAddressValidationRule" xsi:type="object">Magento\Quote\Model\ValidationRules\ShippingAddressValidationRule</item>
                 <item name="BillingAddressValidationRule" xsi:type="object">Magento\Quote\Model\ValidationRules\BillingAddressValidationRule</item>
                 <item name="AllowedCountryValidationRule" xsi:type="object">Magento\Quote\Model\ValidationRules\AllowedCountryValidationRule</item>
@@ -10,6 +10,16 @@
                 <item name="MinimumAmountValidationRule" xsi:type="object">Magento\Quote\Model\ValidationRules\MinimumAmountValidationRule</item>
                 <item name="InStorePickupQuoteValidationRule" xsi:type="object">Magento\InventoryInStorePickupQuote\Model\Quote\ValidationRule\InStorePickupQuoteValidationRule</item>
             </argument>
+        </arguments>
+    </type>
+    <virtualType name="Aheadworks\MobileAppConnector\Model\Payment\Cart\QuoteValidator" type="Magento\Quote\Model\QuoteValidator">
+        <arguments>
+            <argument name="quoteValidationRule" xsi:type="object">Aheadworks\MobileAppConnector\Model\Payment\Cart\ValidationRules\QuoteValidationComposite</argument>
+        </arguments>
+    </virtualType>
+    <type name="Aheadworks\MobileAppConnector\Model\Payment\QuoteManagement">
+        <arguments>
+            <argument name="cartValidator" xsi:type="object">Aheadworks\MobileAppConnector\Model\Payment\Cart\QuoteValidator</argument>
         </arguments>
     </type>
     <type name="Magento\Checkout\Controller\Onepage\Success">

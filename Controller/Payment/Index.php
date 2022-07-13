@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Aheadworks\MobileAppConnector\Controller\Payment;
 
+use Aheadworks\MobileAppConnector\Model\Payment\CheckoutInitializer;
+use Aheadworks\MobileAppConnector\Model\Payment\QuoteManagement;
 use Aheadworks\MobileAppConnector\Model\Service\Encryption;
 use Magento\Framework\App\Action\Context;
 use Magento\Framework\App\RequestInterface;
@@ -11,7 +13,6 @@ use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\View\Result\PageFactory;
 use Magento\Framework\Controller\Result\JsonFactory as JsonResultFactory;
-use Aheadworks\MobileAppConnector\Model\Payment\Cart\Authorization as CartAuth;
 use Magento\Framework\App\Action\Action;
 use Magento\Framework\Controller\ResultInterface;
 
@@ -36,9 +37,14 @@ class Index extends Action
     private $jsonResultFactory;
 
     /**
-     * @var CartAuth
+     * @var QuoteManagement
      */
-    private $cartAuth;
+    private $quoteManagement;
+
+    /**
+     * @var CheckoutInitializer
+     */
+    private $checkoutInitializer;
 
     /**
      * Index constructor.
@@ -47,41 +53,48 @@ class Index extends Action
      * @param PageFactory $resultPageFactory
      * @param Encryption $encryption
      * @param JsonResultFactory $jsonResultFactory
-     * @param CartAuth $cartAuth
+     * @param QuoteManagement $quoteManagement
+     * @param CheckoutInitializer $checkoutInitializer
      */
     public function __construct(
         Context $context,
         PageFactory $resultPageFactory,
         Encryption $encryption,
         JsonResultFactory $jsonResultFactory,
-        CartAuth $cartAuth
+        QuoteManagement $quoteManagement,
+        CheckoutInitializer $checkoutInitializer
     ) {
         $this->resultPageFactory = $resultPageFactory;
         $this->encryption = $encryption;
         $this->jsonResultFactory = $jsonResultFactory;
-        $this->cartAuth = $cartAuth;
+        $this->quoteManagement = $quoteManagement;
+        $this->checkoutInitializer = $checkoutInitializer;
         parent::__construct($context);
     }
 
     /**
+     * Dispatch request (payment page initialization)
+     *
      * @param RequestInterface $request
      * @return ResponseInterface|\Magento\Framework\Controller\Result\Json
      * @throws \Magento\Framework\Exception\NotFoundException
+     * @throws LocalizedException
      */
     public function dispatch(RequestInterface $request)
     {
         $cartIdHash = (string)$request->getParam('id');
 
-        $cartId = (int)$this->encryption->decryptUrlParam($cartIdHash);
-        if (!$cartId) {
-            return $this->jsonResultFactory->create()->setData(['exception' => __('Link is not correct!')]);
-        }
-
         try {
-            /** @var \Magento\Quote\Model\Quote $quote */
-            $quote = $this->cartAuth->loadQuote($cartId);
-            $this->cartAuth->authorizeCustomer($quote);
-            $this->cartAuth->initializeCheckoutSession($quote);
+            $cartId = (int)$this->encryption->decryptUrlParam($cartIdHash);
+            if (!$cartId) {
+                return $this->jsonResultFactory->create()->setData(['exception' => __('Link is not correct!')]);
+            }
+
+            $quote = $this->quoteManagement->loadQuoteByCartId($cartId);
+            $this->quoteManagement->validateQuote($quote);
+
+            $this->checkoutInitializer->initializeCustomerSession($quote);
+            $this->checkoutInitializer->initializeCheckoutSession($quote);
         } catch (NoSuchEntityException | LocalizedException $ex) {
             return $this->jsonResultFactory->create()->setData(['exception' => $ex->getMessage()]);
         }

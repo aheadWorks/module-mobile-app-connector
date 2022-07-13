@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Aheadworks\MobileAppConnector\Model\Service;
 
+use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Url\DecoderInterface;
 use Magento\Framework\Url\EncoderInterface;
 use Magento\Framework\Encryption\EncryptorInterface;
@@ -42,23 +43,37 @@ class Encryption
     }
 
     /**
+     * Encrypt str url param
+     *
      * @param string $param
      * @return string
+     * @throws LocalizedException
      */
-    public function encryptUrlParam(string $param)
+    public function encryptUrlParam(string $param): string
     {
-        $encryptedStr = $this->encryptor->encrypt($param);
-        return $this->urlEncoder->encode($encryptedStr);
+        try {
+            $encryptedStr = $this->encryptor->encrypt($param);
+            return $this->urlEncoder->encode($encryptedStr);
+        } catch (\Exception $ex) {
+            throw new LocalizedException(__('Encrypt Url Param Exception: "%1"', $ex->getMessage()), $ex);
+        }
     }
 
     /**
+     * Decrypt str url param
+     *
      * @param string $hash
      * @return string
+     * @throws LocalizedException
      */
-    public function decryptUrlParam(string $hash)
+    public function decryptUrlParam(string $hash): string
     {
-        $decodedHash = $this->urlDecoder->decode($hash);
-        $decodedHash = str_replace(" ", "+", $decodedHash);
-        return $this->encryptor->decrypt($decodedHash);
+        try {
+            $decodedHash = $this->urlDecoder->decode($hash);
+            $decodedHash = str_replace(" ", "+", $decodedHash);
+            return $this->encryptor->decrypt($decodedHash);
+        } catch (\Exception $ex) {
+            throw new LocalizedException(__('Decrypt Url Param Exception: "%1"', $ex->getMessage()), $ex);
+        }
     }
 }

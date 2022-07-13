@@ -37,7 +37,7 @@ class SuccessPlugin
     public function afterExecute(Subject $subject, ResultInterface $result)
     {
         $checkoutSession = $subject->getOnepage()->getCheckout();
-        if ($checkoutSession->getAwMacPaymentProcess()) {
+        if ($checkoutSession->getAwMacPaymentProcessFlag()) {
             $customerSession = $subject->getOnepage()->getCustomerSession();
 
             $resultOrderData['order'] = [
@@ -45,11 +45,8 @@ class SuccessPlugin
                 'order_id' => $checkoutSession->getLastRealOrder()->getId()
             ];
 
-            if ($customerSession->isLoggedIn()) {
-                $customerSession->logout();
-            }
-
-            $checkoutSession->unsAwMacPaymentProcess();
+            $customerSession->logout();
+            $checkoutSession->unsAwMacPaymentProcessFlag();
 
             return $this->jsonResultFactory->create()->setData($resultOrderData);
         }
