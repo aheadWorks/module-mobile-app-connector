@@ -58,8 +58,8 @@ class PaymentManagement implements PaymentManagementInterface
         $link = $this->urlBuilder->getUrl(
             'aw_mobile_app/payment',
             ['_current' => false,'_use_rewrite' => true, '_query' => ['id' => $encryptedCartId]]
-        );
+        ) . '#payment';
 
-        return $this->jsonSerializer->serialize(['link' => $link . '#payment']);
+        return $this->jsonSerializer->serialize(['link' => $link]);
     }
 }

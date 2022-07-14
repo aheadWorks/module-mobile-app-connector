@@ -42,7 +42,7 @@ class SuccessPlugin
 
             $resultOrderData['order'] = [
                 'increment_id' => $checkoutSession->getLastRealOrder()->getIncrementId(),
-                'order_id' => $checkoutSession->getLastRealOrder()->getId()
+                'id' => $checkoutSession->getLastRealOrder()->getId()
             ];
 
             $customerSession->logout();

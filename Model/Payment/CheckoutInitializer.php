@@ -45,15 +45,15 @@ class CheckoutInitializer
      */
     public function initializeCustomerSession(Quote $quote): void
     {
-        if (!$quote->getCustomerIsGuest()) {
+        if ($quote->getCustomerIsGuest()) {
+            $this->customerManagement->logoutCustomer();
+        } else {
             if (!$this->customerManagement->isCustomerLoggedIn($quote->getCustomer())) {
                 $this->customerManagement->authorizeCustomer(
                     $quote->getCustomer()->getEmail(),
                     $quote->getStore()->getWebsiteId()
                 );
             }
-        } else {
-            $this->customerManagement->logoutCustomer();
         }
     }
 
