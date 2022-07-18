@@ -95,4 +95,11 @@
             <resource ref="Aheadworks_MobileAppConnector::general"/>
         </resources>
     </route>
+    <!-- for payment-->
+    <route url="/V1/payment/generate-link" method="POST">
+        <service class="Aheadworks\MobileAppConnector\Api\PaymentManagementInterface" method="generatePaymentLink"/>
+        <resources>
+            <resource ref="Aheadworks_MobileAppConnector::general"/>
+        </resources>
+    </route>
 </routes>
