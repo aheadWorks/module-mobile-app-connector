@@ -13,12 +13,12 @@ use Magento\Framework\Exception\NoSuchEntityException;
 interface ExtendCategoryManagementInterface
 {
     /**
-     * Retrieve list of categories
+     * Retrieve list of categories with storefront product count
      *
      * @param int|null $rootCategoryId
      * @param int|null $depth
      * @return CategoryTreeInterface containing Tree objects
      * @throws NoSuchEntityException If ID is not found
      */
-    public function getTree(int $rootCategoryId = null, int $depth = null): CategoryTreeInterface;
+    public function getTree(?int $rootCategoryId = null, ?int $depth = null): CategoryTreeInterface;
 }

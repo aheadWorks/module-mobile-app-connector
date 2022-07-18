@@ -46,45 +46,46 @@ class CategoryTree
     public function setStorefrontProductCount(CategoryTreeInterface $treeCategories): void
     {
         $categoriesId = $this->extractCategoriesId($treeCategories);
-        $categoriesCollection = $this->categoriesCollectionFactory->create()
+        $categoryCollection = $this->categoriesCollectionFactory->create()
             ->addFieldToFilter('entity_id', ['in' => $categoriesId]);
 
-        $this->addProductCountToCategories($categoriesCollection);
-        $this->mergeProductCountToTree($treeCategories, $categoriesCollection);
+        $this->addProductCountToCategories($categoryCollection);
+        $this->mergeProductCountToTree($treeCategories, $categoryCollection);
     }
 
     /**
      * Extract categories id from tree of categories
      *
-     * @param array|CategoryTreeInterface $treeCategories
-     * @param array $categoriesId
+     * @param CategoryTreeInterface $node
      * @return array
      */
-    private function extractCategoriesId($treeCategories, array $categoriesId = []): array
+    private function extractCategoriesId(CategoryTreeInterface $node): array
     {
-        $treeCategories = is_array($treeCategories) ? $treeCategories : [$treeCategories];
-        foreach ($treeCategories as $treeCategory) {
-            $categoriesId[] = $treeCategory->getId();
-            if ($treeCategory->getChildrenData()) {
-                $childrenCategoriesId = $this->extractCategoriesId($treeCategory->getChildrenData(), $categoriesId);
-                foreach ($childrenCategoriesId as $childCategoriesId) {
-                    $categoriesId[] = $childCategoriesId;
+        $categoriesId = [];
+        if ($node->getId()) {
+            $categoriesId[] = $node->getId();
+            if ($childrenNode = $node->getChildrenData()) {
+                foreach ($childrenNode as $childNode) {
+                    $nodeCategoriesId = $this->extractCategoriesId($childNode);
+                    foreach ($nodeCategoriesId as $nodeCategoryId) {
+                        $categoriesId[] = $nodeCategoryId;
+                    }
                 }
             }
         }
-        return array_unique($categoriesId);
+        return $categoriesId;
     }
 
     /**
      * Add storefront product count to categories collection
      *
-     * @param CategoryCollection $categories
+     * @param CategoryCollection $categoryCollection
      * @return void
      */
-    private function addProductCountToCategories(CategoryCollection $categories): void
+    private function addProductCountToCategories(CategoryCollection $categoryCollection): void
     {
         $productCollection = $this->productCollectionFactory->create();
-        $productCollection->addCountToCategories($categories);
+        $productCollection->addCountToCategories($categoryCollection);
     }
 
     /**
