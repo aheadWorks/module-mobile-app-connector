@@ -102,4 +102,11 @@
             <resource ref="Aheadworks_MobileAppConnector::general"/>
         </resources>
     </route>
+    <!-- for categories-->
+    <route url="/V1/aw-mac/categories" method="GET">
+        <service class="Aheadworks\MobileAppConnector\Api\ExtendCategoryManagementInterface" method="getTree" />
+        <resources>
+            <resource ref="Magento_Catalog::categories" />
+        </resources>
+    </route>
 </routes>

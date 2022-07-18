@@ -14,6 +14,7 @@
     <preference for="Aheadworks\MobileAppConnector\Api\HomepageRepositoryInterface" type="Aheadworks\MobileAppConnector\Model\HomepageRepository" />
 
     <preference for="Aheadworks\MobileAppConnector\Api\PaymentManagementInterface" type="Aheadworks\MobileAppConnector\Model\PaymentManagement" />
+    <preference for="Aheadworks\MobileAppConnector\Api\ExtendCategoryManagementInterface" type="Aheadworks\MobileAppConnector\Model\ExtendCategoryManagement" />
 
     <virtualType name="Aheadworks\MobileAppConnector\Model\ResourceModel\Library\Item\Collection\CompositeModifier"
                  type="Aheadworks\MobileAppConnector\Model\ResourceModel\Collection\CompositeModifier">
