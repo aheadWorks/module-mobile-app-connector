@@ -54,7 +54,7 @@ class CategoryTree
     }
 
     /**
-     * Extract categories id from tree of categories
+     * Extract category id list from tree of categories
      *
      * @param CategoryTreeInterface $node
      * @return array

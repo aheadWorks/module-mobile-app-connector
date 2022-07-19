@@ -13,7 +13,7 @@ use Magento\Framework\Exception\NoSuchEntityException;
 interface ExtendCategoryManagementInterface
 {
     /**
-     * Retrieve list of categories with storefront product count
+     * Getting extended categories that include the count of storefront products
      *
      * @param int|null $rootCategoryId
      * @param int|null $depth
