@@ -51,6 +51,8 @@ class CategoryTree
 
         $this->addProductCountToCategories($categoryCollection);
         $this->mergeProductCountToTree($treeCategories, $categoryCollection);
+
+        $this->calcTotalProductCountTree($treeCategories);
     }
 
     /**
@@ -86,6 +88,40 @@ class CategoryTree
     {
         $productCollection = $this->productCollectionFactory->create();
         $productCollection->addCountToCategories($categoryCollection);
+    }
+
+    /**
+     * Calc total product count for categories of tree
+     *
+     * @param array|CategoryTreeInterface $treeCategories
+     * @return void
+     */
+    private function calcTotalProductCountTree($treeCategories): void
+    {
+        $treeCategories = is_array($treeCategories) ? $treeCategories : [$treeCategories];
+        /** @var CategoryTreeInterface $treeCategory */
+        foreach ($treeCategories as $treeCategory) {
+            $productCountSum = $treeCategory->getProductCount() + $this->getChildrenTotalProductCount($treeCategory);
+            $treeCategory->setProductCount($productCountSum);
+            if ($treeCategory->getChildrenData()) {
+                $this->calcTotalProductCountTree($treeCategory->getChildrenData());
+            }
+        }
+    }
+
+    /**
+     * Get total product count of category tree children
+     *
+     * @param CategoryTreeInterface $node
+     * @return int
+     */
+    private function getChildrenTotalProductCount(CategoryTreeInterface $node): int
+    {
+        $sum = 0;
+        foreach ($node->getChildrenData() as $child) {
+            $sum += $child->getProductCount() + $this->getChildrenTotalProductCount($child);
+        }
+        return $sum;
     }
 
     /**
