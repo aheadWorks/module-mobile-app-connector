@@ -7,6 +7,7 @@ use Magento\Catalog\Api\Data\CategoryTreeInterface;
 use Magento\Catalog\Model\ResourceModel\Category\Collection as CategoryCollection;
 use Magento\Catalog\Model\ResourceModel\Category\CollectionFactory as CategoryCollectionFactory;
 use Magento\Catalog\Model\ResourceModel\Product\CollectionFactory as ProductCollectionFactory;
+use Magento\Catalog\Model\ResourceModel\Product\Collection as ProductCollection;
 
 /**
  * Class service CategoryTree
@@ -46,8 +47,12 @@ class CategoryTree
     public function setStorefrontProductCount(CategoryTreeInterface $treeCategories): void
     {
         $categoriesId = $this->extractCategoriesId($treeCategories);
-        $categoryCollection = $this->categoriesCollectionFactory->create()
-            ->addFieldToFilter('entity_id', ['in' => $categoriesId]);
+        /** @var CategoryCollection $categoryCollection */
+        $categoryCollection = $this->categoriesCollectionFactory
+            ->create()
+            ->addFieldToFilter('entity_id', ['in' => $categoriesId])
+            ->addAttributeToSelect('is_anchor')
+        ;
 
         $this->addProductCountToCategories($categoryCollection);
         $this->mergeProductCountToTree($treeCategories, $categoryCollection);
