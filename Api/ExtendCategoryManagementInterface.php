@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Aheadworks\MobileAppConnector\Api;
 
 use Magento\Catalog\Api\Data\CategoryTreeInterface;
-use Magento\Framework\Exception\NoSuchEntityException;
+use Magento\Framework\Exception\LocalizedException;
 
 /**
  * Interface ExtendCategoryManagementInterface
@@ -18,7 +18,7 @@ interface ExtendCategoryManagementInterface
      * @param int|null $rootCategoryId
      * @param int|null $depth
      * @return CategoryTreeInterface containing Tree objects
-     * @throws NoSuchEntityException If ID is not found
+     * @throws LocalizedException
      */
     public function getTree(?int $rootCategoryId = null, ?int $depth = null): CategoryTreeInterface;
 }

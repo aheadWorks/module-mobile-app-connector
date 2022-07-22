@@ -8,6 +8,7 @@ use Magento\Catalog\Model\ResourceModel\Category\Collection as CategoryCollectio
 use Magento\Catalog\Model\ResourceModel\Category\CollectionFactory as CategoryCollectionFactory;
 use Magento\Catalog\Model\ResourceModel\Product\CollectionFactory as ProductCollectionFactory;
 use Magento\Catalog\Model\ResourceModel\Product\Collection as ProductCollection;
+use Magento\Framework\Exception\LocalizedException;
 
 /**
  * Class service CategoryTree
@@ -17,7 +18,7 @@ class CategoryTree
     /**
      * @var CategoryCollectionFactory
      */
-    private $categoriesCollectionFactory;
+    private $categoryCollectionFactory;
 
     /**
      * @var ProductCollectionFactory
@@ -27,14 +28,14 @@ class CategoryTree
     /**
      * CategoryTree constructor.
      *
-     * @param CategoryCollectionFactory $categoriesCollectionFactory
+     * @param CategoryCollectionFactory $categoryCollectionFactory
      * @param ProductCollectionFactory $productCollectionFactory
      */
     public function __construct(
-        CategoryCollectionFactory $categoriesCollectionFactory,
+        CategoryCollectionFactory $categoryCollectionFactory,
         ProductCollectionFactory $productCollectionFactory
     ) {
-        $this->categoriesCollectionFactory = $categoriesCollectionFactory;
+        $this->categoryCollectionFactory = $categoryCollectionFactory;
         $this->productCollectionFactory = $productCollectionFactory;
     }
 
@@ -43,13 +44,14 @@ class CategoryTree
      *
      * @param CategoryTreeInterface $treeCategories
      * @return void
+     * @throws LocalizedException
      */
     public function setStorefrontProductCount(CategoryTreeInterface $treeCategories): void
     {
         $categoriesId = $this->extractCategoriesId($treeCategories);
         /** @var CategoryCollection $categoryCollection */
-        $categoryCollection = $this->categoriesCollectionFactory
-            ->create()
+        $categoryCollection = $this->categoryCollectionFactory->create();
+        $categoryCollection
             ->addFieldToFilter('entity_id', ['in' => $categoriesId])
             ->addAttributeToSelect('is_anchor')
         ;
@@ -82,7 +84,7 @@ class CategoryTree
     }
 
     /**
-     * Add storefront product count to categories collection
+     * Add storefront product count to category collection
      *
      * @param CategoryCollection $categoryCollection
      * @return void
