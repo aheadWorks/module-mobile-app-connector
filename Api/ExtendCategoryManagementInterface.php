@@ -3,9 +3,6 @@ declare(strict_types=1);
 
 namespace Aheadworks\MobileAppConnector\Api;
 
-use Magento\Catalog\Api\Data\CategoryTreeInterface;
-use Magento\Framework\Exception\LocalizedException;
-
 /**
  * Interface ExtendCategoryManagementInterface
  * @api
@@ -17,8 +14,11 @@ interface ExtendCategoryManagementInterface
      *
      * @param int|null $rootCategoryId
      * @param int|null $depth
-     * @return CategoryTreeInterface containing Tree objects
-     * @throws LocalizedException
+     * @return \Magento\Catalog\Api\Data\CategoryTreeInterface containing Tree objects
+     * @throws \Magento\Framework\Exception\LocalizedException
      */
-    public function getTree(?int $rootCategoryId = null, ?int $depth = null): CategoryTreeInterface;
+    public function getTree(
+        ?int $rootCategoryId = null,
+        ?int $depth = null
+    ): \Magento\Catalog\Api\Data\CategoryTreeInterface;
 }
