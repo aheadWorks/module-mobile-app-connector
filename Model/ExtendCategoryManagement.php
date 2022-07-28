@@ -16,12 +16,12 @@ class ExtendCategoryManagement implements ExtendCategoryManagementInterface
     /**
      * @var CategoryManagement
      */
-    private $categoryManagement;
+    private CategoryManagement $categoryManagement;
 
     /**
      * @var CategoryTree
      */
-    private $categoryTreeService;
+    private CategoryTree $categoryTreeService;
 
     /**
      * ExtendCategoryManagement constructor.
@@ -40,10 +40,17 @@ class ExtendCategoryManagement implements ExtendCategoryManagementInterface
     /**
      * @inheritDoc
      */
-    public function getTree(int $rootCategoryId = null, int $depth = null): CategoryTreeInterface
+    public function getTree(
+        int $storeId,
+        int $rootCategoryId = null,
+        int $depth = null
+    ): CategoryTreeInterface
     {
         $treeCategories = $this->categoryManagement->getTree($rootCategoryId, $depth);
-        $this->categoryTreeService->setStorefrontProductCount($treeCategories);
+        $this->categoryTreeService->setStorefrontProductCount(
+            $treeCategories,
+            $storeId
+        );
 
         return $treeCategories;
     }

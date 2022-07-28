@@ -40,13 +40,18 @@ class CategoryTree
     }
 
     /**
-     * Set storefront product count to tree of categories
+     * Add to the category tree the count of products,
+     * available and visible for specific store view id
      *
      * @param CategoryTreeInterface $treeCategories
+     * @param int $storeId
      * @return void
      * @throws LocalizedException
      */
-    public function setStorefrontProductCount(CategoryTreeInterface $treeCategories): void
+    public function setStorefrontProductCount(
+        CategoryTreeInterface $treeCategories,
+        int $storeId
+    ): void
     {
         $categoriesId = $this->extractCategoriesId($treeCategories);
         /** @var CategoryCollection $categoryCollection */
@@ -56,7 +61,10 @@ class CategoryTree
             ->addAttributeToSelect('is_anchor')
         ;
 
-        $this->addProductCountToCategories($categoryCollection);
+        $this->addProductCountToCategories(
+            $categoryCollection,
+            $storeId
+        );
         $this->mergeProductCountToTree($treeCategories, $categoryCollection);
     }
 
@@ -84,15 +92,21 @@ class CategoryTree
     }
 
     /**
-     * Add storefront product count to category collection
+     * Add to the category collection the count of products,
+     * available and visible for specific store view id
      *
      * @param CategoryCollection $categoryCollection
+     * @param int $storeId
      * @return void
      */
-    private function addProductCountToCategories(CategoryCollection $categoryCollection): void
+    private function addProductCountToCategories(
+        CategoryCollection $categoryCollection,
+        int $storeId
+    ): void
     {
         /** @var ProductCollection $productCollection */
         $productCollection = $this->productCollectionFactory->create();
+        $productCollection->setStore($storeId);
         $productCollection->addCountToCategories($categoryCollection);
     }
 
