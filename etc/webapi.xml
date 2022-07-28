@@ -2,17 +2,17 @@
 <routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
     <!-- for get bestseller product-->
     <route url="/V1/products/best-selling/period/:period/storeid/:storeId/" method="GET">
-         <service class="Aheadworks\MobileAppConnector\Api\BestSellingProductInterface" method="getBestSellingProducts"/>
-         <resources>
-             <resource ref="self" />
-         </resources>
+        <service class="Aheadworks\MobileAppConnector\Api\BestSellingProductInterface" method="getBestSellingProducts"/>
+        <resources>
+            <resource ref="Aheadworks_MobileAppConnector::general" />
+        </resources>
     </route>
-	<route method="GET" url="/V1/app-preference-data">
-		<service class="Aheadworks\MobileAppConnector\Api\AppPreferencesDataManagementInterface" method="getAppPreferencesData"/>
-		<resources>
-			<resource ref="self"/>
-		</resources>
-	</route>
+    <route method="GET" url="/V1/app-preference-data">
+        <service class="Aheadworks\MobileAppConnector\Api\AppPreferencesDataManagementInterface" method="getAppPreferencesData"/>
+        <resources>
+            <resource ref="Aheadworks_MobileAppConnector::app_preferences"/>
+        </resources>
+    </route>
     <route url="/V1/wishlist/add/:productId" method="POST">
         <service class="Aheadworks\MobileAppConnector\Api\WishlistManagementInterface" method="addProductToWishlist"/>
         <resources>
@@ -52,53 +52,61 @@
     </route>
     <route url="/V1/customer/order/:id" method="GET">
         <service class="Aheadworks\MobileAppConnector\Api\CustomerOrderInterface" method="get"/>
-            <resources>
-                <resource ref="self"/>
-            </resources>
-            <data>
-                <parameter name="customerId" force="true">%customer_id%</parameter>
-            </data>
+        <resources>
+            <resource ref="self"/>
+        </resources>
+        <data>
+            <parameter name="customerId" force="true">%customer_id%</parameter>
+        </data>
     </route>
-       <!-- for customer purchased downloadable productst-->
+    <!-- for customer purchased downloadable productst-->
     <route url="/V1/customer/libraryItemsList" method="GET">
         <service class="Aheadworks\MobileAppConnector\Api\LibraryItemRepositoryInterface" method="getList"/>
-            <resources>
-                <resource ref="self"/>
-            </resources>
-            <data>
-                <parameter name="customerId" force="true">%customer_id%</parameter>
-            </data>
+        <resources>
+            <resource ref="self"/>
+        </resources>
+        <data>
+            <parameter name="customerId" force="true">%customer_id%</parameter>
+        </data>
     </route>
     <route url="/V1/products/most-viewed/:limit/storeid/:storeId" method="GET">
-         <service class="Aheadworks\MobileAppConnector\Api\MostViewedProductInterface" method="getMostViewedProducts"/>
-         <resources>
-             <resource ref="self" />
-         </resources>
-         <data>
-             <parameter name="customerId" force="true">%customer_id%</parameter>
-         </data>
-     </route>
-     <!-- for related products-->
+        <service class="Aheadworks\MobileAppConnector\Api\MostViewedProductInterface" method="getMostViewedProducts"/>
+        <resources>
+            <resource ref="Aheadworks_MobileAppConnector::general" />
+        </resources>
+    </route>
+    <!-- for related products-->
     <route url="/V1/relatedproducts/:sku/storeid/:storeId" method="GET">
         <service class="Aheadworks\MobileAppConnector\Api\RelatedProductsRepositoryInterface" method="getRelatedProducts"/>
-            <resources>
-                <resource ref="self"/>
-            </resources>
-            <data>
-                <parameter name="customerId" force="true">%customer_id%</parameter>
-            </data>
+        <resources>
+            <resource ref="Aheadworks_MobileAppConnector::general"/>
+        </resources>
     </route>
     <!-- for get app customization tenant id-->
     <route url="/V1/overview" method="GET">
         <service class="Aheadworks\MobileAppConnector\Api\AppOverViewRepositoryInterface" method="getAppTenantId"/>
-            <resources>
-                <resource ref="self"/>
-            </resources>
+        <resources>
+            <resource ref="Aheadworks_MobileAppConnector::app_overview"/>
+        </resources>
     </route>
-     <route url="/V1/configurable-products-option/:sku/children" method="GET">
+    <route url="/V1/configurable-products-option/:sku/children" method="GET">
         <service class="Aheadworks\MobileAppConnector\Api\ConfigurableProductManagementInterface" method="getChildren"/>
         <resources>
-            <resource ref="self"/>
+            <resource ref="Aheadworks_MobileAppConnector::general"/>
+        </resources>
+    </route>
+    <!-- for payment-->
+    <route url="/V1/payment/generate-link" method="POST">
+        <service class="Aheadworks\MobileAppConnector\Api\PaymentManagementInterface" method="generatePaymentLink"/>
+        <resources>
+            <resource ref="Aheadworks_MobileAppConnector::general"/>
+        </resources>
+    </route>
+    <!-- for categories-->
+    <route url="/V1/aw-mac/categories" method="GET">
+        <service class="Aheadworks\MobileAppConnector\Api\ExtendCategoryManagementInterface" method="getTree" />
+        <resources>
+            <resource ref="Magento_Catalog::categories" />
         </resources>
     </route>
 </routes>

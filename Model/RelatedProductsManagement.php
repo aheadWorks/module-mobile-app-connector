@@ -62,7 +62,7 @@ class RelatedProductsManagement implements RelatedProductsRepositoryInterface
     /**
      * @inheritdoc
      */
-    public function getRelatedProducts($customerId, $sku, $storeId = null)
+    public function getRelatedProducts($sku, $storeId = null)
     {
         if (empty($sku) || !isset($sku)) {
             throw new InputException(__('Sku required'));
