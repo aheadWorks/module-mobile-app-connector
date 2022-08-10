@@ -8,7 +8,7 @@
             <parameter name="title" xsi:type="text" required="false" visible="true">
                 <label translate="true">Title</label>
             </parameter>
-            <parameter name="show_pager" xsi:type="select" visible="true"
+            <parameter name="show_pager" xsi:type="select" visible="false"
                        source_model="Magento\Config\Model\Config\Source\Yesno">
                 <label translate="true">Display Page Control</label>
             </parameter>
@@ -26,7 +26,7 @@
             <parameter name="template" xsi:type="select" required="true" visible="true">
                 <label translate="true">Template</label>
                 <options>
-                    <option name="default" value="Aheadworks_MobileAppConnector::product/widget/content/grid.phtml" selected="true">
+                    <option name="default" value="Aheadworks_MobileAppConnector::product/widget/content/carousel.phtml" selected="true">
                         <label translate="true">Viewed Products List</label>
                     </option>
                 </options>
@@ -96,7 +96,7 @@
             <parameter name="title" xsi:type="text" required="false" visible="true">
                 <label translate="true">Title</label>
             </parameter>
-            <parameter name="show_pager" xsi:type="select" visible="true"
+            <parameter name="show_pager" xsi:type="select" visible="false"
                        source_model="Magento\Config\Model\Config\Source\Yesno">
                 <label translate="true">Display Page Control</label>
             </parameter>
@@ -114,7 +114,7 @@
             <parameter name="template" xsi:type="select" required="true" visible="true">
                 <label translate="true">Template</label>
                 <options>
-                    <option name="default" value="Aheadworks_MobileAppConnector::product/widget/content/grid.phtml" selected="true">
+                    <option name="default" value="Aheadworks_MobileAppConnector::product/widget/content/carousel.phtml" selected="true">
                         <label translate="true">Best Selling Products List</label>
                     </option>
                 </options>
