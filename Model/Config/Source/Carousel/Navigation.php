@@ -5,6 +5,9 @@ namespace Aheadworks\MobileAppConnector\Model\Config\Source\Carousel;
 
 use Magento\Framework\Data\OptionSourceInterface;
 
+/**
+ * Class Navigation config source
+ */
 class Navigation implements OptionSourceInterface
 {
     public const ARROWS_DOTS_SELECT_VAL = 0;
