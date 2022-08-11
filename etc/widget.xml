@@ -76,6 +76,88 @@
                     </option>
                 </options>
             </parameter>
+<!-- settings of slider -->
+            <parameter name="slider_show_slides_count" xsi:type="text" required="true" visible="true">
+                <label translate="true">Slides to Show</label>
+                <description translate="true">
+                    <![CDATA[# of slides to show]]>
+                </description>
+                <value>3</value>
+            </parameter>
+            <parameter name="slider_scroll_slides_count" xsi:type="text" required="true" visible="true">
+                <label translate="true">Slides to Scroll</label>
+                <description translate="true">
+                    <![CDATA[# of slides to scroll]]>
+                </description>
+                <value>3</value>
+            </parameter>
+            <parameter name="slider_animation_speed" xsi:type="text" required="true" visible="true">
+                <label translate="true">Animation Speed</label>
+                <description translate="true">
+                    <![CDATA[Slide/Fade animation speed]]>
+                </description>
+                <value>300</value>
+            </parameter>
+            <parameter name="slider_navigation" xsi:type="select"
+                       source_model="Aheadworks\MobileAppConnector\Model\Config\Source\Carousel\Navigation"
+                       required="false" visible="true">
+                <label translate="true">Navigation</label>
+                <description translate="true">
+                    <![CDATA[Show dot indicators or Prev/Next Arrows]]>
+                </description>
+            </parameter>
+            <parameter name="slider_pause_on_hover" xsi:type="select" required="false" visible="true">
+                <label translate="true">Pause on Hover</label>
+                <description translate="true">
+                    <![CDATA[Pause Autoplay On Hover]]>
+                </description>
+                <options>
+                    <option name="0" value="0">
+                        <label translate="true">No</label>
+                    </option>
+                    <option name="1" value="1" selected="true">
+                        <label translate="true">Yes</label>
+                    </option>
+                </options>
+            </parameter>
+            <parameter name="slider_autoplay" xsi:type="select" required="false" visible="true">
+                <label translate="true">Autoplay</label>
+                <description translate="true">
+                    <![CDATA[Enables Autoplay]]>
+                </description>
+                <options>
+                    <option name="0" value="0" selected="true">
+                        <label translate="true">No</label>
+                    </option>
+                    <option name="1" value="1">
+                        <label translate="true">Yes</label>
+                    </option>
+                </options>
+            </parameter>
+            <parameter name="slider_autoplay_speed" xsi:type="text" required="true" visible="true">
+                <label translate="true">Autoplay Speed</label>
+                <description translate="true">
+                    <![CDATA[Autoplay Speed in milliseconds]]>
+                </description>
+                <depends>
+                    <parameter name="slider_autoplay" value="1" />
+                </depends>
+                <value>3000</value>
+            </parameter>
+            <parameter name="slider_infinite_loop" xsi:type="select" required="false" visible="true">
+                <label translate="true">Infinite Loop</label>
+                <description translate="true">
+                    <![CDATA[Infinite loop sliding]]>
+                </description>
+                <options>
+                    <option name="0" value="0">
+                        <label translate="true">No</label>
+                    </option>
+                    <option name="1" value="1" selected="true">
+                        <label translate="true">Yes</label>
+                    </option>
+                </options>
+            </parameter>
         </parameters>
         <containers>
             <container name="content">
@@ -177,6 +259,88 @@
             <parameter name="condition" xsi:type="conditions" visible="true" required="true" sort_order="10"
                        class="Magento\CatalogWidget\Block\Product\Widget\Conditions">
                 <label translate="true">Conditions</label>
+            </parameter>
+<!-- settings of slider -->
+            <parameter name="slider_show_slides_count" xsi:type="text" required="true" visible="true">
+                <label translate="true">Slides to Show</label>
+                <description translate="true">
+                    <![CDATA[# of slides to show]]>
+                </description>
+                <value>3</value>
+            </parameter>
+            <parameter name="slider_scroll_slides_count" xsi:type="text" required="true" visible="true">
+                <label translate="true">Slides to Scroll</label>
+                <description translate="true">
+                    <![CDATA[# of slides to scroll]]>
+                </description>
+                <value>3</value>
+            </parameter>
+            <parameter name="slider_animation_speed" xsi:type="text" required="true" visible="true">
+                <label translate="true">Animation Speed</label>
+                <description translate="true">
+                    <![CDATA[Slide/Fade animation speed]]>
+                </description>
+                <value>300</value>
+            </parameter>
+            <parameter name="slider_navigation" xsi:type="select"
+                       source_model="Aheadworks\MobileAppConnector\Model\Config\Source\Carousel\Navigation"
+                       required="false" visible="true">
+                <label translate="true">Navigation</label>
+                <description translate="true">
+                    <![CDATA[Show dot indicators or Prev/Next Arrows]]>
+                </description>
+            </parameter>
+            <parameter name="slider_pause_on_hover" xsi:type="select" required="false" visible="true">
+                <label translate="true">Pause on Hover</label>
+                <description translate="true">
+                    <![CDATA[Pause Autoplay On Hover]]>
+                </description>
+                <options>
+                    <option name="0" value="0">
+                        <label translate="true">No</label>
+                    </option>
+                    <option name="1" value="1" selected="true">
+                        <label translate="true">Yes</label>
+                    </option>
+                </options>
+            </parameter>
+            <parameter name="slider_autoplay" xsi:type="select" required="false" visible="true">
+                <label translate="true">Autoplay</label>
+                <description translate="true">
+                    <![CDATA[Enables Autoplay]]>
+                </description>
+                <options>
+                    <option name="0" value="0" selected="true">
+                        <label translate="true">No</label>
+                    </option>
+                    <option name="1" value="1">
+                        <label translate="true">Yes</label>
+                    </option>
+                </options>
+            </parameter>
+            <parameter name="slider_autoplay_speed" xsi:type="text" required="true" visible="true">
+                <label translate="true">Autoplay Speed</label>
+                <description translate="true">
+                    <![CDATA[Autoplay Speed in milliseconds]]>
+                </description>
+                <depends>
+                    <parameter name="slider_autoplay" value="1" />
+                </depends>
+                <value>3000</value>
+            </parameter>
+            <parameter name="slider_infinite_loop" xsi:type="select" required="false" visible="true">
+                <label translate="true">Infinite Loop</label>
+                <description translate="true">
+                    <![CDATA[Infinite loop sliding]]>
+                </description>
+                <options>
+                    <option name="0" value="0">
+                        <label translate="true">No</label>
+                    </option>
+                    <option name="1" value="1" selected="true">
+                        <label translate="true">Yes</label>
+                    </option>
+                </options>
             </parameter>
         </parameters>
         <containers>
