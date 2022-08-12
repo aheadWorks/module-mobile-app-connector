@@ -20,11 +20,12 @@ use Magento\Framework\App\Action\Action;
     $showWishlist = $block->getViewModel() ? $block->getViewModel()->isShowWishlist($block) : false;
     $showCompare = $block->getViewModel() ? $block->getViewModel()->isShowCompare($block) : false;
     $showReviewsRating = $block->getViewModel() ? $block->getViewModel()->isShowReviewsRating($block) : false;
+    $dataSliderOptions = $block->getViewModel() ? $block->getViewModel()->getJsonDataSliderOptions($block) : '{}';
     $showCart = true;
     $templateType = \Magento\Catalog\Block\Product\ReviewRendererInterface::SHORT_VIEW;
     $description = false;
     ?>
-    <div class="block widget block-products-list <?= /* @noEscape */ $mode ?>">
+    <div class="block widget block-products-list <?= /* @noEscape */ $mode ?>" >
         <?php if ($block->getTitle()): ?>
             <div class="block-title">
                 <strong><?= $block->escapeHtml(__($block->getTitle())) ?></strong>
@@ -33,7 +34,7 @@ use Magento\Framework\App\Action\Action;
         <div class="block-content">
             <?= /* @noEscape */ '<!-- ' . $image . '-->' ?>
             <div class="products-<?= /* @noEscape */ $mode ?> <?= /* @noEscape */ $mode ?>">
-                <ol class="product-items <?= /* @noEscape */ $type ?>">
+                <ol class="product-items <?= /* @noEscape */ $type ?>" data-slider-options="<?= /* @noEscape */ $dataSliderOptions ?>">
                     <?php $iterator = 1; ?>
                     <?php foreach ($items as $_item): ?>
                         <?= /* @noEscape */ ($iterator++ == 1) ? '<li class="product-item">' : '</li><li class="product-item">' ?>
@@ -118,4 +119,16 @@ use Magento\Framework\App\Action\Action;
     }
     </script>
     <?php endif;?>
+    <script>
+        require([
+            'jquery',
+            'slick'
+        ], function ($) {
+            jQuery(document).ready(function () {
+                var productGrid = jQuery(".widget-product-grid");
+                var sliderOptions = productGrid.data("slider-options");
+                productGrid.slick(sliderOptions);
+            });
+        });
+    </script>
 <?php endif;?>
