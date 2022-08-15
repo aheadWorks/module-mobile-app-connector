@@ -1,0 +1,22 @@
+<?php
+/** @var $block \Aheadworks\MobileAppConnector\Block\Adminhtml\System\Config\Field\Toggle */
+/** @var $escaper \Magento\Framework\Escaper */
+
+$namePrefix = $block->getNamePrefix();
+$htmlId = $block->getHtmlId();
+$isFieldDisable = $block->isDisabled() ? 'disabled' : '';
+
+?>
+<!-- this is send if nothing is checked -->
+<input type="hidden" name="<?= $escaper->escapeHtml($namePrefix) ?>"
+       value="<?= $escaper->escapeHtml($block->getDisableValue()) ?>" />
+<div class="admin__actions-switch" data-role="switcher">
+    <input class="admin__actions-switch-checkbox <?= /* @noEscape */ $isFieldDisable ?>"
+           type="checkbox" value="<?= $escaper->escapeHtml($block->getEnableValue()) ?>"
+           name="<?= $escaper->escapeHtml($namePrefix) ?>[]" id="<?= $escaper->escapeHtml($htmlId) ?>"
+        <?= /* @noEscape */  $block->getIsChecked() ? ' checked="checked"' : '' ?>
+        <?= /* @noEscape */ $isFieldDisable ?>/>
+    <label class="admin__actions-switch-label" for="<?= $escaper->escapeHtml($htmlId) ?>">
+        <span class="admin__actions-switch-text" data-text-on="Yes" data-text-off="No"></span>
+    </label>
+</div>
