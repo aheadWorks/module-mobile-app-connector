@@ -3,7 +3,7 @@
     <default>
         <aw_mac>
             <aw_mac_setting>
-                <production_mode_enabled>0</production_mode_enabled>
+                <is_production_mode_enabled>0</is_production_mode_enabled>
             </aw_mac_setting>
         </aw_mac>
     </default>

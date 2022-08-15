@@ -10,7 +10,7 @@
             <resource>Aheadworks_MobileAppConnector::config_aw_mac</resource>
             <group id="aw_mac_setting" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Settings</label>
-                <field id="production_mode_enabled" translate="label" type="checkbox" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="is_production_mode_enabled" translate="label" type="checkbox" sortOrder="30" showInDefault="1">
                     <label>Enable Production Mode</label>
                     <frontend_model>Aheadworks\MobileAppConnector\Block\Adminhtml\System\Config\Field\Toggle</frontend_model>
                     <comment><![CDATA[Switch between demo and production modes]]></comment>
