@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <aw_mac>
+            <aw_mac_setting>
+                <production_mode_enabled>0</production_mode_enabled>
+            </aw_mac_setting>
+        </aw_mac>
+    </default>
+</config>

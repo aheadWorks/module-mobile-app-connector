@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="aheadworks" translate="label" sortOrder="300">
+            <label>Aheadworks Extensions</label>
+        </tab>
+        <section id="aw_mac" translate="label" type="text" sortOrder="145" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Mobile App Connector</label>
+            <tab>aheadworks</tab>
+            <resource>Aheadworks_MobileAppConnector::config_aw_mac</resource>
+            <group id="aw_mac_setting" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Settings</label>
+                <field id="production_mode_enabled" translate="label" type="checkbox" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Production Mode</label>
+                    <frontend_model>Aheadworks\MobileAppConnector\Block\Adminhtml\System\Config\Field\Toggle</frontend_model>
+                    <comment><![CDATA[Switch between demo and production modes]]></comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>
