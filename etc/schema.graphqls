@@ -1,0 +1,8 @@
+type Query {
+    getVersionInfo: VersionInfo @resolver(class: "\\Aheadworks\\MobileAppConnector\\Model\\Resolver\\VersionInfo") @doc(description: "Get version info of module and magento")
+}
+
+type VersionInfo @doc(description: "Allows to get module and magento version information") {
+    module_version: String @doc(description: "Module's version")
+    magento_version: String @doc(description: "Magento's version")
+}
