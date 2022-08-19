@@ -3,12 +3,9 @@ declare(strict_types=1);
 
 namespace Aheadworks\MobileAppConnector\Model\Service;
 
-use Magento\Framework\Component\ComponentRegistrarInterface;
 use Magento\Framework\Exception\LocalizedException;
-use Magento\Framework\Filesystem\Directory\ReadFactory;
-use Magento\Framework\Component\ComponentRegistrar;
-use Magento\Framework\Serialize\Serializer\Json;
 use Magento\Framework\App\ProductMetadataInterface;
+use Aheadworks\MobileAppConnector\Model\ThirdPartyModule\Version\Provider as VersionProvider;
 
 /**
  * Class Service VersionInfo
@@ -16,22 +13,6 @@ use Magento\Framework\App\ProductMetadataInterface;
 class VersionInfo
 {
     public const MODULE_NAME = 'Aheadworks_MobileAppConnector';
-    public const MODULE_COMPOSER_FILE_NAME = 'composer.json';
-
-    /**
-     * @var ComponentRegistrarInterface
-     */
-    private $componentRegistrar;
-
-    /**
-     * @var ReadFactory
-     */
-    private $readFactory;
-
-    /**
-     * @var Json
-     */
-    private $jsonSerializer;
 
     /**
      * @var ProductMetadataInterface
@@ -39,23 +20,22 @@ class VersionInfo
     private $productMetadata;
 
     /**
+     * @var VersionProvider
+     */
+    private $versionProvider;
+
+    /**
      * VersionInfo constructor.
      *
-     * @param ComponentRegistrarInterface $componentRegistrar
-     * @param ReadFactory $readFactory
-     * @param Json $jsonSerializer
      * @param ProductMetadataInterface $productMetadata
+     * @param VersionProvider $versionProvider
      */
     public function __construct(
-        ComponentRegistrarInterface $componentRegistrar,
-        ReadFactory $readFactory,
-        Json $jsonSerializer,
-        ProductMetadataInterface $productMetadata
+        ProductMetadataInterface $productMetadata,
+        VersionProvider $versionProvider
     ) {
-        $this->componentRegistrar = $componentRegistrar;
-        $this->readFactory = $readFactory;
-        $this->jsonSerializer = $jsonSerializer;
         $this->productMetadata = $productMetadata;
+        $this->versionProvider = $versionProvider;
     }
 
     /**
@@ -67,32 +47,20 @@ class VersionInfo
      */
     public function getModuleVersion($moduleName = self::MODULE_NAME): string
     {
-        try {
-            $path = $this->componentRegistrar->getPath(ComponentRegistrar::MODULE, $moduleName);
-            $directoryRead = $this->readFactory->create($path);
-            $composerJsonData = $directoryRead->readFile(self::MODULE_COMPOSER_FILE_NAME);
-            $data = $this->jsonSerializer->unserialize($composerJsonData);
-
-            return $data['version'];
-        } catch (\Exception $ex) {
-            throw new LocalizedException(
-                __('Read module version from composer file exception: "%1"', $ex->getMessage()),
-                $ex
-            );
-        }
+        return $this->versionProvider->getFromComposerJson($moduleName);
     }
 
     /**
      * Get magento version
      *
-     * @return string
+     * @return array
      */
-    public function getMagentoVersion(): string
+    public function getMagentoVersion(): array
     {
-        return implode(' ', [
-            $this->productMetadata->getName(),
-            $this->productMetadata->getEdition(),
-            $this->productMetadata->getVersion()
-        ]);
+        return [
+            'name' => $this->productMetadata->getName(),
+            'edition' => $this->productMetadata->getEdition(),
+            'version' => $this->productMetadata->getVersion()
+        ];
     }
 }

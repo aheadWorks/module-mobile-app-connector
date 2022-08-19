@@ -4,5 +4,11 @@ type Query {
 
 type VersionInfo @doc(description: "Allows to get module and magento version information") {
     module_version: String @doc(description: "Module's version")
-    magento_version: String @doc(description: "Magento's version")
+    magento_version: MagentoDetailVersion @doc(description: "An object containing the name, edition, and version")
+}
+
+type MagentoDetailVersion @doc(description: "MagentoDetailVersion defines the magento's detail version") {
+    name: String @doc(description: "The Magento's name")
+    edition: String @doc(description: "The Magento's edition")
+    version: String @doc(description: "The Magento's version")
 }
