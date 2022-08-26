@@ -52,7 +52,7 @@ class Provider
      * Get module version from composer file
      *
      * @param string $moduleName
-     * @return mixed
+     * @return string
      * @throws LocalizedException
      */
     public function getFromComposerJson(string $moduleName): string
