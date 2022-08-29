@@ -44,7 +44,7 @@ class Manager
      *
      * @return bool
      */
-    public function isIISPQModuleEnabled()
+    public function isInventoryStoryPickupQuoteModuleEnabled()
     {
         return $this->moduleList->has('Magento_InventoryInStorePickupQuote');
     }
