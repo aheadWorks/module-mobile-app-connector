@@ -121,7 +121,17 @@ class BestSellingProducts extends ProductsList
         $collection->distinct(true);
 
         if (empty($this->getData('sku_products'))) {
-            $this->setData('sku_products', $collection->getColumnValues('sku'));
+            if (!$this->showPager()) {
+                $skuProducts = array_slice(
+                    $collection->getColumnValues('sku'),
+                    0,
+                    $this->getProductsCount(),
+                    true
+                );
+            } else {
+                $skuProducts = $collection->getColumnValues('sku');
+            }
+            $this->setData('sku_products', $skuProducts);
             $collection->clear();
         }
 

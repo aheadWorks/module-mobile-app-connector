@@ -129,11 +129,11 @@ class BuildifyExternalWidget
                 '',
                 ['data' => $widgetConfig]
             )->setData('area', 'frontend');
-            $htmlWidget = $blockWidget->toHtml();
+
+            $blockWidget->createCollection();
             $skuProducts = $blockWidget->getData('sku_products') ?: [];
             $skuProducts = $this->serializer->serialize($skuProducts);
 
-            $result['html'] = $this->serializer->serialize($htmlWidget);
             $result['sku_products'] = str_replace('"', "'", $skuProducts);
         } catch (\Exception $exception) {
             $this->logger->error($exception);
