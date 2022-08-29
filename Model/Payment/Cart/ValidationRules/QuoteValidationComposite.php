@@ -3,8 +3,13 @@ declare(strict_types=1);
 
 namespace Aheadworks\MobileAppConnector\Model\Payment\Cart\ValidationRules;
 
+use Aheadworks\MobileAppConnector\Model\ThirdPartyModule\Manager;
+use Magento\Framework\Exception\LocalizedException;
 use Magento\Quote\Model\Quote;
 use Magento\Quote\Model\ValidationRules\QuoteValidationRuleInterface;
+use Magento\Framework\App\ObjectManager;
+use Magento\InventoryInStorePickupQuote\Model\Quote\ValidationRule\InStorePickupQuoteValidationRule;
+use Psr\Log\LoggerInterface;
 
 /**
  * Class Quote validation custom rules composite
@@ -17,12 +22,26 @@ class QuoteValidationComposite implements QuoteValidationRuleInterface
     private $validationRules = [];
 
     /**
+     * @var Manager
+     */
+    private $moduleManager;
+
+    /**
+     * @var LoggerInterface
+     */
+    private $logger;
+
+    /**
      * QuoteValidationComposite constructor.
      *
+     * @param Manager $moduleManager
+     * @param LoggerInterface $logger
      * @param array $validationRules
      */
-    public function __construct(array $validationRules)
+    public function __construct(Manager $moduleManager, LoggerInterface $logger, array $validationRules)
     {
+        $this->moduleManager = $moduleManager;
+        $this->logger = $logger;
         $this->validationRules = $validationRules;
     }
 
@@ -33,6 +52,7 @@ class QuoteValidationComposite implements QuoteValidationRuleInterface
     {
         $aggregateResult = [];
 
+        $this->addMSIValidationRules();
         foreach ($this->validationRules as $validationRule) {
             if (!($validationRule instanceof QuoteValidationRuleInterface)) {
                 throw new \InvalidArgumentException(
@@ -52,5 +72,23 @@ class QuoteValidationComposite implements QuoteValidationRuleInterface
         }
 
         return $aggregateResult;
+    }
+
+    /**
+     * Add Multi Source Inventory rules
+     *
+     * @return void
+     */
+    private function addMSIValidationRules(): void
+    {
+        if ($this->moduleManager->isIISPQModuleEnabled()) {
+            try {
+                $this->validationRules['InStorePickupQuoteValidationRule'] =
+                    ObjectManager::getInstance()->get(InStorePickupQuoteValidationRule::class);
+            } catch (LocalizedException $ex) {
+                $this->logger->error(__('MobileAppConnector Payment Exception: "%1"', $ex->getMessage()));
+                return;
+            }
+        }
     }
 }

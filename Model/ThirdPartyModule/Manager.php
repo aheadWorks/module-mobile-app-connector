@@ -38,4 +38,14 @@ class Manager
     {
         return $this->moduleList->has(self::DIGITAL_MEDIA_MODULE_NAME);
     }
+
+    /**
+     * Check if Magento_InventoryInStorePickupQuote module enabled
+     *
+     * @return bool
+     */
+    public function isIISPQModuleEnabled()
+    {
+        return $this->moduleList->has('Magento_InventoryInStorePickupQuote');
+    }
 }

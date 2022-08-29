@@ -8,7 +8,6 @@
                 <item name="AllowedCountryValidationRule" xsi:type="object">Magento\Quote\Model\ValidationRules\AllowedCountryValidationRule</item>
                 <item name="ShippingMethodValidationRule" xsi:type="object">Magento\Quote\Model\ValidationRules\ShippingMethodValidationRule</item>
                 <item name="MinimumAmountValidationRule" xsi:type="object">Magento\Quote\Model\ValidationRules\MinimumAmountValidationRule</item>
-                <item name="InStorePickupQuoteValidationRule" xsi:type="object">Magento\InventoryInStorePickupQuote\Model\Quote\ValidationRule\InStorePickupQuoteValidationRule</item>
             </argument>
         </arguments>
     </type>
