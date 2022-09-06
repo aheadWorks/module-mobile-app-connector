@@ -116,5 +116,9 @@
             </argument>
         </arguments>
     </type>
+
+    <type name="Aheadworks\Buildify\Model\Config">
+        <plugin name="awMobileAppConnector_BuildifyConfig" type="Aheadworks\MobileAppConnector\Plugin\AwBuildify\Model\ConfigPlugin" />
+    </type>
     <!-- END buildify configuration-->
 </config>
