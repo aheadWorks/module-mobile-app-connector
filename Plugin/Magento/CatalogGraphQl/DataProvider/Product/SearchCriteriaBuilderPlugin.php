@@ -33,14 +33,14 @@ class SearchCriteriaBuilderPlugin
      * Build search criteria according custom filter
      *
      * @param Subject $subject
-     * @param callable $proceed
+     * @param SearchCriteriaInterface $result
      * @param array $args
      * @param bool $includeAggregation
      * @return SearchCriteriaInterface
      */
-    public function aroundBuild(
+    public function afterBuild(
         Subject $subject,
-        callable $proceed,
+        SearchCriteriaInterface $result,
         array $args,
         bool $includeAggregation
     ): SearchCriteriaInterface {
@@ -49,20 +49,15 @@ class SearchCriteriaBuilderPlugin
         if ($isVisibilityFilterIncluded) {
             $conditionFilter = array_key_first($args['filter'][self::VISIBILITY_FIELD_FILTER]);
             $valueFilter = $args['filter'][self::VISIBILITY_FIELD_FILTER][$conditionFilter];
-        }
 
-        /** @var SearchCriteriaInterface $searchCriteria */
-        $searchCriteria = $proceed($args, $includeAggregation);
-
-        if ($isVisibilityFilterIncluded) {
             $this->searchCriteriaEditor->clearSimilarFilters(
-                $searchCriteria,
+                $result,
                 self::VISIBILITY_FIELD_FILTER,
                 $conditionFilter,
                 $valueFilter
             );
         }
 
-        return $searchCriteria;
+        return $result;
     }
 }

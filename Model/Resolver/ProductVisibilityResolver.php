@@ -33,6 +33,6 @@ class ProductVisibilityResolver implements ResolverInterface
         /* @var Product $product */
         $product = $value['model'];
 
-        return $product->getVisibility();
+        return (int)$product->getVisibility();
     }
 }
