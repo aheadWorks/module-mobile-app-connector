@@ -12,3 +12,11 @@ type MagentoDetailVersion @doc(description: "MagentoDetailVersion defines the ma
     edition: String @doc(description: "The Magento's edition")
     version: String @doc(description: "The Magento's version")
 }
+
+input ProductAttributeFilterInput {
+    visibility: FilterTypeInput @doc(description: "The product visibility filter.")
+}
+
+interface ProductInterface {
+    visibility: Int @doc(description: "The product visibility.") @resolver(class: "\\Aheadworks\\MobileAppConnector\\Model\\Resolver\\ProductVisibilityResolver")
+}
