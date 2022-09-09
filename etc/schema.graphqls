@@ -19,4 +19,10 @@ input ProductAttributeFilterInput {
 
 interface ProductInterface {
     visibility: Int @doc(description: "The product visibility.") @resolver(class: "\\Aheadworks\\MobileAppConnector\\Model\\Resolver\\ProductVisibilityResolver")
+    aw_mac_stock_status: AwMacProductStockStatus @doc(description: "Stock status of the product") @resolver(class: "\\Aheadworks\\MobileAppConnector\\Model\\Resolver\\StockStatusProvider")
+}
+
+enum AwMacProductStockStatus @doc(description: "This enumeration states whether a product stock status is in stock or out of stock") {
+    IN_STOCK
+    OUT_OF_STOCK
 }

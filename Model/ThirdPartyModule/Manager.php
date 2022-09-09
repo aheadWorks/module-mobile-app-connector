@@ -48,4 +48,14 @@ class Manager
     {
         return $this->moduleList->has('Magento_InventoryInStorePickupQuote');
     }
+
+    /**
+     * Check if Magento_InventoryGraphQl module enabled
+     *
+     * @return bool
+     */
+    public function isInventoryGraphQlEnabled()
+    {
+        return $this->moduleList->has('Magento_InventoryGraphQl');
+    }
 }
