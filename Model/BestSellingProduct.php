@@ -89,6 +89,10 @@ class BestSellingProduct implements BestSellingProductInterface
                 try {
                     $item = $this->productRepository->getById($product->getProductId());
                 } catch (NoSuchEntityException $ex) {
+                    $this->logger->info(
+                        "MobileAppConnector Best Selling Products Info: Product with ID " . $product->getProductId() .
+                        " not found"
+                    );
                     continue;
                 }
 
