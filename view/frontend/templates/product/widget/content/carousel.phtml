@@ -127,7 +127,7 @@ use Magento\Framework\App\Action\Action;
             jQuery(document).ready(function () {
                 var productGrid = jQuery(".widget-product-grid");
                 var sliderOptions = productGrid.data("slider-options");
-                productGrid.slick(sliderOptions);
+                productGrid.not('.slick-initialized').slick(sliderOptions);
             });
         });
     </script>
