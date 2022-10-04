@@ -9,6 +9,7 @@ use Magento\Catalog\Model\ResourceModel\Category\CollectionFactory as CategoryCo
 use Magento\Catalog\Model\ResourceModel\Product\CollectionFactory as ProductCollectionFactory;
 use Magento\Catalog\Model\ResourceModel\Product\Collection as ProductCollection;
 use Magento\Framework\Exception\LocalizedException;
+use Magento\Catalog\Model\Product\Visibility;
 
 /**
  * Class service CategoryTree
@@ -26,17 +27,25 @@ class CategoryTree
     private $productCollectionFactory;
 
     /**
+     * @var Visibility
+     */
+    private $catalogProductVisibility;
+
+    /**
      * CategoryTree constructor.
      *
      * @param CategoryCollectionFactory $categoryCollectionFactory
      * @param ProductCollectionFactory $productCollectionFactory
+     * @param Visibility $catalogProductVisibility
      */
     public function __construct(
         CategoryCollectionFactory $categoryCollectionFactory,
-        ProductCollectionFactory $productCollectionFactory
+        ProductCollectionFactory $productCollectionFactory,
+        Visibility $catalogProductVisibility
     ) {
         $this->categoryCollectionFactory = $categoryCollectionFactory;
         $this->productCollectionFactory = $productCollectionFactory;
+        $this->catalogProductVisibility = $catalogProductVisibility;
     }
 
     /**
@@ -48,10 +57,7 @@ class CategoryTree
      * @return void
      * @throws LocalizedException
      */
-    public function setStorefrontProductCount(
-        CategoryTreeInterface $treeCategories,
-        int $storeId
-    ): void
+    public function setStorefrontProductCount(CategoryTreeInterface $treeCategories, int $storeId): void
     {
         $categoriesId = $this->extractCategoriesId($treeCategories);
         /** @var CategoryCollection $categoryCollection */
@@ -99,14 +105,12 @@ class CategoryTree
      * @param int $storeId
      * @return void
      */
-    private function addProductCountToCategories(
-        CategoryCollection $categoryCollection,
-        int $storeId
-    ): void
+    private function addProductCountToCategories(CategoryCollection $categoryCollection, int $storeId): void
     {
         /** @var ProductCollection $productCollection */
         $productCollection = $this->productCollectionFactory->create();
         $productCollection->setStore($storeId);
+        $productCollection->setVisibility($this->catalogProductVisibility->getVisibleInCatalogIds());
         $productCollection->addCountToCategories($categoryCollection);
     }
 
