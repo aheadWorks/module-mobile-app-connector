@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Aheadworks\MobileAppConnector\Model\Payment\Cart\ValidationRules;
 
+use Magento\Framework\Validation\ValidationResult;
 use Magento\Quote\Model\Quote;
 use Aheadworks\MobileAppConnector\Model\ThirdPartyModule\Manager;
 use Psr\Log\LoggerInterface;
@@ -35,7 +36,7 @@ class ExtendedInStorePickupQuoteValidationRule extends AbstractQuoteValidationRu
      * Get extended validation rule results
      *
      * @param Quote $quote
-     * @return array
+     * @return ValidationResult[]
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     protected function getValidationRuleResults(Quote $quote): array
@@ -43,7 +44,7 @@ class ExtendedInStorePickupQuoteValidationRule extends AbstractQuoteValidationRu
         $result = [];
         if ($this->moduleManager->isInventoryStoryPickupQuoteModuleEnabled()) {
             $validationRule = ObjectManager::getInstance()->get(InStorePickupQuoteValidationRule::class);
-            $result[] = $validationRule->validate($quote);
+            $result = $validationRule->validate($quote);
         }
         return $result;
     }
