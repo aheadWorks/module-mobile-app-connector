@@ -49,7 +49,7 @@ abstract class AbstractQuoteValidationRule implements QuoteValidationRuleInterfa
      * Get extended validation rule results
      *
      * @param Quote $quote
-     * @return array
+     * @return ValidationResult[]
      */
     abstract protected function getValidationRuleResults(Quote $quote): array;
 }
