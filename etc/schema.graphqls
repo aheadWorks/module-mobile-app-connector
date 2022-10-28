@@ -1,0 +1,28 @@
+type Query {
+    getVersionInfo: VersionInfo @resolver(class: "\\Aheadworks\\MobileAppConnector\\Model\\Resolver\\VersionInfo") @doc(description: "Get version info of module and magento")
+}
+
+type VersionInfo @doc(description: "Allows to get module and magento version information") {
+    module_version: String @doc(description: "Module's version")
+    magento_version: MagentoDetailVersion @doc(description: "An object containing the name, edition, and version")
+}
+
+type MagentoDetailVersion @doc(description: "MagentoDetailVersion defines the magento's detail version") {
+    name: String @doc(description: "The Magento's name")
+    edition: String @doc(description: "The Magento's edition")
+    version: String @doc(description: "The Magento's version")
+}
+
+input ProductAttributeFilterInput {
+    visibility: FilterTypeInput @doc(description: "The product visibility filter.")
+}
+
+interface ProductInterface {
+    visibility: Int @doc(description: "The product visibility.") @resolver(class: "\\Aheadworks\\MobileAppConnector\\Model\\Resolver\\ProductVisibilityResolver")
+    aw_mac_stock_status: AwMacProductStockStatus @doc(description: "Stock status of the product") @resolver(class: "\\Aheadworks\\MobileAppConnector\\Model\\Resolver\\StockStatusProvider")
+}
+
+enum AwMacProductStockStatus @doc(description: "This enumeration states whether a product stock status is in stock or out of stock") {
+    IN_STOCK
+    OUT_OF_STOCK
+}

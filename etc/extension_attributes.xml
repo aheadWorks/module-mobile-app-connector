@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Api/etc/extension_attributes.xsd">
+    <extension_attributes for="Aheadworks\MobileAppConnector\Api\Data\HomepageInterface">
+        <attribute code="aw_entity_fields" type="Aheadworks\Buildify\Api\Data\EntityFieldInterface[]" />
+    </extension_attributes>
+    <extension_attributes for="Magento\Sales\Api\Data\OrderItemInterface">
+        <attribute code="aw_mac_product_detail" type="Magento\Catalog\Api\Data\ProductInterface" />
+    </extension_attributes>
+</config>

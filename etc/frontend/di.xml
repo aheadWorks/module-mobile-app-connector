@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Aheadworks\MobileAppConnector\Model\Payment\Cart\ValidationRules\QuoteValidationComposite">
+        <arguments>
+            <argument name="validationRules" xsi:type="array">
+                <item name="ShippingAddressValidationRule" xsi:type="object">Magento\Quote\Model\ValidationRules\ShippingAddressValidationRule</item>
+                <item name="BillingAddressValidationRule" xsi:type="object">Magento\Quote\Model\ValidationRules\BillingAddressValidationRule</item>
+                <item name="AllowedCountryValidationRule" xsi:type="object">Magento\Quote\Model\ValidationRules\AllowedCountryValidationRule</item>
+                <item name="ShippingMethodValidationRule" xsi:type="object">Magento\Quote\Model\ValidationRules\ShippingMethodValidationRule</item>
+                <item name="MinimumAmountValidationRule" xsi:type="object">Magento\Quote\Model\ValidationRules\MinimumAmountValidationRule</item>
+                <item name="ExtendedInStorePickupQuoteValidationRule" xsi:type="object">Aheadworks\MobileAppConnector\Model\Payment\Cart\ValidationRules\ExtendedInStorePickupQuoteValidationRule</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="Aheadworks\MobileAppConnector\Model\Payment\Cart\QuoteValidator" type="Magento\Quote\Model\QuoteValidator">
+        <arguments>
+            <argument name="quoteValidationRule" xsi:type="object">Aheadworks\MobileAppConnector\Model\Payment\Cart\ValidationRules\QuoteValidationComposite</argument>
+        </arguments>
+    </virtualType>
+    <type name="Aheadworks\MobileAppConnector\Model\Payment\QuoteManagement">
+        <arguments>
+            <argument name="cartValidator" xsi:type="object">Aheadworks\MobileAppConnector\Model\Payment\Cart\QuoteValidator</argument>
+        </arguments>
+    </type>
+    <type name="Magento\Checkout\Controller\Onepage\Success">
+        <plugin name="awMobileAppConnector_changeSuccessPage" type="Aheadworks\MobileAppConnector\Plugin\Magento\Checkout\Controller\Onepage\SuccessPlugin" />
+    </type>
+    <type name="Magento\Checkout\Block\Onepage">
+        <arguments>
+            <argument name="layoutProcessors" xsi:type="array">
+                <item name="awMobileAppPaymentLayoutProcessor" xsi:type="object">Aheadworks\MobileAppConnector\Block\Checkout\PaymentLayoutProcessor</item>
+            </argument>
+        </arguments>
+    </type>
+</config>
