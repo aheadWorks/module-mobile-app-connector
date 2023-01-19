@@ -6,16 +6,14 @@ use Aheadworks\MobileAppConnector\Model\Upload\ImageUploader;
 use Magento\Framework\Exception\LocalizedException;
 
 /**
- * Class AppPreferencesModel
- * @package Aheadworks\MobileAppConnector\Model\Preferences
+ * Class for AppPreferencesModel
  */
 class AppPreferencesModel
 {
-
     /**
      * app logo database column name
      */
-    const APP_IMAGE_NAME = 'image';
+    public const APP_IMAGE_NAME = 'image';
     /**
      * @var Config
      */
@@ -40,7 +38,7 @@ class AppPreferencesModel
     /**
      * Processing save preference data
      *
-     * @param $data
+     * @param array $data
      * @return $this
      * @throws LocalizedException
      */

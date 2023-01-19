@@ -5,9 +5,7 @@ use Magento\Downloadable\Model\Link\Purchased\Item as PurchasedLinkItemModel;
 use Magento\Downloadable\Model\Link\Purchased\ItemFactory as PurchasedLinkItemModelFactory;
 
 /**
- * Class Provider
- *
- * @package Aheadworks\MobileAppConnector\Model\Downloadable\Link\Purchased\Item
+ * Class for provider
  */
 class Provider
 {

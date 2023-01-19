@@ -5,13 +5,16 @@ use Aheadworks\Buildify\Model\Buildify\Entity\Adapter\EntityAdapterInterface;
 use Aheadworks\MobileAppConnector\Api\Data\HomepageInterface;
 
 /**
- * Class Homepage
- * @package Aheadworks\MobileAppConnector\Model\ThirdParty\Buildify\Entity\ToBuilderConfig\Converter\AwMobConnector
+ * Class home page for entity field
+ *
  */
 class Homepage implements EntityAdapterInterface
 {
     /**
-     * {@inheritdoc}
+     * Get entity field
+     *
+     * @param string $entity
+     * @return string
      */
     public function getEntityField($entity)
     {
@@ -23,7 +26,11 @@ class Homepage implements EntityAdapterInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Update entity field
+     *
+     * @param string $entity
+     * @param string $newEntity
+     * @return string
      */
     public function updateEntityField($entity, $newEntity)
     {
@@ -31,7 +38,11 @@ class Homepage implements EntityAdapterInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Set html
+     *
+     * @param string $entity
+     * @param string $html
+     * @return string
      */
     public function setHtml($entity, $html)
     {
@@ -39,7 +50,10 @@ class Homepage implements EntityAdapterInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Get html
+     *
+     * @param string $entity
+     * @return string
      */
     public function getHtml($entity)
     {
@@ -47,7 +61,10 @@ class Homepage implements EntityAdapterInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Get id
+     *
+     * @param string $entity
+     * @return string
      */
     public function getId($entity)
     {
@@ -55,7 +72,9 @@ class Homepage implements EntityAdapterInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Get entity type
+     *
+     * @return string
      */
     public function getEntityType()
     {
@@ -63,7 +82,10 @@ class Homepage implements EntityAdapterInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Get custom theme
+     *
+     * @param string $entity
+     * @return string
      */
     public function getCustomTheme($entity)
     {

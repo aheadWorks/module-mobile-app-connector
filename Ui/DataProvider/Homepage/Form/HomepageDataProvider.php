@@ -12,8 +12,7 @@ use Aheadworks\MobileAppConnector\Api\Data\HomepageExtensionFactory;
 use Aheadworks\MobileAppConnector\Api\Data\HomepageInterfaceFactory;
 
 /**
- * Class HomepageDataProvider
- * @package Aheadworks\MobileAppConnector\Ui\DataProvider\Homepage\Form
+ * Class for HomepageDataProvider
  */
 class HomepageDataProvider extends AbstractDataProvider
 {
@@ -73,7 +72,9 @@ class HomepageDataProvider extends AbstractDataProvider
     }
 
     /**
-     * {@inheritdoc}
+     * Get homepage data
+     *
+     * @return array
      */
     public function getData()
     {
@@ -105,7 +106,10 @@ class HomepageDataProvider extends AbstractDataProvider
     }
 
     /**
-     * {@inheritdoc}
+     * Add filter
+     *
+     * @param array $filter
+     * @return array
      */
     public function addFilter(Filter $filter)
     {

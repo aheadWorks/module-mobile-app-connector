@@ -4,9 +4,7 @@ namespace Aheadworks\MobileAppConnector\Model\Downloadable\Link\Purchased\Item;
 use Magento\Downloadable\Model\Link\Purchased\Item as PurchasedLinkItemModel;
 
 /**
- * Class Processor
- *
- * @package Aheadworks\MobileAppConnector\Model\Downloadable\Link\Purchased\Item
+ * Class for processor
  */
 class Processor
 {

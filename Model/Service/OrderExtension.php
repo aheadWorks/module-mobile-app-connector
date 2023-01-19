@@ -10,10 +10,11 @@ use Magento\Catalog\Model\Product;
 
 /**
  * Class OrderExtension for adding additional data to order
+ *
  */
 class OrderExtension
 {
-    const DISPLAY_PRODUCT_DETAIL_DATA = [
+    private const DISPLAY_PRODUCT_DETAIL_DATA = [
         'type_id',
         'sku',
         'media_gallery',

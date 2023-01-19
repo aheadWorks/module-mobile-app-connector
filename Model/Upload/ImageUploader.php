@@ -5,8 +5,7 @@ use Aheadworks\MobileAppConnector\Model\Preferences\Config as PreferencesConfig;
 use Magento\MediaStorage\Model\File\UploaderFactory;
 
 /**
- * Class ImageUploader
- * @package Aheadworks\MobileAppConnector\Model
+ * Class for ImageUploader
  */
 class ImageUploader
 {
@@ -61,6 +60,8 @@ class ImageUploader
     }
 
     /**
+     * Get Allowed File Extensions
+     *
      * @return string[]
      */
     public function getAllowedFileExtensions()

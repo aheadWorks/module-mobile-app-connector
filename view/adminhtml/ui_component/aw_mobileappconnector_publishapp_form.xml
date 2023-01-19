@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/Ui/etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">aw_mobileappconnector_publishapp_form.aw_mobileappconnector_publishapp_form_data_source</item>
+            <item name="deps" xsi:type="string">aw_mobileappconnector_publishapp_form.aw_mobileappconnector_publishapp_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Publish application</item>
+        <item name="config" xsi:type="array">
+            <item name="dataScope" xsi:type="string">data</item>
+            <item name="namespace" xsi:type="string">aw_mobileappconnector_publishapp_form</item>
+        </item>
+        <item name="buttons" xsi:type="array">
+            <item name="save" xsi:type="string">Aheadworks\MobileAppConnector\Block\Adminhtml\Publishapp\Button\Save
+            </item>
+        </item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <dataSource name="aw_mobileappconnector_publishapp_form_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Aheadworks\MobileAppConnector\Ui\DataProvider\Publishapp\Form\PublishappDataProvider</argument>
+            <argument name="name" xsi:type="string">aw_mobileappconnector_publishapp_form_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">flag</argument>
+            <argument name="requestFieldName" xsi:type="string">flag</argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <settings>
+            <submitUrl path="*/*/save"/>
+        </settings>
+    </dataSource>
+    <fieldset name="publishapp_fieldset">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Publish application</item>
+            </item>
+        </argument>
+        <!-- App Title -->
+        <field name="app_title">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">App Title</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">app_title</item>
+                    <item name="source" xsi:type="string">app_title</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <tooltip>
+                    <description translate="true">Add here your app title</description>
+                </tooltip>
+            </settings>
+        </field>
+        <!-- Short Description of Mobile App -->
+        <field name="short_description_of_mobile_app">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Short Description of Mobile App</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">short_description_of_mobile_app</item>
+                    <item name="source" xsi:type="string">short_description_of_mobile_app</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <tooltip>
+                    <description translate="true">Add here your short description of Mobile App</description>
+                </tooltip>
+            </settings>
+        </field>
+        <!-- Long Description of Mobile App -->
+        <field name="long_description_of_mobile_app">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Long Description of Mobile App</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">long_description_of_mobile_app</item>
+                    <item name="source" xsi:type="string">long_description_of_mobile_app</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>                
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <tooltip>
+                    <description translate="true">Add here your long description of mobile app</description>
+                </tooltip>
+            </settings>
+        </field>
+        <!-- Keywords -->
+        <field name="keywords">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Keywords</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">keywords</item>
+                    <item name="source" xsi:type="string">keywords</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <tooltip>
+                    <description translate="true">Add here your keywords of mobile app</description>
+                </tooltip>
+            </settings>
+        </field>
+         <!-- Support Mail -->
+        <field name="support_mail">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Support Mail</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">support_mail</item>
+                    <item name="source" xsi:type="string">support_mail</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="additionalClasses" xsi:type="array">
+                        <item name="admin__field-publishapp-class" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <!-- Privacy pPlicy Link -->
+        <field name="privacy_policy_link">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Privacy Policy Link</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">privacy_policy_link</item>
+                    <item name="source" xsi:type="string">privacy_policy_link</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="additionalClasses" xsi:type="array">
+                        <item name="admin__field-publishapp-class" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+         <!-- Support Telephone Number -->
+        <field name="support_telephone_number">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Support Telephone Number</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">support_telephone_number</item>
+                    <item name="source" xsi:type="string">support_telephone_number</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="additionalClasses" xsi:type="array">
+                        <item name="admin__field-publishapp-class" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+    </fieldset>
+</form>

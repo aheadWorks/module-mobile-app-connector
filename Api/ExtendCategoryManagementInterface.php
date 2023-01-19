@@ -10,8 +10,7 @@ namespace Aheadworks\MobileAppConnector\Api;
 interface ExtendCategoryManagementInterface
 {
     /**
-     * Getting extended categories that include the count of products,
-     * available and visible for specific store view id
+     * Getting extended categories that include the count of products, available and visible for specific store view id
      *
      * @param int $storeId
      * @param int|null $rootCategoryId

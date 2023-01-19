@@ -73,9 +73,12 @@ class BestSellingProduct implements BestSellingProductInterface
         $this->productRepository = $productRepository;
         $this->logger = $logger;
     }
-
     /**
-     * @inheritdoc
+     * Get best selling products
+     *
+     * @param sting $period
+     * @param int $storeId
+     * @return array
      */
     public function getBestSellingProducts($period, $storeId = null): array
     {
@@ -118,6 +121,7 @@ class BestSellingProduct implements BestSellingProductInterface
                 "MobileAppConnector Best Selling Products Exception - " .
                 $e->getMessage() . ': ' . $e->getTraceAsString()
             );
+            // phpcs:disable Magento2.Exceptions.DirectThrow
             throw new Exception("There is something wrong!");
         }
     }
@@ -133,6 +137,7 @@ class BestSellingProduct implements BestSellingProductInterface
     {
         $allowedPeriods = ['day','month','year'];
         if (!in_array($period, $allowedPeriods)) {
+            // phpcs:disable Magento2.Exceptions.DirectThrow
             throw new Exception('Accepted period values are day,month and year');
         }
     }

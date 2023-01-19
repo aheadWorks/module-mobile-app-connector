@@ -6,9 +6,7 @@ use Aheadworks\MobileAppConnector\Model\FileSystem\Filetype;
 use Aheadworks\MobileAppConnector\Model\ResourceModel\Collection\ModifierInterface;
 
 /**
- * Class ItemType
- *
- * @package Aheadworks\MobileAppConnector\Model\ResourceModel\Library\Item\Collection\Modifier
+ * Class for ItemType
  */
 class ItemType implements ModifierInterface
 {
@@ -27,13 +25,16 @@ class ItemType implements ModifierInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Modify data
+     *
+     * @param string $item
+     * @return string
      */
     public function modifyData($item)
-    {  
+    {
         $item->setData(
-                LibraryItemInterface::TYPE,
-                $this->filetypeChecker->getItemType($item)
+            LibraryItemInterface::TYPE,
+            $this->filetypeChecker->getItemType($item)
         );
         return $item;
     }

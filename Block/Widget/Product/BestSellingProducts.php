@@ -83,7 +83,9 @@ class BestSellingProducts extends ProductsList
     }
 
     /**
-     * @inheritDoc
+     * Best selling products collection
+     *
+     * @return array
      */
     public function createCollection(): Collection
     {

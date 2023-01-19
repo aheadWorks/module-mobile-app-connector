@@ -5,13 +5,10 @@ use Magento\Downloadable\Model\Link\Purchased\Item as PurchasedLinkItemModel;
 use Aheadworks\MobileAppConnector\Model\ThirdPartyModule\DigitalMedia\Purchased\Item\Checker\CheckerFactory;
 
 /**
- * Class Checker
- *
- * @package Aheadworks\MobileAppConnector\Model\Downloadable\Link\Purchased\Item
+ * Class for checker
  */
 class Checker
 {
-
     /**
      * @var CheckerFactory
      */
@@ -27,7 +24,9 @@ class Checker
     }
 
     /**
-     *@param PurchasedLinkItemModel $purchasedLinkItem
+     * Check is library item
+     *
+     * @param PurchasedLinkItemModel $purchasedLinkItem
      * @return bool
      */
     public function isLibraryItem($purchasedLinkItem)

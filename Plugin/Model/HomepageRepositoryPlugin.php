@@ -6,8 +6,7 @@ use Aheadworks\MobileAppConnector\Api\Data\HomepageInterface;
 use Aheadworks\MobileAppConnector\Model\HomepageRepository;
 
 /**
- * Class HomepageRepositoryPlugin
- * @package Aheadworks\MobileAppConnector\Plugin\Model
+ * Class for HomepageRepositoryPlugin
  */
 class HomepageRepositoryPlugin
 {
@@ -26,6 +25,8 @@ class HomepageRepositoryPlugin
     }
 
     /**
+     * Around save
+     *
      * @param HomepageRepository $subject
      * @param callable $proceed
      * @param HomepageInterface $homepage

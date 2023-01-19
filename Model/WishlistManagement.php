@@ -16,10 +16,10 @@ use Magento\Wishlist\Model\WishlistFactory;
  */
 class WishlistManagement implements WishlistManagementInterface
 {
-    const WISHLIST_ITEM_ID = 'wishlist_item_id';
-    const QTY = 'qty';
-    const IMAGE = 'image';
-    const PRODUCT = 'product';
+    public const WISHLIST_ITEM_ID = 'wishlist_item_id';
+    public const QTY = 'qty';
+    public const IMAGE = 'image';
+    public const PRODUCT = 'product';
 
     /**
      * @var WishlistFactory
@@ -58,8 +58,12 @@ class WishlistManagement implements WishlistManagementInterface
     }
 
     /**
-     * @inheritdoc
+     * Add product to wishlist
+     *
      * @throws \Exception
+     * @param int $customerId
+     * @param int $productId
+     * @return string
      */
     public function addProductToWishlist($customerId, $productId)
     {
@@ -76,8 +80,12 @@ class WishlistManagement implements WishlistManagementInterface
         return true;
     }
     /**
-     * @inheritdoc
+     * Remove product from wish list
+     *
      * @throws \Exception
+     * @param int $customerId
+     * @param int $productId
+     * @return string
      */
     public function removeProductFromWishlist($customerId, $productId)
     {
@@ -99,8 +107,11 @@ class WishlistManagement implements WishlistManagementInterface
         return true;
     }
     /**
-     * @inheritdoc
+     * Get wishlist for customer
+     *
      * @throws \Exception
+     * @param int $customerId
+     * @return string
      */
     public function getWishlistForCustomer($customerId)
     {
@@ -125,6 +136,7 @@ class WishlistManagement implements WishlistManagementInterface
             }
             return $wishlistData;
         } catch (\Exception $e) {
+            // phpcs:disable Magento2.Exceptions.DirectThrow
             throw new \Exception('We can\'t get Wishlist right now.');
         }
     }

@@ -11,7 +11,7 @@ use Magento\Framework\App\ObjectManager;
 use Magento\InventoryInStorePickupQuote\Model\Quote\ValidationRule\InStorePickupQuoteValidationRule;
 
 /**
- * Extended InStorePickupQuote Validation Rule
+ * Class for Extended InStorePickupQuote Validation Rule
  */
 class ExtendedInStorePickupQuoteValidationRule extends AbstractQuoteValidationRule
 {

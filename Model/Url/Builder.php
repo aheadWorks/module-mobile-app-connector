@@ -4,9 +4,7 @@ namespace Aheadworks\MobileAppConnector\Model\Url;
 use Magento\Framework\UrlInterface;
 
 /**
- * Class Builder
- *
- * @package Aheadworks\MobileAppConnector\Model\Url
+ * Class for Builder
  */
 class Builder
 {

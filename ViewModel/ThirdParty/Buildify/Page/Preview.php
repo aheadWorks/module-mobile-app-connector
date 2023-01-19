@@ -4,15 +4,14 @@ namespace Aheadworks\MobileAppConnector\ViewModel\ThirdParty\Buildify\Page;
 use Magento\Framework\App\RequestInterface;
 
 /**
- * Class Preview
- * @package Aheadworks\MobileAppConnector\ViewModel\ThirdParty\Buildify\Page
+ * Class for Preview
  */
 class Preview
 {
     /**
      * Additional class for buildify preview
      */
-    const MOBILE_APP_CONNECTOR_BUILDIFY_CLASS = 'buildify-preview-mobile-app-connector';
+    public const MOBILE_APP_CONNECTOR_BUILDIFY_CLASS = 'buildify-preview-mobile-app-connector';
 
     /**
      * @var RequestInterface

@@ -7,15 +7,14 @@ use Magento\Framework\App\RequestInterface;
 use Magento\Ui\DataProvider\AbstractDataProvider;
 
 /**
- * Class AppOverViewDataProvider
- * @package Aheadworks\MobileAppConnector\Ui\Component
+ * Class for AppOverViewDataProvider
  */
 class AppOverViewDataProvider extends AbstractDataProvider
 {
     /**#@+
      * Constants defined for keys of the data array.
      */
-    const AW_TENANT_ID = 'aw_tenant_id';
+    public const AW_TENANT_ID = 'aw_tenant_id';
 
     /**
      * @var RequestInterface
@@ -57,7 +56,9 @@ class AppOverViewDataProvider extends AbstractDataProvider
     }
 
     /**
-     * {@inheritdoc}
+     * Get app overview data
+     *
+     * @return array
      */
     public function getData()
     {
@@ -71,7 +72,10 @@ class AppOverViewDataProvider extends AbstractDataProvider
     }
 
     /**
-     * {@inheritdoc}
+     * Add filter
+     *
+     * @param array $filter
+     * @return array
      */
     public function addFilter(Filter $filter)
     {

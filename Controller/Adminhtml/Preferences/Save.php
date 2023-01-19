@@ -8,13 +8,11 @@ use Magento\Framework\App\Request\DataPersistorInterface;
 use Aheadworks\MobileAppConnector\Ui\DataProvider\Preferences\Form\PreferencesDataProvider;
 
 /**
- * Class Save
- * @package Aheadworks\MobileAppConnector\Controller\Adminhtml\Preferences
+ * Class for Save
  */
 
 class Save extends AbstractAction
 {
-
     /**
      * @var AppPreferencesModel
      */
@@ -25,9 +23,9 @@ class Save extends AbstractAction
     private $dataPersistor;
 
     /**
+     * @param Context $context
      * @param AppPreferencesModel $appPreferences
      * @param DataPersistorInterface $dataPersistor
-     * @param Context $context
      */
     public function __construct(
         Context $context,
@@ -40,12 +38,14 @@ class Save extends AbstractAction
     }
 
     /**
-     * {@inheritdoc}
+     * Preferences save action
+     *
+     * @return string
      */
     public function execute()
     {
         $resultRedirect = $this->resultRedirectFactory->create();
-        $resultRedirect->setUrl($this->_redirect->getRefererUrl());
+        $resultRedirect->setUrl($this->_redirect->getRefererUrl()); // phpcs:ignore
 
         $data = $this->getRequest()->getPostValue();
         if (!empty($data)) {

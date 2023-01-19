@@ -6,8 +6,7 @@ use Magento\Backend\App\Action;
 use Magento\Framework\Exception\LocalizedException;
 
 /**
- * Class Save
- * @package Aheadworks\MobileAppConnector\Controller\Adminhtml\Homepage
+ * Class for Save
  */
 class Save extends Action
 {
@@ -37,7 +36,9 @@ class Save extends Action
     }
 
     /**
-     * @inheritdoc
+     * Homepage save action
+     *
+     * @return string
      */
     public function execute()
     {

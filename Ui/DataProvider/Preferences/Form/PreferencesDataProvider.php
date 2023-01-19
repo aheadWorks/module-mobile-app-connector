@@ -8,14 +8,17 @@ use Magento\Framework\App\RequestInterface;
 use Magento\Ui\DataProvider\AbstractDataProvider;
 use Aheadworks\MobileAppConnector\Model\Upload\Info;
 use Aheadworks\MobileAppConnector\Model\Preferences\AppPreferencesModel;
+use Magento\Framework\App\Filesystem\DirectoryList;
+use Magento\Framework\Filesystem;
+use Magento\Framework\Filesystem\Driver\File;
 
 /**
- * Class PreferencesDataProvider
- * @package Aheadworks\MobileAppConnector\Ui\DataProvider\Preferences\Form
+ * Class for PreferencesDataProvider
  */
 class PreferencesDataProvider extends AbstractDataProvider
 {
-    const DATA_KEY = 'aw_app_data';
+    public const DATA_KEY = 'aw_app_data';
+
     /**
      * @var DataPersistorInterface
      */
@@ -37,6 +40,16 @@ class PreferencesDataProvider extends AbstractDataProvider
     protected $uploadInfo;
 
     /**
+     * @var Filesystem
+     */
+    protected $fileSystem;
+
+    /**
+     * @var File
+     */
+    protected $fileDriver;
+
+    /**
      * @param string $name
      * @param string $primaryFieldName
      * @param string $requestFieldName
@@ -44,6 +57,8 @@ class PreferencesDataProvider extends AbstractDataProvider
      * @param PreferencesConfig $preferencesConfig
      * @param Info $uploadInfo
      * @param RequestInterface $request
+     * @param Filesystem $fileSystem
+     * @param File $fileDriver
      * @param array $meta
      * @param array $data
      */
@@ -55,6 +70,8 @@ class PreferencesDataProvider extends AbstractDataProvider
         PreferencesConfig $preferencesConfig,
         Info $uploadInfo,
         RequestInterface $request,
+        Filesystem $fileSystem,
+        File $fileDriver,
         array $meta = [],
         array $data = []
     ) {
@@ -69,10 +86,14 @@ class PreferencesDataProvider extends AbstractDataProvider
         $this->uploadInfo = $uploadInfo;
         $this->dataPersistor = $dataPersistor;
         $this->request = $request;
+        $this->fileSystem = $fileSystem;
+        $this->fileDriver = $fileDriver;
     }
 
     /**
-     * {@inheritdoc}
+     * Get preferences data
+     *
+     * @return array
      */
     public function getData()
     {
@@ -83,13 +104,19 @@ class PreferencesDataProvider extends AbstractDataProvider
             $data[$appPreferences] = $dataFromForm;
             $this->dataPersistor->clear(self::DATA_KEY);
         } else {
-            if ($appPreferences) {
+            if (!empty($appPreferences)) {
                 $formData[PreferencesConfig::APP_NAME] = $this->preferencesConfig->getAppName();
                 $appLogo = [];
                 $appLogoName = $this->preferencesConfig->getLogo();
-                $appLogo[0]['name'] = $appLogoName;
-                $appLogo[0]['url'] = $this->uploadInfo->getMediaUrl($appLogoName);
-                $formData[AppPreferencesModel::APP_IMAGE_NAME] = $appLogo;
+                $mediaDirectory = $this->fileSystem->getDirectoryWrite(DirectoryList::MEDIA)->getAbsolutePath();
+                if ($this->fileDriver->isExists($mediaDirectory.PreferencesConfig::APP_LOGO.'/'.$appLogoName)) {
+                    $appLogo[0]['name'] = $appLogoName;
+                    $appLogo[0]['url'] = $this->uploadInfo->getMediaUrl($appLogoName);
+                    $fileSize = $this->fileSystem->getDirectoryWrite(DirectoryList::MEDIA)
+                    ->stat(PreferencesConfig::APP_LOGO.'/'.$appLogoName)['size'];
+                    $appLogo[0]['size'] = $fileSize;
+                    $formData[AppPreferencesModel::APP_IMAGE_NAME] = $appLogo;
+                }
                 $formData[PreferencesConfig::FONT_FAMILY]= $this->preferencesConfig->getFontFamily();
                 $formData[PreferencesConfig::COLOR_PREFERENCE]= $this->preferencesConfig->getColorPreference();
                 $formData[PreferencesConfig::POLICY_PAGE]= $this->preferencesConfig->getPolicyPageId();
@@ -103,7 +130,10 @@ class PreferencesDataProvider extends AbstractDataProvider
     }
 
     /**
-     * {@inheritdoc}
+     * Add filter
+     *
+     * @param array $filter
+     * @return array
      */
     public function addFilter(Filter $filter)
     {

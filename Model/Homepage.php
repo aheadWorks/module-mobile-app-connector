@@ -7,13 +7,12 @@ use Magento\Framework\Model\AbstractModel;
 use Aheadworks\MobileAppConnector\Api\Data\HomepageExtensionInterface;
 
 /**
- * Class Homepage
- * @package Aheadworks\MobileAppConnector\Model
+ * Class for Home page
  */
 class Homepage extends AbstractModel implements HomepageInterface
 {
     /**
-     * {@inheritdoc}
+     * Homepage constructor
      */
     public function _construct()
     {
@@ -22,7 +21,7 @@ class Homepage extends AbstractModel implements HomepageInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getId()
     {
@@ -30,7 +29,10 @@ class Homepage extends AbstractModel implements HomepageInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Set id
+     *
+     * @param int $id
+     * @return $this
      */
     public function setId($id)
     {
@@ -40,7 +42,9 @@ class Homepage extends AbstractModel implements HomepageInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Get content
+     *
+     * @return string|null
      */
     public function getContent()
     {
@@ -48,7 +52,10 @@ class Homepage extends AbstractModel implements HomepageInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Set content
+     *
+     * @param string $content
+     * @return $this
      */
     public function setContent($content)
     {
@@ -58,7 +65,9 @@ class Homepage extends AbstractModel implements HomepageInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Retrieve existing extension attributes object or create a new one
+     *
+     * @return \Aheadworks\MobileAppConnector\Api\Data\HomepageExtensionInterface|null
      */
     public function getExtensionAttributes()
     {
@@ -66,7 +75,10 @@ class Homepage extends AbstractModel implements HomepageInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Set an extension attributes object
+     *
+     * @param \Aheadworks\MobileAppConnector\Api\Data\HomepageExtensionInterface $extensionAttributes
+     * @return $this
      */
     public function setExtensionAttributes(HomepageExtensionInterface $extensionAttributes)
     {

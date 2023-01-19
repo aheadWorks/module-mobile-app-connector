@@ -5,8 +5,7 @@ use Aheadworks\MobileAppConnector\Api\Data\HomepageInterface;
 use Aheadworks\MobileAppConnector\Api\Data\HomepageExtensionFactory;
 
 /**
- * Class Homepage
- * @package Aheadworks\MobileAppConnector\Model\ExtensionAttributes\Builder
+ * Class for home page
  */
 class Homepage
 {
@@ -16,6 +15,8 @@ class Homepage
     private $homepageExtensionFactory;
 
     /**
+     * Homepage construct
+     *
      * @param HomepageExtensionFactory $homepageExtensionFactory
      */
     public function __construct(
@@ -24,6 +25,12 @@ class Homepage
         $this->homepageExtensionFactory = $homepageExtensionFactory;
     }
 
+    /**
+     * Set Aw Entity Content Field Attribute
+     *
+     * @param string $homepage
+     * @param string $entityContentField
+     */
     public function setAwEntityContentFieldAttribute($homepage, $entityContentField)
     {
         $extensionAttributes = $homepage->getExtensionAttributes();

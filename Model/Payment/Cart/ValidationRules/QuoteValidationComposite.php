@@ -27,7 +27,10 @@ class QuoteValidationComposite implements QuoteValidationRuleInterface
     }
 
     /**
-     * @inheritdoc
+     * Validate
+     *
+     * @param array $quote
+     * @return array
      */
     public function validate(Quote $quote): array
     {

@@ -4,8 +4,7 @@ namespace Aheadworks\MobileAppConnector\Api\Data;
 use Magento\Framework\Api\ExtensibleDataInterface;
 
 /**
- * Class HomepageInterface
- * @package Aheadworks\MobileAppConnector\Api\Data
+ * Interface HomepageInterface
  */
 interface HomepageInterface extends ExtensibleDataInterface
 {
@@ -13,12 +12,12 @@ interface HomepageInterface extends ExtensibleDataInterface
      * Constants defined for keys of the data array.
      * Identical to the name of the getter in snake case
      */
-    const ID = 'id';
-    const CONTENT = 'content';
+    public const ID = 'id';
+    public const CONTENT = 'content';
     /**#@-*/
-    const AW_MOBILEAPPCONNECTOR_HOMEPAGE_CONTENT = 'aw_mobileappconnector_homepage_content';
+    public const AW_MOBILEAPPCONNECTOR_HOMEPAGE_CONTENT = 'aw_mobileappconnector_homepage_content';
     //todo
-    const HOME_PAGE_BUILDIFY_ID = 1;
+    public const HOME_PAGE_BUILDIFY_ID = 1;
 
     /**
      * Get id

@@ -8,21 +8,18 @@ use Magento\Catalog\Model\Product;
 use Magento\Sales\Api\OrderItemRepositoryInterface;
 
 /**
- * Class Resolver
- *
- * @package Aheadworks\MobileAppConnector\Model\Product
+ * Class for Resolver
  */
 class Resolver
 {
     /**#@+
      * Constants defined for keys of the data array.
      */
-    const ID = 'id';
-    const MIN_PRICE = 'min_price';
-    const MAX_PRICE = 'max_price';
-    const FINAL_PRICE = 'final_price';
-    const IMAGE = 'product_image';
-
+    public const ID = 'id';
+    public const MIN_PRICE = 'min_price';
+    public const MAX_PRICE = 'max_price';
+    public const FINAL_PRICE = 'final_price';
+    public const IMAGE = 'product_image';
 
     /**
      * @var ProductRepositoryInterface
@@ -57,7 +54,7 @@ class Resolver
     /**
      * Retrieve product by corresponding order item
      *
-     * @param $orderItemId
+     * @param int $orderItemId
      * @return Product|null
      */
     public function getProductByOrderItem($orderItemId)
@@ -75,7 +72,7 @@ class Resolver
     /**
      * Retrieve product name from corresponding order item
      *
-     * @param $orderItemId
+     * @param int $orderItemId
      * @return string
      */
     public function getProductNameByOrderItem($orderItemId)
@@ -90,6 +87,8 @@ class Resolver
     }
 
     /**
+     * Get Product ImageUrl
+     *
      * @param ProductInterface $product
      * @return string $image
      */
@@ -100,6 +99,7 @@ class Resolver
 
     /**
      * Return product min price
+     *
      * @param ProductInterface $product
      * @return double
      */
@@ -110,6 +110,7 @@ class Resolver
 
     /**
      * Return product max price
+     *
      * @param ProductInterface $product
      * @return double
      */
@@ -117,5 +118,4 @@ class Resolver
     {
         return $product->getPriceInfo()->getPrice('final_price')->getMaximalPrice()->getValue();
     }
-
 }

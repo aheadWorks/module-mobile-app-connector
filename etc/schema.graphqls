@@ -20,9 +20,35 @@ input ProductAttributeFilterInput {
 interface ProductInterface {
     visibility: Int @doc(description: "The product visibility.") @resolver(class: "\\Aheadworks\\MobileAppConnector\\Model\\Resolver\\ProductVisibilityResolver")
     aw_mac_stock_status: AwMacProductStockStatus @doc(description: "Stock status of the product") @resolver(class: "\\Aheadworks\\MobileAppConnector\\Model\\Resolver\\StockStatusProvider")
+    aw_mac_msrp: AwMacActualPrice @doc(description: "Actual Price of the product") @resolver(class: "\\Aheadworks\\MobileAppConnector\\Model\\Resolver\\ActualPrice")
+}
+
+type AwMacActualPrice {
+    status: String @doc(description: "Check minimum advertised price status")
+    display_actual_price: String @doc(description: "Display Actual Price on Gesture, In Cart, Before Order Confirmation")
+    default_popup_text_message: String @doc(description: "Default Popup Text Message")
+    default_what_this_text_message: String @doc(description: "Default Whats This Text Message")
+    msrp_price: String @doc(description: "Minimum Advertised Price of the product")
 }
 
 enum AwMacProductStockStatus @doc(description: "This enumeration states whether a product stock status is in stock or out of stock") {
     IN_STOCK
     OUT_OF_STOCK
+}
+
+type Mutation {
+    awShareWishList(input: ShareWishListInput!): ShareWishListOutput @resolver(class: "\\Aheadworks\\MobileAppConnector\\Model\\Resolver\\ShareWishList") @doc(description:"Notify your interest")
+}
+
+input ShareWishListInput {
+    emails: String @doc(description: "The customer's email address")
+    message: String @doc(description: "The Mobile")
+}
+
+type ShareWishListOutput {
+   success_message: String
+}
+
+interface WishlistItemInterface {
+    aw_mac_stock_status: AwMacProductStockStatus @doc(description: "Stock status of the product") @resolver(class: "\\Aheadworks\\MobileAppConnector\\Model\\Resolver\\StockStatusProvider")
 }

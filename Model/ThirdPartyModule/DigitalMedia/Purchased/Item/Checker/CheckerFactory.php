@@ -7,13 +7,11 @@ use Aheadworks\MobileAppConnector\Model\ThirdPartyModule\Manager as ModuleManage
 use Magento\Framework\ObjectManagerInterface;
 
 /**
- * Class CheckerFactory
+ * Class checker factory for module
  *
- * @package Aheadworks\MobileAppConnector\Model\ThirdPartyModule\DigitalMedia\Purchased\Item\Checker
  */
 class CheckerFactory
 {
-
     /**
      * @var ModuleManager
      */
@@ -49,6 +47,8 @@ class CheckerFactory
     }
 
     /**
+     * Create module manager
+     *
      * @param array $data
      * @return false|mixed
      */

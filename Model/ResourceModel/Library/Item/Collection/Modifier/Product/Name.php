@@ -6,9 +6,7 @@ use Aheadworks\MobileAppConnector\Model\ResourceModel\Collection\ModifierInterfa
 use Aheadworks\MobileAppConnector\Api\Data\LibraryItemInterface;
 
 /**
- * Class Name
- *
- * @package Aheadworks\MobileAppConnector\Model\ResourceModel\Library\Item\Collection\Modifier\Product
+ * Class for Name
  */
 class Name implements ModifierInterface
 {
@@ -27,7 +25,10 @@ class Name implements ModifierInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Modify data
+     *
+     * @param string $item
+     * @return string
      */
     public function modifyData($item)
     {

@@ -4,10 +4,9 @@ namespace Aheadworks\MobileAppConnector\Model\ResourceModel\Library\Item\Collect
 use Aheadworks\MobileAppConnector\Model\ResourceModel\Collection\ModifierInterface;
 use Aheadworks\MobileAppConnector\Api\Data\LibraryItemInterface;
 use Aheadworks\MobileAppConnector\Model\Url\Builder as UrlBuilder;
+
 /**
- * Class DownloadUrl
- *
- * @package Aheadworks\MobileAppConnector\Model\ResourceModel\Library\Item\Collection\Modifier
+ * Class for DownloadUrl
  */
 class DownloadUrl implements ModifierInterface
 {
@@ -26,7 +25,10 @@ class DownloadUrl implements ModifierInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Modify data
+     *
+     * @param string $item
+     * @return string
      */
     public function modifyData($item)
     {

@@ -5,6 +5,9 @@ namespace Aheadworks\MobileAppConnector\Controller\Adminhtml\Preferences;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\View\Result\PageFactory;
 
+/**
+ * Preferences index controller
+ */
 class Index extends AbstractAction
 {
     /**
@@ -23,20 +26,22 @@ class Index extends AbstractAction
         $this->resultPageFactory = $resultPageFactory;
         parent::__construct($context);
     }
+  
     /**
-     * {@inheritdoc}
+     * Preferences index action
+     *
+     * @return \Magento\Framework\Controller\ResultInterface
      */
-
     public function execute()
     {
         $resultPage = $this->resultPageFactory->create();
         $resultPage->setActiveMenu(
             'Aheadworks_MobileAppConnector::app_preferences'
         )->addBreadcrumb(
-            __('Preferences'),
-            __('Preferences')
+            __('Application Preferences'),
+            __('Application Preferences')
         );
-        $resultPage->getConfig()->getTitle()->prepend(__('App Preferences'));
+        $resultPage->getConfig()->getTitle()->prepend(__('Application Preferences'));
         return $resultPage;
     }
 }

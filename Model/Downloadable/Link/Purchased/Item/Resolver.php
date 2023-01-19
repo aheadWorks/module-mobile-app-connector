@@ -8,9 +8,7 @@ use Magento\Downloadable\Model\Link\Purchased\Item as PurchasedLinkItemModel;
 use Magento\Downloadable\Model\LinkFactory as DownloadableLinkFactory;
 
 /**
- * Class Resolver
- *
- * @package Aheadworks\MobileAppConnector\Model\Downloadable\Link\Purchased\Item
+ * Class for resolver
  */
 class Resolver
 {

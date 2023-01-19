@@ -4,13 +4,14 @@ namespace Aheadworks\MobileAppConnector\Block\Adminhtml\Homepage\Button;
 use Magento\Framework\View\Element\UiComponent\Control\ButtonProviderInterface;
 
 /**
- * Class Save
- * @package Aheadworks\MobileAppConnector\Block\Adminhtml\Homepage\Button
+ * Class for Save
  */
 class Save extends AbstractButton implements ButtonProviderInterface
 {
     /**
-     * {@inheritdoc}
+     * Get button data
+     *
+     * @return array
      */
     public function getButtonData()
     {

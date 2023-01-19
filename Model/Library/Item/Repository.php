@@ -13,9 +13,8 @@ use Magento\Framework\Api\ExtensionAttribute\JoinProcessorInterface;
 use Magento\Framework\DataObject;
 
 /**
- * Class Repository
+ * Repository Class for Library Item
  *
- * @package Aheadworks\MobileAppConnector\Model\Library\Item
  */
 class Repository implements LibraryItemRepositoryInterface
 {
@@ -66,7 +65,10 @@ class Repository implements LibraryItemRepositoryInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Retrieves item from int
+     *
+     * @param int $customerId
+     * @return searchResults
      */
     public function getList(int $customerId)
     {

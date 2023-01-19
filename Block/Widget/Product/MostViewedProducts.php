@@ -82,7 +82,9 @@ class MostViewedProducts extends ProductsList
     }
 
     /**
-     * @inheritDoc
+     * Most viewed products collection
+     *
+     * @return array
      */
     public function createCollection(): Collection
     {

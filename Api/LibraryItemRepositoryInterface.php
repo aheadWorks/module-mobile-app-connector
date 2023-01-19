@@ -10,8 +10,6 @@ use Aheadworks\MobileAppConnector\Api\Data\LibraryItemInterface;
 
 /**
  * Interface LibraryItemRepositoryInterface
- *
- * @package Aheadworks\MobileAppConnector\Api
  */
 interface LibraryItemRepositoryInterface
 {

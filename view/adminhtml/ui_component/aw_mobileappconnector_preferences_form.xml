@@ -6,7 +6,7 @@
             <item name="provider" xsi:type="string">aw_mobileappconnector_preferences_form.aw_mobileappconnector_preferences_form_data_source</item>
             <item name="deps" xsi:type="string">aw_mobileappconnector_preferences_form.aw_mobileappconnector_preferences_form_data_source</item>
         </item>
-        <item name="label" xsi:type="string" translate="true">App Preferences</item>
+        <item name="label" xsi:type="string" translate="true">Application Preferences</item>
         <item name="config" xsi:type="array">
             <item name="dataScope" xsi:type="string">data</item>
             <item name="namespace" xsi:type="string">aw_mobileappconnector_preferences_form</item>
@@ -36,7 +36,7 @@
     <fieldset name="preferences_fieldset">
         <argument name="data" xsi:type="array">
             <item name="config" xsi:type="array">
-                <item name="label" xsi:type="string" translate="true">App Preferences</item>
+                <item name="label" xsi:type="string" translate="true">Application Preferences</item>
             </item>
         </argument>
         <!-- App Name -->
@@ -72,7 +72,7 @@
             <settings>
                 <label translate="true">Color Preferences</label>
                 <elementTmpl>ui/form/element/color-picker</elementTmpl>
-                <colorFormat>rgb</colorFormat>
+                <colorFormat>name</colorFormat>
                 <colorPickerMode>full</colorPickerMode>
                 <dataScope>color_preference</dataScope>
             </settings>

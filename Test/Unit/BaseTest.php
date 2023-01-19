@@ -4,9 +4,7 @@ namespace Aheadworks\MobileAppConnector\Test\Unit;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Class BaseTest
- *
- * @package Aheadworks\MobileAppConnector\Test\Unit
+ * Class for BaseTest
  */
 class BaseTest extends TestCase
 {
@@ -15,6 +13,6 @@ class BaseTest extends TestCase
      */
     public function testBase()
     {
-        $this->assertEquals(1,1);
+        $this->assertEquals(1, 1);
     }
 }

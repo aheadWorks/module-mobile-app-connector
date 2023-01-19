@@ -12,9 +12,7 @@ use Magento\Framework\DB\Adapter\AdapterInterface;
 use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
 
 /**
- * Class AbstractCollection
- *
- * @package Aheadworks\MobileAppConnector\Model\ResourceModel
+ * Class for AbstractCollection
  */
 abstract class AbstractCollection extends FrameworkAbstractCollection
 {
@@ -49,11 +47,13 @@ abstract class AbstractCollection extends FrameworkAbstractCollection
             $connection,
             $resource
         );
-       $this->modifier = $modifier;
+        $this->modifier = $modifier;
     }
 
     /**
-     * {@inheritdoc}
+     * After load
+     *
+     * @return string
      */
     protected function _afterLoad()
     {

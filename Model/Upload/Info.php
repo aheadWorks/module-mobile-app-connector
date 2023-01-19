@@ -8,8 +8,7 @@ use Magento\Framework\UrlInterface;
 use Aheadworks\MobileAppConnector\Model\Preferences\Config as PreferencesConfig;
 
 /**
- * Class Info
- * @package Aheadworks\MobileAppConnector\Model\Upload
+ * Class for Info
  */
 class Info
 {

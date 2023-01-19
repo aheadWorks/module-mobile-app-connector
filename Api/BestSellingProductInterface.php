@@ -1,6 +1,9 @@
 <?php
+
 namespace Aheadworks\MobileAppConnector\Api;
+
 use Exception;
+
 /**
  * Interface BestSellingProductInterface
  * @api
@@ -8,9 +11,9 @@ use Exception;
 
 interface BestSellingProductInterface
 {
-
     /**
      * Get Best Selling products
+     *
      * @param string $period
      * @param int|null $storeId
      * @return bool|mixed

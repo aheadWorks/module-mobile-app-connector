@@ -61,7 +61,11 @@ class MostViewedProduct implements MostViewedProductInterface
     }
 
     /**
-     * @inheritdoc
+     * Get most viewed products
+     *
+     * @param sting $limit
+     * @param int $storeId
+     * @return array
      */
     public function getMostViewedProducts($limit, $storeId = null)
     {

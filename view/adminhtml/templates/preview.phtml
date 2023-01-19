@@ -1,0 +1,15 @@
+<?php
+/** @var $block \Aheadworks\MobileAppConnector\Block\Adminhtml\OverView\Preview */
+/** @var $escaper \Magento\Framework\Escaper */
+// @codingStandardsIgnoreFile
+
+?>
+
+<div class="mobile-preview-container">
+    <div class="mobile-connector-play-store-box">
+    	<a target="_blank" href='#'>
+            <?php $previewImg = $block::PREVIEW_IMAGE_URL; ?>
+        	<img src='<?= $escaper->escapeUrl($block->getViewFileUrl('Aheadworks_MobileAppConnector::'.$previewImg)) ?>' alt="<?= $escaper->escapeHtml(__("Preview")) ?>">
+        </a>                
+    </div>
+</div>

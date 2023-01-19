@@ -6,15 +6,13 @@ use Magento\Framework\Model\AbstractModel;
 use Magento\Downloadable\Model\ResourceModel\Link\Purchased\Item as  ItemResource;
 
 /**
- * Class Item
+ * Class Item for set and get items
  *
- * @package Aheadworks\MobileAppConnector\Model\Library
- * @codeCoverageIgnore
  */
 class Item extends AbstractModel implements LibraryItemInterface
 {
     /**
-     * {@inheritdoc}
+     * Item construct
      */
     protected function _construct()
     {
@@ -22,7 +20,9 @@ class Item extends AbstractModel implements LibraryItemInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Get item id
+     *
+     * @return string
      */
     public function getItemId()
     {
@@ -30,7 +30,10 @@ class Item extends AbstractModel implements LibraryItemInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Set item id
+     *
+     * @param string $itemId
+     * @return bool
      */
     public function setItemId($itemId)
     {
@@ -38,7 +41,9 @@ class Item extends AbstractModel implements LibraryItemInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Get order item id
+     *
+     * @return string
      */
     public function getOrderItemId()
     {
@@ -46,7 +51,10 @@ class Item extends AbstractModel implements LibraryItemInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Set order item id
+     *
+     * @param string $orderItemId
+     * @return bool
      */
     public function setOrderItemId($orderItemId)
     {
@@ -54,7 +62,9 @@ class Item extends AbstractModel implements LibraryItemInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Get product name
+     *
+     * @return string
      */
     public function getProductName()
     {
@@ -62,7 +72,10 @@ class Item extends AbstractModel implements LibraryItemInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Set product name
+     *
+     * @param string $productName
+     * @return bool
      */
     public function setProductName($productName)
     {
@@ -70,7 +83,9 @@ class Item extends AbstractModel implements LibraryItemInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Get product image url
+     *
+     * @return string
      */
     public function getProductImageUrl()
     {
@@ -78,7 +93,10 @@ class Item extends AbstractModel implements LibraryItemInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Set product image url
+     *
+     * @param string $productImageUrl
+     * @return bool
      */
     public function setProductImageUrl($productImageUrl)
     {
@@ -86,7 +104,9 @@ class Item extends AbstractModel implements LibraryItemInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Get link title
+     *
+     * @return string
      */
     public function getLinkTitle()
     {
@@ -94,7 +114,10 @@ class Item extends AbstractModel implements LibraryItemInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Set link title
+     *
+     * @param string $linkTitle
+     * @return bool
      */
     public function setLinkTitle($linkTitle)
     {
@@ -102,7 +125,9 @@ class Item extends AbstractModel implements LibraryItemInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Get link hash
+     *
+     * @return string
      */
     public function getLinkHash()
     {
@@ -110,7 +135,10 @@ class Item extends AbstractModel implements LibraryItemInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Set link hash
+     *
+     * @param string $linkHash
+     * @return bool
      */
     public function setLinkHash($linkHash)
     {
@@ -118,7 +146,9 @@ class Item extends AbstractModel implements LibraryItemInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Get download url
+     *
+     * @return string
      */
     public function getDownloadUrl()
     {
@@ -126,7 +156,10 @@ class Item extends AbstractModel implements LibraryItemInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Set download url
+     *
+     * @param string $downloadUrl
+     * @return bool
      */
     public function setDownloadUrl($downloadUrl)
     {
@@ -134,7 +167,9 @@ class Item extends AbstractModel implements LibraryItemInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Get type
+     *
+     * @return string
      */
     public function getType()
     {
@@ -142,7 +177,10 @@ class Item extends AbstractModel implements LibraryItemInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Set type
+     *
+     * @param string $type
+     * @return bool
      */
     public function setType($type)
     {
@@ -150,7 +188,9 @@ class Item extends AbstractModel implements LibraryItemInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Get remaining downloads
+     *
+     * @return string
      */
     public function getRemainingDownloads()
     {
@@ -158,7 +198,10 @@ class Item extends AbstractModel implements LibraryItemInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Set remaining downloads
+     *
+     * @param string $remainingDownloads
+     * @return bool
      */
     public function setRemainingDownloads($remainingDownloads)
     {
@@ -166,7 +209,9 @@ class Item extends AbstractModel implements LibraryItemInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Get is downloadable
+     *
+     * @return string
      */
     public function getIsDownloadable()
     {
@@ -174,7 +219,10 @@ class Item extends AbstractModel implements LibraryItemInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Set is downloadable
+     *
+     * @param string $isDownloadble
+     * @return bool
      */
     public function setIsDownloadable($isDownloadble)
     {
@@ -182,7 +230,9 @@ class Item extends AbstractModel implements LibraryItemInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Get extension attributes
+     *
+     * @return string
      */
     public function getExtensionAttributes()
     {
@@ -190,7 +240,10 @@ class Item extends AbstractModel implements LibraryItemInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Set is extension attributes
+     *
+     * @param string $extensionAttributes
+     * @return bool
      */
     public function setExtensionAttributes(
         \Aheadworks\MobileAppConnector\Api\Data\LibraryItemExtensionInterface $extensionAttributes

@@ -9,7 +9,7 @@ use Magento\Catalog\Model\CategoryManagement;
 use Aheadworks\MobileAppConnector\Model\Service\CategoryTree;
 
 /**
- * Class ExtendCategoryManagement
+ * Class for extend category management
  */
 class ExtendCategoryManagement implements ExtendCategoryManagementInterface
 {
@@ -38,14 +38,18 @@ class ExtendCategoryManagement implements ExtendCategoryManagementInterface
     }
 
     /**
-     * @inheritDoc
+     * Get tree.
+     *
+     * @param int $storeId
+     * @param int $rootCategoryId
+     * @param int $depth
+     * @return string
      */
     public function getTree(
         int $storeId,
         int $rootCategoryId = null,
         int $depth = null
-    ): CategoryTreeInterface
-    {
+    ): CategoryTreeInterface {
         $treeCategories = $this->categoryManagement->getTree($rootCategoryId, $depth);
         $this->categoryTreeService->setStorefrontProductCount(
             $treeCategories,

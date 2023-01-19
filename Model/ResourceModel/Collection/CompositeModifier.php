@@ -2,9 +2,7 @@
 namespace Aheadworks\MobileAppConnector\Model\ResourceModel\Collection;
 
 /**
- * Class CompositeModifier
- *
- * @package Aheadworks\MobileAppConnector\Model\ResourceModel\Collection
+ * Class for CompositeModifier
  */
 class CompositeModifier implements ModifierInterface
 {
@@ -23,7 +21,10 @@ class CompositeModifier implements ModifierInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Modify data
+     *
+     * @param string $item
+     * @return string
      */
     public function modifyData($item)
     {

@@ -5,8 +5,6 @@ use Magento\Framework\Api\ExtensibleDataInterface;
 
 /**
  * Interface LibraryItemInterface
- *
- * @package Aheadworks\MobileAppConnector\Api\Data
  */
 interface LibraryItemInterface extends ExtensibleDataInterface
 {
@@ -14,16 +12,16 @@ interface LibraryItemInterface extends ExtensibleDataInterface
      * Constants defined for keys of the data array.
      * Identical to the name of the getter in snake case
      */
-    const ITEM_ID = 'item_id';
-    const ORDER_ITEM_ID = 'order_item_id';
-    const PRODUCT_NAME = 'product_name';
-    const PRODUCT_IMAGE_URL = 'product_image_url';
-    const LINK_TITLE = 'link_title';
-    const LINK_HASH = 'link_hash';
-    const TYPE = 'type';
-    const REMAINING_DOWNLOADS = 'remaining_downloads';
-    const IS_DOWNLOADABLE = 'is_downloadable';
-    const DOWNLOAD_URL = 'download_url';
+    public const ITEM_ID = 'item_id';
+    public const ORDER_ITEM_ID = 'order_item_id';
+    public const PRODUCT_NAME = 'product_name';
+    public const PRODUCT_IMAGE_URL = 'product_image_url';
+    public const LINK_TITLE = 'link_title';
+    public const LINK_HASH = 'link_hash';
+    public const TYPE = 'type';
+    public const REMAINING_DOWNLOADS = 'remaining_downloads';
+    public const IS_DOWNLOADABLE = 'is_downloadable';
+    public const DOWNLOAD_URL = 'download_url';
     /**#@-*/
 
     /**

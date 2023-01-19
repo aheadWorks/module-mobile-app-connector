@@ -4,16 +4,18 @@
  *
  */
 namespace Aheadworks\MobileAppConnector\Api;
+
 use Exception;
+
 /**
- * AppOverViewRepositoryInterface
+ * Interface AppOverViewRepositoryInterface
  * @api
  */
 interface AppOverViewRepositoryInterface
 {
-
     /**
-     * get app overview.
+     * Get app overview.
+     *
      * @return null|string
      * @throws Exception
      */

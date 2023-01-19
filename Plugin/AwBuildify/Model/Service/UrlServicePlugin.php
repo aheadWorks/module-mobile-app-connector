@@ -6,15 +6,14 @@ use Aheadworks\Buildify\Model\Entity\Config;
 use Aheadworks\MobileAppConnector\Api\Data\HomepageInterface;
 
 /**
- * Class UrlService
- * @package Aheadworks\MobileAppConnector\Plugin\Model\Service
+ * Class for UrlService
  */
 class UrlServicePlugin
 {
     /**
      * Add additional parameter mobile_app_connector to the /builder request
      */
-    const BUILDER_ROUTE_PATH = 'builder';
+    public const BUILDER_ROUTE_PATH = 'builder';
 
     /**
      * @var Config
@@ -31,6 +30,8 @@ class UrlServicePlugin
     }
 
     /**
+     * Before get url
+     *
      * @param UrlService $subject
      * @param string $routePath
      * @param array $routeParams
@@ -39,8 +40,7 @@ class UrlServicePlugin
      */
     public function beforeGetUrl(UrlService $subject, $routePath, $routeParams = [], $addAdditional = true)
     {
-        if (
-            $routePath == self::BUILDER_ROUTE_PATH
+        if ($routePath == self::BUILDER_ROUTE_PATH
             && $this->config->getExtensionAttributesKey() == HomepageInterface::AW_MOBILEAPPCONNECTOR_HOMEPAGE_CONTENT
         ) {
             $routeParams['mobile_app_connector'] = true;

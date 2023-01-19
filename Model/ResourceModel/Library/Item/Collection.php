@@ -6,9 +6,7 @@ use Magento\Downloadable\Model\Link\Purchased\Item as PurchasedLinkItemModel;
 use Magento\Downloadable\Model\ResourceModel\Link\Purchased\Item as PurchasedLinkItemResourceModel;
 
 /**
- * Class Collection
- *
- * @package Aheadworks\MobileAppConnector\Model\ResourceModel\Library\Item
+ * Class for Collection
  */
 class Collection extends AbstractCollection
 {

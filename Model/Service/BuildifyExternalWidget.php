@@ -46,6 +46,7 @@ class BuildifyExternalWidget
         $this->logger = $logger;
     }
 
+    // @codingStandardsIgnoreStart
     /**
      * Update/Add additional widget's content
      *
@@ -79,6 +80,7 @@ class BuildifyExternalWidget
         }
         return $content;
     }
+    // @codingStandardsIgnoreEnd
 
     /**
      * Widget content convert to array

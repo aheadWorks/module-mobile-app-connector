@@ -7,9 +7,7 @@ use Aheadworks\MobileAppConnector\Model\ResourceModel\Collection\ModifierInterfa
 use Aheadworks\MobileAppConnector\Api\Data\LibraryItemInterface;
 
 /**
- * Class Image
- *
- * @package Aheadworks\MobileAppConnector\Model\ResourceModel\Library\Item\Collection\Modifier\Product
+ * Class for Image
  */
 class Image implements ModifierInterface
 {
@@ -36,7 +34,10 @@ class Image implements ModifierInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Modify data
+     *
+     * @param string $item
+     * @return string
      */
     public function modifyData($item)
     {

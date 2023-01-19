@@ -4,8 +4,7 @@ namespace Aheadworks\MobileAppConnector\Block\Adminhtml\Homepage\Button;
 use Magento\Backend\Block\Widget\Context;
 
 /**
- * Class AbstractButton
- * @package Aheadworks\MobileAppConnector\Block\Adminhtml\Homepage\Button
+ * Class for AbstractButton
  */
 class AbstractButton
 {

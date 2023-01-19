@@ -103,7 +103,9 @@ class Index extends Action
     }
 
     /**
-     * @inheritDoc
+     * Payment index action
+     *
+     * @return \Magento\Framework\Controller\ResultInterface
      */
     public function execute(): ResultInterface
     {

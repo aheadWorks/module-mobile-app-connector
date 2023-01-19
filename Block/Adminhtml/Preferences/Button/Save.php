@@ -1,15 +1,17 @@
 <?php
 namespace Aheadworks\MobileAppConnector\Block\Adminhtml\Preferences\Button;
+
 use Magento\Framework\View\Element\UiComponent\Control\ButtonProviderInterface;
 
 /**
- * Class Save
- * @package Aheadworks\MobileAppConnector\Block\Adminhtml\Preferences\Button
+ * Class for Save
  */
 class Save implements ButtonProviderInterface
 {
     /**
-     * {@inheritdoc}
+     * Get button data
+     *
+     * @return array
      */
     public function getButtonData()
     {

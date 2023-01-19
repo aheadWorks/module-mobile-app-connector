@@ -96,7 +96,7 @@ class Inventory
         $websiteId = $this->storeManager->getWebsite()->getId();
         $stockItem = $this->stockRegistryProvider->getStockItem($product->getId(), $websiteId);
         $status = $stockItem->getIsInStock();
-        if($status === null) {
+        if ($status === null) {
             $stockItem = $this->stockRegistryProvider->getStockItem(
                 $product->getId(),
                 $this->stockConfiguration->getDefaultScopeId()

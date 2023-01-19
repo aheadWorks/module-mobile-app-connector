@@ -11,7 +11,6 @@ use Aheadworks\MobileAppConnector\Model\Upload\Info;
 
 class AppPreferencesDataManagement implements AppPreferencesDataManagementInterface
 {
-
     /**
      * @var PreferencesConfig
      */
@@ -51,7 +50,9 @@ class AppPreferencesDataManagement implements AppPreferencesDataManagementInterf
     }
 
     /**
-     * {@inheritdoc}
+     * Get App preferences data
+     *
+     * @return array
      */
     public function getAppPreferencesData()
     {
@@ -69,10 +70,11 @@ class AppPreferencesDataManagement implements AppPreferencesDataManagementInterf
             PreferencesConfig::COLOR_PREFERENCE => $this->preferencesConfig->getColorPreference(),
             PreferencesConfig::POLICY_PAGE => $policyPageUrl,
             PreferencesConfig::CONTACT_PAGE => $contactPageUrl
-        ];
+            ];
 
             $preferenceData[] = $data;
         } catch (Exception $e) {
+            // phpcs:disable Magento2.Exceptions.DirectThrow
             throw new Exception("We can\'t get App data.");
         }
         return $preferenceData;

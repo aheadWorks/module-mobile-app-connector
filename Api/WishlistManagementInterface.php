@@ -1,5 +1,7 @@
 <?php
+
 namespace Aheadworks\MobileAppConnector\Api;
+
 use Exception;
 
 /**

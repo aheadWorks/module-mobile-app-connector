@@ -5,8 +5,6 @@ use Magento\Framework\Api\SearchResultsInterface;
 
 /**
  * Interface LibraryItemSearchResultsInterface
- *
- * @package Aheadworks\MobileAppConnector\Api\Data
  */
 interface LibraryItemSearchResultsInterface extends SearchResultsInterface
 {

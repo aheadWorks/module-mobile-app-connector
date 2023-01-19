@@ -46,7 +46,11 @@ class PaymentManagement implements PaymentManagementInterface
     }
 
     /**
-     * @inheritDoc
+     * Generate payment link
+     *
+     * @param string $cartId
+     * @param int $storeId
+     * @return array
      */
     public function generatePaymentLink(string $cartId, int $storeId = null): string
     {

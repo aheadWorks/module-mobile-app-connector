@@ -7,6 +7,7 @@ use Magento\Framework\App\Action\Action;
 
 // phpcs:disable Generic.Files.LineLength.TooLong
 // phpcs:disable Magento2.Templates.ThisInTemplate.FoundHelper
+// @codingStandardsIgnoreFile
 ?>
 <?php if ($exist = ($block->getProductCollection() && $block->getProductCollection()->getSize())): ?>
     <?php
@@ -110,7 +111,7 @@ use Magento\Framework\App\Action\Action;
             <?= $block->getPagerHtml() ?>
         </div>
     </div>
-    <?php if($block->getBlockHtml('formkey')): ?>
+    <?php if ($block->getBlockHtml('formkey')): ?>
     <script type="text/x-magento-init">
     {
         ".block.widget [data-role=tocart-form]": {
@@ -131,4 +132,6 @@ use Magento\Framework\App\Action\Action;
             });
         });
     </script>
-<?php endif;?>
+<?php endif;
+// @codingStandardsIgnoreEnd
+?>

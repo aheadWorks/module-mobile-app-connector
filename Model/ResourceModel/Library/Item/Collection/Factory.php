@@ -7,24 +7,28 @@ use Aheadworks\MobileAppConnector\Model\ResourceModel\Library\Item\Collection as
 use Aheadworks\MobileAppConnector\Model\ResourceModel\AbstractCollection;
 use Aheadworks\MobileAppConnector\Model\Downloadable\Link\Purchased\Provider as PurchasedLinkProvider;
 use Magento\Framework\App\ResourceConnection;
+
 /**
- * Class Factory
- *
- * @package Aheadworks\MobileAppConnector\Model\ResourceModel\Library\Item\Collection
+ * Class for Factory
  */
 class Factory
 {
-    /**
-     * @var ResourceConnection
-     */
-    private $resourceConnection;
-
     /**
      * Object Manager instance
      *
      * @var ObjectManagerInterface
      */
     private $objectManager = null;
+
+    /**
+     * @var ResourceConnection
+     */
+    private $resourceConnection;
+
+    /**
+     * @var PurchasedLinkProvider
+     */
+    private $purchasedLinkProvider;
 
     /**
      * Instance name to create
@@ -34,27 +38,23 @@ class Factory
     private $instanceName = null;
 
     /**
-     * @var PurchasedLinkProvider
-     */
-    private $purchasedLinkProvider;
-
-    /**
      * Factory constructor
      *
      * @param ObjectManagerInterface $objectManager
+     * @param ResourceConnection $resourceConnection
      * @param PurchasedLinkProvider $purchasedLinkProvider
      * @param string $instanceName
      */
     public function __construct(
         ObjectManagerInterface $objectManager,
-        PurchasedLinkProvider $purchasedLinkProvider,
         ResourceConnection $resourceConnection,
+        PurchasedLinkProvider $purchasedLinkProvider,
         $instanceName = LibraryItemCollection::class
     ) {
         $this->objectManager = $objectManager;
-        $this->instanceName = $instanceName;
-        $this->purchasedLinkProvider = $purchasedLinkProvider;
         $this->resourceConnection = $resourceConnection;
+        $this->purchasedLinkProvider = $purchasedLinkProvider;
+        $this->instanceName = $instanceName;
     }
 
     /**
@@ -84,7 +84,7 @@ class Factory
                 'status',
                 ['in' => [Item::LINK_STATUS_AVAILABLE]]
             )
-             ->setOrder(
+            ->setOrder(
                 'item_id',
                 AbstractCollection::SORT_ORDER_DESC
             );

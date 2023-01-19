@@ -4,16 +4,15 @@ namespace Aheadworks\MobileAppConnector\Model\ThirdPartyModule;
 use Magento\Framework\Module\ModuleListInterface;
 
 /**
- * Class Manager
+ * Class Manager for modules
  *
- * @package Aheadworks\MobileAppConnector\Model\ThirdPartyModule
  */
 class Manager
 {
     /**
      * Aheadworks DigitalMedia module name
      */
-    const DIGITAL_MEDIA_MODULE_NAME = 'Aheadworks_DigitalMedia';
+    private const DIGITAL_MEDIA_MODULE_NAME = 'Aheadworks_DigitalMedia';
 
     /**
      * @var ModuleListInterface

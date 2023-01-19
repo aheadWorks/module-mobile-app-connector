@@ -42,7 +42,7 @@ class StockStatusProvider implements ResolverInterface
      * @return string
      * @throws LocalizedException
      */
-    public function resolve(Field $field,  $context, ResolveInfo $info, array $value = null, array $args = null): string
+    public function resolve(Field $field, $context, ResolveInfo $info, array $value = null, array $args = null): string
     {
         if (!array_key_exists('model', $value) || !$value['model'] instanceof ProductInterface) {
             throw new LocalizedException(__('"model" value should be specified'));

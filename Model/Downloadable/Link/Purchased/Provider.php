@@ -1,6 +1,6 @@
 <?php
-namespace Aheadworks\MobileAppConnector\Model\Downloadable\Link\Purchased;
 
+namespace Aheadworks\MobileAppConnector\Model\Downloadable\Link\Purchased;
 
 use Magento\Downloadable\Model\Link\Purchased as PurchasedLink;
 use Magento\Downloadable\Model\Link\PurchasedFactory as PurchasedLinkFactory;
@@ -8,9 +8,7 @@ use Magento\Downloadable\Model\ResourceModel\Link\Purchased\Collection as Purcha
 use Magento\Downloadable\Model\ResourceModel\Link\Purchased\CollectionFactory as PurchasedLinkCollectionFactory;
 
 /**
- * Class Provider
- *
- * @package Aheadworks\MobileAppConnector\Model\Downloadable\Link\Purchased
+ * Class for provider
  */
 class Provider
 {
@@ -70,5 +68,4 @@ class Provider
         $purchasedLink->load($purchasedLinkId);
         return $purchasedLink;
     }
-
 }

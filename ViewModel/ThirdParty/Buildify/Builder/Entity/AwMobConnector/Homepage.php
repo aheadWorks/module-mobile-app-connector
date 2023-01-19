@@ -8,8 +8,7 @@ use Aheadworks\MobileAppConnector\Model\ExtensionAttributes\Builder\Homepage as 
 use Aheadworks\MobileAppConnector\Api\Data\HomepageInterfaceFactory;
 
 /**
- * Class Homepage
- * @package Aheadworks\MobileAppConnector\ViewModel\ThirdParty\Buildify\Builder\Entity\AwMobConnector
+ * Class for Homepage
  */
 class Homepage implements EntityLocatorInterface
 {
@@ -44,7 +43,9 @@ class Homepage implements EntityLocatorInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Get entity
+     *
+     * @return string
      */
     public function getEntity()
     {

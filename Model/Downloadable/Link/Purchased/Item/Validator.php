@@ -8,9 +8,7 @@ use Magento\Framework\Exception\AuthorizationException;
 use Aheadworks\MobileAppConnector\Model\Downloadable\Link\Purchased\Provider as PurchasedLinkProvider;
 
 /**
- * Class Validator
- *
- * @package Aheadworks\MobileAppConnector\Model\Downloadable\Link\Purchased\Item
+ * Class for validator
  */
 class Validator
 {

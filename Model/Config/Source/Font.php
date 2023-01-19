@@ -4,22 +4,23 @@ namespace Aheadworks\MobileAppConnector\Model\Config\Source;
 use Magento\Framework\Data\OptionSourceInterface;
 
 /**
- * Class Font
- * @package Aheadworks\MobileAppConnector\Model\Config\Source
+ * Class for Font
  */
 class Font implements OptionSourceInterface
 {
     /**#@+
      * Font values
      */
-    const ARIAL           = 1;
-    const HELVETICA_NEUE  = 2;
-    const VERDANA         = 3;
-    const SAN_FRANCISCO   = 4;
+    public const ARIAL = 1;
+    public const HELVETICA_NEUE = 2;
+    public const VERDANA = 3;
+    public const SAN_FRANCISCO = 4;
     /**#@-*/
 
     /**
-     * {@inheritdoc}
+     * To option array
+     *
+     * @return array
      */
     public function toOptionArray()
     {

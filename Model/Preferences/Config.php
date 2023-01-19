@@ -4,20 +4,19 @@ namespace Aheadworks\MobileAppConnector\Model\Preferences;
 use Magento\Framework\FlagManager;
 
 /**
- * Class Config
- * @package Aheadworks\MobileAppConnector\Model\Preferences
+ * Class for Config
  */
 class Config
 {
     /**#@+
      * App Preferences constants
      */
-    const APP_NAME = 'app_name';
-    const APP_LOGO = 'applogo';
-    const FONT_FAMILY = 'font_family';
-    const COLOR_PREFERENCE = 'color_preference';
-    const POLICY_PAGE = 'policy_page';
-    const CONTACT_PAGE = 'contact_page';
+    public const APP_NAME = 'app_name';
+    public const APP_LOGO = 'applogo';
+    public const FONT_FAMILY = 'font_family';
+    public const COLOR_PREFERENCE = 'color_preference';
+    public const POLICY_PAGE = 'policy_page';
+    public const CONTACT_PAGE = 'contact_page';
     /**#@-*/
 
     /**
@@ -35,6 +34,7 @@ class Config
     }
     /**
      * Get App name
+     *
      * @return string
      */
     public function getAppName()
@@ -44,6 +44,7 @@ class Config
 
     /**
      * Save App name
+     *
      * @param string $appName
      * @return bool
      */
@@ -54,6 +55,7 @@ class Config
     }
     /**
      * Get App logo
+     *
      * @return string
      */
     public function getLogo()
@@ -63,6 +65,7 @@ class Config
 
     /**
      * Save App logo
+     *
      * @param string $logo
      * @return bool
      */
@@ -73,6 +76,7 @@ class Config
     }
     /**
      * Get App font family
+     *
      * @return string
      */
     public function getFontFamily()
@@ -82,6 +86,7 @@ class Config
 
     /**
      * Save App font family
+     *
      * @param string $fontFamily
      * @return bool
      */
@@ -92,6 +97,7 @@ class Config
     }
     /**
      * Get App color preference
+     *
      * @return string
      */
     public function getColorPreference()
@@ -101,6 +107,7 @@ class Config
 
     /**
      * Save App color preference
+     *
      * @param string $colorPreference
      * @return bool
      */
@@ -111,6 +118,7 @@ class Config
     }
     /**
      * Get App policy page
+     *
      * @return string
      */
     public function getPolicyPageId()
@@ -120,6 +128,7 @@ class Config
 
     /**
      * Save App policy page
+     *
      * @param string $policyPage
      * @return bool
      */
@@ -130,6 +139,7 @@ class Config
     }
     /**
      * Get App contact page
+     *
      * @return string
      */
     public function getContactPageId()
@@ -139,6 +149,7 @@ class Config
 
     /**
      * Save App contact page
+     *
      * @param string $contactPage
      * @return bool
      */

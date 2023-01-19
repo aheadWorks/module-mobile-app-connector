@@ -7,18 +7,21 @@ use Magento\Backend\App\Action\Context;
 use Magento\Backend\Model\View\Result\Page;
 use Magento\Framework\View\Result\PageFactory;
 
+/**
+ * Overview index controller
+ */
 class Index extends Action
 {
-
     /**
      * @var PageFactory
      */
     public $resultPageFactory;
 
-    /**
-     * @inheritdoc
+    /**#@+
+     * App overview constants
      */
-    const ADMIN_RESOURCE = 'Aheadworks_MobileAppConnector::app_overview';
+    public const ADMIN_RESOURCE = 'Aheadworks_MobileAppConnector::app_overview';
+    /**#@-*/
 
     /**
      * @param Context $context
@@ -33,7 +36,9 @@ class Index extends Action
     }
 
     /**
-     * {@inheritdoc}
+     * Overview index action
+     *
+     * @return \Magento\Framework\Controller\ResultInterface
      */
     public function execute()
     {
@@ -42,10 +47,10 @@ class Index extends Action
         $resultPage->setActiveMenu(
             'Aheadworks_MobileAppConnector::app_overview'
         )->addBreadcrumb(
-            __('Overview'),
-            __('Overview')
+            __('Preview application'),
+            __('Preview application')
         );
-        $resultPage->getConfig()->getTitle()->prepend(__('Overview'));
+        $resultPage->getConfig()->getTitle()->prepend(__('Preview application'));
         return $resultPage;
     }
 }

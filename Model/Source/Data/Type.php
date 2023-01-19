@@ -4,23 +4,23 @@ namespace Aheadworks\MobileAppConnector\Model\Source\Data;
 use Magento\Framework\Data\OptionSourceInterface;
 
 /**
- * Class Format
- *
- * @package Aheadworks\MobileAppConnector\Model\Source\Email
+ * Class for Format
  */
 class Type implements OptionSourceInterface
 {
     /**#@+
      * Constants defined for the source model
      */
-    const OTHER_TYPE = 'other';
-    const PDF_TYPE = 'book';
-    const MP3_TYPE = 'audio';
-    const MP4_TYPE = 'video';
+    public const OTHER_TYPE = 'other';
+    public const PDF_TYPE = 'book';
+    public const MP3_TYPE = 'audio';
+    public const MP4_TYPE = 'video';
     /**#@-*/
 
     /**
-     * @inheritdoc
+     * To option array
+     *
+     * @return array
      */
     public function toOptionArray()
     {

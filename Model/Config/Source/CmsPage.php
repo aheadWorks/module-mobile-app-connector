@@ -9,8 +9,7 @@ use Magento\Framework\Data\OptionSourceInterface;
 use Magento\Framework\Exception\LocalizedException;
 
 /**
- * Class CmsPage
- * @package Aheadworks\MobileAppConnector\Model\Config\Source
+ * Class for CmsPage
  */
 class CmsPage implements OptionSourceInterface
 {
@@ -42,7 +41,9 @@ class CmsPage implements OptionSourceInterface
     }
 
     /**
-     * {@inheritdoc}
+     * To option array
+     *
+     * @return array
      */
     public function toOptionArray()
     {
@@ -66,6 +67,7 @@ class CmsPage implements OptionSourceInterface
                 }
             } catch (LocalizedException $e) {
                 // do nothing
+                throw $e;
             }
         }
         return $this->options;

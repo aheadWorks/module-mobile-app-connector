@@ -1,11 +1,12 @@
 <?php
 
 namespace Aheadworks\MobileAppConnector\Api;
+
 use Magento\Framework\Exception\InputException;
 use Magento\Framework\Exception\NoSuchEntityException;
 
 /**
- * ConfigurableProductManagementInterface
+ * Interface ConfigurableProductManagementInterface
  * @api
  */
 interface ConfigurableProductManagementInterface

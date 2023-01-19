@@ -14,8 +14,7 @@ use Magento\Sales\Api\Data\OrderInterface;
 use Magento\Sales\Api\OrderRepositoryInterface;
 
 /**
- * Class CustomerOrder
- * @package Aheadworks\MobileAppConnector\Model
+ * Class for customer order
  */
 class CustomerOrder implements CustomerOrderInterface
 {
@@ -37,7 +36,7 @@ class CustomerOrder implements CustomerOrderInterface
     /*
      * SHIP TO.
      */
-    const SHIP_TO = 'ship_to';
+    private const SHIP_TO = 'ship_to';
 
     /**
      * @param OrderRepositoryInterface $orderRepository
@@ -55,7 +54,11 @@ class CustomerOrder implements CustomerOrderInterface
     }
 
     /**
-     * @inheritdoc
+     * Get customer id
+     *
+     * @param int $customerId
+     * @param int $id
+     * @return int
      */
     public function get(int $customerId, int $id)
     {
@@ -72,7 +75,10 @@ class CustomerOrder implements CustomerOrderInterface
     }
 
     /**
-     * @inheritdoc
+     * Get let
+     *
+     * @param int $customerId
+     * @return string
      */
     public function getList($customerId)
     {
@@ -100,7 +106,8 @@ class CustomerOrder implements CustomerOrderInterface
     }
 
     /**
-     * get Shipping name
+     * Get shipping name
+     *
      * @param OrderInterface $order
      * @return string
      */

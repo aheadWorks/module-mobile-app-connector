@@ -6,12 +6,12 @@ use Magento\Framework\Controller\ResultFactory;
 use Aheadworks\MobileAppConnector\Controller\Adminhtml\Preferences\AbstractAction;
 
 /**
- * Class Upload
+ * Class for Upload
  */
 class Upload extends AbstractAction implements HttpPostActionInterface
 {
     /**
-     * Image uploader
+     * Image upload
      *
      * @var \Aheadworks\MobileAppConnector\Model\Upload\ImageUploader
      */

@@ -15,12 +15,10 @@ use Magento\Framework\Exception\InputException;
 use Aheadworks\MobileAppConnector\Model\Product\Resolver;
 
 /**
- * Class RelatedProductsManagement
- * @package Aheadworks\MobileAppConnector\Model
+ * Class for related products management
  */
 class RelatedProductsManagement implements RelatedProductsRepositoryInterface
 {
-
     /**
      * @var ProductRepositoryInterface
      */
@@ -60,7 +58,11 @@ class RelatedProductsManagement implements RelatedProductsRepositoryInterface
     }
 
     /**
-     * @inheritdoc
+     * Get related products
+     *
+     * @param string $sku
+     * @param int $storeId
+     * @return array
      */
     public function getRelatedProducts($sku, $storeId = null)
     {
@@ -98,12 +100,14 @@ class RelatedProductsManagement implements RelatedProductsRepositoryInterface
             }
             return $productsData;
         } catch (\Exception $e) {
+            // phpcs:disable Magento2.Exceptions.DirectThrow
             throw new \Exception(__('We can\'t get Related product right now.'));
         }
     }
 
     /**
-     * product link type
+     * Product link type
+     *
      * @return int
      */
     private function getLinkType(): int

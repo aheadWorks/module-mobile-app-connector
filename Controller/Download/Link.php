@@ -20,9 +20,7 @@ use Aheadworks\MobileAppConnector\Model\Downloadable\Link\Purchased\Item\Process
     as DownloadablePurchasedLinkItemProcessor;
 
 /**
- * Class Link
- *
- * @package Aheadworks\MobileAppConnector\Controller\Download
+ * Class for Link
  */
 class Link extends DownloadController
 {

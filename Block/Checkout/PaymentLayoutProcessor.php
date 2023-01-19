@@ -7,7 +7,7 @@ use Magento\Checkout\Block\Checkout\LayoutProcessorInterface;
 use Magento\Checkout\Model\Session as CheckoutSession;
 
 /**
- * Class PaymentLayoutProcessor
+ * Class for PaymentLayoutProcessor
  */
 class PaymentLayoutProcessor implements LayoutProcessorInterface
 {
@@ -35,7 +35,8 @@ class PaymentLayoutProcessor implements LayoutProcessorInterface
     public function process($jsLayout): array
     {
         if ($this->checkoutSession->getAwMacPaymentProcessFlag()) {
-            unset($jsLayout["components"]["checkout"]["children"]["sidebar"]["children"]["shipping-information"],
+            unset(
+                $jsLayout["components"]["checkout"]["children"]["sidebar"]["children"]["shipping-information"],
                 $jsLayout["components"]["checkout"]["children"]["sidebar"]["children"]["summary"]["children"]
                 ["cart_items"]
             );

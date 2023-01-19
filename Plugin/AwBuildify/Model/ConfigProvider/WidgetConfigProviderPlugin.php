@@ -12,7 +12,7 @@ use Magento\Widget\Model\Widget\Config as WidgetConfig;
  */
 class WidgetConfigProviderPlugin
 {
-    const REQUEST_PAGE_IDENTIFIER = 'mobileappconnector/homepage';
+    public const REQUEST_PAGE_IDENTIFIER = 'mobileappconnector/homepage';
 
     /**
      * @var Request
@@ -55,8 +55,7 @@ class WidgetConfigProviderPlugin
     {
         $checkPageIdentifier = $this->request->getModuleName() . '/' . $this->request->getControllerName();
         $skipWidgets = [];
-        if (
-            self::REQUEST_PAGE_IDENTIFIER === $checkPageIdentifier &&
+        if (self::REQUEST_PAGE_IDENTIFIER === $checkPageIdentifier &&
             isset($result['widget']['types']) &&
             $this->showWidgets
         ) {

@@ -4,13 +4,15 @@ namespace Aheadworks\MobileAppConnector\Model;
 use Aheadworks\MobileAppConnector\Api\HomepageRepositoryInterface;
 
 /**
- * Class HomepageRepository
- * @package Aheadworks\MobileAppConnector\Model
+ * Class for homepage repository
  */
 class HomepageRepository implements HomepageRepositoryInterface
 {
     /**
-     * {@inheritdoc}
+     * Save homepage
+     *
+     * @param string $homepage
+     * @return bool
      */
     public function save($homepage)
     {

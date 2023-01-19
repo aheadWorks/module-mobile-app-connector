@@ -6,9 +6,7 @@ use Aheadworks\MobileAppConnector\Model\Downloadable\Link\Purchased\Item\Resolve
 use Aheadworks\MobileAppConnector\Model\ResourceModel\Collection\ModifierInterface;
 
 /**
- * Class GetRemainingDownload
- *
- * @package Aheadworks\MobileAppConnector\Model\ResourceModel\Library\Item\Collection\Modifier
+ * Class for GetRemainingDownload
  */
 class GetRemainingDownload implements ModifierInterface
 {
@@ -27,7 +25,10 @@ class GetRemainingDownload implements ModifierInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Modify data
+     *
+     * @param string $item
+     * @return string
      */
     public function modifyData($item)
     {

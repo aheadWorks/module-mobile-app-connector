@@ -12,16 +12,14 @@ use Magento\Catalog\Model\View\Asset\ImageFactory as AssetImageFactory;
 use Magento\Framework\View\Asset\Repository as ViewAssetFrontendRepository;
 
 /**
- * Class Resolver
- *
- * @package Aheadworks\MobileAppConnector\Model\Product\Image
+ * Class for Resolver
  */
 class Resolver
 {
     /**
      * File path fot the case, when product is not defined, or product image is not set
      */
-    const DEFAULT_FILE_PATH = 'no_selection';
+    public const DEFAULT_FILE_PATH = 'no_selection';
 
     /**
      * @var ConfigInterface

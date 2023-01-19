@@ -11,16 +11,15 @@ use Magento\Framework\Exception\InputException;
 use Aheadworks\MobileAppConnector\Model\Product\Resolver;
 
 /**
- * Class ConfigurableProductManagement
- * @package Aheadworks\MobileAppConnector\Model
+ * Class for configurable product management
  */
 class ConfigurableProductManagement implements ConfigurableProductManagementInterface
 {
     /**#@+
      * Constants defined for keys of the data array.
      */
-    const VARIATION = 'variation';
-    const OPTIONS ='configurable_options';
+    private const VARIATION = 'variation';
+    private const OPTIONS ='configurable_options';
 
     /**
      * @var ProductRepositoryInterface
@@ -48,7 +47,6 @@ class ConfigurableProductManagement implements ConfigurableProductManagementInte
         ProductRepositoryInterface $productRepository,
         LinkManagement $linkManagement,
         Resolver $productResolver
-
     ) {
         $this->productRepository = $productRepository;
         $this->linkManagement = $linkManagement;
@@ -56,7 +54,10 @@ class ConfigurableProductManagement implements ConfigurableProductManagementInte
     }
 
     /**
-     * @inheritdoc
+     * Get children sku
+     *
+     * @param string $sku
+     * @return array
      */
     public function getChildren($sku)
     {
@@ -93,5 +94,4 @@ class ConfigurableProductManagement implements ConfigurableProductManagementInte
         $productsData[] = $data;
         return $productsData;
     }
-
 }

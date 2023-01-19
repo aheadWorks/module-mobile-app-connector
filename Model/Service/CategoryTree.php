@@ -12,7 +12,7 @@ use Magento\Framework\Exception\LocalizedException;
 use Magento\Catalog\Model\Product\Visibility;
 
 /**
- * Class service CategoryTree
+ * Class service categoryTree
  */
 class CategoryTree
 {
@@ -49,8 +49,7 @@ class CategoryTree
     }
 
     /**
-     * Add to the category tree the count of products,
-     * available and visible for specific store view id
+     * Add to the category tree the count of products, available and visible for specific store view id
      *
      * @param CategoryTreeInterface $treeCategories
      * @param int $storeId
@@ -98,8 +97,7 @@ class CategoryTree
     }
 
     /**
-     * Add to the category collection the count of products,
-     * available and visible for specific store view id
+     * Add to the category collection the count of products, available and visible for specific store view id
      *
      * @param CategoryCollection $categoryCollection
      * @param int $storeId

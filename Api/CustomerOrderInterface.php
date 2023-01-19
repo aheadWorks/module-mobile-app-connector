@@ -6,17 +6,16 @@
 namespace Aheadworks\MobileAppConnector\Api;
 
 /**
- * CustomerOrder interface
+ * Interface CustomerOrder interface
  * @api
  */
 interface CustomerOrderInterface
 {
-
     /**
      * Loads a specified order.
      *
-     * @param int $id The order ID.
      * @param int $customerId The customerId ID.
+     * @param int $id The order ID.
      * @return \Magento\Sales\Api\Data\OrderInterface Order interface.
      * @throws \Magento\Framework\Exception\LocalizedException
      */
@@ -24,7 +23,7 @@ interface CustomerOrderInterface
 
     /**
      * Lists orders that match specified customer search criteria.
-     * 
+     *
      * @param int $customerId The CustomerId ID.
      * @return \Magento\Sales\Api\Data\OrderInterface Order interface.
      * @throws \Magento\Framework\Exception\LocalizedException

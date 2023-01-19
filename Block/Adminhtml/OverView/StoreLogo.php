@@ -2,8 +2,7 @@
 namespace Aheadworks\MobileAppConnector\Block\Adminhtml\OverView;
 
 /**
- * Class StoreLogo
- * @package Aheadworks\MobileAppConnector\Block\Adminhtml\OverView
+ * Class for StoreLogo
  */
 class StoreLogo extends \Magento\Backend\Block\Template
 {
@@ -14,7 +13,9 @@ class StoreLogo extends \Magento\Backend\Block\Template
     */
     protected $_template = 'store_logo.phtml';
 
-    const PLAY_STORE_URL ='https://play.google.com/store/apps';
+    public const PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=com.aheadworks.aheadworksmobileapp';
 
-    const APP_STORE_URL ='https://apps.apple.com';
+    public const APP_STORE_URL = 'https://apps.apple.com/us/app/aheadworks-mobile-app/id1536034360?platform=iphone';
+
+    public const QR_CODE_IMAGE_URL = 'images/qr-code.png';
 }

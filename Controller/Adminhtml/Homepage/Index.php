@@ -7,8 +7,7 @@ use Magento\Backend\Model\View\Result\Page;
 use Magento\Framework\View\Result\PageFactory;
 
 /**
- * Class Index
- * @package Aheadworks\MobileAppConnector\Controller\Adminhtml\Homepage
+ * Homepage index controller
  */
 class Index extends Action
 {
@@ -17,10 +16,11 @@ class Index extends Action
      */
     public $resultPageFactory;
 
-    /**
-     * @inheritdoc
+    /**#@+
+     * App Homepage constants
      */
-    const ADMIN_RESOURCE = 'Aheadworks_MobileAppConnector::homepage_page';
+    public const ADMIN_RESOURCE = 'Aheadworks_MobileAppConnector::homepage_page';
+    /**#@-*/
 
     /**
      * @param Context $context
@@ -35,7 +35,9 @@ class Index extends Action
     }
 
     /**
-     * {@inheritdoc}
+     * Homepage index action
+     *
+     * @return \Magento\Framework\Controller\ResultInterface
      */
     public function execute()
     {
@@ -44,10 +46,10 @@ class Index extends Action
         $resultPage->setActiveMenu(
             'Aheadworks_MobileAppConnector::homepage_page'
         )->addBreadcrumb(
-            __('Home Page'),
-            __('Home Page')
+            __('Application Design'),
+            __('Application Design')
         );
-        $resultPage->getConfig()->getTitle()->prepend(__('Home Page'));
+        $resultPage->getConfig()->getTitle()->prepend(__('Application Design'));
 
         return $resultPage;
     }

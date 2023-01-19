@@ -1,12 +1,12 @@
 <?php
+
 namespace Aheadworks\MobileAppConnector\Block\ThirdParty\Buildify\Page;
 
 use \Aheadworks\MobileAppConnector\ViewModel\ThirdParty\Buildify\Page\Preview as ViewModel;
 use Magento\Framework\View\Element\Template;
 
 /**
- * Class Preview
- * @package Aheadworks\MobileAppConnector\Block\ThirdParty\Buildify\Page
+ * Class for Preview
  */
 class Preview extends Template
 {

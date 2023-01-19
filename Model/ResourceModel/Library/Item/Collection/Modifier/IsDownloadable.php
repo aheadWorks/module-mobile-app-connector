@@ -6,13 +6,10 @@ use Aheadworks\MobileAppConnector\Api\Data\LibraryItemInterface;
 use Aheadworks\MobileAppConnector\Model\Downloadable\Link\Purchased\Item\Checker as PurchasedLinkItemChecker;
 
 /**
- * Class IsDownAheadworksloadable
- *
- * @package Aheadworks\MobileAppConnector\Model\ResourceModel\Library\Item\Collection\Modifier
+ * Class for IsDownAheadworksloadable
  */
 class IsDownloadable implements ModifierInterface
 {
-
     /**
      * @var purchasedLinkItemChecker
      */
@@ -28,14 +25,17 @@ class IsDownloadable implements ModifierInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Modify data
+     *
+     * @param string $item
+     * @return string
      */
     public function modifyData($item)
     {
         $item->setData(
             LibraryItemInterface::IS_DOWNLOADABLE,
-               $this->purchasedLinkItemChecker->isLibraryItem($item)
-        ); 
+            $this->purchasedLinkItemChecker->isLibraryItem($item)
+        );
         return $item;
     }
 }
