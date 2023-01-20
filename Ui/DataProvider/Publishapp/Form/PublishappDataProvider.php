@@ -93,13 +93,13 @@ class PublishappDataProvider extends AbstractDataProvider
                 $getPolicyPolicyLink = $this->publishappConfig->getPolicyPolicyLink();
                 $getSupportTelephoneNumber = $this->publishappConfig->getSupportTelephoneNumber();
 
-                $formData[PublishappConfig::APP_TITLE] = $getAppTitle();
-                $formData[PublishappConfig::SHORT_DESCRIPTION_OF_MOBILE_APP]= $getShortDescriptionOfMobileApp();
-                $formData[PublishappConfig::LONG_DESCRIPTION_OF_MOBILE_APP]= $getLongDescriptionOfMobileApp();
-                $formData[PublishappConfig::KEYWORDS]= $getKeywords();
-                $formData[PublishappConfig::SUPPORT_MAIL]= $getSupportMail();
-                $formData[PublishappConfig::PRIVACY_POLICY_LINK]= $getPolicyPolicyLink();
-                $formData[PublishappConfig::SUPPORT_TELEPHONE_NUMBER]= $getSupportTelephoneNumber();
+                $formData[PublishappConfig::APP_TITLE] = $getAppTitle;
+                $formData[PublishappConfig::SHORT_DESCRIPTION_OF_MOBILE_APP]= $getShortDescriptionOfMobileApp;
+                $formData[PublishappConfig::LONG_DESCRIPTION_OF_MOBILE_APP]= $getLongDescriptionOfMobileApp;
+                $formData[PublishappConfig::KEYWORDS]= $getKeywords;
+                $formData[PublishappConfig::SUPPORT_MAIL]= $getSupportMail;
+                $formData[PublishappConfig::PRIVACY_POLICY_LINK]= $getPolicyPolicyLink;
+                $formData[PublishappConfig::SUPPORT_TELEPHONE_NUMBER]= $getSupportTelephoneNumber;
                 $data[$appPublishapp] = $formData;
             }
         }
